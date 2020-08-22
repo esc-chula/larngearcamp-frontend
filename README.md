@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Larngear Camp 20<sup>th</sup>
+
+## About Project
+
+Registration system for 20<sup>th</sup> Larngear camp.
 
 ## Available Scripts
 
