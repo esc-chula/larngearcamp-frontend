@@ -4,9 +4,11 @@ import { Provider } from "react-redux"
 import { BrowserRouter } from "react-router-dom"
 import LoadingComponent from "../core/components/loading/loading.component"
 
-import store from "../redux"
+import configureStore from "../redux"
+import initialState from "../redux/initialState"
+const store = configureStore(initialState)
 
-function AppModule() {
+const AppModule = () => {
   return (
     <Provider store={store}>
       <Suspense fallback={<LoadingComponent />}>

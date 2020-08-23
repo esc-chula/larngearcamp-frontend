@@ -1,12 +1,12 @@
 import { applyMiddleware, createStore, compose } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
-import thunk from "react-thunk"
+import thunk from "redux-thunk"
 
 // INITIALSTATE
 import initialState from "./initialState"
 
 // REDUCER
-import { createRootReducer } from "./reducers"
+import createRootReducer from "./reducers"
 
 // UTILITY FUNCTIONS
 import { saveState, observeStore } from "../utils/storage"
