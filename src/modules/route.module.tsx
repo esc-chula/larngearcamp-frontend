@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom"
 // COMPONENTS
 import SampleComponent from "../core/components/sample/sample.component"
 
-const RouteModule = () => {
+const RouteModule: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/">

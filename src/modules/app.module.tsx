@@ -3,7 +3,7 @@ import RouteModule from "./route.module"
 import { BrowserRouter } from "react-router-dom"
 import LoadingComponent from "../core/components/loading/loading.component"
 
-const AppModule = () => {
+const AppModule: React.FC = () => {
   return (
     <Suspense fallback={<LoadingComponent />}>
       <BrowserRouter>

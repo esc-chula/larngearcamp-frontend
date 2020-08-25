@@ -1,4 +1,4 @@
-export const loadState = (name, defaultValue = {}) => {
+export const loadState = (name: string, defaultValue = {}) => {
   try {
     const value = localStorage.getItem(name)
     if (value === null) return defaultValue
@@ -9,23 +9,10 @@ export const loadState = (name, defaultValue = {}) => {
   }
 }
 
-export const saveState = (name, value) => {
+export const saveState = (name: string, value: JSON) => {
   try {
     localStorage.setItem(name, JSON.stringify(value))
   } catch (e) {
     console.error("Can't save state '" + name + "'")
   }
-}
-
-export const observeStore = (store, select, onChange) => {
-  let currentState
-  const handleChange = () => {
-    let nextState = select(store.getState())
-    if (nextState !== currentState) {
-      currentState = nextState
-      onChange(currentState)
-    }
-  }
-  let unsubscribe = store.subscribe(handleChange)
-  return unsubscribe
 }

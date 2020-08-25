@@ -2,7 +2,7 @@ import React from "react"
 import "./sample.style.scss"
 import logo from "../../../assets/images/gear-logo.svg"
 
-const SampleComponent = () => {
+const SampleComponent: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
