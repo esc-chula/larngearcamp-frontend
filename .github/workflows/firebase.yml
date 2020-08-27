@@ -1,27 +1,27 @@
 name: Deploy to Firebase
 
 on:
-  workflow_dispatch:  
+  workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@v2
-    - name: Setup Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12'
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
-    - name: Build the app
-      run: yarn run build --if-present
-    - name: Deploy to Firebase Hosting
-      uses: w9jds/firebase-action@v1.5.0
-      with:
-        args: deploy --only hosting:production
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Build the app
+        run: yarn run build --if-present
+      - name: Deploy to Firebase Hosting
+        uses: w9jds/firebase-action@v1.5.0
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
