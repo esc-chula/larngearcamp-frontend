@@ -1,12 +1,13 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import { Button } from "react-bootstrap"
+import LandingComponent from "../core/components/cover/cover"
+import { Container } from "react-bootstrap"
 
 const HomeModule: React.FC = () => {
   return (
-    <Link to="/register">
-      <Button>Register</Button>
-    </Link>
+    <>
+      <LandingComponent />
+      <Container fluid="md" className="d-flex justify-content-center"></Container>
+    </>
   )
 }
 

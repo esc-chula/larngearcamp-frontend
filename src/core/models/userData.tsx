@@ -3,5 +3,5 @@ export interface UserDataInterface {
   surname: string
   gender: string
   age: string
-  birthdate: Date
+  birthdate?: Date
 }

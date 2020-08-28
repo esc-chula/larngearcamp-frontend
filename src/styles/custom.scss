@@ -1,4 +1,6 @@
-/* Make the customizations */
+$theme-colors: (
+  "primary": #941014,
+  "second": #941014
+);
 
-/* Import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
