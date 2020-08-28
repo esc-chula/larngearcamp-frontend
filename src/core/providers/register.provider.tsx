@@ -1,12 +1,9 @@
-import React, { createContext, useContext, useState, useCallback } from "react"
-import { UserDataInterface } from "../models/userData"
+import React, { createContext, useContext } from "react"
 
 export const RegisterContext = createContext({})
 
 export const RegisterProvider: React.FC = ({ children, ...other }) => {
-  const [userData, setUserData] = useState<UserDataInterface | null>(null)
-
-  const value = { userData }
+  const value = {}
   return <RegisterContext.Provider value={value} children={children} {...other} />
 }
 

@@ -1,11 +1,11 @@
 import React from "react"
-import LandingComponent from "../core/components/cover/cover"
+import CoverComponent from "../core/components/cover/cover.component"
 import { Container } from "react-bootstrap"
 
 const HomeModule: React.FC = () => {
   return (
     <>
-      <LandingComponent />
+      <CoverComponent />
       <Container fluid="md" className="d-flex justify-content-center"></Container>
     </>
   )
