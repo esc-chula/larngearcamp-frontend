@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "larngear20th"
+  },
+  "targets": {
+    "larngear20th": {
+      "hosting": {
+        "production": [
+          "larngear20th"
+        ],
+        "dev": [
+          "larngear20th-dev"
+        ]
+      }
+    }
   }
 }
