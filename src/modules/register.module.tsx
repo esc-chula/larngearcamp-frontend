@@ -1,5 +1,5 @@
 import React from "react"
-import RegisterSchema from "../schemas/registerSchema"
+import RegisterSchema from "../schemas/register.schema"
 import { yupResolver } from "@hookform/resolvers"
 import { useForm } from "react-hook-form"
 
@@ -14,4 +14,4 @@ const RegisterModule = () => {
   return <></>
 }
 
-export default RegisterModule
+export { RegisterModule }

@@ -25,7 +25,8 @@ const theme = createMuiTheme({
       "Droid Sans",
       "Helvetica Neue",
       "sans-serif"
-    ].join(",")
+    ].join(","),
+    fontSize: 13
   },
   breakpoints: {
     values: {
@@ -34,6 +35,13 @@ const theme = createMuiTheme({
       md: 960,
       lg: 1280,
       xl: 1920
+    }
+  },
+  overrides: {
+    MuiPaper: {
+      rounded: {
+        borderRadius: 0
+      }
     }
   }
 })

@@ -19,7 +19,7 @@ const NavBarComponent = () => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
 
-  const toggleDrawer = (open: boolean) => (event: KeyboardEvent) => {
+  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return
     }

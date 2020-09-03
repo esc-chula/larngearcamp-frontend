@@ -1,19 +1,33 @@
 import React from "react"
-import { Drawer, Box } from "@material-ui/core"
+import { Drawer, Box, Link, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import classes from "*.module.css"
 
 interface Props {
   open: boolean
-  onClose?: (event: KeyboardEvent) => void
+  onClose?: (event: React.KeyboardEvent) => void
 }
 
-const SideBarComponent: React.FC<Props> = ({ open, ...other }) => {
+const useStyles = makeStyles(theme => ({
+  content: {
+    "& > *": {
+      marginBottom: theme.spacing(3)
+    }
+  }
+}))
+
+const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
+  const classes = useStyles()
+
   return (
-    <Drawer anchor="left" open={open} {...other}>
-      <Box minWidth={220} height="100%" display="flex" flexDirection="column" alignItems="center">
-        <div>wowza</div>
-        <div>wowza</div>
+    <Drawer anchor="left" open={open} onClose={onClose}>
+      <Box minWidth={200} height="100%" display="flex" flexDirection="column" alignItems="center" py={6} px={5} className={classes.content}>
+        <div>Logo</div>
+        <Link href="/docs">เอกสารการสมัคร</Link>
+        <Link href="/qna">คำถามที่พบบ่อย</Link>
+        <Link href="/login">เข้าสู่ระบบ</Link>
+        <Button color="primary" variant="contained" fullWidth>
+          ลงทะเบียน
+        </Button>
       </Box>
     </Drawer>
   )
