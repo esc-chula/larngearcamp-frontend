@@ -1,12 +1,12 @@
 import React from "react"
-import CoverComponent from "../core/components/cover/cover.component"
-import { Container } from "react-bootstrap"
+import { CoverComponent } from "../core/components/cover.component"
+import { NavBarComponent } from "../core/components/navbar.component"
 
 const HomeModule: React.FC = () => {
   return (
     <>
+      <NavBarComponent />
       <CoverComponent />
-      <Container fluid="md" className="d-flex justify-content-center"></Container>
     </>
   )
 }

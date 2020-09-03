@@ -1,8 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import "./styles/index.scss"
-import "./styles/custom.scss"
 
-import AppModule from "./modules/app.module"
+import { AppModule } from "./modules/app.module"
 
 ReactDOM.render(<AppModule />, document.getElementById("root"))
