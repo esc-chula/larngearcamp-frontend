@@ -7,23 +7,9 @@ import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
+import { FormBodyComponent } from "../core/components/formBody.component"
 
 const useStyles = makeStyles(theme => ({
-  logo: {
-    margin: theme.spacing(5, 0),
-    marginRight: "auto",
-    marginLeft: "auto",
-    width: "fit-content"
-  },
-  paper: {
-    padding: theme.spacing(5),
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    "& > *": {
-      marginBottom: theme.spacing(2)
-    }
-  },
   form: {
     display: "flex",
     justifyContent: "center",
@@ -67,8 +53,8 @@ const LoginModule = () => {
 
   const onSubmit = async () => {
     console.log(state)
-    const result = LoginService(state)
-    if (true) {
+    const result = await LoginService(state)
+    if (result.status !== 200) {
       setError(true)
     }
   }
@@ -89,45 +75,42 @@ const LoginModule = () => {
 
   return (
     <>
-      <div className={classes.logo}>Logo</div>
-      <Container maxWidth="sm">
-        <Paper elevation={0} className={classes.paper}>
-          <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-            <TextField id="email" name="email" label="อีเมล" variant="outlined" type="email" onChange={handleChange} ref={register} size="small" />
-            <TextField
-              id="password"
-              name="password"
-              label="รหัสผ่าน"
-              variant="outlined"
-              type="password"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-            />
-            <FormControlLabel
-              control={<Checkbox name="remember" color="primary" onChange={handleCheckBoxChange} />}
-              label="จำฉันไว้ในระบบ"
-              className={classes.checkbox}
-            />
-            <Button type="submit" variant="contained" color="primary">
-              เข้าสู่ระบบ
-            </Button>
-            {error && (
-              <Typography color="error" variant="body2">
-                อีเมลหรือรหัสผ่านไม่ถูกต้อง
-              </Typography>
-            )}
-          </form>
+      <FormBodyComponent maxWidth="sm">
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+          <TextField id="email" name="email" label="อีเมล" variant="outlined" type="email" onChange={handleChange} ref={register} size="small" />
+          <TextField
+            id="password"
+            name="password"
+            label="รหัสผ่าน"
+            variant="outlined"
+            type="password"
+            onChange={handleChange}
+            ref={register}
+            size="small"
+          />
+          <FormControlLabel
+            control={<Checkbox name="remember" color="primary" onChange={handleCheckBoxChange} />}
+            label="จำฉันไว้ในระบบ"
+            className={classes.checkbox}
+          />
+          <Button type="submit" variant="contained" color="primary">
+            เข้าสู่ระบบ
+          </Button>
+          {error && (
+            <Typography color="error" variant="body2">
+              อีเมลหรือรหัสผ่านไม่ถูกต้อง
+            </Typography>
+          )}
+        </form>
 
-          <div className={classes.divider}>OR</div>
-          <FacebookButtonComponent type="submit" variant="contained" color="primary">
-            เข้าสู่ระบบด้วยบัญชี Facebook
-          </FacebookButtonComponent>
-          <GoogleButtonComponent type="submit" variant="contained" color="primary">
-            เข้าสู่ระบบด้วยบัญชี Google
-          </GoogleButtonComponent>
-        </Paper>
-      </Container>
+        <div className={classes.divider}>OR</div>
+        <FacebookButtonComponent type="submit" variant="contained" color="primary">
+          เข้าสู่ระบบด้วยบัญชี Facebook
+        </FacebookButtonComponent>
+        <GoogleButtonComponent type="submit" variant="contained" color="primary">
+          เข้าสู่ระบบด้วยบัญชี Google
+        </GoogleButtonComponent>
+      </FormBodyComponent>
 
       <Box mt={4}>
         <Container maxWidth="sm">
