@@ -19,6 +19,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Build the app
         run: yarn run build --if-present
+        env:
+          CI: false
       - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@v1.5.0
         with:
