@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap"
 const HomeModule: React.FC = () => {
   return (
     <Link to="/register">
-      <Button>Register</Button>
+      <Button style={{ display: "none" }}>Register</Button>
     </Link>
   )
 }
