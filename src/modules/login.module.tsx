@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     color: grey[500],
+    margin: theme.spacing(4, 0),
     "&:before, &:after": {
       flex: 1,
       content: "''",
