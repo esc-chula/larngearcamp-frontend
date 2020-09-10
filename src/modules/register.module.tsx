@@ -73,7 +73,7 @@ const RegisterModule = () => {
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(`${event.target.name}`, event.target.value)
+    setValue(event.target.name, event.target.value)
   }
 
   return (
