@@ -7,21 +7,21 @@ type AuthContextProps = {
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  isUserLogin: useCallback(() => {
+  isUserLogin: () => {
     return Boolean(getLocalStorage("ACCESS_TOKEN"))
-  }, []),
-  isAdminLogin: useCallback(() => {
+  },
+  isAdminLogin: () => {
     return Boolean(getLocalStorage("ACCESS_TOKEN"))
-  }, [])
+  }
 })
 
 export const AuthProvider: React.FC = ({ ...other }) => {
-  const isUserLogin = useCallback(() => {
+  const isUserLogin = () => {
     return Boolean(getLocalStorage("ACCESS_TOKEN"))
-  }, [])
-  const isAdminLogin = useCallback(() => {
+  }
+  const isAdminLogin = () => {
     return Boolean(getLocalStorage("ACCESS_TOKEN"))
-  }, [])
+  }
 
   const value = { isUserLogin, isAdminLogin }
   return <AuthContext.Provider value={value} {...other} />
