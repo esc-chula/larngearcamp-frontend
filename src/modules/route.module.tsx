@@ -6,6 +6,8 @@ import { HomeModule } from "./home.module"
 import { RegisterModule } from "./register.module"
 import { LoginModule } from "./login.module"
 import { NavBarComponent } from "../core/components/navbar.component"
+import { UserGuardedRoute } from "../core/guards/user.guard"
+import { AdminGuardedRoute } from "../core/guards/admin.guard"
 
 const RouteModule: React.FC = () => {
   return (
@@ -24,7 +26,9 @@ const RouteModule: React.FC = () => {
         <Route exact path="/qna"></Route>
         <Route exact path="/terms"></Route>
         <Route exact path="/policy"></Route>
-        <Route exact path="/application"></Route>
+        <UserGuardedRoute exact path="/profile"></UserGuardedRoute>
+        <UserGuardedRoute exact path="/application"></UserGuardedRoute>
+        <AdminGuardedRoute exact path="/admin/dashboard"></AdminGuardedRoute>
       </Switch>
     </>
   )
