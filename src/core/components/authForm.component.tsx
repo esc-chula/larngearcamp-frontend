@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const FormBodyComponent: React.FC<Props> = ({ maxWidth, children }) => {
+const AuthFormComponent: React.FC<Props> = ({ maxWidth, children }) => {
   const classes = useStyles()
 
   return (
@@ -39,4 +39,4 @@ const FormBodyComponent: React.FC<Props> = ({ maxWidth, children }) => {
   )
 }
 
-export { FormBodyComponent }
+export { AuthFormComponent }

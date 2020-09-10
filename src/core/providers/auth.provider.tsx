@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useCallback } from "react"
+import React, { createContext, useContext } from "react"
 import { getLocalStorage } from "../../utils/storage"
 
 type AuthContextProps = {

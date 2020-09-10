@@ -4,4 +4,4 @@ const ApplicationStepSixModule = () => {
   return <></>
 }
 
-export { ApplicationStepSixModule }
+export default ApplicationStepSixModule
