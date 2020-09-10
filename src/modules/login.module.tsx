@@ -1,13 +1,14 @@
-import React, { useState } from "react"
+import React from "react"
 import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box, Link } from "@material-ui/core"
 import { useForm } from "react-hook-form"
-import LoginModel from "../core/models/login.model"
 import AuthService from "../core/services/auth.service"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
 import { FormBodyComponent } from "../core/components/formBody.component"
+import { yupResolver } from "@hookform/resolvers"
+import LoginSchema from "../schemas/login.schema"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     color: grey[500],
+    margin: theme.spacing(4, 0),
     "&:before, &:after": {
       flex: 1,
       content: "''",
@@ -47,37 +49,45 @@ const useStyles = makeStyles(theme => ({
 
 const LoginModule = () => {
   const classes = useStyles()
-  const [state, setState] = useState<LoginModel>()
-  const [error, setError] = useState(false)
-  const { register, handleSubmit } = useForm({})
+  const { register, handleSubmit, setValue, getValues, setError, errors } = useForm({
+    resolver: yupResolver(LoginSchema)
+  })
 
   const onSubmit = async () => {
-    console.log(state)
-    const result = await AuthService.login(state)
+    const values = getValues(["email", "password"])
+    const result = await AuthService.login(values)
     if (result.status !== 200) {
-      setError(true)
+      setError("validate", {
+        type: "validate",
+        message: result.data.message
+      })
     }
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.value
-    } as Pick<LoginModel, keyof LoginModel>)
+    setValue(event.target.name, event.target.value)
   }
 
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked
-    } as Pick<LoginModel, keyof LoginModel>)
+    setValue(event.target.name, event.target.checked)
   }
 
   return (
     <>
       <FormBodyComponent maxWidth="sm">
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-          <TextField id="email" name="email" label="อีเมล" variant="outlined" type="email" onChange={handleChange} ref={register} size="small" />
+          <TextField
+            id="email"
+            name="email"
+            label="อีเมล"
+            variant="outlined"
+            type="email"
+            onChange={handleChange}
+            ref={register}
+            size="small"
+            error={Boolean(errors?.email)}
+            helperText={errors?.email?.message}
+          />
           <TextField
             id="password"
             name="password"
@@ -87,6 +97,8 @@ const LoginModule = () => {
             onChange={handleChange}
             ref={register}
             size="small"
+            error={Boolean(errors?.email)}
+            helperText={errors?.email?.message}
           />
           <FormControlLabel
             control={<Checkbox name="remember" color="primary" onChange={handleCheckBoxChange} />}
@@ -96,7 +108,7 @@ const LoginModule = () => {
           <Button type="submit" variant="contained" color="primary">
             เข้าสู่ระบบ
           </Button>
-          {error && (
+          {errors.validate && (
             <Typography color="error" variant="body2">
               อีเมลหรือรหัสผ่านไม่ถูกต้อง
             </Typography>
@@ -104,6 +116,7 @@ const LoginModule = () => {
         </form>
 
         <div className={classes.divider}>OR</div>
+
         <FacebookButtonComponent type="submit" variant="contained" color="primary">
           เข้าสู่ระบบด้วยบัญชี Facebook
         </FacebookButtonComponent>

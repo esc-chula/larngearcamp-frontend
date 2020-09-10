@@ -5,13 +5,23 @@ import { AppBar, Button, IconButton, Toolbar, Box, Link, Hidden } from "@materia
 import { SideBarComponent } from "./sidebar.component"
 
 const useStyles = makeStyles(theme => ({
-  itemLeft: {
-    marginRight: theme.spacing(2),
-    color: "#fff"
+  appbar: {
+    padding: theme.spacing(0, 10),
+    [theme.breakpoints.down("md")]: {
+      padding: theme.spacing(0, 2)
+    }
   },
-  itemRight: {
-    marginLeft: theme.spacing(2),
-    color: "#fff"
+  itemsLeft: {
+    "&>*": {
+      marginRight: theme.spacing(2),
+      color: "#fff"
+    }
+  },
+  itemsRight: {
+    "&>*": {
+      marginLeft: theme.spacing(2),
+      color: "#fff"
+    }
   }
 }))
 
@@ -28,27 +38,27 @@ const NavBarComponent = () => {
 
   return (
     <>
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" color="secondary" className={classes.appbar}>
         <Toolbar>
-          <Hidden smUp>
+          <Hidden lgUp>
             <SideBarComponent open={open} onClose={toggleDrawer(open)} />
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setOpen(!open)}>
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <Box mx={2}>Logo</Box>
-          <Hidden xsDown>
-            <Box display="flex" alignItems="center" marginRight="auto">
-              <Link className={classes.itemLeft}>เอกสารการสมัคร</Link>
-              <Link className={classes.itemLeft}>คำถามที่พบบ่อย</Link>
+          <Box mr={6}>Logo</Box>
+          <Hidden mdDown>
+            <Box display="flex" alignItems="center" marginRight="auto" className={classes.itemsLeft}>
+              <Link href="/docs">เอกสารการสมัคร</Link>
+              <Link href="/qna">คำถามที่พบบ่อย</Link>
             </Box>
-            <Box display="flex" alignItems="center">
-              <Link href="/login" className={classes.itemRight}>
-                เข้าสู่ระบบ
+            <Box display="flex" alignItems="center" className={classes.itemsRight}>
+              <Link href="/login">เข้าสู่ระบบ</Link>
+              <Link href="/register">
+                <Button color="primary" variant="contained">
+                  ลงทะเบียน
+                </Button>
               </Link>
-              <Button color="primary" variant="contained" className={classes.itemRight}>
-                ลงทะเบียน
-              </Button>
             </Box>
           </Hidden>
         </Toolbar>
