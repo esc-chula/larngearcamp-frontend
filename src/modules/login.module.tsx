@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box, Link } from "@material-ui/core"
 import { useForm } from "react-hook-form"
 import LoginModel from "../core/models/login.model"
-import { LoginService } from "../core/services/login.service"
+import AuthService from "../core/services/auth.service"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
@@ -53,7 +53,7 @@ const LoginModule = () => {
 
   const onSubmit = async () => {
     console.log(state)
-    const result = await LoginService(state)
+    const result = await AuthService.login(state)
     if (result.status !== 200) {
       setError(true)
     }
@@ -117,7 +117,9 @@ const LoginModule = () => {
           <Paper elevation={0}>
             <Box display="flex" alignItems="center" py={2} px={5}>
               <div> ยังไม่มีบัญชีลานเกียร์?</div>
-              <Link className={classes.rightAlign}>ลงทะเบียน</Link>
+              <Link className={classes.rightAlign} href="/register">
+                ลงทะเบียน
+              </Link>
             </Box>
           </Paper>
         </Container>
