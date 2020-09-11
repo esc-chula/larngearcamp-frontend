@@ -3,9 +3,9 @@ import { Route, RouteProps, Redirect } from "react-router-dom"
 import { useAuthContext } from "../providers/auth.provider"
 
 const AdminGuardedRoute: React.FC<RouteProps> = ({ children, ...props }) => {
-  const { isAdminLogin } = useAuthContext()
+  const { isAdminLoggedIn } = useAuthContext()
 
-  if (isAdminLogin()) {
+  if (isAdminLoggedIn) {
     return <Route {...props}>{children}</Route>
   }
 
