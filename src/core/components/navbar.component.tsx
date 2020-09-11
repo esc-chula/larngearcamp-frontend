@@ -3,6 +3,8 @@ import MenuIcon from "@material-ui/icons/Menu"
 import { makeStyles } from "@material-ui/core/styles"
 import { AppBar, Button, IconButton, Toolbar, Box, Link, Hidden } from "@material-ui/core"
 import { SideBarComponent } from "./sidebar.component"
+import { AuthNavbarComponent } from "./authNavbar.component"
+import { useAuthContext } from "../providers/auth.provider"
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -28,6 +30,7 @@ const useStyles = makeStyles(theme => ({
 const NavBarComponent = () => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
+  const { isLoggedIn } = useAuthContext()
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
@@ -53,12 +56,18 @@ const NavBarComponent = () => {
               <Link href="/qna">คำถามที่พบบ่อย</Link>
             </Box>
             <Box display="flex" alignItems="center" className={classes.itemsRight}>
-              <Link href="/login">เข้าสู่ระบบ</Link>
-              <Link href="/register">
-                <Button color="primary" variant="contained">
-                  ลงทะเบียน
-                </Button>
-              </Link>
+              {isLoggedIn ? (
+                <AuthNavbarComponent />
+              ) : (
+                <>
+                  <Link href="/login">เข้าสู่ระบบ</Link>
+                  <Link href="/register">
+                    <Button color="primary" variant="contained">
+                      ลงทะเบียน
+                    </Button>
+                  </Link>
+                </>
+              )}
             </Box>
           </Hidden>
         </Toolbar>
