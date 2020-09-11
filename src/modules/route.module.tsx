@@ -11,6 +11,7 @@ import { AdminGuardedRoute } from "../core/guards/admin.guard"
 import { ProfileModule } from "./profile.module"
 import { Step1, Step2, Step3, Step4, Step5, Step6 } from "./applications"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
+import { NotFoundModule } from "./notfound.module"
 
 const RouteModule: React.FC = () => {
   return (
@@ -56,7 +57,9 @@ const RouteModule: React.FC = () => {
         <UserGuardedRoute exact path="/application/step6">
           <Step6 />
         </UserGuardedRoute>
-
+        <Route>
+          <NotFoundModule />
+        </Route>
         {/* Admin Guard */}
         <AdminGuardedRoute exact path="/admin/dashboard"></AdminGuardedRoute>
       </Switch>

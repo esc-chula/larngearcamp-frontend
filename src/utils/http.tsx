@@ -9,7 +9,6 @@ const httpClient = axios.create({
 const authHeaderConfig = (config: AxiosRequestConfig) => {
   const accessToken = getLocalStorage("ACCESS_TOKEN")
   config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : ""
-  console.log(config)
   return config
 }
 
