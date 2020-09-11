@@ -6,6 +6,7 @@ import { AppBar, Button, IconButton, Toolbar, Box, Hidden } from "@material-ui/c
 import { SideBarComponent } from "./sidebar.component"
 import { AuthNavbarComponent } from "./authNavbar.component"
 import { useAuthContext } from "../providers/auth.provider"
+import { useLoadingContext } from "../providers/loading.provider"
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -38,6 +39,7 @@ const NavBarComponent = () => {
   const history = useHistory()
   const [open, setOpen] = useState(false)
   const { isLoggedIn } = useAuthContext()
+  const { setLoading } = useLoadingContext()
 
   const toggleDrawer = useCallback(
     (open: boolean) => (event: React.KeyboardEvent) => {
@@ -71,6 +73,9 @@ const NavBarComponent = () => {
               <Link className={classes.underlineWhite} to="/qna">
                 คำถามที่พบบ่อย
               </Link>
+              <Button color="primary" variant="contained" onClick={() => setLoading(true)}>
+                ทดสอบ loading
+              </Button>
             </Box>
             <Box display="flex" alignItems="center" className={classes.itemsRight}>
               {isLoggedIn ? (

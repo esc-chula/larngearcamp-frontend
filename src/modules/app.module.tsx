@@ -6,6 +6,7 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../styles/theme"
 import { AuthProvider } from "../core/providers/auth.provider"
 import { ErrorBoundary } from "../core/providers/error.provider"
+import { LoadingProvider } from "../core/providers/loading.provider"
 
 const AppModule = () => {
   return (
@@ -13,9 +14,11 @@ const AppModule = () => {
       <Suspense fallback={<LoadingComponent loading={true} />}>
         <AuthProvider>
           <ThemeProvider theme={theme}>
-            <BrowserRouter>
-              <RouteModule />
-            </BrowserRouter>
+            <LoadingProvider>
+              <BrowserRouter>
+                <RouteModule />
+              </BrowserRouter>
+            </LoadingProvider>
           </ThemeProvider>
         </AuthProvider>
       </Suspense>
