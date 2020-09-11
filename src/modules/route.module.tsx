@@ -10,6 +10,7 @@ import { UserGuardedRoute } from "../core/guards/user.guard"
 import { AdminGuardedRoute } from "../core/guards/admin.guard"
 import { ProfileModule } from "./profile.module"
 import { Step1, Step2, Step3, Step4, Step5, Step6 } from "./applications"
+import { GuestGuardedRoute } from "../core/guards/guest.guard"
 
 const RouteModule: React.FC = () => {
   return (
@@ -20,15 +21,15 @@ const RouteModule: React.FC = () => {
         <Route exact path="/">
           <HomeModule />
         </Route>
-        <Route exact path="/register">
-          <RegisterModule />
-        </Route>
-        <Route exact path="/login">
-          <LoginModule />
-        </Route>
         <Route exact path="/qna"></Route>
-        <Route exact path="/terms"></Route>
-        <Route exact path="/policy"></Route>
+
+        {/* Guest Guard */}
+        <GuestGuardedRoute exact path="/login">
+          <LoginModule />
+        </GuestGuardedRoute>
+        <GuestGuardedRoute exact path="/register">
+          <RegisterModule />
+        </GuestGuardedRoute>
 
         {/* User Guard */}
         <UserGuardedRoute exact path="/profile">

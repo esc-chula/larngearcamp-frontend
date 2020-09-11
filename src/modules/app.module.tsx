@@ -8,14 +8,14 @@ import { AuthProvider } from "../core/providers/auth.provider"
 
 const AppModule = () => {
   return (
-    <Suspense fallback={<LoadingComponent />}>
-      <ThemeProvider theme={theme}>
-        <AuthProvider>
+    <Suspense fallback={<LoadingComponent loading={true} />}>
+      <AuthProvider>
+        <ThemeProvider theme={theme}>
           <BrowserRouter>
             <RouteModule />
           </BrowserRouter>
-        </AuthProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </Suspense>
   )
 }
