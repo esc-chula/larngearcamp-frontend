@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
-import { FormBodyComponent } from "../core/components/formBody.component"
+import { CardComponent } from "../core/components/card.component"
 import { yupResolver } from "@hookform/resolvers"
 import RegisterSchema from "../schemas/register.schema"
 import UsersService from "../core/services/users.service"
@@ -78,7 +78,7 @@ const RegisterModule = () => {
 
   return (
     <>
-      <FormBodyComponent maxWidth="sm">
+      <CardComponent maxWidth="sm">
         <Box width="100%" margin="auto" mb={4} fontFamily="Kanit">
           <Typography variant="h6" align="center">
             น้องต้องสร้างบัญชีเพื่อทำการสมัคร เข้าค่ายลานเกียร์ครั้งที่ 20 นี้ด้วยนะครับ
@@ -161,7 +161,7 @@ const RegisterModule = () => {
             ลงทะเบียน
           </Button>
         </form>
-      </FormBodyComponent>
+      </CardComponent>
 
       <Box mt={4}>
         <Container maxWidth="sm">

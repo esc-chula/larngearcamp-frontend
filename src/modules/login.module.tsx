@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
-import { FormBodyComponent } from "../core/components/formBody.component"
+import { CardComponent } from "../core/components/card.component"
 import { yupResolver } from "@hookform/resolvers"
 import LoginSchema from "../schemas/login.schema"
 import { useHistory } from "react-router-dom"
@@ -78,7 +78,7 @@ const LoginModule = () => {
 
   return (
     <>
-      <FormBodyComponent maxWidth="sm">
+      <CardComponent maxWidth="sm">
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <TextField
             id="email"
@@ -127,7 +127,7 @@ const LoginModule = () => {
         <GoogleButtonComponent type="submit" variant="contained" color="primary">
           เข้าสู่ระบบด้วยบัญชี Google
         </GoogleButtonComponent>
-      </FormBodyComponent>
+      </CardComponent>
 
       <Box mt={4}>
         <Container maxWidth="sm">

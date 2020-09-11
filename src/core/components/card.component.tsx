@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const FormBodyComponent: React.FC<ContainerProps> = ({ maxWidth, children }) => {
+const CardComponent: React.FC<ContainerProps> = ({ maxWidth, children }) => {
   const classes = useStyles()
 
   return (
@@ -35,4 +35,4 @@ const FormBodyComponent: React.FC<ContainerProps> = ({ maxWidth, children }) => 
   )
 }
 
-export { FormBodyComponent }
+export { CardComponent }

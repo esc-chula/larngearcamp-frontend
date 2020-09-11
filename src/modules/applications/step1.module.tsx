@@ -1,11 +1,11 @@
 import React from "react"
-import { FormBodyComponent } from "../../core/components/formBody.component"
+import { CardComponent } from "../../core/components/card.component"
 
 const ApplicationStepOneModule = () => {
   return (
-    <FormBodyComponent maxWidth="md">
+    <CardComponent maxWidth="md">
       <div></div>
-    </FormBodyComponent>
+    </CardComponent>
   )
 }
 
