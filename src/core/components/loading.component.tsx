@@ -1,7 +1,14 @@
 import React from "react"
 
-const LoadingComponent: React.FC = () => {
-  return <div>Loading</div>
+interface LoadingProps {
+  loading: boolean
+}
+
+const LoadingComponent: React.FC<LoadingProps> = ({ loading }) => {
+  if (loading) {
+    return <div>Loading</div>
+  }
+  return <></>
 }
 
 export { LoadingComponent }
