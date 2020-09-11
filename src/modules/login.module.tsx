@@ -6,9 +6,10 @@ import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
-import { AuthFormComponent } from "../core/components/authForm.component"
+import { FormBodyComponent } from "../core/components/formBody.component"
 import { yupResolver } from "@hookform/resolvers"
 import LoginSchema from "../schemas/login.schema"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const LoginModule = () => {
+  const history = useHistory()
   const classes = useStyles()
   const { register, handleSubmit, setValue, getValues, setError, errors } = useForm({
     resolver: yupResolver(LoginSchema)
@@ -61,6 +63,8 @@ const LoginModule = () => {
         type: "validate",
         message: result.data.message
       })
+    } else {
+      history.push("/profile")
     }
   }
 
@@ -74,7 +78,7 @@ const LoginModule = () => {
 
   return (
     <>
-      <AuthFormComponent maxWidth="sm">
+      <FormBodyComponent maxWidth="sm">
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <TextField
             id="email"
@@ -123,7 +127,7 @@ const LoginModule = () => {
         <GoogleButtonComponent type="submit" variant="contained" color="primary">
           เข้าสู่ระบบด้วยบัญชี Google
         </GoogleButtonComponent>
-      </AuthFormComponent>
+      </FormBodyComponent>
 
       <Box mt={4}>
         <Container maxWidth="sm">

@@ -1,10 +1,6 @@
 import React from "react"
-import { Container, Paper } from "@material-ui/core"
+import { Container, Paper, ContainerProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-
-interface Props {
-  maxWidth: "xs" | "sm" | "md" | "lg" | "xl"
-}
 
 const useStyles = makeStyles(theme => ({
   logo: {
@@ -24,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const AuthFormComponent: React.FC<Props> = ({ maxWidth, children }) => {
+const FormBodyComponent: React.FC<ContainerProps> = ({ maxWidth, children }) => {
   const classes = useStyles()
 
   return (
@@ -39,4 +35,4 @@ const AuthFormComponent: React.FC<Props> = ({ maxWidth, children }) => {
   )
 }
 
-export { AuthFormComponent }
+export { FormBodyComponent }
