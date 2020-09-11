@@ -15,7 +15,7 @@ export const useAuthContext = () => {
 }
 
 export const AuthProvider: React.FC = ({ ...other }) => {
-  const [accessToken, setAccessToken] = useState(null)
+  const [accessToken, setAccessToken] = useState(getLocalStorage("ACCESS_TOKEN"))
   const isUserLoggedIn = useMemo(() => {
     return Boolean(accessToken)
   }, [accessToken])
@@ -27,7 +27,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   }, [accessToken])
 
   useEffect(() => {
-    setAccessToken(JSON.parse(getLocalStorage("ACCESS_TOKEN")))
+    setAccessToken(getLocalStorage("ACCESS_TOKEN"))
   }, [])
 
   const value: AuthContruct = {
