@@ -1,5 +1,6 @@
 import React from "react"
-import { Drawer, Box, Link, Button } from "@material-ui/core"
+import { Link } from "react-router-dom"
+import { Drawer, Box, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 interface Props {
@@ -22,9 +23,9 @@ const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box minWidth={200} height="100%" display="flex" flexDirection="column" alignItems="center" py={6} px={5} className={classes.content}>
         <div>Logo</div>
-        <Link href="/docs">เอกสารการสมัคร</Link>
-        <Link href="/qna">คำถามที่พบบ่อย</Link>
-        <Link href="/login">เข้าสู่ระบบ</Link>
+        <Link to="/docs">เอกสารการสมัคร</Link>
+        <Link to="/qna">คำถามที่พบบ่อย</Link>
+        <Link to="/login">เข้าสู่ระบบ</Link>
         <Button color="primary" variant="contained" fullWidth>
           ลงทะเบียน
         </Button>

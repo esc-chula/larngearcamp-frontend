@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import { makeStyles } from "@material-ui/core/styles"
-import { AppBar, Button, IconButton, Toolbar, Box, Link, Hidden } from "@material-ui/core"
+import { Link } from "react-router-dom"
+import { AppBar, Button, IconButton, Toolbar, Box, Hidden } from "@material-ui/core"
 import { SideBarComponent } from "./sidebar.component"
 import { AuthNavbarComponent } from "./authNavbar.component"
 import { useAuthContext } from "../providers/auth.provider"
@@ -52,16 +53,16 @@ const NavBarComponent = () => {
           <Box mr={6}>Logo</Box>
           <Hidden mdDown>
             <Box display="flex" alignItems="center" marginRight="auto" className={classes.itemsLeft}>
-              <Link href="/docs">เอกสารการสมัคร</Link>
-              <Link href="/qna">คำถามที่พบบ่อย</Link>
+              <Link to="/docs">เอกสารการสมัคร</Link>
+              <Link to="/qna">คำถามที่พบบ่อย</Link>
             </Box>
             <Box display="flex" alignItems="center" className={classes.itemsRight}>
               {isLoggedIn ? (
                 <AuthNavbarComponent />
               ) : (
                 <>
-                  <Link href="/login">เข้าสู่ระบบ</Link>
-                  <Link href="/register">
+                  <Link to="/login">เข้าสู่ระบบ</Link>
+                  <Link to="/register">
                     <Button color="primary" variant="contained">
                       ลงทะเบียน
                     </Button>

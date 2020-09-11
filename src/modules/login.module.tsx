@@ -1,5 +1,6 @@
 import React from "react"
-import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box, Link } from "@material-ui/core"
+import { Link } from "react-router-dom"
+import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box } from "@material-ui/core"
 import { useForm } from "react-hook-form"
 import AuthService from "../core/services/auth.service"
 import { makeStyles } from "@material-ui/core/styles"
@@ -134,7 +135,7 @@ const LoginModule = () => {
           <Paper elevation={0}>
             <Box display="flex" alignItems="center" py={2} px={5}>
               <div> ยังไม่มีบัญชีลานเกียร์?</div>
-              <Link className={classes.rightAlign} href="/register">
+              <Link className={classes.rightAlign} to="/register">
                 ลงทะเบียน
               </Link>
             </Box>

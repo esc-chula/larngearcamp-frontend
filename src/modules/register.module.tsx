@@ -1,5 +1,6 @@
 import React from "react"
-import { TextField, Typography, Button, Container, Paper, Box, Link } from "@material-ui/core"
+import { Link } from "react-router-dom"
+import { TextField, Typography, Button, Container, Paper, Box } from "@material-ui/core"
 import { useForm } from "react-hook-form"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
@@ -168,7 +169,7 @@ const RegisterModule = () => {
           <Paper elevation={0}>
             <Box display="flex" alignItems="center" py={2} px={5}>
               <div> สร้างบัญชีเรียบร้อยแล้ว?</div>
-              <Link className={classes.rightAlign} href="/login">
+              <Link className={classes.rightAlign} to="/login">
                 เข้าสู่ระบบ
               </Link>
             </Box>
