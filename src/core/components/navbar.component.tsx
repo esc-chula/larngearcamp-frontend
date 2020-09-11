@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import { makeStyles } from "@material-ui/core/styles"
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { AppBar, Button, IconButton, Toolbar, Box, Hidden } from "@material-ui/core"
 import { SideBarComponent } from "./sidebar.component"
 import { AuthNavbarComponent } from "./authNavbar.component"
@@ -12,6 +12,11 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0, 10),
     [theme.breakpoints.down("md")]: {
       padding: theme.spacing(0, 2)
+    }
+  },
+  underlineWhite: {
+    "&:after": {
+      background: "#fff"
     }
   },
   itemsLeft: {
@@ -30,15 +35,19 @@ const useStyles = makeStyles(theme => ({
 
 const NavBarComponent = () => {
   const classes = useStyles()
+  const history = useHistory()
   const [open, setOpen] = useState(false)
   const { isLoggedIn } = useAuthContext()
 
-  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return
-    }
-    setOpen(!open)
-  }
+  const toggleDrawer = useCallback(
+    (open: boolean) => (event: React.KeyboardEvent) => {
+      if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) return
+      setOpen(false)
+    },
+    []
+  )
+
+  const nextPage = useCallback((path: string) => () => history.push(path), [history])
 
   return (
     <>
@@ -49,24 +58,31 @@ const NavBarComponent = () => {
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setOpen(!open)}>
               <MenuIcon />
             </IconButton>
+            <Box display="flex" alignItems="center" className={classes.itemsRight}>
+              {isLoggedIn && <AuthNavbarComponent />}
+            </Box>
           </Hidden>
           <Box mr={6}>Logo</Box>
           <Hidden mdDown>
             <Box display="flex" alignItems="center" marginRight="auto" className={classes.itemsLeft}>
-              <Link to="/docs">เอกสารการสมัคร</Link>
-              <Link to="/qna">คำถามที่พบบ่อย</Link>
+              <Link className={classes.underlineWhite} to="/docs">
+                เอกสารการสมัคร
+              </Link>
+              <Link className={classes.underlineWhite} to="/qna">
+                คำถามที่พบบ่อย
+              </Link>
             </Box>
             <Box display="flex" alignItems="center" className={classes.itemsRight}>
               {isLoggedIn ? (
                 <AuthNavbarComponent />
               ) : (
                 <>
-                  <Link to="/login">เข้าสู่ระบบ</Link>
-                  <Link to="/register">
-                    <Button color="primary" variant="contained">
-                      ลงทะเบียน
-                    </Button>
+                  <Link className={classes.underlineWhite} to="/login">
+                    เข้าสู่ระบบ
                   </Link>
+                  <Button color="primary" variant="contained" onClick={nextPage("/register")}>
+                    ลงทะเบียน
+                  </Button>
                 </>
               )}
             </Box>

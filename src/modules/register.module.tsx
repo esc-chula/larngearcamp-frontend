@@ -4,6 +4,7 @@ import { TextField, Typography, Button, Container, Paper, Box } from "@material-
 import { useForm } from "react-hook-form"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
+import { LogoComponent } from "../core/components/logo.component"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
 import { CardComponent } from "../core/components/card.component"
@@ -18,10 +19,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     "& > *": {
       marginBottom: theme.spacing(2)
-    },
-    "& > button": {
-      marginBottom: theme.spacing(0)
     }
+  },
+  clearMargin: {
+    margin: 0
   },
   errorMessage: {
     marginTop: theme.spacing(-1)
@@ -44,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     color: grey[500],
-    margin: theme.spacing(4, 0),
+    margin: theme.spacing(2, 0, 4, 0),
     "&:before, &:after": {
       flex: 1,
       content: "''",
@@ -79,6 +80,7 @@ const RegisterModule = () => {
 
   return (
     <>
+      <LogoComponent />
       <CardComponent maxWidth="sm">
         <Box width="100%" margin="auto" mb={4} fontFamily="Kanit">
           <Typography variant="h6" align="center">
@@ -158,7 +160,7 @@ const RegisterModule = () => {
             error={Boolean(errors?.passwordConfirmation)}
             helperText={errors?.passwordConfirmation?.message}
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" className={classes.clearMargin}>
             ลงทะเบียน
           </Button>
         </form>

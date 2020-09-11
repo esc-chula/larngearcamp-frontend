@@ -12,11 +12,24 @@ const AuthNavbarComponent: React.FC = () => {
   const handleClick = useCallback(event => {
     setAnchorEl(event.currentTarget)
   }, [])
-  const handleClose = useCallback(() => {
+  const handleClose = useCallback((event: React.KeyboardEvent) => {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return
+    }
     setAnchorEl(null)
   }, [])
+
+  const nextPage = useCallback(
+    (path: string) => () => {
+      setAnchorEl(null)
+      history.push(path)
+    },
+    [history]
+  )
+
   const logout = useCallback(async () => {
     await AuthService.logout()
+    setAnchorEl(null)
     history.push("/")
   }, [history])
 
@@ -41,7 +54,7 @@ const AuthNavbarComponent: React.FC = () => {
           vertical: "top",
           horizontal: "right"
         }}>
-        <MenuItem onClick={() => history.push("/profile")}>
+        <MenuItem onClick={nextPage("/profile")}>
           <ListItemIcon>
             <AccountCircleIcon fontSize="small" />
           </ListItemIcon>

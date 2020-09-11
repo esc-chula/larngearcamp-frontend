@@ -57,11 +57,14 @@ const RouteModule: React.FC = () => {
         <UserGuardedRoute exact path="/application/step6">
           <Step6 />
         </UserGuardedRoute>
+
+        {/* Admin Guard */}
+        <AdminGuardedRoute exact path="/admin/dashboard"></AdminGuardedRoute>
+
+        {/* NotFound Route */}
         <Route>
           <NotFoundModule />
         </Route>
-        {/* Admin Guard */}
-        <AdminGuardedRoute exact path="/admin/dashboard"></AdminGuardedRoute>
       </Switch>
     </>
   )

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form"
 import AuthService from "../core/services/auth.service"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
+import { LogoComponent } from "../core/components/logo.component"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
 import { CardComponent } from "../core/components/card.component"
@@ -21,6 +22,9 @@ const useStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(2)
     }
   },
+  clearMargin: {
+    margin: 0
+  },
   checkbox: {
     "& > *": {
       color: grey[500]
@@ -31,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     color: grey[500],
-    margin: theme.spacing(4, 0),
+    margin: theme.spacing(2, 0, 4, 0),
     "&:before, &:after": {
       flex: 1,
       content: "''",
@@ -79,6 +83,7 @@ const LoginModule = () => {
 
   return (
     <>
+      <LogoComponent />
       <CardComponent maxWidth="sm">
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <TextField
@@ -110,11 +115,11 @@ const LoginModule = () => {
             label="จำฉันไว้ในระบบ"
             className={classes.checkbox}
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" className={classes.clearMargin}>
             เข้าสู่ระบบ
           </Button>
           {errors.validate && (
-            <Typography color="error" variant="body2">
+            <Typography color="error" variant="body2" className={classes.clearMargin}>
               อีเมลหรือรหัสผ่านไม่ถูกต้อง
             </Typography>
           )}

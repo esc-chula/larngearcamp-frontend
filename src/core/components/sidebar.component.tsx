@@ -1,5 +1,5 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useCallback } from "react"
+import { Link, useHistory } from "react-router-dom"
 import { Drawer, Box, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
 
 const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
   const classes = useStyles()
+  const history = useHistory()
+
+  const nextPage = useCallback((path: string) => () => history.push(path), [history])
 
   return (
     <Drawer anchor="left" open={open} onClose={onClose}>
@@ -26,7 +29,7 @@ const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
         <Link to="/docs">เอกสารการสมัคร</Link>
         <Link to="/qna">คำถามที่พบบ่อย</Link>
         <Link to="/login">เข้าสู่ระบบ</Link>
-        <Button color="primary" variant="contained" fullWidth>
+        <Button color="primary" variant="contained" fullWidth onClick={nextPage("/register")}>
           ลงทะเบียน
         </Button>
       </Box>

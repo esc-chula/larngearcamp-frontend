@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     "& > *": {
       marginBottom: theme.spacing(2)
+    },
+    "&:last-child": {
+      marginBottom: theme.spacing(0)
     }
   }
 }))
@@ -25,7 +28,6 @@ const CardComponent: React.FC<ContainerProps> = ({ maxWidth, children }) => {
 
   return (
     <>
-      <div className={classes.logo}>Logo</div>
       <Container maxWidth={maxWidth}>
         <Paper elevation={0} className={classes.paper}>
           {children}
