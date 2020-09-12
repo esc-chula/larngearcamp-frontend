@@ -84,7 +84,7 @@ const RegisterModule = () => {
       <CardComponent maxWidth="sm">
         <Box width="100%" margin="auto" mb={4} fontFamily="Kanit">
           <Typography variant="h6" align="center">
-            น้องต้องสร้างบัญชีเพื่อทำการสมัคร เข้าค่ายลานเกียร์ครั้งที่ 20 นี้ด้วยนะครับ
+            เพื่อทำการสมัครเข้าค่ายลานเกียร์ครั้งที่ 20 น้องจำเป็นต้องสร้างบัญชีเพื่อดำเนินการต่อ
           </Typography>
         </Box>
 
