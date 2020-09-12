@@ -1,5 +1,5 @@
 import React from "react"
-import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box, Grid, Avatar, ListItem, List } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 const UseStyleTL = makeStyles(theme => ({
@@ -24,10 +24,12 @@ const UseStyleTL = makeStyles(theme => ({
     NCLeftText: {
       color: "#828282",
       position: "absolute",
+      lineHeight: "32px",
       right: "calc(50% + 16px + 32px)"
     },
     NCRightText: {
       position: "absolute",
+      lineHeight: "32px",
       left: "calc(50% + 16px + 32px)"
     },
     hline: {
@@ -44,15 +46,19 @@ interface TimelineLabel {
     right: string,
 }
   
-const TimelineDisplay: React.FC<{label: TimelineLabel[], startNumber?: number}> = (props) => {
+const TimelineDisplay: React.FC<{
+    label: TimelineLabel[], 
+    startNumber?: number,
+    includeFinalLine?: boolean
+    }> = (props) => {
     const classes = UseStyleTL();
 
     return (
     <>
         {props.label.map(({left, right}, i, arr) => 
-        <>
+        <div key={i}>
             <div className={classes.line}>
-                <Typography variant="body1" className={classes.NCLeftText}>
+                <Typography variant="body1" className={classes.NCLeftText + ' kanit'}>
                     {left}
                 </Typography>
                 <Typography variant="subtitle2" className={classes.numberCircle}>
@@ -63,8 +69,8 @@ const TimelineDisplay: React.FC<{label: TimelineLabel[], startNumber?: number}> 
                 </Typography>
             </div>
 
-            {(i < arr.length-1) && <div className={classes.hline}></div>}
-        </>
+            {(props.includeFinalLine || (i < arr.length-1)) && <div className={classes.hline}></div>}
+        </div>
         )}
     </>
     )
