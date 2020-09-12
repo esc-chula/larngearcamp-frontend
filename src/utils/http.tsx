@@ -3,7 +3,8 @@ import { AxiosRequestConfig } from "axios"
 import { getLocalStorage } from "./storage"
 
 const httpClient = axios.create({
-  baseURL: process.env.REACT_APP_API_SERVER
+  baseURL: process.env.REACT_APP_API_SERVER,
+  timeout: 5000
 })
 
 const authHeaderConfig = (config: AxiosRequestConfig) => {
