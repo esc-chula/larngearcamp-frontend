@@ -6,7 +6,7 @@ import { AppBar, Button, IconButton, Toolbar, Box, Hidden } from "@material-ui/c
 import { SideBarComponent } from "./sidebar.component"
 import { AuthNavbarComponent } from "./authNavbar.component"
 import { useAuthContext } from "../providers/auth.provider"
-import { useLoadingContext } from "../providers/loading.provider"
+import { useGlobalContext } from "../providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -39,7 +39,7 @@ const NavBarComponent = () => {
   const history = useHistory()
   const [open, setOpen] = useState(false)
   const { isLoggedIn } = useAuthContext()
-  const { setLoading } = useLoadingContext()
+  const { setLoading, setModal } = useGlobalContext()
 
   const toggleDrawer = useCallback(
     (open: boolean) => (event: React.KeyboardEvent) => {
@@ -60,11 +60,14 @@ const NavBarComponent = () => {
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setOpen(!open)}>
               <MenuIcon />
             </IconButton>
-            <Box display="flex" alignItems="center" className={classes.itemsRight}>
+          </Hidden>
+          <Box mr={6}>Logo</Box>
+          <Hidden lgUp>
+            <Box display="flex" alignItems="center" marginLeft="auto">
               {isLoggedIn && <AuthNavbarComponent />}
             </Box>
           </Hidden>
-          <Box mr={6}>Logo</Box>
+
           <Hidden mdDown>
             <Box display="flex" alignItems="center" marginRight="auto" className={classes.itemsLeft}>
               <Link className={classes.underlineWhite} to="/docs">
@@ -75,6 +78,9 @@ const NavBarComponent = () => {
               </Link>
               <Button color="primary" variant="contained" onClick={() => setLoading(true)}>
                 ทดสอบ loading
+              </Button>
+              <Button color="primary" variant="contained" onClick={() => setModal(true)}>
+                ทดสอบ Modal
               </Button>
             </Box>
             <Box display="flex" alignItems="center" className={classes.itemsRight}>

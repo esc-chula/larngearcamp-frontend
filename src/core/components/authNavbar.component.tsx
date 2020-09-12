@@ -4,9 +4,13 @@ import MeetingRoomIcon from "@material-ui/icons/MeetingRoom"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import AuthService from "../services/auth.service"
 import { useHistory } from "react-router-dom"
+import { useGlobalContext } from "../providers/global.provider"
+import { useAuthContext } from "../providers/auth.provider"
 
 const AuthNavbarComponent: React.FC = () => {
   const history = useHistory()
+  const { setAccessToken } = useAuthContext()
+  const { setLoading } = useGlobalContext()
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClick = useCallback(event => {
@@ -28,10 +32,13 @@ const AuthNavbarComponent: React.FC = () => {
   )
 
   const logout = useCallback(async () => {
-    await AuthService.logout()
     setAnchorEl(null)
+    setAccessToken(null)
+    setLoading(true)
+    await AuthService.logout()
+    setLoading(false)
     history.push("/")
-  }, [history])
+  }, [history, setLoading, setAccessToken])
 
   return (
     <>

@@ -23,12 +23,12 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const CardComponent: React.FC<ContainerProps> = ({ maxWidth, children }) => {
+const CardComponent: React.FC<ContainerProps> = ({ children, ...other }) => {
   const classes = useStyles()
 
   return (
     <>
-      <Container maxWidth={maxWidth}>
+      <Container {...other}>
         <Paper elevation={0} className={classes.paper}>
           {children}
         </Paper>

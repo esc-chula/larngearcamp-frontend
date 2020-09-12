@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useState, useEffect, useMemo } from "react"
+import React, { createContext, useContext, useState, useMemo } from "react"
 import { getLocalStorage } from "../../utils/storage"
 
 interface AuthContruct {
   accessToken: string | null
+  setAccessToken: React.Dispatch<any>
   isLoggedIn: boolean
   isUserLoggedIn: boolean
   isAdminLoggedIn: boolean
@@ -26,12 +27,9 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     return Boolean(accessToken)
   }, [accessToken])
 
-  useEffect(() => {
-    setAccessToken(getLocalStorage("ACCESS_TOKEN"))
-  }, [])
-
   const value: AuthContruct = {
     accessToken,
+    setAccessToken,
     isLoggedIn,
     isUserLoggedIn,
     isAdminLoggedIn
