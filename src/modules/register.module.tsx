@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { Link } from "react-router-dom"
 import { TextField, Typography, Button, Container, Paper, Box } from "@material-ui/core"
 import { useForm } from "react-hook-form"
@@ -68,15 +68,16 @@ const RegisterModule = () => {
   const { register, handleSubmit, errors, setValue, getValues } = useForm({
     resolver: yupResolver(RegisterSchema)
   })
-
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     const values = getValues(["email", "password"])
     await UsersService.createUser(values)
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.name, event.target.value)
-  }
+  }, [getValues])
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.name, event.target.value)
+    },
+    [setValue]
+  )
 
   return (
     <>

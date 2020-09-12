@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { Link } from "react-router-dom"
 import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box } from "@material-ui/core"
 import { useForm } from "react-hook-form"
@@ -12,6 +12,8 @@ import { CardComponent } from "../core/components/card.component"
 import { yupResolver } from "@hookform/resolvers"
 import LoginSchema from "../schemas/login.schema"
 import { useHistory } from "react-router-dom"
+import { useAuthContext } from "../core/providers/auth.provider"
+import { useGlobalContext } from "../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -56,11 +58,14 @@ const useStyles = makeStyles(theme => ({
 const LoginModule = () => {
   const history = useHistory()
   const classes = useStyles()
+  const { setLoading } = useGlobalContext()
+  const { setAccessToken } = useAuthContext()
   const { register, handleSubmit, setValue, getValues, setError, errors } = useForm({
     resolver: yupResolver(LoginSchema)
   })
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
+    setLoading(true)
     const values = getValues(["email", "password"])
     const result = await AuthService.login(values)
     if (result.status !== 200) {
@@ -69,17 +74,25 @@ const LoginModule = () => {
         message: result.data.message
       })
     } else {
+      setAccessToken(result.data.token)
       history.push("/profile")
     }
-  }
+    setLoading(false)
+  }, [getValues, history, setAccessToken, setError, setLoading])
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.name, event.target.value)
-  }
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.name, event.target.value)
+    },
+    [setValue]
+  )
 
-  const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.name, event.target.checked)
-  }
+  const handleCheckBoxChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.name, event.target.checked)
+    },
+    [setValue]
+  )
 
   return (
     <>
@@ -115,7 +128,7 @@ const LoginModule = () => {
             label="จำฉันไว้ในระบบ"
             className={classes.checkbox}
           />
-          <Button type="submit" variant="contained" color="primary" className={classes.clearMargin}>
+          <Button type="submit" variant="contained" color="primary">
             เข้าสู่ระบบ
           </Button>
           {errors.validate && (
