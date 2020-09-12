@@ -12,6 +12,7 @@ import { ProfileModule } from "./profile.module"
 import { Step1, Step2, Step3, Step4, Step5, Step6 } from "./applications"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
+import { NavigatorComponent } from "../core/components/navigator.component"
 
 const RouteModule: React.FC = () => {
   return (
@@ -40,21 +41,27 @@ const RouteModule: React.FC = () => {
           <Redirect to="/application/step1" />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/step1">
+          <NavigatorComponent />
           <Step1 />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/step2">
+          <NavigatorComponent />
           <Step2 />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/step3">
+          <NavigatorComponent />
           <Step3 />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/step4">
+          <NavigatorComponent />
           <Step4 />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/step5">
+          <NavigatorComponent />
           <Step5 />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/step6">
+          <NavigatorComponent />
           <Step6 />
         </UserGuardedRoute>
 
