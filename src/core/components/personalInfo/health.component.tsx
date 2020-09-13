@@ -45,9 +45,9 @@ const PersonalHealthComponent = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <TextField
-              id="name"
-              name="name"
-              label="ชื่อจริง"
+              id="congenitalDisease"
+              name="congenitalDisease"
+              label="โรคประจำตัว"
               variant="outlined"
               type="text"
               onChange={handleChange}
@@ -58,9 +58,9 @@ const PersonalHealthComponent = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <TextField
-              id="surname"
-              name="surname"
-              label="นามสกุล"
+              id="foodAllergy"
+              name="foodAllergy"
+              label="แพ้อาหาร"
               variant="outlined"
               type="text"
               onChange={handleChange}
@@ -69,11 +69,24 @@ const PersonalHealthComponent = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextField
-              id="nickname"
-              name="nickname"
-              label="ชื่อเล่น"
+              id="drugAllergy"
+              name="drugAllergy"
+              label="แพ้ยา"
+              variant="outlined"
+              type="text"
+              onChange={handleChange}
+              ref={register}
+              size="small"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={12} md={6}>
+            <TextField
+              id="drug"
+              name="drug"
+              label="ยาที่ต้องใช้ประจำ"
               variant="outlined"
               type="text"
               onChange={handleChange}
