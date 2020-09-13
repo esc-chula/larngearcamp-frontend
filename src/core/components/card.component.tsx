@@ -1,10 +1,6 @@
 import React from "react"
-import { Container, Paper } from "@material-ui/core"
+import { Container, Paper, ContainerProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-
-interface Props {
-  maxWidth: "xs" | "sm" | "md" | "lg" | "xl"
-}
 
 const useStyles = makeStyles(theme => ({
   logo: {
@@ -20,17 +16,19 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     "& > *": {
       marginBottom: theme.spacing(2)
+    },
+    "&:last-child": {
+      marginBottom: theme.spacing(0)
     }
   }
 }))
 
-const FormBodyComponent: React.FC<Props> = ({ maxWidth, children }) => {
+const CardComponent: React.FC<ContainerProps> = ({ children, ...other }) => {
   const classes = useStyles()
 
   return (
     <>
-      <div className={classes.logo}>Logo</div>
-      <Container maxWidth={maxWidth}>
+      <Container {...other}>
         <Paper elevation={0} className={classes.paper}>
           {children}
         </Paper>
@@ -39,4 +37,4 @@ const FormBodyComponent: React.FC<Props> = ({ maxWidth, children }) => {
   )
 }
 
-export { FormBodyComponent }
+export { CardComponent }

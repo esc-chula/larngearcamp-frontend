@@ -7,12 +7,14 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: "#333333"
-    }
+    },
+    contrastThreshold: 3,
+    tonalOffset: 0.2
   },
   typography: {
     fontFamily: [
-      "Raleway",
       "Kanit",
+      "Raleway",
       "Sarabun",
       "-apple-system",
       "BlinkMacSystemFont",
