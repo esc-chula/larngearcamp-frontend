@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
 import { useHistory } from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles"
-import { Button, Container, Grid } from "@material-ui/core"
+import { Container } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -37,33 +37,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepFourModule = () => {
+const ApplicationFinishModule = () => {
   const classes = useStyles()
-  const history = useHistory()
-  const nextPage = useCallback(
-    (path: string) => () => {
-      history.push(path)
-    },
-    [history]
-  )
   return (
     <>
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
-          <Grid xs={6} item>
-            <Button onClick={nextPage("/application/step3")} variant="contained" className={classes.buttonWarning} fullWidth>
-              ย้อนกลับ
-            </Button>
-          </Grid>
-          <Grid xs={6} item>
-            <Button onClick={nextPage("/application/step5")} variant="contained" className={classes.buttonSuccess} fullWidth>
-              ไปขั้นตอนถัดไป
-            </Button>
-          </Grid>
-        </Grid>
-      </Container>
+      <Container maxWidth="lg">finish</Container>
     </>
   )
 }
 
-export default ApplicationStepFourModule
+export default ApplicationFinishModule
