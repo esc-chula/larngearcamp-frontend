@@ -1,11 +1,13 @@
-import React from "react"
-import { TextField, Typography, Button, Container, Paper, Box, Link } from "@material-ui/core"
+import React, { useCallback } from "react"
+import { Link } from "react-router-dom"
+import { TextField, Typography, Button, Container, Paper, Box } from "@material-ui/core"
 import { useForm } from "react-hook-form"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
+import { LogoComponent } from "../core/components/logo.component"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
-import { FormBodyComponent } from "../core/components/formBody.component"
+import { CardComponent } from "../core/components/card.component"
 import { yupResolver } from "@hookform/resolvers"
 import RegisterSchema from "../schemas/register.schema"
 import UsersService from "../core/services/users.service"
@@ -17,10 +19,10 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     "& > *": {
       marginBottom: theme.spacing(2)
-    },
-    "& > button": {
-      marginBottom: theme.spacing(0)
     }
+  },
+  clearMargin: {
+    margin: 0
   },
   errorMessage: {
     marginTop: theme.spacing(-1)
@@ -43,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     color: grey[500],
-    margin: theme.spacing(4, 0),
+    margin: theme.spacing(2, 0, 4, 0),
     "&:before, &:after": {
       flex: 1,
       content: "''",
@@ -66,22 +68,24 @@ const RegisterModule = () => {
   const { register, handleSubmit, errors, setValue, getValues } = useForm({
     resolver: yupResolver(RegisterSchema)
   })
-
-  const onSubmit = async () => {
-    const values = getValues(["email", "password"])
+  const onSubmit = useCallback(async () => {
+    const values = getValues(["email", "password", "firstName", "lastName"])
     await UsersService.createUser(values)
-  }
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.name, event.target.value)
-  }
+  }, [getValues])
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.name, event.target.value)
+    },
+    [setValue]
+  )
 
   return (
     <>
-      <FormBodyComponent maxWidth="sm">
+      <LogoComponent />
+      <CardComponent maxWidth="sm">
         <Box width="100%" margin="auto" mb={4} fontFamily="Kanit">
           <Typography variant="h6" align="center">
-            น้องต้องสร้างบัญชีเพื่อทำการสมัคร เข้าค่ายลานเกียร์ครั้งที่ 20 นี้ด้วยนะครับ
+            เพื่อทำการสมัครเข้าค่ายลานเกียร์ครั้งที่ 20 น้องจำเป็นต้องสร้างบัญชีเพื่อดำเนินการต่อ
           </Typography>
         </Box>
 
@@ -97,28 +101,28 @@ const RegisterModule = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <Box display="flex" className={classes.inputInLine}>
             <TextField
-              id="name"
-              name="name"
+              id="firstName"
+              name="firstName"
               label="ชื่อจริง"
               variant="outlined"
               type="string"
               onChange={handleChange}
               ref={register}
               size="small"
-              error={Boolean(errors?.name)}
-              helperText={errors?.name?.message}
+              error={Boolean(errors?.firstName)}
+              helperText={errors?.firstName?.message}
             />
             <TextField
-              id="surname"
-              name="surname"
+              id="lastName"
+              name="lastName"
               label="นามสกุล"
               variant="outlined"
               type="string"
               onChange={handleChange}
               ref={register}
               size="small"
-              error={Boolean(errors?.surname)}
-              helperText={errors?.surname?.message}
+              error={Boolean(errors?.lastName)}
+              helperText={errors?.lastName?.message}
             />
           </Box>
           <TextField
@@ -157,18 +161,18 @@ const RegisterModule = () => {
             error={Boolean(errors?.passwordConfirmation)}
             helperText={errors?.passwordConfirmation?.message}
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="primary" className={classes.clearMargin}>
             ลงทะเบียน
           </Button>
         </form>
-      </FormBodyComponent>
+      </CardComponent>
 
       <Box mt={4}>
         <Container maxWidth="sm">
           <Paper elevation={0}>
             <Box display="flex" alignItems="center" py={2} px={5}>
               <div> สร้างบัญชีเรียบร้อยแล้ว?</div>
-              <Link className={classes.rightAlign} href="/login">
+              <Link className={classes.rightAlign} to="/login">
                 เข้าสู่ระบบ
               </Link>
             </Box>

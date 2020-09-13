@@ -1,4 +1,4 @@
-export const getLocalStorage = (name: string, defaultValue = {}) => {
+export const getLocalStorage = (name: string, defaultValue = null) => {
   try {
     const value = localStorage.getItem(name)
     if (value === null) return defaultValue
@@ -21,7 +21,7 @@ export const removeLocalStorage = (name: string) => {
   localStorage.removeItem(name)
 }
 
-export const getSessionStorage = (name: string, defaultValue = {}) => {
+export const getSessionStorage = (name: string, defaultValue = null) => {
   try {
     const value = sessionStorage.getItem(name)
     if (value === null) return defaultValue

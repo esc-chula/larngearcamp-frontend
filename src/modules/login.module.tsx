@@ -1,14 +1,19 @@
-import React from "react"
-import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box, Link } from "@material-ui/core"
+import React, { useCallback } from "react"
+import { Link } from "react-router-dom"
+import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box } from "@material-ui/core"
 import { useForm } from "react-hook-form"
 import AuthService from "../core/services/auth.service"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
+import { LogoComponent } from "../core/components/logo.component"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
-import { FormBodyComponent } from "../core/components/formBody.component"
+import { CardComponent } from "../core/components/card.component"
 import { yupResolver } from "@hookform/resolvers"
 import LoginSchema from "../schemas/login.schema"
+import { useHistory } from "react-router-dom"
+import { useAuthContext } from "../core/providers/auth.provider"
+import { useGlobalContext } from "../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -18,6 +23,9 @@ const useStyles = makeStyles(theme => ({
     "& > *": {
       marginBottom: theme.spacing(2)
     }
+  },
+  clearMargin: {
+    margin: 0
   },
   checkbox: {
     "& > *": {
@@ -29,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     color: grey[500],
-    margin: theme.spacing(4, 0),
+    margin: theme.spacing(2, 0, 4, 0),
     "&:before, &:after": {
       flex: 1,
       content: "''",
@@ -48,12 +56,16 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const LoginModule = () => {
+  const history = useHistory()
   const classes = useStyles()
+  const { setLoading } = useGlobalContext()
+  const { setAccessToken } = useAuthContext()
   const { register, handleSubmit, setValue, getValues, setError, errors } = useForm({
     resolver: yupResolver(LoginSchema)
   })
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
+    setLoading(true)
     const values = getValues(["email", "password"])
     const result = await AuthService.login(values)
     if (result.status !== 200) {
@@ -61,20 +73,31 @@ const LoginModule = () => {
         type: "validate",
         message: result.data.message
       })
+    } else {
+      setAccessToken(result.data.token)
+      history.push("/profile")
     }
-  }
+    setLoading(false)
+  }, [getValues, history, setAccessToken, setError, setLoading])
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.name, event.target.value)
-  }
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.name, event.target.value)
+    },
+    [setValue]
+  )
 
-  const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.name, event.target.checked)
-  }
+  const handleCheckBoxChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(event.target.name, event.target.checked)
+    },
+    [setValue]
+  )
 
   return (
     <>
-      <FormBodyComponent maxWidth="sm">
+      <LogoComponent />
+      <CardComponent maxWidth="sm">
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <TextField
             id="email"
@@ -109,7 +132,7 @@ const LoginModule = () => {
             เข้าสู่ระบบ
           </Button>
           {errors.validate && (
-            <Typography color="error" variant="body2">
+            <Typography color="error" variant="body2" className={classes.clearMargin}>
               อีเมลหรือรหัสผ่านไม่ถูกต้อง
             </Typography>
           )}
@@ -123,14 +146,14 @@ const LoginModule = () => {
         <GoogleButtonComponent type="submit" variant="contained" color="primary">
           เข้าสู่ระบบด้วยบัญชี Google
         </GoogleButtonComponent>
-      </FormBodyComponent>
+      </CardComponent>
 
       <Box mt={4}>
         <Container maxWidth="sm">
           <Paper elevation={0}>
             <Box display="flex" alignItems="center" py={2} px={5}>
               <div> ยังไม่มีบัญชีลานเกียร์?</div>
-              <Link className={classes.rightAlign} href="/register">
+              <Link className={classes.rightAlign} to="/register">
                 ลงทะเบียน
               </Link>
             </Box>

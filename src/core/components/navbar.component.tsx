@@ -1,14 +1,23 @@
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import { makeStyles } from "@material-ui/core/styles"
-import { AppBar, Button, IconButton, Toolbar, Box, Link, Hidden } from "@material-ui/core"
+import { Link, useHistory } from "react-router-dom"
+import { AppBar, Button, IconButton, Toolbar, Box, Hidden } from "@material-ui/core"
 import { SideBarComponent } from "./sidebar.component"
+import { AuthNavbarComponent } from "./authNavbar.component"
+import { useAuthContext } from "../providers/auth.provider"
+import { useGlobalContext } from "../providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   appbar: {
     padding: theme.spacing(0, 10),
     [theme.breakpoints.down("md")]: {
       padding: theme.spacing(0, 2)
+    }
+  },
+  underlineWhite: {
+    "&:after": {
+      background: "#fff"
     }
   },
   itemsLeft: {
@@ -27,14 +36,20 @@ const useStyles = makeStyles(theme => ({
 
 const NavBarComponent = () => {
   const classes = useStyles()
+  const history = useHistory()
   const [open, setOpen] = useState(false)
+  const { isLoggedIn } = useAuthContext()
+  const { setLoading, setModal } = useGlobalContext()
 
-  const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return
-    }
-    setOpen(!open)
-  }
+  const toggleDrawer = useCallback(
+    (open: boolean) => (event: React.KeyboardEvent) => {
+      if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) return
+      setOpen(false)
+    },
+    []
+  )
+
+  const nextPage = useCallback((path: string) => () => history.push(path), [history])
 
   return (
     <>
@@ -47,18 +62,40 @@ const NavBarComponent = () => {
             </IconButton>
           </Hidden>
           <Box mr={6}>Logo</Box>
+          <Hidden lgUp>
+            <Box display="flex" alignItems="center" marginLeft="auto">
+              {isLoggedIn && <AuthNavbarComponent />}
+            </Box>
+          </Hidden>
+
           <Hidden mdDown>
             <Box display="flex" alignItems="center" marginRight="auto" className={classes.itemsLeft}>
-              <Link href="/docs">เอกสารการสมัคร</Link>
-              <Link href="/qna">คำถามที่พบบ่อย</Link>
+              <Link className={classes.underlineWhite} to="/docs">
+                เอกสารการสมัคร
+              </Link>
+              <Link className={classes.underlineWhite} to="/qna">
+                คำถามที่พบบ่อย
+              </Link>
+              <Button color="primary" variant="contained" onClick={() => setLoading(true)}>
+                ทดสอบ loading
+              </Button>
+              <Button color="primary" variant="contained" onClick={() => setModal(true)}>
+                ทดสอบ Modal
+              </Button>
             </Box>
             <Box display="flex" alignItems="center" className={classes.itemsRight}>
-              <Link href="/login">เข้าสู่ระบบ</Link>
-              <Link href="/register">
-                <Button color="primary" variant="contained">
-                  ลงทะเบียน
-                </Button>
-              </Link>
+              {isLoggedIn ? (
+                <AuthNavbarComponent />
+              ) : (
+                <>
+                  <Link className={classes.underlineWhite} to="/login">
+                    เข้าสู่ระบบ
+                  </Link>
+                  <Button color="primary" variant="contained" onClick={nextPage("/register")}>
+                    ลงทะเบียน
+                  </Button>
+                </>
+              )}
             </Box>
           </Hidden>
         </Toolbar>
