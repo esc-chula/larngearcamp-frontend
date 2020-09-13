@@ -56,7 +56,7 @@ const PersonalHealthComponent = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={5}>
+          <Grid item xs={12} sm={12} md={5}>
             <TextField
               id="foodAllergy"
               name="foodAllergy"
@@ -69,7 +69,7 @@ const PersonalHealthComponent = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={12} sm={12} md={6}>
             <TextField
               id="drugAllergy"
               name="drugAllergy"
