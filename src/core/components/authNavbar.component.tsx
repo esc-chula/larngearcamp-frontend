@@ -33,9 +33,9 @@ const AuthNavbarComponent: React.FC = () => {
 
   const logout = useCallback(async () => {
     setAnchorEl(null)
-    setAccessToken(null)
     setLoading(true)
     await AuthService.logout()
+    setAccessToken(null)
     setLoading(false)
     history.push("/")
   }, [history, setLoading, setAccessToken])
