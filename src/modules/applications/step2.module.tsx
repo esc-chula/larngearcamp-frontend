@@ -9,6 +9,7 @@ import { PersonalProfileComponent } from "../../core/components/personalInfo/pro
 import { PersonalContactComponent } from "../../core/components/personalInfo/contact.component"
 import { PersonalEducationComponent } from "../../core/components/personalInfo/education.component"
 import { PersonalHealthComponent } from "../../core/components/personalInfo/health.component"
+import { PersonalEmergencyComponent } from "../../core/components/personalInfo/emergency.component"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -64,6 +65,7 @@ const ApplicationStepTwoModule = () => {
           <PersonalEducationComponent />
           <PersonalHealthComponent />
           <PersonalContactComponent />
+          <PersonalEmergencyComponent />
           <Grid container spacing={2}>
             <Grid xs={6} item>
               <Button onClick={nextPage("/application/step1")} variant="contained" className={classes.buttonWarning} fullWidth>
@@ -72,7 +74,7 @@ const ApplicationStepTwoModule = () => {
             </Grid>
             <Grid xs={6} item>
               <Button onClick={nextPage("/application/step3")} variant="contained" className={classes.buttonSuccess} fullWidth>
-                ไปขั้นตอนถัดไป
+                ย้อนกลับ
               </Button>
             </Grid>
           </Grid>
