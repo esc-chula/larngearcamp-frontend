@@ -69,7 +69,7 @@ const RegisterModule = () => {
     resolver: yupResolver(RegisterSchema)
   })
   const onSubmit = useCallback(async () => {
-    const values = getValues(["email", "password"])
+    const values = getValues(["email", "password", "firstName", "lastName"])
     await UsersService.createUser(values)
   }, [getValues])
   const handleChange = useCallback(
@@ -101,28 +101,28 @@ const RegisterModule = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <Box display="flex" className={classes.inputInLine}>
             <TextField
-              id="name"
-              name="name"
+              id="firstName"
+              name="firstName"
               label="ชื่อจริง"
               variant="outlined"
               type="string"
               onChange={handleChange}
               ref={register}
               size="small"
-              error={Boolean(errors?.name)}
-              helperText={errors?.name?.message}
+              error={Boolean(errors?.firstName)}
+              helperText={errors?.firstName?.message}
             />
             <TextField
-              id="surname"
-              name="surname"
+              id="lastName"
+              name="lastName"
               label="นามสกุล"
               variant="outlined"
               type="string"
               onChange={handleChange}
               ref={register}
               size="small"
-              error={Boolean(errors?.surname)}
-              helperText={errors?.surname?.message}
+              error={Boolean(errors?.lastName)}
+              helperText={errors?.lastName?.message}
             />
           </Box>
           <TextField
