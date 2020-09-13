@@ -6,9 +6,17 @@ import AuthService from "../services/auth.service"
 import { useHistory } from "react-router-dom"
 import { useGlobalContext } from "../providers/global.provider"
 import { useAuthContext } from "../providers/auth.provider"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles(theme => ({
+  cursor: {
+    cursor: "pointer"
+  }
+}))
 
 const AuthNavbarComponent: React.FC = () => {
   const history = useHistory()
+  const classes = useStyles()
   const { setAccessToken } = useAuthContext()
   const { setLoading } = useGlobalContext()
   const [anchorEl, setAnchorEl] = useState(null)
@@ -42,7 +50,7 @@ const AuthNavbarComponent: React.FC = () => {
 
   return (
     <>
-      <div onClick={handleClick}>
+      <div onClick={handleClick} className={classes.cursor}>
         <Avatar alt="avatar">H</Avatar>
       </div>
       <Menu
