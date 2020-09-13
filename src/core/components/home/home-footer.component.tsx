@@ -41,11 +41,15 @@ const useStyle = makeStyles(theme => ({
   facebookContainer: {
     textAlign: "center"
   },
+  larngearContainer:{
+    marginTop: theme.spacing(3)
+  },
   center: {
     display: "flex",
     alignItems: "center"
   },
   grid: {
+    marginTop: theme.spacing(1.5),
     display: "grid",
     gridTemplateColumns: "max-content max-content max-content",
     gridTemplateRows: "repeat(auto-fill, minmax(auto, 1fr))",
@@ -86,7 +90,7 @@ const HomeFooter: React.FC<{
     <>
       <Typography variant="subtitle1">ติดตามข่าวสารเพิ่มเติมได้ที่</Typography>
 
-      <Grid container>
+      <Grid container className={classes.larngearContainer}>
         <Grid item xs={3} className={classes.facebookContainer}>
           <FacebookIcon />
         </Grid>
