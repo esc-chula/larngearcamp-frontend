@@ -13,8 +13,8 @@ const theme = createMuiTheme({
   },
   typography: {
     fontFamily: [
-      "Raleway",
       "Kanit",
+      "Raleway",
       "Sarabun",
       "-apple-system",
       "BlinkMacSystemFont",
