@@ -2,6 +2,7 @@ import SelectModel from "../models/select.model"
 
 const bloodGroupsConstant: SelectModel = {
   name: "bloodGroup",
+  label: "หมู่เลือด",
   contents: [
     { text: "A+", value: "A+" },
     { text: "A-", value: "A+" },

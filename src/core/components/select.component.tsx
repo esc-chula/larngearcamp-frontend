@@ -6,13 +6,14 @@ interface SelectComponentProps extends FormControlProps {
   data: SelectModel
   value: string
   onChange: (event: any) => void
+  cusTomRef: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined
 }
 
-const SelectComponent: React.FC<SelectComponentProps> = ({ data, value, onChange, ref, ...other }) => {
+const SelectComponent: React.FC<SelectComponentProps> = ({ data, value, onChange, cusTomRef, ...other }) => {
   return (
     <FormControl {...other}>
-      <InputLabel id={`${data.name}-label`}>หมู่เลือด</InputLabel>
-      <Select labelId={`${data.name}-label`} id={data.name} name={data.name} value={value} onChange={onChange} label="หมู่เลือด" ref={ref}>
+      <InputLabel id={`${data.name}-label`}>{data.label}</InputLabel>
+      <Select labelId={`${data.name}-label`} id={data.name} name={data.name} value={value} onChange={onChange} label="หมู่เลือด" ref={cusTomRef}>
         {data.contents.map((content, index) => (
           <MenuItem value={content.value} key={data.name + content.text + content.value + index}>
             {content.text}

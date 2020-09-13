@@ -2,6 +2,7 @@ import SelectModel from "../models/select.model"
 
 const religionsConstant: SelectModel = {
   name: "religion",
+  label: "ศาสนา",
   contents: [
     { text: "พุทธ", value: "พุทธ" },
     { text: "คริสต์", value: "คริสต์" },
