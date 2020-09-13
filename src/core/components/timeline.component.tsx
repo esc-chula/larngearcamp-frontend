@@ -13,13 +13,17 @@ const UseStyleTL = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.main,
       width: "32px",
       height: "32px",
-      lineHeight: "32px",
-      borderRadius: "50%",
-      textAlign: "center",  
+      borderRadius: "50%",  
       position: "absolute",
+      left: "calc(50% - 16px)"
+    },
+    numberText: {
+      position: "absolute",
+      lineHeight: "32px",
+      width: "32px",
       left: "calc(50% - 16px)",
       color: "white",
-
+      textAlign: "center"
     },
     NCLeftText: {
       color: "#828282",
@@ -58,10 +62,11 @@ const TimelineDisplay: React.FC<{
         {props.label.map(({left, right}, i, arr) => 
         <div key={i}>
             <div className={classes.line}>
-                <Typography variant="body1" className={classes.NCLeftText + ' kanit'}>
+                <Typography variant="body2" className={classes.NCLeftText + ' kanit'}>
                     {left}
                 </Typography>
-                <Typography variant="subtitle2" className={classes.numberCircle}>
+                <div className={classes.numberCircle}></div>
+                <Typography variant="body2" className={classes.numberText + ' kanit'}>
                     {(props.startNumber||1) + i}
                 </Typography>
                 <Typography variant="h6" className={classes.NCRightText}>
