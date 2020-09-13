@@ -30,8 +30,8 @@ export const GlobalProvider: React.FC = ({ children, ...other }) => {
 
   return (
     <GlobalContext.Provider value={value} {...other}>
-      {loading && <LoadingComponent loading={loading} />}
-      {modal && <ModalComponent open={modal} onClick={toggleModal} />}
+      <LoadingComponent loading={loading} />
+      <ModalComponent open={modal} onClick={toggleModal} />
       {children}
     </GlobalContext.Provider>
   )
