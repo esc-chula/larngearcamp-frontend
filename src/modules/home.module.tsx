@@ -37,7 +37,7 @@ const HomeModule: React.FC = () => {
       <br></br>
       <br></br>
 
-      {/*<HomeCarousal/>*/}
+      <HomeCarousal gradientPercent={20} />
       <br></br>
       <br></br>
       <br></br>
