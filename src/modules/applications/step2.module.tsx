@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
 import { CardComponent } from "../../core/components/card.component"
-import { Button, Grid } from "@material-ui/core"
+import { Button, Divider, Grid, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useHistory } from "react-router-dom"
 import { useGlobalContext } from "../../core/providers/global.provider"
@@ -13,13 +13,19 @@ import { PersonalEmergencyComponent } from "../../core/components/personalInfo/e
 
 const useStyles = makeStyles(theme => ({
   card: {
-    marginTop: theme.spacing(4)
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(8)
   },
   divider: {
     marginBottom: theme.spacing(2)
   },
+  question: {
+    "&>*": {
+      marginBottom: theme.spacing(6)
+    }
+  },
   bold: {
-    fontWeight: "bold"
+    fontWeight: 500
   },
   buttonSuccess: {
     marginTop: theme.spacing(2),
@@ -61,11 +67,18 @@ const ApplicationStepTwoModule = () => {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardComponent maxWidth="lg" className={classes.card}>
-          <PersonalProfileComponent />
-          <PersonalEducationComponent />
-          <PersonalHealthComponent />
-          <PersonalContactComponent />
-          <PersonalEmergencyComponent />
+          <Typography variant="h5" align="center" className={classes.bold}>
+            ข้อมูลส่วนตัว
+          </Typography>
+          <Divider className={classes.divider} />
+          <div className={classes.question}>
+            <PersonalProfileComponent />
+            <PersonalEducationComponent />
+            <PersonalHealthComponent />
+            <PersonalContactComponent />
+            <PersonalEmergencyComponent />
+          </div>
+
           <Grid container spacing={2}>
             <Grid xs={6} item>
               <Button onClick={nextPage("/application/step1")} variant="contained" className={classes.buttonWarning} fullWidth>

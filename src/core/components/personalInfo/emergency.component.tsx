@@ -7,7 +7,7 @@ import { relationsConstant } from "../../constants/relation.constant"
 
 const useStyles = makeStyles(theme => ({
   bold: {
-    fontWeight: "bold"
+    fontWeight: 500
   },
   title: {
     marginBottom: theme.spacing(2)

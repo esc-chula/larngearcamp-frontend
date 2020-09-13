@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
   bold: {
-    fontWeight: "bold"
+    fontWeight: 500
   },
   title: {
     marginBottom: theme.spacing(2)

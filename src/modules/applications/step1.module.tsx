@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2)
   },
   bold: {
-    fontWeight: "bold"
+    fontWeight: 500
   },
   button: {
     marginTop: theme.spacing(2),
@@ -63,7 +63,7 @@ const ApplicationStepOneModule = () => {
 
   return (
     <CardComponent maxWidth="lg" className={classes.card}>
-      <Typography variant="h5" align="center">
+      <Typography variant="h5" align="center" className={classes.bold}>
         รายละเอียดของการสมัครค่ายลานเกียร์ครั้งที่ 20
       </Typography>
       <Divider className={classes.divider} />

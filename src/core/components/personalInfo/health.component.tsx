@@ -7,7 +7,7 @@ import { bloodGroupsConstant } from "../../constants/bloodGroups.constant"
 
 const useStyles = makeStyles(theme => ({
   bold: {
-    fontWeight: "bold"
+    fontWeight: 500
   },
   title: {
     marginBottom: theme.spacing(2)
@@ -28,8 +28,11 @@ const PersonalHealthComponent = () => {
   return (
     <>
       <Box mt={2}>
-        <Typography variant="h6" className={`${classes.bold} ${classes.title}`}>
+        <Typography variant="h6" className={`${classes.bold}`}>
           ข้อมูลสุขภาพ
+        </Typography>
+        <Typography variant="body2" className={`${classes.title}`}>
+          หากมีหลายข้อให้คั่นคำตอบด้วย comma
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={2}>
