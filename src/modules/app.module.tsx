@@ -11,17 +11,17 @@ import { GlobalProvider } from "../core/providers/global.provider"
 const AppModule = () => {
   return (
     <ErrorBoundary>
-      <Suspense fallback={<LoadingComponent loading={true} />}>
-        <AuthProvider>
-          <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <Suspense fallback={<LoadingComponent loading={true} />}>
+          <AuthProvider>
             <GlobalProvider>
               <BrowserRouter>
                 <RouteModule />
               </BrowserRouter>
             </GlobalProvider>
-          </ThemeProvider>
-        </AuthProvider>
-      </Suspense>
+          </AuthProvider>
+        </Suspense>
+      </ThemeProvider>
     </ErrorBoundary>
   )
 }
