@@ -29,7 +29,8 @@ const UseStyleTL = makeStyles(theme => ({
       color: "#828282",
       position: "absolute",
       lineHeight: "32px",
-      right: "calc(50% + 16px + 32px)"
+      right: "calc(50% + 16px + 32px)",
+      fontWeight: "normal"
     },
     NCRightText: {
       position: "absolute",
