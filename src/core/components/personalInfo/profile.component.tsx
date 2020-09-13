@@ -1,7 +1,10 @@
 import React, { useCallback, useState } from "react"
 import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField, MenuItem, FormControl, InputLabel, Select } from "@material-ui/core"
+import { Typography, Box, Grid, TextField } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { titlesConstant } from "../../constants/titles.constants"
+import { SelectComponent } from "../select.component"
+import { religionsConstant } from "../../constants/religions.constant"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -34,15 +37,15 @@ const PersonalProfileComponent = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={2}>
-            <FormControl variant="outlined" size="small" fullWidth>
-              <InputLabel id="title-label">คำนำหน้า</InputLabel>
-              <Select labelId="title-label" id="title" name="title" value={title} onChange={handleChange} label="คำนำหน้า">
-                <MenuItem value="เด็กชาย">ด.ช.</MenuItem>
-                <MenuItem value="เด็กหญิง">ด.ญ.</MenuItem>
-                <MenuItem value="นาย">นาย</MenuItem>
-                <MenuItem value="นางสาว">นางสาว</MenuItem>
-              </Select>
-            </FormControl>
+            <SelectComponent
+              variant="outlined"
+              size="small"
+              fullWidth
+              data={titlesConstant}
+              onChange={handleChange}
+              value={title}
+              cusTomRef={register}
+            />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <TextField
@@ -84,15 +87,15 @@ const PersonalProfileComponent = () => {
             />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <FormControl variant="outlined" size="small" fullWidth>
-              <InputLabel id="religion-label">ศาสนา</InputLabel>
-              <Select labelId="religion-label" id="religion" name="religion" value={religion} onChange={handleChange} label="ศาสนา">
-                <MenuItem value="พุทธ">พุทธ</MenuItem>
-                <MenuItem value="คริสต์">คริสต์</MenuItem>
-                <MenuItem value="อิสลาม">อิสลาม</MenuItem>
-                <MenuItem value="พราหมณ์-ฮินดู">พราหมณ์-ฮินดู</MenuItem>
-              </Select>
-            </FormControl>
+            <SelectComponent
+              variant="outlined"
+              size="small"
+              fullWidth
+              data={religionsConstant}
+              onChange={handleChange}
+              value={religion}
+              cusTomRef={register}
+            />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
             <TextField

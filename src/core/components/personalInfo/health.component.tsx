@@ -1,7 +1,9 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useState } from "react"
 import { useFormContext } from "react-hook-form"
 import { Typography, Box, Grid, TextField } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { SelectComponent } from "../select.component"
+import { bloodGroupsConstant } from "../../constants/bloodGroups.constant"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -13,11 +15,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const PersonalHealthComponent = () => {
+  const [bloodGroup, setBloodGroup] = useState("")
   const { register, setValue } = useFormContext()
   const classes = useStyles()
   const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+    event => {
       setValue(event.target.name, event.target.value)
+      event.target.name === "bloodGroup" && setBloodGroup(event.target.value)
     },
     [setValue]
   )
@@ -29,16 +33,14 @@ const PersonalHealthComponent = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={2}>
-            <TextField
-              id="title"
-              name="title"
-              label="คำนำหน้า"
+            <SelectComponent
               variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
               size="small"
               fullWidth
+              data={bloodGroupsConstant}
+              onChange={handleChange}
+              value={bloodGroup}
+              cusTomRef={register}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
