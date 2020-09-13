@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
 
 const PersonalProfileComponent = () => {
   const [title, setTitle] = useState("")
+  const [religion, setReligion] = useState("")
   const { register, setValue } = useFormContext()
   const classes = useStyles()
 
@@ -21,6 +22,7 @@ const PersonalProfileComponent = () => {
     event => {
       setValue(event.target.name, event.target.value)
       event.target.name === "title" && setTitle(event.target.value)
+      event.target.name === "religion" && setReligion(event.target.value)
     },
     [setValue]
   )
@@ -31,10 +33,12 @@ const PersonalProfileComponent = () => {
           ข้อมูลส่วนตัว
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={2}>
+          <Grid item xs={12} sm={12} md={2}>
             <FormControl variant="outlined" size="small" fullWidth>
               <InputLabel id="title-label">คำนำหน้า</InputLabel>
               <Select labelId="title-label" id="title" name="title" value={title} onChange={handleChange} label="คำนำหน้า">
+                <MenuItem value="เด็กชาย">ด.ช.</MenuItem>
+                <MenuItem value="เด็กหญิง">ด.ญ.</MenuItem>
                 <MenuItem value="นาย">นาย</MenuItem>
                 <MenuItem value="นางสาว">นางสาว</MenuItem>
               </Select>
@@ -66,7 +70,7 @@ const PersonalProfileComponent = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextField
               id="nickname"
               name="nickname"
@@ -79,7 +83,18 @@ const PersonalProfileComponent = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
+            <FormControl variant="outlined" size="small" fullWidth>
+              <InputLabel id="religion-label">ศาสนา</InputLabel>
+              <Select labelId="religion-label" id="religion" name="religion" value={religion} onChange={handleChange} label="ศาสนา">
+                <MenuItem value="พุทธ">พุทธ</MenuItem>
+                <MenuItem value="คริสต์">คริสต์</MenuItem>
+                <MenuItem value="อิสลาม">อิสลาม</MenuItem>
+                <MenuItem value="พราหมณ์-ฮินดู">พราหมณ์-ฮินดู</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={12} md={5}>
             <TextField
               id="birthDate"
               name="birthDate"
@@ -94,30 +109,6 @@ const PersonalProfileComponent = () => {
                 shrink: true
               }}
             />
-          </Grid>
-          <Grid item xs={12} sm={6} md={2}>
-            <TextField
-              id="age"
-              name="age"
-              label="อายุ"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <FormControl variant="outlined" size="small" fullWidth>
-              <InputLabel id="religion-label">ศาสนา</InputLabel>
-              <Select labelId="religion-label" id="religion" name="religion" value={title} onChange={handleChange} label="ศาสนา">
-                <MenuItem value="พุทธ">พุทธ</MenuItem>
-                <MenuItem value="คริสต์">คริสต์</MenuItem>
-                <MenuItem value="อิสลาม">อิสลาม</MenuItem>
-                <MenuItem value="พราหมณ์-ฮินดู">พราหมณ์-ฮินดู</MenuItem>
-              </Select>
-            </FormControl>
           </Grid>
         </Grid>
       </Box>
