@@ -41,7 +41,7 @@ const useStyle = makeStyles(theme => ({
   facebookContainer: {
     textAlign: "center"
   },
-  larngearContainer:{
+  larngearContainer: {
     marginTop: theme.spacing(3)
   },
   center: {
