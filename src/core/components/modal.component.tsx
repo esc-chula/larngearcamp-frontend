@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Backdrop, Box } from "@material-ui/core"
 import { CardComponent } from "./card.component"
 
-interface LoadingProps {
+interface ModalProps {
   open: boolean
   onClick: (event: React.MouseEvent) => void
 }
@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ModalComponent: React.FC<LoadingProps> = ({ open, onClick }) => {
+const ModalComponent: React.FC<ModalProps> = ({ open, onClick }) => {
   const classes = useStyles()
   return (
     <Backdrop className={classes.backdrop} open={open} transitionDuration={500} onClick={onClick}>
