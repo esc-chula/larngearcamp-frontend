@@ -21,7 +21,10 @@ const useStyles = makeStyles(theme => ({
   },
   question: {
     "&>*": {
-      marginBottom: theme.spacing(6)
+      marginTop: theme.spacing(6)
+    },
+    "&>*:first-child": {
+      marginTop: theme.spacing(0)
     }
   },
   bold: {
