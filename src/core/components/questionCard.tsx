@@ -17,12 +17,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     flexDirection: "column"
   },
-  mutiline: {
-    "&>*": {
-      minHeight: 80,
-      display: "flex",
-      alignItems: "flex-start"
-    }
+  image: {
+    margin: theme.spacing(2, 0)
   }
 }))
 
@@ -30,10 +26,10 @@ const QuestionCardComponent: React.FC<QuestionCard> = ({ question, questionProps
   const classes = useStyles()
   return (
     <Paper elevation={0} className={classes.paper}>
-      <Typography variant="h5" {...questionProps}>
+      <Typography variant="body1" {...questionProps}>
         {question}
       </Typography>
-      {imagePath && <img src={imagePath} alt={question} />}
+      {imagePath && <img src={imagePath} alt={question} className={classes.image} />}
       {caption && (
         <Typography variant="caption" {...captionProps}>
           {caption}
