@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 const ProfileModule = () => {
   const classes = useStyles()
   return (
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <ProfileComponent />
       <Link to="/application/step1">
         <Button className={classes.button} color="primary" variant="contained" fullWidth>
