@@ -8,7 +8,7 @@ const questionsSection2Constant: Array<QuestionModel> = [
   },
   {
     question: "จากรูปที่กำหนดให้ น้องเห็นรูปแล้วนึกถึงอะไร เพราะอะไร",
-    imagePath: "src/assets/q2.jpg",
+    imagePath: require("../../assets/images/sunflower.jpg"),
     caption: "ที่มา : https://wallpapersite.com/creative-graphics/astronaut-sunflowers-4k-15924.html",
     type: "multiline"
   },
