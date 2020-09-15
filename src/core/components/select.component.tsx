@@ -2,14 +2,14 @@ import React from "react"
 import { FormControl, InputLabel, Select, MenuItem, FormControlProps } from "@material-ui/core"
 import SelectModel from "../models/select.model"
 
-interface SelectComponentProps extends FormControlProps {
+interface SelectProps extends FormControlProps {
   data: SelectModel
   value: string
   onChange: (event: any) => void
   cusTomRef: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined
 }
 
-const SelectComponent: React.FC<SelectComponentProps> = ({ data, value, onChange, cusTomRef, ...other }) => {
+const SelectComponent: React.FC<SelectProps> = ({ data, value, onChange, cusTomRef, ...other }) => {
   return (
     <FormControl {...other}>
       <InputLabel id={`${data.name}-label`}>{data.label}</InputLabel>
