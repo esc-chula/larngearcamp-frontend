@@ -97,12 +97,12 @@ const ApplicationStepFourModule = () => {
             </div>
 
             <Grid container spacing={2}>
-              <Grid xs={6} item>
+              <Grid xs={12} sm={6} item>
                 <Button onClick={nextPage("/application/step4")} variant="contained" className={classes.buttonWarning} fullWidth>
                   ย้อนกลับ
                 </Button>
               </Grid>
-              <Grid xs={6} item>
+              <Grid xs={12} sm={6} item>
                 <Button onClick={nextPage("/application/step5")} variant="contained" className={classes.buttonSuccess} fullWidth>
                   ไปขั้นตอนถัดไป
                 </Button>
