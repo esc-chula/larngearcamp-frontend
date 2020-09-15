@@ -1,6 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import "./styles/index.scss"
+import "./styles/index.css"
 
 import { AppModule } from "./modules/app.module"
 
