@@ -1,7 +1,6 @@
 name: Deploy to Firebase dev
 
 on:
-  workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches: [dev]
