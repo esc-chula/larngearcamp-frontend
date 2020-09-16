@@ -26,9 +26,7 @@ const QuestionCardComponent: React.FC<QuestionCard> = ({ question, questionProps
   const classes = useStyles()
   return (
     <Paper elevation={0} className={classes.paper}>
-      <Typography variant="body1" {...questionProps}>
-        {question}
-      </Typography>
+      <Typography variant="body1" {...questionProps} dangerouslySetInnerHTML={{ __html: question }} />
       {imagePath && <img src={imagePath} alt={question} className={classes.image} />}
       {caption && (
         <Typography variant="caption" {...captionProps}>
