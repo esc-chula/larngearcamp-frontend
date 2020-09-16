@@ -9,7 +9,11 @@ const GuestGuardedRoute: React.FC<RouteProps> = ({ children, ...props }) => {
     return <Route {...props}>{children}</Route>
   }
 
-  return <Redirect to="/" />
+  return (
+    <Route {...props}>
+      <Redirect to="/" />
+    </Route>
+  )
 }
 
 export { GuestGuardedRoute }
