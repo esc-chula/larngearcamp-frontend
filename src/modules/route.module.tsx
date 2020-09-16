@@ -13,6 +13,7 @@ import { Finish, Step1, Step2, Step3, Step4, Step5, Step6 } from "./applications
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
 import { NavigatorComponent } from "../core/components/navigator.component"
+import { AdminDashboardModule } from "./admin/dashboard.module"
 
 const RouteModule: React.FC = () => {
   return (
@@ -70,7 +71,10 @@ const RouteModule: React.FC = () => {
         </UserGuardedRoute>
 
         {/* Admin Guard */}
-        <AdminGuardedRoute exact path="/admin/dashboard"></AdminGuardedRoute>
+        <AdminGuardedRoute exact path="/admin/dashboard">
+          <AdminDashboardModule />
+        </AdminGuardedRoute>
+        <AdminGuardedRoute exact path="/admin/dashboard/:id"></AdminGuardedRoute>
 
         {/* NotFound Route */}
         <Route>
