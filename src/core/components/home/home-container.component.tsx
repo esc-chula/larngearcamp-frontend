@@ -3,18 +3,23 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const useStyle = makeStyles(theme => ({
   container: {
-    [theme.breakpoints.up("lg")]: {
-      marginLeft: "160px",
-      marginRight: "160px"
+    display: 'grid',
+    [theme.breakpoints.up("xl")]: {
+      gridTemplateColumns: "minmax(0px, 160px) auto minmax(0px, 160px)",
     },
-    marginLeft: "32px",
-    marginRight: "32px"
+    gridTemplateColumns: "minmax(0px, 32px) auto minmax(0px, 32px)",
   }
 }))
 
 const HomeContainer: React.FC = props => {
-  const classes = useStyle()
-  return <div className={classes.container}>{props.children}</div>
+  const classes = useStyle();
+  return (
+  <div className={classes.container}>
+    <span/>
+    <span>{props.children}</span>
+    <span/>
+  </div>
+  )
 }
 
 export default HomeContainer
