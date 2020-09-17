@@ -21,7 +21,10 @@ const useStyles = makeStyles(theme => ({
   },
   question: {
     "&>*": {
-      marginBottom: theme.spacing(6)
+      marginTop: theme.spacing(6)
+    },
+    "&>*:first-child": {
+      marginTop: theme.spacing(0)
     }
   },
   bold: {
@@ -80,12 +83,12 @@ const ApplicationStepTwoModule = () => {
           </div>
 
           <Grid container spacing={2}>
-            <Grid xs={6} item>
+            <Grid xs={12} sm={6} item>
               <Button onClick={nextPage("/application/step1")} variant="contained" className={classes.buttonWarning} fullWidth>
                 ย้อนกลับ
               </Button>
             </Grid>
-            <Grid xs={6} item>
+            <Grid xs={12} sm={6} item>
               <Button onClick={nextPage("/application/step3")} variant="contained" className={classes.buttonSuccess} fullWidth>
                 ไปขั้นตอนถัดไป
               </Button>

@@ -10,6 +10,9 @@
         ],
         "dev": [
           "larngear20th-dev"
+        ],
+        "lastest-pr": [
+          "larngear20th-lastest-pr"
         ]
       }
     }

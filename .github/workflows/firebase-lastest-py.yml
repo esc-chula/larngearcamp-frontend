@@ -1,8 +1,8 @@
 name: Deploy to Firebase dev
 
 on:
-  workflow_dispatch:
-  push:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
     branches: [dev]
 
 jobs:
@@ -25,6 +25,6 @@ jobs:
       - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@v1.5.0
         with:
-          args: deploy --only hosting:dev
+          args: deploy --only hosting:lastest-pr
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
