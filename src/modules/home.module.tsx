@@ -10,11 +10,20 @@ import HomeTimeline from "../core/components/home/home-timeline.component"
 import HomeCarousal from "../core/components/home/home-carousel.component"
 import HomeAnnouce from "../core/components/home/home-annouce.component"
 
+import landing1 from "../assets/images/background/landing-1.svg"
+import BackgroundOverlay from "../core/components/backgroundOverlay.component"
+
 const useStyle = makeStyles(theme => ({
   homeTitleContainer: {
-    marginTop: "80px"
+    paddingTop: "80px",
+    paddingBottom: "166px"
+  },
+  homeDescriptionContainer: {
+    paddingBottom: "72px"
   }
 }))
+
+const VSeperator: React.FC<{ height: string | number }> = props => <div style={{ height: props.height }} />
 
 const HomeModule: React.FC = () => {
   const classes = useStyle()
@@ -22,20 +31,13 @@ const HomeModule: React.FC = () => {
   return (
     <>
       <CoverComponent />
-
-      <div className={classes.homeTitleContainer}>
+      <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70}>
+        <VSeperator height="80px" />
         <HomeTitle />
-      </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      </BackgroundOverlay>
 
       <HomeLarngearDescription />
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <VSeperator height="80px" />
 
       <HomeCarousal gradientPercent={20} />
       <br></br>
