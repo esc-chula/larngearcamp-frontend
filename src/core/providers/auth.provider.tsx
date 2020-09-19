@@ -65,14 +65,14 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   const refresh = useCallback(async (): Promise<Boolean> => {
     if (accessToken) {
       const { exp } = jwt_decode(accessToken)
-      if (moment().isAfter(moment(exp).add("3", "d"))) {
+      if (moment().isAfter(moment(exp * 1000).add("3", "d"))) {
         await AuthService.logout()
-        process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out")
+        process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out (inactive in 3 days)")
         setAccessToken(null)
         return true
-      } else if (moment().isAfter(moment(exp))) {
+      } else if (moment().isAfter(moment(exp * 1000))) {
         const result = await AuthService.refresh()
-        process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh")
+        process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh (active in 3 days)")
         setAccessToken(result.data.token)
         return true
       }
@@ -91,16 +91,8 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   }, [])
 
   useEffect(() => {
-    if (accessToken) {
-      const { exp } = jwt_decode(accessToken)
-      console.log(moment())
-      console.log(moment(exp))
-      console.log(moment().isAfter(moment(exp)))
-      console.log(new Date())
-      console.log(new Date(exp))
-    }
-    //refresh().then(result => process.env.REACT_APP_DEBUG && console.log("refresh: ", result))
-  }, [accessToken])
+    refresh().then(result => process.env.REACT_APP_DEBUG && console.log("refresh: ", result))
+  }, [accessToken, refresh])
 
   const value: AuthConstruct = {
     accessToken,
