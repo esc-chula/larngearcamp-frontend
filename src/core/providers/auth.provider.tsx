@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode"
 import AuthService from "../services/auth.service"
 import LoginModel from "../models/login.model"
 import moment from "moment"
+import { AxiosResponse } from "axios"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -12,11 +13,11 @@ interface AuthConstruct {
   isUserLoggedIn: boolean
   isAdminLoggedIn: boolean
   refresh: () => Promise<Boolean>
-  login: (params: LoginModel) => Promise<any>
-  logout: () => Promise<any>
-  me: () => Promise<any>
-  forgetPassword: () => Promise<any>
-  resetPassword: (params: { password: string }) => Promise<any>
+  login: (params: LoginModel) => Promise<AxiosResponse<any>>
+  logout: () => Promise<AxiosResponse<any>>
+  me: () => Promise<AxiosResponse<any>>
+  forgetPassword: () => Promise<AxiosResponse<any>>
+  resetPassword: (params: { password: string }) => Promise<AxiosResponse<any>>
 }
 
 export const AuthContext = createContext({} as AuthConstruct)
@@ -47,19 +48,21 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const login = useCallback(async (params: LoginModel) => {
     const result = await AuthService.login(params)
-    setAccessToken(result.data.token)
-    return result.data
+    if (result.status === 200) {
+      setAccessToken(result.data.token)
+    }
+    return result
   }, [])
 
   const logout = useCallback(async () => {
     const result = await AuthService.logout()
     setAccessToken(null)
-    return result.data
+    return result
   }, [])
 
   const me = useCallback(async () => {
     const result = await AuthService.me()
-    return result.data
+    return result
   }, [])
 
   const refresh = useCallback(async (): Promise<Boolean> => {
@@ -73,7 +76,9 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       } else if (moment().isAfter(moment(exp * 1000))) {
         const result = await AuthService.refresh()
         process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh (active in 3 days)")
-        setAccessToken(result.data.token)
+        if (result.status === 200) {
+          setAccessToken(result.data.token)
+        }
         return true
       }
     }
@@ -82,12 +87,12 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const forgetPassword = useCallback(async () => {
     const result = await AuthService.forgetPassword()
-    return result.data
+    return result
   }, [])
 
   const resetPassword = useCallback(async (params: { password: string }) => {
     const result = await AuthService.resetPassword(params)
-    return result.data
+    return result
   }, [])
 
   useEffect(() => {

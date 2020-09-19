@@ -2,7 +2,6 @@ import React, { useCallback } from "react"
 import { Link } from "react-router-dom"
 import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box } from "@material-ui/core"
 import { useForm } from "react-hook-form"
-import AuthService from "../core/services/auth.service"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { LogoComponent } from "../core/components/logo.component"
@@ -59,7 +58,7 @@ const LoginModule = () => {
   const history = useHistory()
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
-  const { setAccessToken } = useAuthContext()
+  const { login } = useAuthContext()
   const { register, handleSubmit, setValue, getValues, setError, errors } = useForm({
     resolver: yupResolver(LoginSchema)
   })
@@ -67,18 +66,17 @@ const LoginModule = () => {
   const onSubmit = useCallback(async () => {
     setLoading(true)
     const values = getValues(["email", "password"])
-    const result = await AuthService.login(values)
+    const result = await login(values)
     if (result.status !== 200) {
       setError("validate", {
         type: "validate",
         message: result.data.message
       })
     } else {
-      setAccessToken(result.data.token)
       history.push("/profile")
     }
     setLoading(false)
-  }, [getValues, history, setAccessToken, setError, setLoading])
+  }, [getValues, history, setError, setLoading, login])
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

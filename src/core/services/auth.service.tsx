@@ -47,7 +47,7 @@ const me = async (): Promise<AxiosResponse> => {
 const refresh = async (): Promise<AxiosResponse> => {
   try {
     process.env.REACT_APP_DEBUG && console.log("on request: refresh")
-    const result = await httpClient.get(`/auth/refresh`)
+    const result = await httpClient.post(`/auth/refresh`, {})
     process.env.REACT_APP_DEBUG && console.log("success", result)
     setLocalStorage("ACCESS_TOKEN", result.data.token)
     return result
