@@ -27,7 +27,7 @@ const logout = async (): Promise<AxiosResponse> => {
     removeLocalStorage("ACCESS_TOKEN")
     return result
   } catch (error) {
-    process.env.NODE_ENV === "development" && console.log("error", error)
+    process.env.NODE_ENV === "development" && console.log("error", error.response)
     return error.response
   }
 }
@@ -69,10 +69,10 @@ const forgetPassword = async (): Promise<AxiosResponse> => {
   }
 }
 
-const resetPassword = async (): Promise<AxiosResponse> => {
+const resetPassword = async (params: { password: string }): Promise<AxiosResponse> => {
   try {
     process.env.NODE_ENV === "development" && console.log("on request: reset password")
-    const result = await httpClient.patch(`/auth/reset-password`)
+    const result = await httpClient.patch(`/auth/reset-password`, params)
     process.env.NODE_ENV === "development" && console.log("success", result)
     return result
   } catch (error) {

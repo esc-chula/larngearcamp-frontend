@@ -18,8 +18,7 @@ const useStyles = makeStyles(theme => ({
 const AuthNavbarComponent: React.FC = () => {
   const history = useHistory()
   const classes = useStyles()
-  const { isAdminLoggedIn } = useAuthContext()
-  const { setAccessToken } = useAuthContext()
+  const { isAdminLoggedIn, setAccessToken } = useAuthContext()
   const { setLoading } = useGlobalContext()
   const [anchorEl, setAnchorEl] = useState(null)
 

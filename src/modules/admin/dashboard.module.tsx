@@ -1,11 +1,22 @@
 import React from "react"
-import { Typography } from "@material-ui/core"
+import { Container, Typography } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
+
+const useStyles = makeStyles(theme => ({
+  subtitle: {
+    fontSize: "1.5rem"
+  }
+}))
 
 const AdminDashboardModule = () => {
+  const classes = useStyles()
   return (
-    <Typography variant="h2" align="center">
-      Admin Dashboard ver 1.0.
-    </Typography>
+    <Container maxWidth="lg">
+      <div></div>
+      <Typography variant="h2" align="center">
+        Admin Dashboard <span className={classes.subtitle}>ver 1.0.0</span>
+      </Typography>
+    </Container>
   )
 }
 

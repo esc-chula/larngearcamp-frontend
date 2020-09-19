@@ -14,6 +14,7 @@ import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
 import { NavigatorComponent } from "../core/components/navigator.component"
 import { AdminDashboardModule } from "./admin/dashboard.module"
+import { QandAModule } from "./qna.model"
 
 const RouteModule: React.FC = () => {
   return (
@@ -24,7 +25,9 @@ const RouteModule: React.FC = () => {
         <Route exact path="/">
           <HomeModule />
         </Route>
-        <Route exact path="/qna"></Route>
+        <Route exact path="/qna">
+          <QandAModule />
+        </Route>
 
         {/* Guest Guard */}
         <GuestGuardedRoute exact path="/login">
