@@ -67,12 +67,12 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       const { exp } = jwt_decode(accessToken)
       if (moment().isAfter(moment(exp).add("3", "d"))) {
         await AuthService.logout()
-        process.env.NODE_ENV === "development" && console.log("Token Expired, logged out")
+        process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out")
         setAccessToken(null)
         return true
       } else if (moment().isAfter(moment(exp))) {
         const result = await AuthService.refresh()
-        process.env.NODE_ENV === "development" && console.log("Token Expired, refresh")
+        process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh")
         setAccessToken(result.data.token)
         return true
       }
@@ -99,7 +99,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       console.log(new Date())
       console.log(new Date(exp))
     }
-    //refresh().then(result => process.env.NODE_ENV === "development" && console.log("refresh: ", result))
+    //refresh().then(result => process.env.REACT_APP_DEBUG && console.log("refresh: ", result))
   }, [accessToken])
 
   const value: AuthConstruct = {
