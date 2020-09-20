@@ -12,10 +12,10 @@ import { ProfileModule } from "./profile.module"
 import { StepRouter, Finish } from "./applications"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
-import { NavigatorComponent } from "../core/components/navigator.component"
 import { AdminDashboardModule } from "./admin/dashboard.module"
 import { QandAModule } from "./qna.module"
 import { ForgotPasswordModule } from "./forgotpassword.module"
+import { Box } from "@material-ui/core"
 
 const RouteModule: React.FC = () => {
   return (
@@ -52,7 +52,7 @@ const RouteModule: React.FC = () => {
           <StepRouter />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/finish">
-          <NavigatorComponent step={7} />
+          <Box my={3} />
           <Finish />
         </UserGuardedRoute>
 
