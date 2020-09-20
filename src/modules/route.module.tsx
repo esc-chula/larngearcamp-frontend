@@ -14,7 +14,7 @@ import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
 import { NavigatorComponent } from "../core/components/navigator.component"
 import { AdminDashboardModule } from "./admin/dashboard.module"
-import { QandAModule } from "./qna.model"
+import { QandAModule } from "./qna.module"
 
 const RouteModule: React.FC = () => {
   return (
