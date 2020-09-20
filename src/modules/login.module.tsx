@@ -118,8 +118,8 @@ const LoginModule = () => {
             onChange={handleChange}
             ref={register}
             size="small"
-            error={Boolean(errors?.email)}
-            helperText={errors?.email?.message}
+            error={Boolean(errors?.password)}
+            helperText={errors?.password?.message}
           />
           <FormControlLabel
             control={<Checkbox name="remember" color="primary" onChange={handleCheckBoxChange} />}
