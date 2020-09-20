@@ -1,7 +1,31 @@
+import React, { useCallback, useState } from "react"
 import { withStyles } from "@material-ui/core/styles"
-import { Button } from "@material-ui/core"
+import { Button, ButtonProps } from "@material-ui/core"
+import { waitFbInit, fbLogin } from "../services/facebook.service"
+import { useAuthContext } from "../providers/auth.provider"
 
-const FacebookButtonComponent = withStyles({
+const FacebookButtonComponent: React.FC<ButtonProps> = props => {
+  const [loading, setLoading] = useState(false)
+  const { loginFb } = useAuthContext()
+
+  const handleClick = useCallback(async () => {
+    if (loading) {
+      return
+    }
+
+    setLoading(true)
+    const fbResponse = (await waitFbInit) || (await fbLogin())
+    if (fbResponse) {
+      const { accessToken } = fbResponse.authResponse
+      loginFb(accessToken)
+    }
+    setLoading(false)
+  }, [loading, loginFb])
+
+  return <Button {...props} disabled={loading} onClick={handleClick} />
+}
+
+const FacebookButtonComponentWithStyles = withStyles({
   root: {
     background: "#1877F2",
     borderRadius: "40px",
@@ -10,6 +34,6 @@ const FacebookButtonComponent = withStyles({
       background: "#004cbe"
     }
   }
-})(Button)
+})(FacebookButtonComponent)
 
-export { FacebookButtonComponent }
+export { FacebookButtonComponentWithStyles as FacebookButtonComponent }

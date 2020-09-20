@@ -13,6 +13,7 @@ interface AuthConstruct {
   isAdminLoggedIn: boolean
   refresh: () => Promise<Boolean>
   login: (params: LoginModel) => Promise<AxiosResponse<any>>
+  loginFb: (facebookAccessToken: string) => Promise<AxiosResponse<any>>
   logout: () => Promise<AxiosResponse<any>>
   me: () => Promise<AxiosResponse<any>>
   forgetPassword: () => Promise<AxiosResponse<any>>
@@ -47,6 +48,14 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const login = useCallback(async (params: LoginModel) => {
     const result = await AuthService.login(params)
+    if (result.status === 200) {
+      setAccessToken(result.data.token)
+    }
+    return result
+  }, [])
+
+  const loginFb = useCallback(async (accessToken: string) => {
+    const result = await AuthService.loginFb(accessToken)
     if (result.status === 200) {
       setAccessToken(result.data.token)
     }
@@ -109,6 +118,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     isAdminLoggedIn,
     refresh,
     login,
+    loginFb,
     logout,
     me,
     forgetPassword,

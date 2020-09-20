@@ -19,6 +19,21 @@ const login = async (params: LoginModel | undefined): Promise<AxiosResponse> => 
   }
 }
 
+const loginFb = async (accessToken: string): Promise<AxiosResponse> => {
+  try {
+    process.env.REACT_APP_DEBUG && console.log("on request: loginFb")
+    const result = await httpClient.post(`/auth/loginFb`, {
+      accessToken
+    })
+    process.env.REACT_APP_DEBUG && console.log("success", result)
+    setLocalStorage("ACCESS_TOKEN", result.data.token)
+    return result
+  } catch (error) {
+    process.env.REACT_APP_DEBUG && console.log("error", error.response)
+    return error.response
+  }
+}
+
 const logout = async (): Promise<AxiosResponse> => {
   try {
     process.env.REACT_APP_DEBUG && console.log("on request: logout")
@@ -81,6 +96,6 @@ const resetPassword = async (params: { password: string }): Promise<AxiosRespons
   }
 }
 
-const AuthService = { login, logout, me, refresh, forgetPassword, resetPassword }
+const AuthService = { login, loginFb, logout, me, refresh, forgetPassword, resetPassword }
 
 export default AuthService
