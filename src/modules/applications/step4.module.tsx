@@ -27,7 +27,7 @@ const ApplicationStepFourModule = () => {
   const classes = useStyles()
   const onSubmit = useCallback(() => {}, [])
   return (
-    <ApplicationStepModule previousPage="/application/step3" nextPage="/application/step5">
+    <ApplicationStepModule>
       {({ buttonBar }) => (
         <>
           <FormProvider {...methods}>

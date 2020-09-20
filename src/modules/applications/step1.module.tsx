@@ -76,7 +76,7 @@ const ApplicationStepOneModule = () => {
           น้องสามารถกดที่หมายเลข 2 เพื่อย้อนกลับมา แก้ไขข้อมูลในส่วนที่ 2 ได้
         </Typography>
       </Box>
-      <Link className="no-underline" to="/application/step2">
+      <Link className="no-underline" to="/application/step/2">
         <Button variant="contained" className={classes.button} fullWidth>
           ไปขั้นตอนถัดไป
         </Button>

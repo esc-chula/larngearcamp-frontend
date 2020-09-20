@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
 const ApplicationStepSixModule = () => {
   const classes = useStyles()
   return (
-    <ApplicationStepModule previousPage="/application/step5" nextPage="/application/finish">
+    <ApplicationStepModule>
       {({ buttonBar }) => (
         <CardComponent maxWidth="lg">
           <Typography variant="h5" align="center" className={classes.bold}>

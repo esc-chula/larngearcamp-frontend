@@ -9,7 +9,7 @@ import { NavBarComponent } from "../core/components/navbar.component"
 import { UserGuardedRoute } from "../core/guards/user.guard"
 import { AdminGuardedRoute } from "../core/guards/admin.guard"
 import { ProfileModule } from "./profile.module"
-import { Finish, Step1, Step2, Step3, Step4, Step5, Step6 } from "./applications"
+import { StepRouter, Finish } from "./applications"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
 import { NavigatorComponent } from "../core/components/navigator.component"
@@ -46,34 +46,13 @@ const RouteModule: React.FC = () => {
           <ProfileModule />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application">
-          <Redirect to="/application/step1" />
+          <Redirect to="/application/step/1" />
         </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application/step1">
-          <NavigatorComponent />
-          <Step1 />
-        </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application/step2">
-          <NavigatorComponent />
-          <Step2 />
-        </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application/step3">
-          <NavigatorComponent />
-          <Step3 />
-        </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application/step4">
-          <NavigatorComponent />
-          <Step4 />
-        </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application/step5">
-          <NavigatorComponent />
-          <Step5 />
-        </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application/step6">
-          <NavigatorComponent />
-          <Step6 />
+        <UserGuardedRoute exact path="/application/step/:step">
+          <StepRouter />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/finish">
-          <NavigatorComponent />
+          <NavigatorComponent step={7} />
           <Finish />
         </UserGuardedRoute>
 

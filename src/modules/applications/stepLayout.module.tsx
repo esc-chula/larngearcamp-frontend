@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useRouteMatch } from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles"
 import { Button, Container, Grid } from "@material-ui/core"
 
@@ -24,11 +24,13 @@ const useStyles = makeStyles(theme => ({
 
 type ApplicationStepModuleProps = {
   children: (props: { buttonBar: React.ReactElement }) => React.ReactElement
-  nextPage: string
-  previousPage: string
 }
 
-const ApplicationStepModule: React.FC<ApplicationStepModuleProps> = ({ children, nextPage, previousPage }) => {
+const ApplicationStepModule: React.FC<ApplicationStepModuleProps> = ({ children }) => {
+  const step = parseInt(useRouteMatch<{ step: string }>().params.step)
+  const previousPage = `/application/step/${step - 1}`
+  const nextPage = step === 6 ? `/application/finish` : `/application/step/${step + 1}`
+
   const classes = useStyles()
   const buttonBar = (
     <Grid container spacing={2}>

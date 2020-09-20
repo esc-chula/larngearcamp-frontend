@@ -41,7 +41,7 @@ const ApplicationStepTwoModule = () => {
   }, [])
 
   return (
-    <ApplicationStepModule previousPage="/application/step1" nextPage="/application/step3">
+    <ApplicationStepModule>
       {({ buttonBar }) => (
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
