@@ -22,6 +22,7 @@ const CheckboxTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents, ..
           {...other}
           render={({ onChange, onBlur, value, name }) => (
             <FormControlLabel
+              name={name}
               label={content.label}
               control={<Checkbox color="primary" onBlur={onBlur} onChange={e => onChange(e.target.checked)} checked={value} />}
             />
