@@ -1,9 +1,8 @@
-import React, { useCallback } from "react"
+import React from "react"
 import { CardComponent } from "../../core/components/card.component"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { useHistory } from "react-router-dom"
-import { useGlobalContext } from "../../core/providers/global.provider"
+import { Link } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -51,15 +50,6 @@ const datas = [
 
 const ApplicationStepOneModule = () => {
   const classes = useStyles()
-  const history = useHistory()
-  const { setStep } = useGlobalContext()
-  const nextPage = useCallback(
-    (path: string) => () => {
-      setStep(2)
-      history.push(path)
-    },
-    [history, setStep]
-  )
 
   return (
     <CardComponent maxWidth="lg" className={classes.card}>
@@ -86,9 +76,11 @@ const ApplicationStepOneModule = () => {
           น้องสามารถกดที่หมายเลข 2 เพื่อย้อนกลับมา แก้ไขข้อมูลในส่วนที่ 2 ได้
         </Typography>
       </Box>
-      <Button onClick={nextPage("/application/step2")} variant="contained" className={classes.button} fullWidth>
-        ไปขั้นตอนถัดไป
-      </Button>
+      <Link className="no-underline" to="/application/step2">
+        <Button variant="contained" className={classes.button} fullWidth>
+          ไปขั้นตอนถัดไป
+        </Button>
+      </Link>
     </CardComponent>
   )
 }
