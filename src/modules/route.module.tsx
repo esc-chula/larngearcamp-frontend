@@ -15,6 +15,7 @@ import { NotFoundModule } from "./notfound.module"
 import { NavigatorComponent } from "../core/components/navigator.component"
 import { AdminDashboardModule } from "./admin/dashboard.module"
 import { QandAModule } from "./qna.module"
+import { ForgotPasswordModule } from "./forgotpassword.module"
 
 const RouteModule: React.FC = () => {
   return (
@@ -35,6 +36,9 @@ const RouteModule: React.FC = () => {
         </GuestGuardedRoute>
         <GuestGuardedRoute exact path="/register">
           <RegisterModule />
+        </GuestGuardedRoute>
+        <GuestGuardedRoute exact path="/forgotpassword">
+          <ForgotPasswordModule />
         </GuestGuardedRoute>
 
         {/* User Guard */}
