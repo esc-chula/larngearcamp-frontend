@@ -5,6 +5,7 @@ const HomeModule: React.FC = () => {
   return (
     <>
       <CoverComponent />
+      Landing
     </>
   )
 }
