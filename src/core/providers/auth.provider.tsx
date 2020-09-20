@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode"
 import AuthService from "../services/auth.service"
 import LoginModel from "../models/login.model"
 import { AxiosResponse } from "axios"
+import ForgotPasswordModel from "../models/forgotPassword.model"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -16,7 +17,7 @@ interface AuthConstruct {
   loginFb: (facebookAccessToken: string) => Promise<AxiosResponse<any>>
   logout: () => Promise<AxiosResponse<any>>
   me: () => Promise<AxiosResponse<any>>
-  forgetPassword: () => Promise<AxiosResponse<any>>
+  forgotPassword: (email: ForgotPasswordModel) => Promise<AxiosResponse<any>>
   resetPassword: (params: { password: string }) => Promise<AxiosResponse<any>>
 }
 
@@ -96,8 +97,8 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     return false
   }, [accessToken])
 
-  const forgetPassword = useCallback(async () => {
-    const result = await AuthService.forgetPassword()
+  const forgotPassword = useCallback(async (params: ForgotPasswordModel) => {
+    const result = await AuthService.forgotPassword(params)
     return result
   }, [])
 
@@ -121,7 +122,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     loginFb,
     logout,
     me,
-    forgetPassword,
+    forgotPassword,
     resetPassword
   }
 

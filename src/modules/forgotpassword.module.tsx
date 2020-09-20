@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers"
 import ForgotPasswordSchema from "../schemas/forgotpassword.schema"
 import { useGlobalContext } from "../core/providers/global.provider"
+import { useAuthContext } from "../core/providers/auth.provider"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -36,25 +37,18 @@ const useStyles = makeStyles(theme => ({
 const ForgotPasswordModule: React.FC = () => {
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
+  const { forgotPassword } = useAuthContext()
 
-  const { register, handleSubmit, setValue, getValues, setError, errors } = useForm({
+  const { register, handleSubmit, setValue, getValues, errors } = useForm({
     resolver: yupResolver(ForgotPasswordSchema)
   })
 
   const onSubmit = useCallback(async () => {
     setLoading(true)
-    const values = getValues(["email", "password"])
-    // const result = await login(values)
-    // if (result.status !== 200) {
-    //   setError("validate", {
-    //     type: "validate",
-    //     message: result.data.message
-    //   })
-    // } else {
-    //  history.push("/profile")
-    // }
+    const values = getValues(["email"])
+    await forgotPassword(values)
     setLoading(false)
-  }, [getValues, setError, setLoading])
+  }, [getValues, setLoading, forgotPassword])
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,11 +85,6 @@ const ForgotPasswordModule: React.FC = () => {
           <Button type="submit" variant="contained" color="primary">
             ยืนยันอีเมล
           </Button>
-          {errors.validate && (
-            <Typography color="error" variant="body2" className={classes.clearMargin}>
-              อีเมลไม่ถูกต้อง
-            </Typography>
-          )}
         </form>
       </CardComponent>
     </>
