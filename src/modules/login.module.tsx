@@ -51,6 +51,11 @@ const useStyles = makeStyles(theme => ({
   },
   rightAlign: {
     marginLeft: "auto"
+  },
+  redBg: {
+    "&:after": {
+      backgroundColor: theme.palette.primary.main
+    }
   }
 }))
 
@@ -121,11 +126,16 @@ const LoginModule = () => {
             error={Boolean(errors?.password)}
             helperText={errors?.password?.message}
           />
-          <FormControlLabel
-            control={<Checkbox name="remember" color="primary" onChange={handleCheckBoxChange} />}
-            label="จำฉันไว้ในระบบ"
-            className={classes.checkbox}
-          />
+          <Box display="flex" justifyContent="space-between" alignItems="center">
+            <FormControlLabel
+              control={<Checkbox name="remember" color="primary" onChange={handleCheckBoxChange} />}
+              label="จำฉันไว้ในระบบ"
+              className={classes.checkbox}
+            />
+            <Link to="/forgotpassword" className={classes.redBg}>
+              <Typography color="primary">ลืมรหัสผ่าน?</Typography>
+            </Link>
+          </Box>
           <Button type="submit" variant="contained" color="primary">
             เข้าสู่ระบบ
           </Button>
