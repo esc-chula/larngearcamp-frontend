@@ -3,7 +3,6 @@ import { getLocalStorage } from "../../utils/storage"
 import jwt_decode from "jwt-decode"
 import AuthService from "../services/auth.service"
 import LoginModel from "../models/login.model"
-import moment from "moment"
 import { AxiosResponse } from "axios"
 
 interface AuthConstruct {
@@ -68,12 +67,15 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   const refresh = useCallback(async (): Promise<Boolean> => {
     if (accessToken) {
       const { exp } = jwt_decode(accessToken)
-      if (moment().isAfter(moment(exp * 1000).add("3", "d"))) {
+      const currentTime = new Date()
+      const expireTime = new Date(exp * 1000)
+      const expireTimeNext3Day = new Date(exp * 1000 + 60 * 60 * 24 * 3)
+      if (currentTime > expireTimeNext3Day) {
         await AuthService.logout()
         process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out (inactive in 3 days)")
         setAccessToken(null)
         return true
-      } else if (moment().isAfter(moment(exp * 1000))) {
+      } else if (currentTime > expireTime) {
         const result = await AuthService.refresh()
         process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh (active in 3 days)")
         if (result.status === 200) {
