@@ -1,4 +1,5 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useState } from "react"
+import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import { CardComponent } from "../core/components/card.component"
 import { LogoComponent } from "../core/components/logo.component"
 import { Button, makeStyles, TextField, Typography } from "@material-ui/core"
@@ -38,6 +39,7 @@ const ForgotPasswordModule: React.FC = () => {
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
   const { forgotPassword } = useAuthContext()
+  const [finished, setFinished] = useState(false)
 
   const { register, handleSubmit, setValue, getValues, errors } = useForm({
     resolver: yupResolver(ForgotPasswordSchema)
@@ -48,6 +50,7 @@ const ForgotPasswordModule: React.FC = () => {
     const values = getValues(["email"])
     await forgotPassword(values)
     setLoading(false)
+    setFinished(true)
   }, [getValues, setLoading, forgotPassword])
 
   const handleChange = useCallback(
@@ -55,6 +58,38 @@ const ForgotPasswordModule: React.FC = () => {
       setValue(event.target.name, event.target.value)
     },
     [setValue]
+  )
+
+  const UnfinishedComponent = (
+    <>
+      <Typography align="center" className={classes.remark}>
+        ขอให้น้องกรอกอีเมลที่ใช้สร้างบัญชีเพื่อยืนยันตัวตน
+      </Typography>
+
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+        <TextField
+          id="email"
+          name="email"
+          label="อีเมล"
+          variant="outlined"
+          type="email"
+          onChange={handleChange}
+          ref={register}
+          size="small"
+          error={Boolean(errors?.email)}
+          helperText={errors?.email?.message}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          <Typography variant="h6">ยืนยันอีเมล</Typography>
+        </Button>
+      </form>
+    </>
+  )
+
+  const FinishedComponent = (
+    <>
+      <CheckCircleIcon style={{ color: "#38A169" }} fontSize="large" />
+    </>
   )
 
   return (
@@ -65,27 +100,7 @@ const ForgotPasswordModule: React.FC = () => {
           เปลี่ยนรหัสผ่าน
         </Typography>
         <div className={classes.divider} />
-        <Typography align="center" className={classes.remark}>
-          ขอให้น้องกรอกอีเมลที่ใช้สร้างบัญชีเพื่อยืนยันตัวตน
-        </Typography>
-
-        <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-          <TextField
-            id="email"
-            name="email"
-            label="อีเมล"
-            variant="outlined"
-            type="email"
-            onChange={handleChange}
-            ref={register}
-            size="small"
-            error={Boolean(errors?.email)}
-            helperText={errors?.email?.message}
-          />
-          <Button type="submit" variant="contained" color="primary">
-            ยืนยันอีเมล
-          </Button>
-        </form>
+        {finished ? FinishedComponent : UnfinishedComponent}
       </CardComponent>
     </>
   )
