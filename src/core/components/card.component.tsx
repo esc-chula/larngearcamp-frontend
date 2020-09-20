@@ -2,6 +2,10 @@ import React from "react"
 import { Container, Paper, ContainerProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
+interface CardProps extends ContainerProps {
+  padding?: number
+}
+
 const useStyles = makeStyles(theme => ({
   logo: {
     margin: theme.spacing(5, 0),
@@ -10,7 +14,6 @@ const useStyles = makeStyles(theme => ({
     width: "fit-content"
   },
   paper: {
-    padding: theme.spacing(5),
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
@@ -23,13 +26,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const CardComponent: React.FC<ContainerProps> = ({ children, ...other }) => {
+const CardComponent: React.FC<CardProps> = ({ padding, children, ...other }) => {
   const classes = useStyles()
+  const paddingStyle = {
+    padding: padding ? padding * 8 : 40
+  }
 
   return (
     <>
       <Container {...other}>
-        <Paper elevation={0} className={classes.paper}>
+        <Paper elevation={0} className={classes.paper} style={paddingStyle}>
           {children}
         </Paper>
       </Container>
