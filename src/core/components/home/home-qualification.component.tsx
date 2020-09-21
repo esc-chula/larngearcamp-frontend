@@ -37,10 +37,8 @@ const HomeQualification: React.FC<
       return maxWidth
     }
 
-    const w1 = allToMaxWidth(leftsRef.current.filter(x => x !== null) as HTMLDivElement[])
-    const w2 = allToMaxWidth(rightsRef.current.filter(x => x !== null) as HTMLDivElement[])
-
-    console.log(w1 + w2)
+    allToMaxWidth(leftsRef.current.filter(x => x !== null) as HTMLDivElement[])
+    allToMaxWidth(rightsRef.current.filter(x => x !== null) as HTMLDivElement[])
   }, [])
 
   const items = []

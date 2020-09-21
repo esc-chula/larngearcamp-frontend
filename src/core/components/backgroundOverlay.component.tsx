@@ -1,5 +1,6 @@
 import React from "react"
 import { makeStyles, Theme } from "@material-ui/core/styles"
+import { Box, BoxProps } from "@material-ui/core"
 
 type Props = {
   src: string
@@ -42,16 +43,18 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
  * contentPercentage: percentage of content height will be (with respected to image height),
  * note that other element are only effected by content height
  */
-const BackgroundOverlay: React.FC<Props & React.HTMLAttributes<HTMLDivElement>> = props => {
+const BackgroundOverlay: React.FC<Props & BoxProps> = props => {
+  const { src, aspectRatio, contentPercentage, offsetPercentage, disableAutoColor, ...rest }: Props = props
+
   const classes = useStyle(props)
 
   return (
-    <div {...props}>
+    <Box {...rest}>
       <img src={props.src} className={classes.backgroundImg} />
       <div className={classes.contentContainer}>
         <div className={classes.content}>{props.children}</div>
       </div>
-    </div>
+    </Box>
   )
 }
 
