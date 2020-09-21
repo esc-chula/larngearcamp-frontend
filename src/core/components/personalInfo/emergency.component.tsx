@@ -30,7 +30,7 @@ const PersonalEmergencyComponent = () => {
             <TextFieldComponent name="contact.parentName" label="ชื่อ-นามสกุลผู้ปกครอง" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <TextFieldComponent name="contact.parentNumber" label="หมายเลขโทรศัพท์ผู้ปกครอง" type="tel" />
+            <TextFieldComponent name="contact.parentNumber" label="หมายเลขโทรศัพท์" type="tel" />
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <SelectComponent control={control} data={relationsConstant} />
