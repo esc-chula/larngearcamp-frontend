@@ -11,6 +11,7 @@ import { PersonalEmergencyComponent } from "../../core/components/personalInfo/e
 import { yupResolver } from "@hookform/resolvers"
 import ProfileSchema from "../../schemas/profile.schema"
 import ApplicationStepModule from "./stepLayout.module"
+import { useGlobalContext } from "../../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -22,10 +23,10 @@ const useStyles = makeStyles(theme => ({
   },
   question: {
     "&>*": {
-      marginTop: theme.spacing(6)
+      marginBottom: theme.spacing(3)
     },
-    "&>*:first-child": {
-      marginTop: theme.spacing(0)
+    "&>*:not(:last-child)": {
+      marginBottom: theme.spacing(6)
     }
   },
   bold: {
@@ -35,23 +36,20 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationStepTwoModule = () => {
   const classes = useStyles()
+  const { setLoading } = useGlobalContext()
   const methods = useForm({
     resolver: yupResolver(ProfileSchema)
   })
-  const { handleSubmit, getValues } = methods
+  const { handleSubmit } = methods
 
-  const onSubmit = useCallback(() => {
-    console.log("Success")
-  }, [])
-
-  const check = useCallback(() => {
-    const values = getValues()
-    console.log(values)
-  }, [getValues])
+  const onSubmit = useCallback(async () => {
+    setLoading(true)
+    setLoading(false)
+  }, [setLoading])
 
   return (
     <ApplicationStepModule>
-      {({ buttonBar }) => (
+      {({ ButtonBar }) => (
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <CardComponent maxWidth="lg" className={classes.card}>
@@ -66,8 +64,7 @@ const ApplicationStepTwoModule = () => {
                 <PersonalContactComponent />
                 <PersonalEmergencyComponent />
               </div>
-              <button onClick={check}>check value</button>
-              {buttonBar}
+              <ButtonBar onSubmit={onSubmit} />
             </CardComponent>
           </form>
         </FormProvider>

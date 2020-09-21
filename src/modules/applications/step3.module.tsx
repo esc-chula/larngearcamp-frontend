@@ -25,10 +25,12 @@ const ApplicationStepThreeModule = () => {
   const methods = useForm()
   const { handleSubmit } = methods
   const classes = useStyles()
-  const onSubmit = useCallback(() => {}, [])
+  const onSubmit = useCallback(() => {
+    console.log("Success")
+  }, [])
   return (
     <ApplicationStepModule>
-      {({ buttonBar }) => (
+      {({ ButtonBar }) => (
         <>
           <FormProvider {...methods}>
             <form className={classes.question} onSubmit={handleSubmit(onSubmit)}>
@@ -48,7 +50,7 @@ const ApplicationStepThreeModule = () => {
               ))}
             </form>
           </FormProvider>
-          {buttonBar}
+          <ButtonBar onSubmit={onSubmit} />
         </>
       )}
     </ApplicationStepModule>

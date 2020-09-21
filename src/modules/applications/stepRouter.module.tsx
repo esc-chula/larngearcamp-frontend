@@ -8,6 +8,7 @@ import ApplicationStepFiveModule from "./step5.module"
 import ApplicationStepSixModule from "./step6.module"
 import { NotFoundModule } from "../notfound.module"
 import { NavigatorComponent } from "../../core/components/navigator.component"
+import { Container } from "@material-ui/core"
 
 const StepRouter: React.FC = () => {
   const { params } = useRouteMatch<{ step: string }>()
@@ -38,7 +39,7 @@ const StepRouter: React.FC = () => {
   return (
     <>
       <NavigatorComponent step={parseInt(step)} />
-      {component}
+      <Container maxWidth="lg">{component}</Container>
     </>
   )
 }

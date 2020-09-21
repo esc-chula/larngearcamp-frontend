@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Divider, Typography } from "@material-ui/core"
 import { CardComponent } from "../../core/components/card.component"
@@ -18,9 +18,14 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationStepSixModule = () => {
   const classes = useStyles()
+
+  const onSubmit = useCallback(() => {
+    console.log("Success")
+  }, [])
+
   return (
     <ApplicationStepModule>
-      {({ buttonBar }) => (
+      {({ ButtonBar }) => (
         <CardComponent maxWidth="lg">
           <Typography variant="h5" align="center" className={classes.bold}>
             อัพโหลดเอกสารประกอบการรับสมัคร
@@ -34,7 +39,7 @@ const ApplicationStepSixModule = () => {
             <span className={classes.highlight}>ผ่านการกดหมายเลขขั้นตอนที่แถบทางด้านบน</span>
           </Typography>
 
-          {buttonBar}
+          <ButtonBar onSubmit={onSubmit} />
         </CardComponent>
       )}
     </ApplicationStepModule>
