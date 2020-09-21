@@ -12,6 +12,7 @@ import HomeAnnouce from "../core/components/home/home-annouce.component"
 
 import landing1 from "../assets/images/background/landing-1.svg"
 import landing2 from "../assets/images/background/landing-2.svg"
+import landing3 from "../assets/images/background/landing-3.svg"
 import BackgroundOverlay from "../core/components/backgroundOverlay.component"
 
 import q1 from "../assets/images/icon/qualification-1.svg"
@@ -84,10 +85,11 @@ const HomeModule: React.FC = () => {
 
       <HomeAnnouce />
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <BackgroundOverlay src={landing3} aspectRatio={1617 / 525.84} offsetPercentage={10}>
+        <Box display="flex" height="100%" alignItems="center" justifyContent="center">
+          <HomeAnnouce height="max-content" />
+        </Box>
+      </BackgroundOverlay>
 
       <HomeFooter
         contacts={[
