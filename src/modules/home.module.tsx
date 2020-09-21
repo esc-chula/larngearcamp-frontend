@@ -11,6 +11,7 @@ import HomeCarousal from "../core/components/home/home-carousel.component"
 import HomeAnnouce from "../core/components/home/home-annouce.component"
 
 import landing1 from "../assets/images/background/landing-1.svg"
+import landing2 from "../assets/images/background/landing-2.svg"
 import BackgroundOverlay from "../core/components/backgroundOverlay.component"
 
 const useStyle = makeStyles(theme => ({
@@ -45,14 +46,16 @@ const HomeModule: React.FC = () => {
       <br></br>
       <br></br>
 
-      <HomeQualification
-        qualifications={[
-          { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: "" },
-          { description: "ไม่ป่วยเป็นโรคติดต่อร้ายแรง", src: "" },
-          { description: "สามารถค้างคืนได้ที่คณะวิศวกรรมศาสตร์\nจุฬาลงกรณ์มหาวิทยาลัย ตลอดระยะเวลาจัดค่าย", src: "" },
-          { description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน", src: "" }
-        ]}
-      />
+      <BackgroundOverlay src={landing2} aspectRatio={1440 / 692} contentPercentage={100} offsetPercentage={40}>
+        <HomeQualification
+          qualifications={[
+            { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: "" },
+            { description: "ไม่ป่วยเป็นโรคติดต่อร้ายแรง", src: "" },
+            { description: "สามารถค้างคืนได้ที่คณะวิศวกรรมศาสตร์\nจุฬาลงกรณ์มหาวิทยาลัย ตลอดระยะเวลาจัดค่าย", src: "" },
+            { description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน", src: "" }
+          ]}
+        />
+      </BackgroundOverlay>
 
       <br></br>
       <br></br>

@@ -5,6 +5,7 @@ type Props = {
   src: string
   aspectRatio: number
   contentPercentage?: number
+  offsetPercentage?: number
   disableAutoColor?: boolean
 }
 
@@ -26,6 +27,7 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
     left: 0,
     width: "100%",
     height: "100%",
+    paddingTop: props => `${(props.offsetPercentage || 0) / props.aspectRatio}%`,
     color: props => (props.disableAutoColor ? "" : theme.palette.primary.contrastText)
   }
 }))
