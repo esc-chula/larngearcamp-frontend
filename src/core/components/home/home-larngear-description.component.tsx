@@ -6,6 +6,7 @@ import HomeContainer, { HomeContainerProps } from "./home-container.component"
 
 const useStyle = makeStyles(theme => ({
   title: {
+    fontFamily: "Raleway",
     marginBottom: "28px"
   },
   body: {
