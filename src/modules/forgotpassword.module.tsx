@@ -1,14 +1,16 @@
 import React, { useCallback, useState } from "react"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import { CardComponent } from "../core/components/card.component"
 import { LogoComponent } from "../core/components/logo.component"
-import { Button, makeStyles, TextField, Typography } from "@material-ui/core"
+import { Box, Button, makeStyles, TextField, Typography } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers"
 import ForgotPasswordSchema from "../schemas/forgotpassword.schema"
 import { useGlobalContext } from "../core/providers/global.provider"
 import { useAuthContext } from "../core/providers/auth.provider"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -19,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     borderBottom: "2px solid #e0e0e0"
   },
   remark: {
-    fontSize: "18px",
+    fontSize: "16px",
     fontWeight: 300
   },
   clearMargin: {
@@ -32,11 +34,15 @@ const useStyles = makeStyles(theme => ({
     "& > *:not(:last-child)": {
       marginBottom: theme.spacing(4)
     }
+  },
+  marginTop: {
+    marginTop: "24px"
   }
 }))
 
 const ForgotPasswordModule: React.FC = () => {
   const classes = useStyles()
+  const history = useHistory()
   const { setLoading } = useGlobalContext()
   const { forgotPassword } = useAuthContext()
   const [finished, setFinished] = useState(false)
@@ -58,6 +64,13 @@ const ForgotPasswordModule: React.FC = () => {
       setValue(event.target.name, event.target.value)
     },
     [setValue]
+  )
+
+  const changePage = useCallback(
+    (path: string) => () => {
+      history.push(path)
+    },
+    [history]
   )
 
   const UnfinishedComponent = (
@@ -87,9 +100,14 @@ const ForgotPasswordModule: React.FC = () => {
   )
 
   const FinishedComponent = (
-    <>
-      <CheckCircleIcon style={{ color: "#38A169" }} fontSize="large" />
-    </>
+    <Box textAlign="center">
+      <CheckCircleIcon style={{ color: "#38A169", fontSize: "48px" }} />
+      <Typography className={classes.remark}>ระบบได้ทำการส่งลิงก์เปลี่ยนรหัสผ่านไปยังอีเมลที่ระบุแล้ว กรุณาเช็คอีเมลเพื่อดำเนินการต่อไป</Typography>
+      <Button onClick={changePage("/login")} variant="contained" color="primary" className={classes.marginTop} fullWidth>
+        <ChevronLeftIcon style={{ fontSize: "32px" }} />
+        <Typography variant="h6">กลับสู่หน้าเข้าสู่ระบบ</Typography>
+      </Button>
+    </Box>
   )
 
   return (
