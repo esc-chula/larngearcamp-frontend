@@ -98,8 +98,18 @@ const LoginModule = () => {
                 name="remember"
                 control={control}
                 defaultValue={false}
-                render={props => (
-                  <FormControlLabel control={<Checkbox color="primary" {...props} />} label="จำฉันไว้ในระบบ" className={classes.checkbox} />
+                render={({ onChange, onBlur, value, name }) => (
+                  <FormControlLabel
+                    control={
+                      <FormControlLabel
+                        name={name}
+                        label="จำฉันไว้ในระบบ"
+                        control={<Checkbox color="primary" onBlur={onBlur} onChange={e => onChange(e.target.checked)} checked={value} />}
+                      />
+                    }
+                    label="จำฉันไว้ในระบบ"
+                    className={classes.checkbox}
+                  />
                 )}
               />
               <Link to="/forgotpassword" className={classes.redBg}>
