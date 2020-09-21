@@ -23,11 +23,10 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
   },
   content: {
     position: "absolute",
-    top: 0,
+    top: props => `${props.offsetPercentage || 0}%`,
     left: 0,
     width: "100%",
     height: "100%",
-    paddingTop: props => `${(props.offsetPercentage || 0) / props.aspectRatio}%`,
     color: props => (props.disableAutoColor ? "" : theme.palette.primary.contrastText)
   }
 }))

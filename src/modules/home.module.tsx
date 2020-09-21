@@ -46,7 +46,7 @@ const HomeModule: React.FC = () => {
       <br></br>
       <br></br>
 
-      <BackgroundOverlay src={landing2} aspectRatio={1440 / 692} contentPercentage={100} offsetPercentage={40}>
+      <BackgroundOverlay src={landing2} aspectRatio={1440 / 692} contentPercentage={100} offsetPercentage={37}>
         <HomeQualification
           qualifications={[
             { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: "" },
