@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode"
 import AuthService from "../services/auth.service"
 import LoginModel from "../models/login.model"
 import { AxiosResponse } from "axios"
+import ForgotPasswordModel from "../models/forgotPassword.model"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -13,9 +14,10 @@ interface AuthConstruct {
   isAdminLoggedIn: boolean
   refresh: () => Promise<Boolean>
   login: (params: LoginModel) => Promise<AxiosResponse<any>>
+  loginFb: (facebookAccessToken: string) => Promise<AxiosResponse<any>>
   logout: () => Promise<AxiosResponse<any>>
   me: () => Promise<AxiosResponse<any>>
-  forgetPassword: () => Promise<AxiosResponse<any>>
+  forgotPassword: (email: ForgotPasswordModel) => Promise<AxiosResponse<any>>
   resetPassword: (params: { password: string }) => Promise<AxiosResponse<any>>
 }
 
@@ -47,6 +49,14 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const login = useCallback(async (params: LoginModel) => {
     const result = await AuthService.login(params)
+    if (result.status === 200) {
+      setAccessToken(result.data.token)
+    }
+    return result
+  }, [])
+
+  const loginFb = useCallback(async (accessToken: string) => {
+    const result = await AuthService.loginFb(accessToken)
     if (result.status === 200) {
       setAccessToken(result.data.token)
     }
@@ -87,8 +97,8 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     return false
   }, [accessToken])
 
-  const forgetPassword = useCallback(async () => {
-    const result = await AuthService.forgetPassword()
+  const forgotPassword = useCallback(async (params: ForgotPasswordModel) => {
+    const result = await AuthService.forgotPassword(params)
     return result
   }, [])
 
@@ -109,9 +119,10 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     isAdminLoggedIn,
     refresh,
     login,
+    loginFb,
     logout,
     me,
-    forgetPassword,
+    forgotPassword,
     resetPassword
   }
 

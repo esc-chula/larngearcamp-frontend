@@ -1,6 +1,6 @@
 import React from "react"
 import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField, Button } from "@material-ui/core"
+import { Typography, Box, Grid, TextField } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { gradesConstant } from "../../constants/grades.constant"
 import { SelectComponent } from "../select.component"
@@ -16,12 +16,8 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const PersonalEducationComponent = () => {
-  const { register, control, getValues } = useFormContext()
+  const { register, control } = useFormContext()
   const classes = useStyles()
-  const check = () => {
-    const values = getValues()
-    console.log(values)
-  }
   return (
     <>
       <Box mt={2}>
@@ -40,7 +36,6 @@ const PersonalEducationComponent = () => {
           </Grid>
         </Grid>
       </Box>
-      <Button onClick={check}>Cccc</Button>
     </>
   )
 }

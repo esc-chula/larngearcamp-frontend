@@ -1,14 +1,30 @@
 import React from "react"
-import { useGlobalContext } from "../providers/global.provider"
-import { Box, Typography } from "@material-ui/core"
+import { Box, MobileStepper } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
 
-const NavigatorComponent = () => {
-  const { step } = useGlobalContext()
+interface NavigatorComponentProps {
+  step: number
+}
+
+const useStyles = makeStyles(theme => ({
+  stepper: {
+    backgroundColor: "transparent"
+  }
+}))
+
+const NavigatorComponent: React.FC<NavigatorComponentProps> = ({ step }) => {
+  const classes = useStyles()
   return (
-    <Box my={3}>
-      <Typography variant="h6" align="center">
-        {step}
-      </Typography>
+    <Box my={3} display="flex" justifyContent="center">
+      <MobileStepper
+        className={classes.stepper}
+        variant="dots"
+        steps={6}
+        position="static"
+        activeStep={step - 1}
+        nextButton={null}
+        backButton={null}
+      />
     </Box>
   )
 }
