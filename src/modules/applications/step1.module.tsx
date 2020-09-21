@@ -4,6 +4,7 @@ import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useHistory } from "react-router-dom"
 import { useGlobalContext } from "../../core/providers/global.provider"
+import { ruleConstant } from "../../core/constants/rule.constant"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -25,36 +26,12 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const datas = [
-  {
-    title: "เอกสารที่จำเป็นต้องดาวน์โหลดไปใช้",
-    contents: ["ใบตอบรับผู้ปกครองค่ายลานเกียร์ครั้งที่ 20"]
-  },
-  {
-    title: "เอกสารที่ต้องแนบเพิ่มเติม",
-    contents: [
-      "รูปถ่ายหน้าตรง เห็นหน้าชัดเจน เช่นรูปติดบัตร (.jpg / .png)",
-      "ใบตอบรับผู้ปกครอง ค่ายลานเกียร์ ครั้งที่ 20 (.pdf / .jpg / .png)",
-      "ใบ ปพ. 1 หรือ 7 หรือ หลักฐานยืนยันตัวตนอื่นๆ (.pdf / .jpg / .png)"
-    ]
-  },
-  {
-    title: "ขั้นตอนการสมัคร",
-    contents: [
-      "กรอกข้อมูลส่วนตัว การศึกษา สุขภาพ และช่องทางการติดต่อ",
-      "ตอบคำถามที่พี่ ๆ เตรียมไว้ให้",
-      "อัพโหลดเอกสารดังที่กล่าวไว้ข้างต้น",
-      "ยืนยันการสมัคร"
-    ]
-  }
-]
-
 const ApplicationStepOneModule = () => {
   const classes = useStyles()
   const history = useHistory()
   const { setStep } = useGlobalContext()
   const nextPage = useCallback(
-    (path: string) => () => {
+    (path: string) => async () => {
       setStep(2)
       history.push(path)
     },
@@ -67,7 +44,7 @@ const ApplicationStepOneModule = () => {
         รายละเอียดของการสมัครค่ายลานเกียร์ครั้งที่ 20
       </Typography>
       <Divider className={classes.divider} />
-      {datas.map((data, index) => (
+      {ruleConstant.map((data, index) => (
         <Box mt={3} key={index + 1}>
           <Typography variant="subtitle1">{`${index + 1} ${data.title}`}</Typography>
           {data.contents.map((content, innerIndex) => (
