@@ -1,7 +1,7 @@
 import SelectModel from "../models/select.model"
 
 const gradesConstant: SelectModel = {
-  name: "grade",
+  name: "education",
   label: "ระดับชั้น",
   contents: [
     { text: "ม.4", value: "มัญยมศึกษาปีที่ 4" },
