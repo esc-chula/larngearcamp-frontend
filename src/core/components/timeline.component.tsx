@@ -57,10 +57,12 @@ export interface TimelineProps extends BoxProps {
 }
 
 export const TimelineDisplay: React.FC<TimelineProps> = props => {
+  const { label, startNumber, includeFinalLine, ...rest } = props
+
   const classes = UseStyleTL()
 
   return (
-    <Box {...props}>
+    <Box {...rest}>
       {props.label.map(({ left, right }, i, arr) => (
         <div key={i}>
           <div className={classes.line}>
@@ -76,7 +78,7 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
             </Typography>
           </div>
 
-          {(props.includeFinalLine || i < arr.length - 1) && <div className={classes.hline}></div>}
+          {(props.includeFinalLine || i < arr.length - 1) && <div className={classes.hline} />}
         </div>
       ))}
     </Box>

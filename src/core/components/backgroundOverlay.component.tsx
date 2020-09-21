@@ -4,6 +4,7 @@ import { Box, BoxProps } from "@material-ui/core"
 
 type Props = {
   src: string
+  alt?: string
   aspectRatio: number
   contentPercentage?: number
   offsetPercentage?: number
@@ -44,13 +45,13 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
  * note that other element are only effected by content height
  */
 const BackgroundOverlay: React.FC<Props & BoxProps> = props => {
-  const { src, aspectRatio, contentPercentage, offsetPercentage, disableAutoColor, ...rest }: Props = props
+  const { src, alt, aspectRatio, contentPercentage, offsetPercentage, disableAutoColor, ...rest }: Props = props
 
   const classes = useStyle(props)
 
   return (
     <Box {...rest}>
-      <img src={props.src} className={classes.backgroundImg} />
+      <img src={src} alt={alt} className={classes.backgroundImg} />
       <div className={classes.contentContainer}>
         <div className={classes.content}>{props.children}</div>
       </div>

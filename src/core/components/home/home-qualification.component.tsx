@@ -41,14 +41,17 @@ const HomeQualification: React.FC<
     allToMaxWidth(rightsRef.current.filter(x => x !== null) as HTMLDivElement[])
   }, [])
 
-  const items = []
-  for (let i = 0; i < props.qualifications.length; i += 2) {
+  const items = Array.from(Array(props.qualifications.length / 2).keys()).map(i => {
     const [left, right] = [props.qualifications[i], props.qualifications[i + 1]]
 
-    items.push(<QualificationItem qualification={left} ref={ref => leftsRef.current.push(ref)} />)
-    items.push(<div style={{ flexGrow: 100 }} />)
-    right && items.push(<QualificationItem qualification={right} ref={ref => rightsRef.current.push(ref)} />)
-  }
+    return (
+      <React.Fragment key={i}>
+        <QualificationItem qualification={left} ref={ref => leftsRef.current.push(ref)} />
+        <div style={{ flexGrow: 100 }} />
+        {right && <QualificationItem qualification={right} ref={ref => rightsRef.current.push(ref)} />}
+      </React.Fragment>
+    )
+  })
 
   return (
     <HomeContainer {...props}>
@@ -86,11 +89,11 @@ const QualificationItem = React.forwardRef<HTMLDivElement, { qualification: Qual
     <div className={classes.container} ref={ref}>
       <Avatar src={props.qualification.src} className={classes.logoImg}></Avatar>
       <Typography variant="body2" align="left" className={classes.description}>
-        {props.qualification.description.split("\n").map(line => (
-          <>
+        {props.qualification.description.split("\n").map((line, i) => (
+          <React.Fragment key={i}>
             <span>{line}</span>
             <br />
-          </>
+          </React.Fragment>
         ))}
       </Typography>
     </div>
