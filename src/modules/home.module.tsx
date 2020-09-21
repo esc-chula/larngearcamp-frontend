@@ -14,6 +14,11 @@ import landing1 from "../assets/images/background/landing-1.svg"
 import landing2 from "../assets/images/background/landing-2.svg"
 import BackgroundOverlay from "../core/components/backgroundOverlay.component"
 
+import q1 from "../assets/images/icon/qualification-1.svg"
+import q2 from "../assets/images/icon/qualification-2.svg"
+import q3 from "../assets/images/icon/qualification-3.svg"
+import q4 from "../assets/images/icon/qualification-4.svg"
+
 const useStyle = makeStyles(theme => ({
   homeTitleContainer: {
     paddingTop: "80px",
@@ -49,10 +54,10 @@ const HomeModule: React.FC = () => {
       <BackgroundOverlay src={landing2} aspectRatio={1440 / 692} contentPercentage={100} offsetPercentage={37}>
         <HomeQualification
           qualifications={[
-            { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: "" },
-            { description: "ไม่ป่วยเป็นโรคติดต่อร้ายแรง", src: "" },
-            { description: "สามารถค้างคืนได้ที่คณะวิศวกรรมศาสตร์\nจุฬาลงกรณ์มหาวิทยาลัย ตลอดระยะเวลาจัดค่าย", src: "" },
-            { description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน", src: "" }
+            { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: q1 },
+            { description: "ไม่ป่วยเป็นโรคติดต่อร้ายแรง", src: q2 },
+            { description: "สามารถค้างคืนได้ที่คณะวิศวกรรมศาสตร์\nจุฬาลงกรณ์มหาวิทยาลัย ตลอดระยะเวลาจัดค่าย", src: q3 },
+            { description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน", src: q4 }
           ]}
         />
       </BackgroundOverlay>
