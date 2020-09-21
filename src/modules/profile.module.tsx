@@ -29,7 +29,11 @@ const ProfileModule = () => {
   const { setLoading } = useGlobalContext()
   const createApplication = useCallback(async () => {
     setLoading(true)
-    await ApplicationService.createApplication()
+    try {
+      await ApplicationService.createApplication()
+    } catch (error) {
+      // fails silently
+    }
     setLoading(false)
   }, [setLoading])
 
