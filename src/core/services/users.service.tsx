@@ -7,64 +7,58 @@ const getUsers = async (): Promise<AxiosResponse> => {
   try {
     process.env.REACT_APP_DEBUG && console.log("on request: getUsers")
     const result = await httpClient.get(`${process.env.REACT_APP_API_SERVER}/users`)
-    process.env.REACT_APP_DEBUG && console.log(result)
+    process.env.REACT_APP_DEBUG && console.log("finish getUsers", result)
     return result
   } catch (error) {
-    process.env.REACT_APP_DEBUG && console.log(error.response)
+    process.env.REACT_APP_DEBUG && console.log("error", error.response)
     return error.response
   }
 }
 
-const getUser = async (params: { userId: string } | undefined): Promise<AxiosResponse> => {
+const getUser = async (params: { userId: string }): Promise<AxiosResponse> => {
   try {
     process.env.REACT_APP_DEBUG && console.log("on request: getUser")
     const result = await httpClient.get(`${process.env.REACT_APP_API_SERVER}/users/${params?.userId}`)
-    process.env.REACT_APP_DEBUG && console.log(result)
+    process.env.REACT_APP_DEBUG && console.log("finish getUser", result)
     return result
   } catch (error) {
-    process.env.REACT_APP_DEBUG && console.log(error.response)
+    process.env.REACT_APP_DEBUG && console.log("error", error.response)
     return error.response
   }
 }
 
-const createUser = async (params: UserModel | undefined): Promise<AxiosResponse> => {
+const createUser = async (params: UserModel): Promise<AxiosResponse> => {
   try {
     process.env.REACT_APP_DEBUG && console.log("on request: createUser")
-    const result = await httpClient.post(`${process.env.REACT_APP_API_SERVER}/users`, {
-      email: params?.email,
-      password: params?.password
-    })
-    console.log(result)
+    const result = await httpClient.post(`${process.env.REACT_APP_API_SERVER}/users`, params)
+    process.env.REACT_APP_DEBUG && console.log("finish createUser", result)
     return result
   } catch (error) {
-    process.env.REACT_APP_DEBUG && console.log(error.response)
+    process.env.REACT_APP_DEBUG && console.log("error", error.response)
     return error.response
   }
 }
 
-const updateUser = async (params: UserModel | undefined): Promise<AxiosResponse> => {
+const updateUser = async (params: UserModel): Promise<AxiosResponse> => {
   try {
     process.env.REACT_APP_DEBUG && console.log("on request: updateUser")
-    const result = await httpClient.patch(`${process.env.REACT_APP_API_SERVER}/users`, {
-      email: params?.email,
-      password: params?.password
-    })
-    process.env.REACT_APP_DEBUG && console.log(result)
+    const result = await httpClient.patch(`${process.env.REACT_APP_API_SERVER}/users`, params)
+    process.env.REACT_APP_DEBUG && console.log("finish updateUser", result)
     return result
   } catch (error) {
-    process.env.REACT_APP_DEBUG && console.log(error.response)
+    process.env.REACT_APP_DEBUG && console.log("error", error.response)
     return error.response
   }
 }
 
-const deleteUser = async (params: { userId: string } | undefined): Promise<AxiosResponse> => {
+const deleteUser = async (params: { userId: string }): Promise<AxiosResponse> => {
   try {
     process.env.REACT_APP_DEBUG && console.log("on request: deleteUser")
     const result = await axios.delete(`${process.env.REACT_APP_API_SERVER}/users/${params?.userId}`)
-    process.env.REACT_APP_DEBUG && console.log(result)
+    process.env.REACT_APP_DEBUG && console.log("finish logout", result)
     return result
   } catch (error) {
-    process.env.REACT_APP_DEBUG && console.log(error.response)
+    process.env.REACT_APP_DEBUG && console.log("error", error.response)
     return error.response
   }
 }
