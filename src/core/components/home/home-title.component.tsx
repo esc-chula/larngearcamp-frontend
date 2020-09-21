@@ -1,5 +1,5 @@
 import React from "react"
-import { Typography, Button, Box } from "@material-ui/core"
+import { Typography, Button, Box, BoxProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../../utils/conversion"
 
@@ -25,10 +25,10 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const HomeTitle: React.FC = () => {
+const HomeTitle: React.FC<BoxProps> = props => {
   const classes = useStyle()
   return (
-    <Box textAlign="center">
+    <Box textAlign="center" {...props}>
       <h2 className={classes.title}>LARNGEAR CAMP 20th</h2>
       <Typography variant="subtitle1" className={classes.subtitle}>
         ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง

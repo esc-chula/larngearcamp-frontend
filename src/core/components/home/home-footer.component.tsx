@@ -1,5 +1,5 @@
 import React from "react"
-import { Typography, Grid, Paper } from "@material-ui/core"
+import { Typography, Grid, Paper, PaperProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import HomeContainer from "./home-container.component"
 import gearIcon from "../../../assets/images/icon/gear-icon.svg"
@@ -58,9 +58,11 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const HomeFooter: React.FC<{
-  contacts: { name: string; tel: string }[]
-}> = props => {
+const HomeFooter: React.FC<
+  {
+    contacts: { name: string; tel: string }[]
+  } & PaperProps
+> = props => {
   const classes = useStyle()
 
   const left = (
@@ -102,7 +104,7 @@ const HomeFooter: React.FC<{
   )
 
   return (
-    <Paper className={classes.container}>
+    <Paper className={classes.container} {...props}>
       <HomeContainer>
         <Grid container justify="space-between">
           <Grid item>{left}</Grid>

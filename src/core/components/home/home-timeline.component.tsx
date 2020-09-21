@@ -19,14 +19,14 @@ const useStyle = makeStyles(theme => ({
 
 const HomeTimeline: React.FC<{
   label: TimelineLabel[]
-}> = ({ label }) => {
+}> = props => {
   const classes = useStyle()
   return (
     <>
       <Typography variant="h2" align="center" className={classes.title}>
         TIMELINE
       </Typography>
-      <TimelineDisplay includeFinalLine={true} label={label} />
+      <TimelineDisplay includeFinalLine={true} label={props.label} />
       <div className={classes.endCard}>
         <Typography variant="h6" className="kanit">
           ค่ายลานเกียร์ครั้งที่ 20

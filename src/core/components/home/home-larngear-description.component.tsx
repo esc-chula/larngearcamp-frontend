@@ -2,7 +2,7 @@ import React from "react"
 import { Typography, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../../utils/conversion"
-import HomeContainer from "./home-container.component"
+import HomeContainer, { HomeContainerProps } from "./home-container.component"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -14,10 +14,10 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const HomeLarngearDescription: React.FC = () => {
+const HomeLarngearDescription: React.FC<HomeContainerProps> = props => {
   const classes = useStyle()
   return (
-    <HomeContainer>
+    <HomeContainer {...props}>
       <Typography variant="h4" align="right" className={classes.title}>
         What is Larngear Camp?
       </Typography>

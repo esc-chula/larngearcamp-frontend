@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react"
 import { Typography, Avatar } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../../utils/conversion"
-import HomeContainer from "./home-container.component"
+import HomeContainer, { HomeContainerProps } from "./home-container.component"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -19,9 +19,11 @@ const useStyle = makeStyles(theme => ({
 }))
 
 type Qualification = { description: string; src: string }
-const HomeQualification: React.FC<{
-  qualifications: Qualification[]
-}> = props => {
+const HomeQualification: React.FC<
+  {
+    qualifications: Qualification[]
+  } & HomeContainerProps
+> = props => {
   const classes = useStyle()
 
   const leftsRef = useRef<(HTMLDivElement | null)[]>([])
@@ -51,7 +53,7 @@ const HomeQualification: React.FC<{
   }
 
   return (
-    <HomeContainer>
+    <HomeContainer {...props}>
       <Typography variant="h3" className={classes.title}>
         คุณสมบัติผู้สมัคร
       </Typography>
