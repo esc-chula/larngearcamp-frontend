@@ -1,5 +1,5 @@
 import React from "react"
-import { Typography } from "@material-ui/core"
+import { Box, BoxProps, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 const UseStyleTL = makeStyles(theme => ({
@@ -50,15 +50,17 @@ export interface TimelineLabel {
   right: string
 }
 
-export const TimelineDisplay: React.FC<{
+export interface TimelineProps extends BoxProps {
   label: TimelineLabel[]
   startNumber?: number
   includeFinalLine?: boolean
-}> = props => {
+}
+
+export const TimelineDisplay: React.FC<TimelineProps> = props => {
   const classes = UseStyleTL()
 
   return (
-    <>
+    <Box {...props}>
       {props.label.map(({ left, right }, i, arr) => (
         <div key={i}>
           <div className={classes.line}>
@@ -77,6 +79,6 @@ export const TimelineDisplay: React.FC<{
           {(props.includeFinalLine || i < arr.length - 1) && <div className={classes.hline}></div>}
         </div>
       ))}
-    </>
+    </Box>
   )
 }

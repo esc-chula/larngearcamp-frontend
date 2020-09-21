@@ -42,11 +42,11 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
  * contentPercentage: percentage of content height will be (with respected to image height),
  * note that other element are only effected by content height
  */
-const BackgroundOverlay: React.FC<Props> = props => {
+const BackgroundOverlay: React.FC<Props & React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle(props)
 
   return (
-    <div>
+    <div {...props}>
       <img src={props.src} className={classes.backgroundImg} />
       <div className={classes.contentContainer}>
         <div className={classes.content}>{props.children}</div>

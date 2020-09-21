@@ -1,7 +1,7 @@
 import React from "react"
-import { Typography } from "@material-ui/core"
+import { Box, BoxProps, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { TimelineDisplay, TimelineLabel } from "../timeline.component"
+import { TimelineDisplay, TimelineLabel, TimelineProps } from "../timeline.component"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -17,12 +17,10 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const HomeTimeline: React.FC<{
-  label: TimelineLabel[]
-}> = props => {
+const HomeTimeline: React.FC<TimelineProps & BoxProps> = props => {
   const classes = useStyle()
   return (
-    <>
+    <Box {...props}>
       <Typography variant="h2" align="center" className={classes.title}>
         TIMELINE
       </Typography>
@@ -35,7 +33,7 @@ const HomeTimeline: React.FC<{
           8 - 11 มกราคม 2564
         </Typography>
       </div>
-    </>
+    </Box>
   )
 }
 
