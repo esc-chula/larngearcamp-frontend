@@ -7,6 +7,7 @@ import { theme } from "../styles/theme"
 import { AuthProvider } from "../core/providers/auth.provider"
 import { ErrorBoundary } from "../core/providers/error.provider"
 import { GlobalProvider } from "../core/providers/global.provider"
+import { ApplicationProvider } from "../core/providers/application.provider"
 
 const AppModule = () => {
   return (
@@ -14,11 +15,13 @@ const AppModule = () => {
       <ThemeProvider theme={theme}>
         <Suspense fallback={<LoadingComponent loading={true} />}>
           <AuthProvider>
-            <GlobalProvider>
-              <BrowserRouter>
-                <RouteModule />
-              </BrowserRouter>
-            </GlobalProvider>
+            <ApplicationProvider>
+              <GlobalProvider>
+                <BrowserRouter>
+                  <RouteModule />
+                </BrowserRouter>
+              </GlobalProvider>
+            </ApplicationProvider>
           </AuthProvider>
         </Suspense>
       </ThemeProvider>

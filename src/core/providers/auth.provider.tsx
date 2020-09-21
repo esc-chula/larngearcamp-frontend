@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useMemo, useCallback, useEffect } from "react"
-import { getLocalStorage } from "../../utils/storage"
+import { getLocalStorage, setLocalStorage, removeLocalStorage } from "../../utils/storage"
 import jwt_decode from "jwt-decode"
 import AuthService from "../services/auth.service"
 import LoginModel from "../models/login.model"
@@ -53,6 +53,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     const result = await AuthService.login(params)
     if (result.status === 200) {
       setAccessToken(result.data.token)
+      setLocalStorage("ACCESS_TOKEN", result.data.token)
     }
     return result
   }, [])
@@ -61,6 +62,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     const result = await AuthService.loginFb(accessToken)
     if (result.status === 200) {
       setAccessToken(result.data.token)
+      setLocalStorage("ACCESS_TOKEN", result.data.token)
     }
     return result
   }, [])
@@ -68,13 +70,17 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   const logout = useCallback(async () => {
     const result = await AuthService.logout()
     setAccessToken(null)
+    removeLocalStorage("ACCESS_TOKEN")
     return result
   }, [])
 
   const me = useSWR(
     () => (accessToken ? `me (${accessToken})` : null),
     async () => (await AuthService.me()).data,
-    { refreshInterval: 0 }
+    {
+      refreshInterval: 0,
+      revalidateOnFocus: process.env.NODE_ENV === "production"
+    }
   )
 
   const refresh = useCallback(async (): Promise<Boolean> => {
@@ -82,17 +88,19 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       const { exp } = jwt_decode(accessToken)
       const currentTime = new Date()
       const expireTime = new Date(exp * 1000)
-      const expireTimeNext3Day = new Date(exp * 1000 + 60 * 60 * 24 * 3)
+      const expireTimeNext3Day = new Date(exp * 1000 + 1000 * 60 * 60 * 24 * 3)
       if (currentTime > expireTimeNext3Day) {
         await AuthService.logout()
         process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out (inactive in 3 days)")
         setAccessToken(null)
+        removeLocalStorage("ACCESS_TOKEN")
         return true
       } else if (currentTime > expireTime) {
         const result = await AuthService.refresh()
         process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh (active in 3 days)")
         if (result.status === 200) {
           setAccessToken(result.data.token)
+          setLocalStorage("ACCESS_TOKEN", result.data.token)
         }
         return true
       }
@@ -111,7 +119,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   }, [])
 
   useEffect(() => {
-    refresh().then(result => process.env.REACT_APP_DEBUG && console.log("refresh: ", result))
+    refresh()
   }, [accessToken, refresh])
 
   const value: AuthConstruct = {

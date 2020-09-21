@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useCallback } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { ProfileComponent } from "../core/components/profile.component"
 import { Container, Paper, Typography, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
+import ApplicationService from "../core/services/application.service"
+import { useGlobalContext } from "../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -24,10 +26,17 @@ const useStyles = makeStyles(theme => ({
 
 const ProfileModule = () => {
   const classes = useStyles()
+  const { setLoading } = useGlobalContext()
+  const createApplication = useCallback(async () => {
+    setLoading(true)
+    await ApplicationService.createApplication()
+    setLoading(false)
+  }, [setLoading])
+
   return (
     <Container maxWidth="lg">
       <ProfileComponent />
-      <Link to="/application/step/1">
+      <Link to="/application/step/1" onClick={createApplication}>
         <Button className={classes.button} color="primary" variant="contained" fullWidth>
           สมัครเข้าค่าย
         </Button>

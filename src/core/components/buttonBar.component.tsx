@@ -22,11 +22,11 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ButtonBar: React.FC<{ onSubmit: () => void }> = ({ onSubmit }) => {
+const ButtonBar = () => {
   const step = parseInt(useRouteMatch<{ step: string }>().params.step)
   const previousPage = `/application/step/${step - 1}`
-  const nextPage = step === 6 ? `/application/finish` : `/application/step/${step + 1}`
   const classes = useStyles()
+
   return (
     <Grid container spacing={2}>
       <Grid xs={12} sm={6} item>
@@ -37,11 +37,9 @@ const ButtonBar: React.FC<{ onSubmit: () => void }> = ({ onSubmit }) => {
         </Link>
       </Grid>
       <Grid xs={12} sm={6} item>
-        <Link className="no-underline" to={nextPage} onClick={onSubmit}>
-          <Button variant="contained" className={classes.buttonSuccess} fullWidth>
-            ไปขั้นตอนถัดไป
-          </Button>
-        </Link>
+        <Button variant="contained" className={classes.buttonSuccess} fullWidth type="submit">
+          ไปขั้นตอนถัดไป
+        </Button>
       </Grid>
     </Grid>
   )
