@@ -19,18 +19,20 @@ import q1 from "../assets/images/icon/qualification-1.svg"
 import q2 from "../assets/images/icon/qualification-2.svg"
 import q3 from "../assets/images/icon/qualification-3.svg"
 import q4 from "../assets/images/icon/qualification-4.svg"
+import { Box } from "@material-ui/core"
 
 const useStyle = makeStyles(theme => ({
-  homeTitleContainer: {
-    paddingTop: "80px",
-    paddingBottom: "166px"
+  title: {
+    marginTop: "80px"
   },
-  homeDescriptionContainer: {
-    paddingBottom: "72px"
+  description: {
+    marginBottom: "80px"
+  },
+  timeline: {
+    marginTop: "80px",
+    marginBottom: "80px"
   }
 }))
-
-const VSeperator: React.FC<{ height: string | number }> = props => <div style={{ height: props.height }} />
 
 const HomeModule: React.FC = () => {
   const classes = useStyle()
@@ -39,18 +41,12 @@ const HomeModule: React.FC = () => {
     <>
       <CoverComponent />
       <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70}>
-        <VSeperator height="80px" />
-        <HomeTitle />
+        <HomeTitle className={classes.title} />
       </BackgroundOverlay>
 
-      <HomeLarngearDescription />
-      <VSeperator height="80px" />
+      <HomeLarngearDescription className={classes.description} />
 
       <HomeCarousal gradientPercent={20} />
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
 
       <BackgroundOverlay src={landing2} aspectRatio={1440 / 692} contentPercentage={100} offsetPercentage={37}>
         <HomeQualification
@@ -63,12 +59,8 @@ const HomeModule: React.FC = () => {
         />
       </BackgroundOverlay>
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-
       <HomeTimeline
+        className={classes.timeline}
         label={[
           { left: "18 กันยายน - 10 ตุลาคม 2563", right: "รับสมัคร" },
           { left: "24 ตุลาคม 2563", right: "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" },
@@ -78,12 +70,6 @@ const HomeModule: React.FC = () => {
           { left: "15 พฤศจิกายน - 19 ธันวาคม 2563", right: "ยืนยันสิทธิ์การเข้าร่วมค่าย" }
         ]}
       />
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-
-      <HomeAnnouce />
 
       <BackgroundOverlay src={landing3} aspectRatio={1617 / 525.84} offsetPercentage={10}>
         <Box display="flex" height="100%" alignItems="center" justifyContent="center">
