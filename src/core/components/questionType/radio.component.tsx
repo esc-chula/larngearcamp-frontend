@@ -21,7 +21,7 @@ const RadioTypeComponent: React.FC<RadioTypeProps> = ({ name, contents, ...other
         as={
           <RadioGroup aria-label={name}>
             {contents?.map((content, index) => (
-              <FormControlLabel key={index} label={content.label} value={`choice${index + 1}`} control={<Radio color="primary" />} />
+              <FormControlLabel key={index} label={content.label} value={index + 1} control={<Radio color="primary" />} />
             ))}
           </RadioGroup>
         }

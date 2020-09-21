@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
 import { Link } from "react-router-dom"
-import { TextField, Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box } from "@material-ui/core"
-import { useForm } from "react-hook-form"
+import { Typography, Button, Container, Paper, Checkbox, FormControlLabel, Box } from "@material-ui/core"
+import { Controller, FormProvider, useForm } from "react-hook-form"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { LogoComponent } from "../core/components/logo.component"
@@ -13,6 +13,7 @@ import LoginSchema from "../schemas/login.schema"
 import { useHistory } from "react-router-dom"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { useGlobalContext } from "../core/providers/global.provider"
+import { TextFieldComponent } from "../core/components/textField.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -64,97 +65,77 @@ const LoginModule = () => {
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
   const { login } = useAuthContext()
-  const { register, handleSubmit, setValue, getValues, setError, errors } = useForm({
+  const methods = useForm({
     resolver: yupResolver(LoginSchema)
   })
+  const { handleSubmit, control, getValues, setError, errors } = methods
 
   const onSubmit = useCallback(async () => {
     setLoading(true)
     const values = getValues(["email", "password"])
-    const result = await login(values)
-    if (result.status !== 200) {
+    try {
+      await login(values)
+      history.push("/profile")
+    } catch (error) {
       setError("validate", {
         type: "validate",
-        message: result.data.message
+        message: error.response.data.message
       })
-    } else {
-      history.push("/profile")
     }
     setLoading(false)
   }, [getValues, history, setError, setLoading, login])
 
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.name, event.target.value)
-    },
-    [setValue]
-  )
-
-  const handleCheckBoxChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.name, event.target.checked)
-    },
-    [setValue]
-  )
-
   return (
     <>
       <LogoComponent />
-      <CardComponent maxWidth="sm">
-        <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-          <TextField
-            id="email"
-            name="email"
-            label="อีเมล"
-            variant="outlined"
-            type="email"
-            onChange={handleChange}
-            ref={register}
-            size="small"
-            error={Boolean(errors?.email)}
-            helperText={errors?.email?.message}
-          />
-          <TextField
-            id="password"
-            name="password"
-            label="รหัสผ่าน"
-            variant="outlined"
-            type="password"
-            onChange={handleChange}
-            ref={register}
-            size="small"
-            error={Boolean(errors?.password)}
-            helperText={errors?.password?.message}
-          />
-          <Box display="flex" justifyContent="space-between" alignItems="center">
-            <FormControlLabel
-              control={<Checkbox name="remember" color="primary" onChange={handleCheckBoxChange} />}
-              label="จำฉันไว้ในระบบ"
-              className={classes.checkbox}
-            />
-            <Link to="/forgotpassword" className={classes.redBg}>
-              <Typography color="primary">ลืมรหัสผ่าน?</Typography>
-            </Link>
-          </Box>
-          <Button type="submit" variant="contained" color="primary">
-            เข้าสู่ระบบ
-          </Button>
-          {errors.validate && (
-            <Typography color="error" variant="body2" className={classes.clearMargin}>
-              อีเมลหรือรหัสผ่านไม่ถูกต้อง
-            </Typography>
-          )}
-        </form>
+      <FormProvider {...methods}>
+        <CardComponent maxWidth="sm">
+          <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+            <TextFieldComponent name="email" label="อีเมล" type="email" />
+            <TextFieldComponent name="password" label="รหัสผ่าน" type="password" />
+            <Box display="flex" justifyContent="space-between" alignItems="center">
+              <Controller
+                name="remember"
+                control={control}
+                defaultValue={false}
+                render={({ onChange, onBlur, value, name }) => (
+                  <FormControlLabel
+                    control={
+                      <FormControlLabel
+                        name={name}
+                        label="จำฉันไว้ในระบบ"
+                        control={<Checkbox color="primary" onBlur={onBlur} onChange={e => onChange(e.target.checked)} checked={value} />}
+                      />
+                    }
+                    label="จำฉันไว้ในระบบ"
+                    className={classes.checkbox}
+                  />
+                )}
+              />
+              <Link to="/forgotpassword" className={classes.redBg}>
+                <Typography color="primary">ลืมรหัสผ่าน?</Typography>
+              </Link>
+            </Box>
+            <Button type="submit" variant="contained" color="primary">
+              เข้าสู่ระบบ
+            </Button>
+            {errors.validate && (
+              <Typography color="error" variant="body2" className={classes.clearMargin}>
+                อีเมลหรือรหัสผ่านไม่ถูกต้อง
+              </Typography>
+            )}
+          </form>
 
-        <div className={classes.divider}>OR</div>
+          <div className={classes.divider}>OR</div>
 
-        <FacebookButtonComponent type="submit" variant="contained" color="primary">
-          เข้าสู่ระบบด้วยบัญชี Facebook
-        </FacebookButtonComponent>
-        <GoogleButtonComponent type="submit" variant="contained" color="primary">
-          เข้าสู่ระบบด้วยบัญชี Google
-        </GoogleButtonComponent>
-      </CardComponent>
+          <FacebookButtonComponent type="submit" variant="contained" color="primary">
+            เข้าสู่ระบบด้วยบัญชี Facebook
+          </FacebookButtonComponent>
+          <GoogleButtonComponent type="submit" variant="contained" color="primary">
+            เข้าสู่ระบบด้วยบัญชี Google
+          </GoogleButtonComponent>
+        </CardComponent>
+      </FormProvider>
 
       <Box mt={4}>
         <Container maxWidth="sm">

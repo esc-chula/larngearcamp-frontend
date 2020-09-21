@@ -1,7 +1,7 @@
 import React, { useCallback } from "react"
-import { Link } from "react-router-dom"
-import { TextField, Typography, Button, Container, Paper, Box } from "@material-ui/core"
-import { useForm } from "react-hook-form"
+import { Link, useHistory } from "react-router-dom"
+import { Typography, Button, Container, Paper, Box } from "@material-ui/core"
+import { useForm, FormProvider } from "react-hook-form"
 import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { LogoComponent } from "../core/components/logo.component"
@@ -11,6 +11,8 @@ import { CardComponent } from "../core/components/card.component"
 import { yupResolver } from "@hookform/resolvers"
 import RegisterSchema from "../schemas/register.schema"
 import UsersService from "../core/services/users.service"
+import { useAuthContext } from "../core/providers/auth.provider"
+import { TextFieldComponent } from "../core/components/textField.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -65,107 +67,55 @@ const useStyles = makeStyles(theme => ({
 
 const RegisterModule = () => {
   const classes = useStyles()
-  const { register, handleSubmit, errors, setValue, getValues } = useForm({
+  const history = useHistory()
+  const { login } = useAuthContext()
+  const methods = useForm({
     resolver: yupResolver(RegisterSchema)
   })
+  const { handleSubmit, getValues } = methods
   const onSubmit = useCallback(async () => {
     const values = getValues(["email", "password", "firstName", "lastName"])
-    await UsersService.createUser(values)
-  }, [getValues])
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.name, event.target.value)
-    },
-    [setValue]
-  )
+    try {
+      await UsersService.createUser(values)
+      await login({ email: values["email"], password: values["password"] })
+      history.push("/profile")
+    } catch (error) {}
+  }, [getValues, history, login])
 
   return (
     <>
       <LogoComponent />
-      <CardComponent maxWidth="sm">
-        <Box width="100%" margin="auto" mb={4} fontFamily="Kanit">
-          <Typography variant="h6" align="center">
-            เพื่อทำการสมัครเข้าค่ายลานเกียร์ครั้งที่ 20 น้องจำเป็นต้องสร้างบัญชีเพื่อดำเนินการต่อ
-          </Typography>
-        </Box>
-
-        <FacebookButtonComponent type="submit" variant="contained" color="primary">
-          เข้าสู่ระบบด้วยบัญชี Facebook
-        </FacebookButtonComponent>
-        <GoogleButtonComponent type="submit" variant="contained" color="primary">
-          เข้าสู่ระบบด้วยบัญชี Google
-        </GoogleButtonComponent>
-
-        <div className={classes.divider}>OR</div>
-
-        <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-          <Box display="flex" className={classes.inputInLine}>
-            <TextField
-              id="firstName"
-              name="firstName"
-              label="ชื่อจริง"
-              variant="outlined"
-              type="string"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              error={Boolean(errors?.firstName)}
-              helperText={errors?.firstName?.message}
-            />
-            <TextField
-              id="lastName"
-              name="lastName"
-              label="นามสกุล"
-              variant="outlined"
-              type="string"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              error={Boolean(errors?.lastName)}
-              helperText={errors?.lastName?.message}
-            />
+      <FormProvider {...methods}>
+        <CardComponent maxWidth="sm">
+          <Box width="100%" margin="auto" mb={4} fontFamily="Kanit">
+            <Typography variant="h6" align="center">
+              เพื่อทำการสมัครเข้าค่ายลานเกียร์ครั้งที่ 20 น้องจำเป็นต้องสร้างบัญชีเพื่อดำเนินการต่อ
+            </Typography>
           </Box>
-          <TextField
-            id="email"
-            name="email"
-            label="อีเมล"
-            variant="outlined"
-            type="email"
-            onChange={handleChange}
-            ref={register}
-            size="small"
-            error={Boolean(errors?.email)}
-            helperText={errors?.email?.message}
-          />
-          <TextField
-            id="password"
-            name="password"
-            label="รหัสผ่าน"
-            variant="outlined"
-            type="password"
-            onChange={handleChange}
-            ref={register}
-            size="small"
-            error={Boolean(errors?.password)}
-            helperText={errors?.password?.message}
-          />
-          <TextField
-            id="passwordConfirmation"
-            name="passwordConfirmation"
-            label="ยืนยันรหัสผ่าน"
-            variant="outlined"
-            type="password"
-            onChange={handleChange}
-            ref={register}
-            size="small"
-            error={Boolean(errors?.passwordConfirmation)}
-            helperText={errors?.passwordConfirmation?.message}
-          />
-          <Button type="submit" variant="contained" color="primary" className={classes.clearMargin}>
-            ลงทะเบียน
-          </Button>
-        </form>
-      </CardComponent>
+
+          <FacebookButtonComponent type="submit" variant="contained" color="primary">
+            เข้าสู่ระบบด้วยบัญชี Facebook
+          </FacebookButtonComponent>
+          <GoogleButtonComponent type="submit" variant="contained" color="primary">
+            เข้าสู่ระบบด้วยบัญชี Google
+          </GoogleButtonComponent>
+
+          <div className={classes.divider}>OR</div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+            <Box display="flex" className={classes.inputInLine}>
+              <TextFieldComponent id="firstName" name="firstName" label="ชื่อจริง" />
+              <TextFieldComponent id="lastName" name="lastName" label="นามสกุล" />
+            </Box>
+            <TextFieldComponent id="email" name="email" label="อีเมล" type="email" />
+            <TextFieldComponent id="password" name="password" label="รหัสผ่าน" type="password" />
+            <TextFieldComponent id="passwordConfirmation" name="passwordConfirmation" label="ยืนยันรหัสผ่าน" type="password" />
+            <Button type="submit" variant="contained" color="primary" className={classes.clearMargin}>
+              ลงทะเบียน
+            </Button>
+          </form>
+        </CardComponent>
+      </FormProvider>
 
       <Box mt={4}>
         <Container maxWidth="sm">

@@ -9,6 +9,8 @@ import { RadioTypeComponent } from "../../core/components/questionType/radio.com
 import { CheckboxTypeComponent } from "../../core/components/questionType/checkbox.component"
 import { RankingTypeComponent } from "../../core/components/questionType/ranking.component"
 import ApplicationStepModule from "./stepLayout.module"
+import { yupResolver } from "@hookform/resolvers"
+import AnswerSchema from "../../schemas/answer.schema"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -22,7 +24,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const ApplicationStepFourModule: React.FC<{ step: string }> = ({ step }) => {
-  const methods = useForm()
+  const methods = useForm({
+    resolver: yupResolver(AnswerSchema)
+  })
   const { handleSubmit } = methods
   const classes = useStyles()
   const onSubmit = useCallback(() => {
@@ -40,17 +44,17 @@ const ApplicationStepFourModule: React.FC<{ step: string }> = ({ step }) => {
                   question={`${index + 1}. ${question.question}`}
                   caption={question.caption}
                   imagePath={question.imagePath}>
-                  {question.type === "multiline" && <MultilineTypeComponent name={`question${index}`} className={classes.input} />}
-                  {question.type === "checkbox" && <CheckboxTypeComponent name={`question${index}`} contents={question.contents} />}
+                  {question.type === "multiline" && <MultilineTypeComponent name={`secondPart.${index}`} className={classes.input} />}
+                  {question.type === "checkbox" && <CheckboxTypeComponent name={`secondPart.${index}`} contents={question.contents} />}
                   {question.type === "radio" && (
-                    <RadioTypeComponent name={`question${index}`} contents={question.contents} className={classes.input} />
+                    <RadioTypeComponent name={`secondPart.${index}`} contents={question.contents} className={classes.input} />
                   )}
-                  {question.type === "ranking" && <RankingTypeComponent name={`question${index}`} contents={question.contents} />}
+                  {question.type === "ranking" && <RankingTypeComponent name={`secondPart.${index}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
+              <ButtonBar />
             </form>
           </FormProvider>
-          <ButtonBar />
         </>
       )}
     </ApplicationStepModule>

@@ -9,6 +9,8 @@ import { RadioTypeComponent } from "../../core/components/questionType/radio.com
 import { CheckboxTypeComponent } from "../../core/components/questionType/checkbox.component"
 import { RankingTypeComponent } from "../../core/components/questionType/ranking.component"
 import ApplicationStepModule from "./stepLayout.module"
+import { yupResolver } from "@hookform/resolvers"
+import AnswerSchema from "../../schemas/answer.schema"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -22,12 +24,17 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
-  const methods = useForm()
-  const { handleSubmit } = methods
+  const methods = useForm({
+    resolver: yupResolver(AnswerSchema)
+  })
+  const { handleSubmit, getValues } = methods
   const classes = useStyles()
   const onSubmit = useCallback(() => {
     console.log("Success")
   }, [])
+  const check = () => {
+    console.log(getValues())
+  }
   return (
     <ApplicationStepModule>
       {({ ButtonBar }) => (
@@ -40,17 +47,20 @@ const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
                   question={`${index + 1}. ${question.question}`}
                   caption={question.caption}
                   imagePath={question.imagePath}>
-                  {question.type === "multiline" && <MultilineTypeComponent name={`question${index}`} className={classes.input} />}
-                  {question.type === "checkbox" && <CheckboxTypeComponent name={`question${index}`} contents={question.contents} />}
+                  {question.type === "multiline" && <MultilineTypeComponent name={`firstPart.answer${index + 1}`} />}
+                  {question.type === "checkbox" && <CheckboxTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} />}
                   {question.type === "radio" && (
-                    <RadioTypeComponent name={`question${index}`} contents={question.contents} className={classes.input} />
+                    <RadioTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} className={classes.input} />
                   )}
-                  {question.type === "ranking" && <RankingTypeComponent name={`question${index}`} contents={question.contents} />}
+                  {question.type === "ranking" && <RankingTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
+              <button placeholder="check" onClick={check}>
+                Check
+              </button>
+              <ButtonBar />
             </form>
           </FormProvider>
-          <ButtonBar />
         </>
       )}
     </ApplicationStepModule>

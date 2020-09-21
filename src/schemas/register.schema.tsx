@@ -7,11 +7,7 @@ const RegisterSchema = object().shape({
   password: string()
     .trim()
     .required("Enter your password")
-    .matches(/^.{8,16}$/, "Password should contain 8 - 16 characters")
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[" !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"])?.{8,16}$/,
-      "Password should contain at least 1 lowercase letter, 1 uppercase letter"
-    ),
+    .matches(/^.{8,16}$/, "Password should contain 8 - 16 characters"),
   passwordConfirmation: string()
     .trim()
     .oneOf([ref("password")], "Password doesn't match")

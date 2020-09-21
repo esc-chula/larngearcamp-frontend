@@ -3,6 +3,8 @@ import { useFormContext } from "react-hook-form"
 import { Box, TextField, Typography } from "@material-ui/core"
 import ChoiceModel from "../../models/choice.model"
 import { makeStyles } from "@material-ui/core/styles"
+import { sequenceConstant } from "../../constants/sequence.constant"
+import { resolve } from "../../../utils/other"
 
 interface CheckboxTypeProps {
   name: string
@@ -11,9 +13,10 @@ interface CheckboxTypeProps {
 
 const useStyles = makeStyles(theme => ({
   input: {
+    minWidth: 25,
     color: theme.palette.primary.main,
     marginRight: theme.spacing(2),
-    maxWidth: 50,
+    maxWidth: 80,
     "&:first-child": {
       marginTop: 0
     }
@@ -24,24 +27,31 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const RankingTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents, ...other }) => {
+const RankingTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents }) => {
   const classes = useStyles()
-  const { register } = useFormContext()
+
+  const { register, errors } = useFormContext()
   return (
     <Box mt={2} display="flex" flexDirection="column">
-      {contents?.map((content, index) => (
-        <div className={classes.container} key={index}>
-          <TextField
-            className={classes.input}
-            placeholder="อันดับ"
-            ref={register}
-            name={`q${index}`}
-            size="small"
-            inputProps={{ min: 0, style: { textAlign: "center" } }}
-          />
-          <Typography>{content.label}</Typography>
-        </div>
-      ))}
+      {contents?.map((content, index) => {
+        const newName = `${name}.${sequenceConstant[index + 1]}`
+        const selfError = resolve(newName, errors)
+        return (
+          <div className={classes.container} key={index}>
+            <TextField
+              name={newName}
+              placeholder="อันดับ"
+              size="small"
+              inputRef={register}
+              className={classes.input}
+              error={!!selfError}
+              helperText={selfError?.message}
+              inputProps={{ min: 0, style: { textAlign: "center" } }}
+            />
+            <Typography>{content.label}</Typography>
+          </div>
+        )
+      })}
     </Box>
   )
 }

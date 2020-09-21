@@ -49,13 +49,13 @@ const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
   const onSubmit = useCallback(async () => {
     setLoading(true)
     const values = getValues()
-    const result = await ApplicationService.updateApplication(values)
-    setLoading(false)
-    if (result.status !== 200) {
-      // show modal
-    } else {
+    try {
+      await ApplicationService.updateApplication(values)
       history.push(`/application/step/${step}`)
+    } catch (error) {
+      // show modal
     }
+    setLoading(false)
   }, [setLoading, getValues, history, step])
 
   return (

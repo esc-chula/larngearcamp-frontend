@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { useAuthContext } from "../../providers/auth.provider"
 import { grey } from "@material-ui/core/colors"
 import { TextFieldComponent } from "../textField.component"
+import AddressFieldComponent from "./addressField.component"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -38,16 +39,16 @@ const PersonalContactComponent = () => {
             <TextFieldComponent name="contact.address" label="บ้านเลขที่ หมูที่ และถนน" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextFieldComponent name="contact.subDistrict" label="ตำบล/แขวง" type="text" />
+            <AddressFieldComponent type="district" label="ตำบล/แขวง" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextFieldComponent name="contact.district" label="อำเภอ/เขต" type="text" />
+            <AddressFieldComponent type="amphoe" label="อำเภอ/เขต" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextFieldComponent name="contact.province" label="จังหวัด" type="text" />
+            <AddressFieldComponent type="province" label="จังหวัด" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextFieldComponent name="contact.zip" label="รหัสไปรษณีย์" type="text" />
+            <AddressFieldComponent type="zipcode" label="รหัสไปรษณีย์" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <TextFieldComponent name="contact.homeNumber" label="โทรศัพท์บ้าน" type="tel" />

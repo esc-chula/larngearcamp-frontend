@@ -36,7 +36,7 @@ const PersonalProfileComponent = () => {
             <TextFieldComponent name="name" label="ชื่อจริง" type="text" defaultValue={me.data?.name?.first} />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
-            <TextFieldComponent name="surname" label="นามสกุล" type="text" defaultValue={me.data?.name?.second} />
+            <TextFieldComponent name="surname" label="นามสกุล" type="text" defaultValue={me.data?.name?.last} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <TextFieldComponent name="nickname" label="ชื่อเล่น" type="text" />
