@@ -1,9 +1,10 @@
 import React from "react"
 import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField, TextFieldProps } from "@material-ui/core"
+import { Typography, Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { SelectComponent } from "../select.component"
 import { bloodGroupsConstant } from "../../constants/bloodGroups.constant"
+import { TextFieldComponent } from "../textField.component"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -14,14 +15,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const inputPropsConstant: TextFieldProps = {
-  size: "small",
-  fullWidth: true,
-  variant: "outlined"
-}
-
 const PersonalHealthComponent = () => {
-  const { register, control } = useFormContext()
+  const { control } = useFormContext()
   const classes = useStyles()
 
   return (
@@ -38,16 +33,16 @@ const PersonalHealthComponent = () => {
             <SelectComponent control={control} data={bloodGroupsConstant} />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
-            <TextField name="health.cogenitalDisease" label="โรคประจำตัว" type="text" inputRef={register} {...inputPropsConstant} />
+            <TextFieldComponent name="health.congenitalDisease" label="โรคประจำตัว" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            <TextField name="health.foodAllergy" label="แพ้อาหาร" type="text" inputRef={register} {...inputPropsConstant} />
+            <TextFieldComponent name="health.allergicFood" label="แพ้อาหาร" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <TextField name="health.drugAllergy" label="แพ้ยา" type="text" inputRef={register} {...inputPropsConstant} />
+            <TextFieldComponent name="health.allergicDrug" label="แพ้ยา" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <TextField name="health.drug" label="ยาที่ต้องใช้ประจำ" type="text" inputRef={register} {...inputPropsConstant} />
+            <TextFieldComponent name="health.drug" label="ยาที่ต้องใช้ประจำ" type="text" />
           </Grid>
         </Grid>
       </Box>

@@ -1,10 +1,11 @@
 import React from "react"
 import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField, TextFieldProps } from "@material-ui/core"
+import { Typography, Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { gradesConstant } from "../../constants/grades.constant"
 import { SelectComponent } from "../select.component"
 import { provincesConstant } from "../../constants/provinces.constant"
+import { TextFieldComponent } from "../textField.component"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -15,14 +16,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const inputPropsConstant: TextFieldProps = {
-  size: "small",
-  fullWidth: true,
-  variant: "outlined"
-}
-
 const PersonalEducationComponent = () => {
-  const { register, control } = useFormContext()
+  const { control } = useFormContext()
   const classes = useStyles()
 
   return (
@@ -39,7 +34,7 @@ const PersonalEducationComponent = () => {
             <SelectComponent control={control} data={provincesConstant} />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            <TextField name="school" label="โรงเรียน" type="text" inputRef={register} {...inputPropsConstant} />
+            <TextFieldComponent name="school" label="โรงเรียน" type="text" />
           </Grid>
         </Grid>
       </Box>

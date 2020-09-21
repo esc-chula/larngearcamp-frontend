@@ -1,9 +1,10 @@
 import React from "react"
 import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField, TextFieldProps } from "@material-ui/core"
+import { Typography, Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { SelectComponent } from "../select.component"
 import { relationsConstant } from "../../constants/relation.constant"
+import { TextFieldComponent } from "../textField.component"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -14,14 +15,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const inputPropsConstant: TextFieldProps = {
-  size: "small",
-  fullWidth: true,
-  variant: "outlined"
-}
-
 const PersonalEmergencyComponent = () => {
-  const { register, control } = useFormContext()
+  const { control } = useFormContext()
   const classes = useStyles()
 
   return (
@@ -32,10 +27,10 @@ const PersonalEmergencyComponent = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={5}>
-            <TextField name="contact.parentName" label="ชื่อ-นามสกุลผู้ปกครอง" type="text" inputRef={register} {...inputPropsConstant} />
+            <TextFieldComponent name="contact.parentName" label="ชื่อ-นามสกุลผู้ปกครอง" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <TextField name="contact.parentNumber" label="หมายเลขโทรศัพท์ผู้ปกครอง" type="tel" inputRef={register} {...inputPropsConstant} />
+            <TextFieldComponent name="contact.parentNumber" label="หมายเลขโทรศัพท์ผู้ปกครอง" type="tel" />
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <SelectComponent control={control} data={relationsConstant} />
