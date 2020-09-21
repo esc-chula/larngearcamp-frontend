@@ -16,7 +16,7 @@ export interface HomeContainerProps extends React.HTMLAttributes<HTMLDivElement>
 const HomeContainer: React.FC<HomeContainerProps> = props => {
   const classes = useStyle()
   return (
-    <div className={classes.container} {...props}>
+    <div {...props} className={`${classes.container} ${props.className}`}>
       <span />
       <span>{props.children}</span>
       <span />
