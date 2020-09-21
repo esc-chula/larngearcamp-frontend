@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepThreeModule = () => {
+const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
   const methods = useForm()
   const { handleSubmit } = methods
   const classes = useStyles()
@@ -50,7 +50,7 @@ const ApplicationStepThreeModule = () => {
               ))}
             </form>
           </FormProvider>
-          <ButtonBar onSubmit={onSubmit} />
+          <ButtonBar />
         </>
       )}
     </ApplicationStepModule>

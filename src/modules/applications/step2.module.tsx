@@ -12,6 +12,8 @@ import { yupResolver } from "@hookform/resolvers"
 import ProfileSchema from "../../schemas/profile.schema"
 import ApplicationStepModule from "./stepLayout.module"
 import { useGlobalContext } from "../../core/providers/global.provider"
+import ApplicationService from "../../core/services/application.service"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -34,18 +36,27 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepTwoModule = () => {
+const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
+  const history = useHistory()
   const methods = useForm({
+    reValidateMode: "onBlur",
     resolver: yupResolver(ProfileSchema)
   })
-  const { handleSubmit } = methods
+  const { handleSubmit, getValues } = methods
 
   const onSubmit = useCallback(async () => {
     setLoading(true)
+    const values = getValues()
+    const result = await ApplicationService.updateApplication(values)
     setLoading(false)
-  }, [setLoading])
+    if (result.status !== 200) {
+      // show modal
+    } else {
+      history.push(`/application/step/${step}`)
+    }
+  }, [setLoading, getValues, history, step])
 
   return (
     <ApplicationStepModule>
@@ -64,7 +75,7 @@ const ApplicationStepTwoModule = () => {
                 <PersonalContactComponent />
                 <PersonalEmergencyComponent />
               </div>
-              <ButtonBar onSubmit={onSubmit} />
+              <ButtonBar />
             </CardComponent>
           </form>
         </FormProvider>

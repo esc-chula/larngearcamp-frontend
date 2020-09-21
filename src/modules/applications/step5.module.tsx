@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepFiveModule = () => {
+const ApplicationStepFiveModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
   const onSubmit = useCallback(() => {
     console.log("Success")
@@ -89,7 +89,7 @@ const ApplicationStepFiveModule = () => {
             </Box>
           </Box>
 
-          <ButtonBar onSubmit={onSubmit} />
+          <ButtonBar />
         </CardComponent>
       )}
     </ApplicationStepModule>

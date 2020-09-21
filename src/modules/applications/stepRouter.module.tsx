@@ -19,19 +19,19 @@ const StepRouter: React.FC = () => {
       component = <ApplicationStepOneModule />
       break
     case "2":
-      component = <ApplicationStepTwoModule />
+      component = <ApplicationStepTwoModule step={step} />
       break
     case "3":
-      component = <ApplicationStepThreeModule />
+      component = <ApplicationStepThreeModule step={step} />
       break
     case "4":
-      component = <ApplicationStepFourModule />
+      component = <ApplicationStepFourModule step={step} />
       break
     case "5":
-      component = <ApplicationStepFiveModule />
+      component = <ApplicationStepFiveModule step={step} />
       break
     case "6":
-      component = <ApplicationStepSixModule />
+      component = <ApplicationStepSixModule step={step} />
       break
     default:
       return <NotFoundModule />

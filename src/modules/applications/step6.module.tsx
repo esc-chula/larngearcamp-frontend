@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepSixModule = () => {
+const ApplicationStepSixModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
 
   const onSubmit = useCallback(() => {
@@ -39,7 +39,7 @@ const ApplicationStepSixModule = () => {
             <span className={classes.highlight}>ผ่านการกดหมายเลขขั้นตอนที่แถบทางด้านบน</span>
           </Typography>
 
-          <ButtonBar onSubmit={onSubmit} />
+          <ButtonBar />
         </CardComponent>
       )}
     </ApplicationStepModule>
