@@ -41,17 +41,19 @@ const HomeQualification: React.FC<
     allToMaxWidth(rightsRef.current.filter(x => x !== null) as HTMLDivElement[])
   }, [])
 
-  const items = Array.from(Array(props.qualifications.length / 2).keys()).map(i => {
-    const [left, right] = [props.qualifications[i], props.qualifications[i + 1]]
+  const items = Array.from(Array(props.qualifications.length / 2).keys())
+    .map(i => 2 * i)
+    .map(i => {
+      const [left, right] = [props.qualifications[i], props.qualifications[i + 1]]
 
-    return (
-      <React.Fragment key={i}>
-        <QualificationItem qualification={left} ref={ref => leftsRef.current.push(ref)} />
-        <div style={{ flexGrow: 100 }} />
-        {right && <QualificationItem qualification={right} ref={ref => rightsRef.current.push(ref)} />}
-      </React.Fragment>
-    )
-  })
+      return (
+        <React.Fragment key={i}>
+          <QualificationItem qualification={left} ref={ref => leftsRef.current.push(ref)} />
+          <div style={{ flexGrow: 100 }} />
+          {right && <QualificationItem qualification={right} ref={ref => rightsRef.current.push(ref)} />}
+        </React.Fragment>
+      )
+    })
 
   return (
     <HomeContainer {...props}>
