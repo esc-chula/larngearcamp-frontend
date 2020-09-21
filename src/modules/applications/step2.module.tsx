@@ -10,6 +10,8 @@ import { PersonalContactComponent } from "../../core/components/personalInfo/con
 import { PersonalEducationComponent } from "../../core/components/personalInfo/education.component"
 import { PersonalHealthComponent } from "../../core/components/personalInfo/health.component"
 import { PersonalEmergencyComponent } from "../../core/components/personalInfo/emergency.component"
+import { yupResolver } from "@hookform/resolvers"
+import ProfileSchema from "../../schemas/profile.schema"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -51,9 +53,11 @@ const useStyles = makeStyles(theme => ({
 const ApplicationStepTwoModule = () => {
   const classes = useStyles()
   const history = useHistory()
-  const methods = useForm()
+  const methods = useForm({
+    resolver: yupResolver(ProfileSchema)
+  })
   const { setStep } = useGlobalContext()
-  const { handleSubmit } = methods
+  const { handleSubmit, getValues } = methods
   const nextPage = useCallback(
     (path: string) => () => {
       setStep(2)
@@ -65,6 +69,11 @@ const ApplicationStepTwoModule = () => {
   const onSubmit = useCallback(() => {
     console.log("Success")
   }, [])
+
+  const check = useCallback(() => {
+    const values = getValues()
+    console.log(values)
+  }, [getValues])
 
   return (
     <FormProvider {...methods}>
@@ -82,6 +91,7 @@ const ApplicationStepTwoModule = () => {
             <PersonalEmergencyComponent />
           </div>
 
+          <Button onClick={check}>CHECK</Button>
           <Grid container spacing={2}>
             <Grid xs={12} sm={6} item>
               <Button onClick={nextPage("/application/step1")} variant="contained" className={classes.buttonWarning} fullWidth>
