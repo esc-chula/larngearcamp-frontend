@@ -1,26 +1,32 @@
 import React from "react"
-import { FormControl, InputLabel, Select, MenuItem, FormControlProps } from "@material-ui/core"
+import { InputLabel, Select, MenuItem, FormControlProps, FormControl } from "@material-ui/core"
 import SelectModel from "../models/select.model"
+import { Controller } from "react-hook-form"
 
 interface SelectProps extends FormControlProps {
   data: SelectModel
-  value: string
-  onChange: (event: any) => void
-  cusTomRef: ((instance: unknown) => void) | React.RefObject<unknown> | null | undefined
+  control: any
 }
 
-const SelectComponent: React.FC<SelectProps> = ({ data, value, onChange, cusTomRef, ...other }) => {
+const SelectComponent: React.FC<SelectProps> = ({ control, data }) => {
   return (
-    <FormControl {...other}>
-      <InputLabel id={`${data.name}-label`}>{data.label}</InputLabel>
-      <Select labelId={`${data.name}-label`} id={data.name} name={data.name} value={value} onChange={onChange} label={data.label} ref={cusTomRef}>
-        {data.contents.map((content, index) => (
-          <MenuItem value={content.value} key={data.name + content.text + content.value + index}>
-            {content.text}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <Controller
+      name={data.name}
+      control={control}
+      defaultValue={""}
+      render={({ onChange, value, name }) => (
+        <FormControl fullWidth variant="outlined" size="small">
+          <InputLabel id={`${data.name}-label`}>{data.label}</InputLabel>
+          <Select labelId={`${data.name}-label`} id={name} name={name} onChange={onChange} label={data.label} value={value}>
+            {data.contents.map((content, index) => (
+              <MenuItem value={content.value} key={data.name + content.text + content.value + index}>
+                {content.text}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      )}
+    />
   )
 }
 

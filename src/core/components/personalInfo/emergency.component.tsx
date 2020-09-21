@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React from "react"
 import { useFormContext } from "react-hook-form"
 import { Typography, Box, Grid, TextField } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -15,16 +15,9 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const PersonalEmergencyComponent = () => {
-  const [relation, setRelation] = useState("")
-  const { register, setValue } = useFormContext()
+  const { register, control } = useFormContext()
   const classes = useStyles()
-  const handleChange = useCallback(
-    event => {
-      setValue(event.target.name, event.target.value)
-      event.target.name === "relation" && setRelation(event.target.value)
-    },
-    [setValue]
-  )
+
   return (
     <>
       <Box mt={2}>
@@ -39,7 +32,6 @@ const PersonalEmergencyComponent = () => {
               label="ชื่อ-นามสกุลผู้ปกครอง"
               variant="outlined"
               type="text"
-              onChange={handleChange}
               ref={register}
               size="small"
               fullWidth
@@ -52,22 +44,13 @@ const PersonalEmergencyComponent = () => {
               label="หมายเลขโทรศัพท์ผู้ปกครอง"
               variant="outlined"
               type="tel"
-              onChange={handleChange}
               ref={register}
               size="small"
               fullWidth
             />
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
-            <SelectComponent
-              variant="outlined"
-              size="small"
-              fullWidth
-              data={relationsConstant}
-              onChange={handleChange}
-              value={relation}
-              cusTomRef={register}
-            />
+            <SelectComponent control={control} data={relationsConstant} />
           </Grid>
         </Grid>
       </Box>

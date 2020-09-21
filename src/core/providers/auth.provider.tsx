@@ -26,7 +26,7 @@ export const useAuthContext = () => {
 }
 
 export const AuthProvider: React.FC = ({ ...other }) => {
-  const [accessToken, setAccessToken] = useState(getLocalStorage("ACCESS_TOKEN"))
+  const [accessToken, setAccessToken] = useState(() => getLocalStorage("ACCESS_TOKEN"))
   const isUserLoggedIn = useMemo(() => {
     if (accessToken) {
       const { role } = jwt_decode(accessToken)
