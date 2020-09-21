@@ -13,11 +13,11 @@ const SelectComponent: React.FC<SelectProps> = ({ control, data }) => {
     <Controller
       name={data.name}
       control={control}
-      defaultValue={""}
-      render={({ onChange, value, name }) => (
+      defaultValue=""
+      render={props => (
         <FormControl fullWidth variant="outlined" size="small">
-          <InputLabel id={`${data.name}-label`}>{data.label}</InputLabel>
-          <Select labelId={`${data.name}-label`} id={name} name={name} onChange={onChange} label={data.label} value={value}>
+          <InputLabel>{data.label}</InputLabel>
+          <Select label={data.label} {...props}>
             {data.contents.map((content, index) => (
               <MenuItem value={content.value} key={data.name + content.text + content.value + index}>
                 {content.text}

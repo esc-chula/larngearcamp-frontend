@@ -5,6 +5,8 @@ import AuthService from "../services/auth.service"
 import LoginModel from "../models/login.model"
 import { AxiosResponse } from "axios"
 import ForgotPasswordModel from "../models/forgotPassword.model"
+import useSWR, { responseInterface } from "swr"
+import { LoadingComponent } from "../components/loading.component"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -16,7 +18,7 @@ interface AuthConstruct {
   login: (params: LoginModel) => Promise<AxiosResponse<any>>
   loginFb: (facebookAccessToken: string) => Promise<AxiosResponse<any>>
   logout: () => Promise<AxiosResponse<any>>
-  me: () => Promise<AxiosResponse<any>>
+  me: responseInterface<any, Error>
   forgotPassword: (email: ForgotPasswordModel) => Promise<AxiosResponse<any>>
   resetPassword: (params: { password: string }) => Promise<AxiosResponse<any>>
 }
@@ -69,10 +71,11 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     return result
   }, [])
 
-  const me = useCallback(async () => {
-    const result = await AuthService.me()
-    return result
-  }, [])
+  const me = useSWR(
+    () => (accessToken ? `me (${accessToken})` : null),
+    async () => (await AuthService.me()).data,
+    { refreshInterval: 0 }
+  )
 
   const refresh = useCallback(async (): Promise<Boolean> => {
     if (accessToken) {
@@ -124,6 +127,10 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     me,
     forgotPassword,
     resetPassword
+  }
+
+  if (accessToken && !me.data) {
+    return <LoadingComponent loading={true} />
   }
 
   return <AuthContext.Provider value={value} {...other} />

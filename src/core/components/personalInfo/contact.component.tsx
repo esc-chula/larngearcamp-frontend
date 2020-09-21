@@ -1,7 +1,9 @@
-import React, { useCallback } from "react"
+import React from "react"
 import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField } from "@material-ui/core"
+import { Typography, Box, Grid, TextField, TextFieldProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { useAuthContext } from "../../providers/auth.provider"
+import { grey } from "@material-ui/core/colors"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -9,18 +11,26 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     marginBottom: theme.spacing(2)
+  },
+  disabled: {
+    background: grey[200]
+  },
+  inputDisabled: {
+    color: theme.palette.primary.main
   }
 }))
 
+const inputPropsConstant: TextFieldProps = {
+  size: "small",
+  fullWidth: true,
+  variant: "outlined"
+}
+
 const PersonalContactComponent = () => {
-  const { register, setValue } = useFormContext()
+  const { register } = useFormContext()
   const classes = useStyles()
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.name, event.target.value)
-    },
-    [setValue]
-  )
+  const { me } = useAuthContext()
+
   return (
     <>
       <Box mt={2}>
@@ -29,147 +39,45 @@ const PersonalContactComponent = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              id="receiver"
-              name="receiver"
-              label="ชื่อ-นามสกุลผู้รับส่ง"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextField name="contacnt.receiver" label="ชื่อ-นามสกุลผู้รับส่ง" type="text" inputRef={register} {...inputPropsConstant} />
+          </Grid>
+          <Grid item xs={12} sm={12} md={6}>
+            <TextField name="contacnt.address" label="บ้านเลขที่ หมูที่ และถนน" type="text" inputRef={register} {...inputPropsConstant} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TextField name="contacnt.subDistrict" label="ตำบล/แขวง" type="text" inputRef={register} {...inputPropsConstant} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TextField name="contacnt.district" label="อำเภอ/เขต" type="text" inputRef={register} {...inputPropsConstant} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TextField name="contacnt.province" label="จังหวัด" type="text" inputRef={register} {...inputPropsConstant} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TextField name="contacnt.zip" label="รหัสไปรษณีย์" type="text" inputRef={register} {...inputPropsConstant} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TextField name="contacnt.homeNumber" label="โทรศัพท์บ้าน" type="tel" inputRef={register} {...inputPropsConstant} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TextField name="contacnt.phoneNumber" label="โทรศัพท์มือถือ" type="text" inputRef={register} {...inputPropsConstant} />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <TextField
-              id="address"
-              name="address"
-              label="บ้านเลขที่ หมูที่ และถนน"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="subDistrict"
-              name="subDistrict"
-              label="ตำบล/แขวง"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="district"
-              name="district"
-              label="อำเภอ/เขต"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="province"
-              name="province"
-              label="จังหวัด"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="postalCode"
-              name="postalCode"
-              label="รหัสไปรษณีย์"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="homeTel"
-              name="homeTel"
-              label="โทรศัพท์บ้าน"
-              variant="outlined"
-              type="tel"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="tel"
-              name="tel"
-              label="โทรศัพท์มือถือ"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              id="email"
-              name="email"
               label="อีเมล"
-              variant="outlined"
+              value={me.data?.email || ""}
               type="email"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
+              disabled
+              className={classes.disabled}
+              {...inputPropsConstant}
+              inputProps={{ className: classes.inputDisabled }}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <TextField
-              id="facebook"
-              name="facebook"
-              label="Facebook"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextField name="contacnt.facebookName" label="Facebook" type="text" inputRef={register} {...inputPropsConstant} />
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <TextField
-              id="line"
-              name="line"
-              label="Line ID"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextField name="contacnt.lineId" label="Line ID" type="text" inputRef={register} {...inputPropsConstant} />
           </Grid>
         </Grid>
       </Box>

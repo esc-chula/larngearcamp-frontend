@@ -1,6 +1,6 @@
 import React from "react"
 import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField } from "@material-ui/core"
+import { Typography, Box, Grid, TextField, TextFieldProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { gradesConstant } from "../../constants/grades.constant"
 import { SelectComponent } from "../select.component"
@@ -15,9 +15,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const inputPropsConstant: TextFieldProps = {
+  size: "small",
+  fullWidth: true,
+  variant: "outlined"
+}
+
 const PersonalEducationComponent = () => {
   const { register, control } = useFormContext()
   const classes = useStyles()
+
   return (
     <>
       <Box mt={2}>
@@ -32,7 +39,7 @@ const PersonalEducationComponent = () => {
             <SelectComponent control={control} data={provincesConstant} />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            <TextField id="school" name="school" label="โรงเรียน" variant="outlined" type="text" ref={register} size="small" fullWidth />
+            <TextField name="school" label="โรงเรียน" type="text" inputRef={register} {...inputPropsConstant} />
           </Grid>
         </Grid>
       </Box>
