@@ -1,7 +1,9 @@
-import React, { useCallback } from "react"
-import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField } from "@material-ui/core"
+import React from "react"
+import { Typography, Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { useAuthContext } from "../../providers/auth.provider"
+import { grey } from "@material-ui/core/colors"
+import { TextFieldComponent } from "../textField.component"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -9,18 +11,19 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     marginBottom: theme.spacing(2)
+  },
+  disabled: {
+    background: grey[200]
+  },
+  inputDisabled: {
+    color: theme.palette.primary.main
   }
 }))
 
 const PersonalContactComponent = () => {
-  const { register, setValue } = useFormContext()
   const classes = useStyles()
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.name, event.target.value)
-    },
-    [setValue]
-  )
+  const { me } = useAuthContext()
+
   return (
     <>
       <Box mt={2}>
@@ -29,147 +32,48 @@ const PersonalContactComponent = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              id="receiver"
-              name="receiver"
-              label="ชื่อ-นามสกุลผู้รับส่ง"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.recipient" label="ชื่อ-นามสกุลผู้รับส่ง" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              id="address"
-              name="address"
-              label="บ้านเลขที่ หมูที่ และถนน"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.address" label="บ้านเลขที่ หมูที่ และถนน" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="subDistrict"
-              name="subDistrict"
-              label="ตำบล/แขวง"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.subDistrict" label="ตำบล/แขวง" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="district"
-              name="district"
-              label="อำเภอ/เขต"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.district" label="อำเภอ/เขต" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="province"
-              name="province"
-              label="จังหวัด"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.province" label="จังหวัด" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="postalCode"
-              name="postalCode"
-              label="รหัสไปรษณีย์"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.zip" label="รหัสไปรษณีย์" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="homeTel"
-              name="homeTel"
-              label="โทรศัพท์บ้าน"
-              variant="outlined"
-              type="tel"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.homeNumber" label="โทรศัพท์บ้าน" type="tel" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextField
-              id="tel"
-              name="tel"
-              label="โทรศัพท์มือถือ"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.phoneNumber" label="โทรศัพท์มือถือ" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <TextField
-              id="email"
-              name="email"
+            <TextFieldComponent
+              name="userEmail"
               label="อีเมล"
-              variant="outlined"
+              value={me.data?.email || ""}
               type="email"
-              onChange={handleChange}
-              ref={register}
+              disabled
+              className={classes.disabled}
+              inputProps={{ className: classes.inputDisabled }}
+              variant="outlined"
               size="small"
               fullWidth
             />
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <TextField
-              id="facebook"
-              name="facebook"
-              label="Facebook"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.facebookName" label="Facebook" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={6}>
-            <TextField
-              id="line"
-              name="line"
-              label="Line ID"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="contact.lineId" label="Line ID" type="text" />
           </Grid>
         </Grid>
       </Box>

@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react"
 import { Avatar, Menu, MenuItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
-import AuthService from "../services/auth.service"
 import { useHistory } from "react-router-dom"
 import { useGlobalContext } from "../providers/global.provider"
 import { useAuthContext } from "../providers/auth.provider"
@@ -18,8 +17,7 @@ const useStyles = makeStyles(theme => ({
 const AuthNavbarComponent: React.FC = () => {
   const history = useHistory()
   const classes = useStyles()
-  const { isAdminLoggedIn } = useAuthContext()
-  const { setAccessToken } = useAuthContext()
+  const { isAdminLoggedIn, logout } = useAuthContext()
   const { setLoading } = useGlobalContext()
   const [anchorEl, setAnchorEl] = useState(null)
 
@@ -41,14 +39,13 @@ const AuthNavbarComponent: React.FC = () => {
     [history]
   )
 
-  const logout = useCallback(async () => {
+  const logoutClicked = useCallback(async () => {
     setAnchorEl(null)
     setLoading(true)
-    await AuthService.logout()
-    setAccessToken(null)
+    await logout()
     setLoading(false)
     history.push("/")
-  }, [history, setLoading, setAccessToken])
+  }, [history, setLoading, logout])
 
   return (
     <>
@@ -71,7 +68,6 @@ const AuthNavbarComponent: React.FC = () => {
           vertical: "top",
           horizontal: "right"
         }}>
-        {}
         <MenuItem onClick={nextPage("/profile")}>
           <ListItemIcon>
             <AccountCircleIcon fontSize="small" />
@@ -88,7 +84,7 @@ const AuthNavbarComponent: React.FC = () => {
           </MenuItem>
         )}
 
-        <MenuItem onClick={logout}>
+        <MenuItem onClick={logoutClicked}>
           <ListItemIcon>
             <MeetingRoomIcon fontSize="small" />
           </ListItemIcon>

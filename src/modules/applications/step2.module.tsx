@@ -1,15 +1,19 @@
 import React, { useCallback } from "react"
 import { CardComponent } from "../../core/components/card.component"
-import { Button, Divider, Grid, Typography } from "@material-ui/core"
+import { Divider, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { useHistory } from "react-router-dom"
-import { useGlobalContext } from "../../core/providers/global.provider"
 import { FormProvider, useForm } from "react-hook-form"
 import { PersonalProfileComponent } from "../../core/components/personalInfo/profile.component"
 import { PersonalContactComponent } from "../../core/components/personalInfo/contact.component"
 import { PersonalEducationComponent } from "../../core/components/personalInfo/education.component"
 import { PersonalHealthComponent } from "../../core/components/personalInfo/health.component"
 import { PersonalEmergencyComponent } from "../../core/components/personalInfo/emergency.component"
+import { yupResolver } from "@hookform/resolvers"
+import ProfileSchema from "../../schemas/profile.schema"
+import ApplicationStepModule from "./stepLayout.module"
+import { useGlobalContext } from "../../core/providers/global.provider"
+import ApplicationService from "../../core/services/application.service"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -21,82 +25,62 @@ const useStyles = makeStyles(theme => ({
   },
   question: {
     "&>*": {
-      marginTop: theme.spacing(6)
+      marginBottom: theme.spacing(3)
     },
-    "&>*:first-child": {
-      marginTop: theme.spacing(0)
+    "&>*:not(:last-child)": {
+      marginBottom: theme.spacing(6)
     }
   },
   bold: {
     fontWeight: 500
-  },
-  buttonSuccess: {
-    marginTop: theme.spacing(2),
-    color: "white",
-    background: theme.palette.success.main,
-    "&:hover": {
-      background: theme.palette.success.dark
-    }
-  },
-  buttonWarning: {
-    marginTop: theme.spacing(2),
-    color: "white",
-    background: theme.palette.warning.main,
-    "&:hover": {
-      background: theme.palette.warning.dark
-    }
   }
 }))
 
-const ApplicationStepTwoModule = () => {
+const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
+  const { setLoading } = useGlobalContext()
   const history = useHistory()
-  const methods = useForm()
-  const { setStep } = useGlobalContext()
-  const { handleSubmit } = methods
-  const nextPage = useCallback(
-    (path: string) => () => {
-      setStep(2)
-      history.push(path)
-    },
-    [history, setStep]
-  )
+  const methods = useForm({
+    reValidateMode: "onBlur",
+    resolver: yupResolver(ProfileSchema)
+  })
+  const { handleSubmit, getValues } = methods
 
-  const onSubmit = useCallback(() => {
-    console.log("Success")
-  }, [])
+  const onSubmit = useCallback(async () => {
+    setLoading(true)
+    const values = getValues()
+    const result = await ApplicationService.updateApplication(values)
+    setLoading(false)
+    if (result.status !== 200) {
+      // show modal
+    } else {
+      history.push(`/application/step/${step}`)
+    }
+  }, [setLoading, getValues, history, step])
 
   return (
-    <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CardComponent maxWidth="lg" className={classes.card}>
-          <Typography variant="h5" align="center" className={classes.bold}>
-            ข้อมูลส่วนตัว
-          </Typography>
-          <Divider className={classes.divider} />
-          <div className={classes.question}>
-            <PersonalProfileComponent />
-            <PersonalEducationComponent />
-            <PersonalHealthComponent />
-            <PersonalContactComponent />
-            <PersonalEmergencyComponent />
-          </div>
-
-          <Grid container spacing={2}>
-            <Grid xs={12} sm={6} item>
-              <Button onClick={nextPage("/application/step1")} variant="contained" className={classes.buttonWarning} fullWidth>
-                ย้อนกลับ
-              </Button>
-            </Grid>
-            <Grid xs={12} sm={6} item>
-              <Button onClick={nextPage("/application/step3")} variant="contained" className={classes.buttonSuccess} fullWidth>
-                ไปขั้นตอนถัดไป
-              </Button>
-            </Grid>
-          </Grid>
-        </CardComponent>
-      </form>
-    </FormProvider>
+    <ApplicationStepModule>
+      {({ ButtonBar }) => (
+        <FormProvider {...methods}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <CardComponent maxWidth="lg" className={classes.card}>
+              <Typography variant="h5" align="center" className={classes.bold}>
+                ข้อมูลส่วนตัว
+              </Typography>
+              <Divider className={classes.divider} />
+              <div className={classes.question}>
+                <PersonalProfileComponent />
+                <PersonalEducationComponent />
+                <PersonalHealthComponent />
+                <PersonalContactComponent />
+                <PersonalEmergencyComponent />
+              </div>
+              <ButtonBar />
+            </CardComponent>
+          </form>
+        </FormProvider>
+      )}
+    </ApplicationStepModule>
   )
 }
 

@@ -1,86 +1,36 @@
 import LoginModel from "../models/login.model"
 import { AxiosResponse } from "axios"
-import { setLocalStorage, removeLocalStorage } from "../../utils/storage"
 import { httpClient } from "../../utils/http"
+import ForgotPasswordModel from "../models/forgotPassword.model"
 
-const login = async (params: LoginModel | undefined): Promise<AxiosResponse> => {
-  try {
-    process.env.NODE_ENV === "development" && console.log("on request: login")
-    const result = await httpClient.post(`/auth/login`, {
-      email: params?.email,
-      password: params?.password
-    })
-    process.env.NODE_ENV === "development" && console.log("success", result)
-    setLocalStorage("ACCESS_TOKEN", result.data.token)
-    return result
-  } catch (error) {
-    process.env.NODE_ENV === "development" && console.log("error", error.response)
-    return error.response
-  }
+const login = async (params: LoginModel): Promise<AxiosResponse> => {
+  return await httpClient.post(`/auth/login`, params)
+}
+
+const loginFb = async (accessToken: string): Promise<AxiosResponse> => {
+  return await httpClient.post(`/auth/loginFb`, { accessToken })
 }
 
 const logout = async (): Promise<AxiosResponse> => {
-  try {
-    process.env.NODE_ENV === "development" && console.log("on request: logout")
-    const result = await httpClient.post(`/auth/logout`, {})
-    process.env.NODE_ENV === "development" && console.log("success", result)
-    removeLocalStorage("ACCESS_TOKEN")
-    return result
-  } catch (error) {
-    process.env.NODE_ENV === "development" && console.log("error", error)
-    return error.response
-  }
+  return await httpClient.post(`/auth/logout`, {})
 }
 
 const me = async (): Promise<AxiosResponse> => {
-  try {
-    process.env.NODE_ENV === "development" && console.log("on request: me")
-    const result = await httpClient.get(`/auth/me`)
-    process.env.NODE_ENV === "development" && console.log("success", result)
-    return result
-  } catch (error) {
-    process.env.NODE_ENV === "development" && console.log("error", error.response)
-    return error.response
-  }
+  return await httpClient.get(`/auth/me`)
 }
 
 const refresh = async (): Promise<AxiosResponse> => {
-  try {
-    process.env.NODE_ENV === "development" && console.log("on request: refresh")
-    const result = await httpClient.get(`/auth/refresh`)
-    process.env.NODE_ENV === "development" && console.log("success", result)
-    setLocalStorage("ACCESS_TOKEN", result.data.token)
-    return result
-  } catch (error) {
-    process.env.NODE_ENV === "development" && console.log("error", error.response)
-    return error.response
-  }
+  return await httpClient.post(`/auth/refresh`, {})
 }
 
-const forgetPassword = async (): Promise<AxiosResponse> => {
-  try {
-    process.env.NODE_ENV === "development" && console.log("on request: forget password")
-    const result = await httpClient.post(`/auth/forget-password`)
-    process.env.NODE_ENV === "development" && console.log("success", result)
-    return result
-  } catch (error) {
-    process.env.NODE_ENV === "development" && console.log("error", error.response)
-    return error.response
-  }
+const forgotPassword = async (params: ForgotPasswordModel): Promise<AxiosResponse> => {
+  return await httpClient.post(`/auth/forget-password`, params)
 }
 
-const resetPassword = async (): Promise<AxiosResponse> => {
-  try {
-    process.env.NODE_ENV === "development" && console.log("on request: reset password")
-    const result = await httpClient.patch(`/auth/reset-password`)
-    process.env.NODE_ENV === "development" && console.log("success", result)
-    return result
-  } catch (error) {
-    process.env.NODE_ENV === "development" && console.log("error", error.response)
-    return error.response
-  }
+const resetPassword = async (params: { password: string }): Promise<AxiosResponse> => {
+  return await httpClient.patch(`/auth/reset-password`, params)
 }
 
-const AuthService = { login, logout, me, refresh, forgetPassword, resetPassword }
+const AuthService = { login, loginFb, logout, me, refresh, forgotPassword, resetPassword }
 
 export default AuthService

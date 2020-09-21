@@ -1,10 +1,12 @@
-import React, { useCallback, useState } from "react"
+import React from "react"
 import { useFormContext } from "react-hook-form"
-import { Typography, Box, Grid, TextField } from "@material-ui/core"
+import { Typography, Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { titlesConstant } from "../../constants/titles.constants"
 import { SelectComponent } from "../select.component"
 import { religionsConstant } from "../../constants/religions.constant"
+import { useAuthContext } from "../../providers/auth.provider"
+import { TextFieldComponent } from "../textField.component"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -16,19 +18,10 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const PersonalProfileComponent = () => {
-  const [title, setTitle] = useState("")
-  const [religion, setReligion] = useState("")
-  const { register, setValue } = useFormContext()
+  const { control } = useFormContext()
   const classes = useStyles()
+  const { me } = useAuthContext()
 
-  const handleChange = useCallback(
-    event => {
-      setValue(event.target.name, event.target.value)
-      event.target.name === "title" && setTitle(event.target.value)
-      event.target.name === "religion" && setReligion(event.target.value)
-    },
-    [setValue]
-  )
   return (
     <>
       <Box mt={2}>
@@ -37,77 +30,25 @@ const PersonalProfileComponent = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={2}>
-            <SelectComponent
-              variant="outlined"
-              size="small"
-              fullWidth
-              data={titlesConstant}
-              onChange={handleChange}
-              value={title}
-              cusTomRef={register}
-            />
+            <SelectComponent control={control} data={titlesConstant} />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
-            <TextField
-              id="name"
-              name="name"
-              label="ชื่อจริง"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="name" label="ชื่อจริง" type="text" defaultValue={me.data?.name?.first} />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
-            <TextField
-              id="surname"
-              name="surname"
-              label="นามสกุล"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="surname" label="นามสกุล" type="text" defaultValue={me.data?.name?.second} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <TextField
-              id="nickname"
-              name="nickname"
-              label="ชื่อเล่น"
-              variant="outlined"
-              type="text"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
-            />
+            <TextFieldComponent name="nickname" label="ชื่อเล่น" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <SelectComponent
-              variant="outlined"
-              size="small"
-              fullWidth
-              data={religionsConstant}
-              onChange={handleChange}
-              value={religion}
-              cusTomRef={register}
-            />
+            <SelectComponent data={religionsConstant} control={control} />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            <TextField
-              id="birthDate"
+            <TextFieldComponent
               name="birthDate"
-              variant="outlined"
-              type="date"
               label="วันเกิด"
-              onChange={handleChange}
-              ref={register}
-              size="small"
-              fullWidth
+              type="date"
               InputLabelProps={{
                 shrink: true
               }}

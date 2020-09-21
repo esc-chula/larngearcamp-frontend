@@ -124,6 +124,11 @@ const theme = createMuiTheme({
       rounded: {
         borderRadius: 0
       }
+    },
+    MuiTableCell: {
+      root: {
+        padding: 16
+      }
     }
   }
 })

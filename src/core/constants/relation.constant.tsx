@@ -1,7 +1,7 @@
 import SelectModel from "../models/select.model"
 
 const relationsConstant: SelectModel = {
-  name: "relation",
+  name: "contact.parentRelationship",
   label: "ความเกี่ยวข้อง",
   contents: [
     { text: "บิดา", value: "บิดา" },

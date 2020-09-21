@@ -7,7 +7,8 @@ const religionsConstant: SelectModel = {
     { text: "พุทธ", value: "พุทธ" },
     { text: "คริสต์", value: "คริสต์" },
     { text: "อิสลาม", value: "อิสลาม" },
-    { text: "พราหมณ์-ฮินดู", value: "พราหมณ์-ฮินดู" }
+    { text: "ไม่ระบุ", value: "ไม่ระบุ" },
+    { text: "อื่น ๆ", value: "อื่น ๆ" }
   ]
 }
 
