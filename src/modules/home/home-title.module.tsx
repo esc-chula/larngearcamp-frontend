@@ -2,6 +2,7 @@ import React from "react"
 import { Typography, Button, Box, BoxProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../utils/conversion"
+import { Link } from "react-router-dom"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -33,9 +34,11 @@ const HomeTitle: React.FC<BoxProps> = props => {
       <Typography variant="subtitle1" className={classes.subtitle}>
         ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
       </Typography>
-      <Button variant="contained" color="primary" className={classes.button}>
-        <p className={classes.buttonText}>Apply Now</p>
-      </Button>
+      <Link to="/application">
+        <Button variant="contained" color="primary" className={classes.button}>
+          <p className={classes.buttonText}>Apply Now</p>
+        </Button>
+      </Link>
     </Box>
   )
 }
