@@ -40,7 +40,7 @@ const HomeModule: React.FC = () => {
   return (
     <>
       <CoverComponent />
-      <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70}>
+      <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70} minHeightPx={800}>
         <HomeTitle className={classes.title} />
       </BackgroundOverlay>
 
@@ -48,7 +48,7 @@ const HomeModule: React.FC = () => {
 
       <HomeCarousal gradientPercent={20} />
 
-      <BackgroundOverlay src={landing2} aspectRatio={1440 / 692} contentPercentage={100} offsetPercentage={37}>
+      <BackgroundOverlay src={landing2} aspectRatio={1440 / 692} contentPercentage={100} offsetPercentage={37} minHeightPx={1000}>
         <HomeQualification
           qualifications={[
             { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: q1 },
