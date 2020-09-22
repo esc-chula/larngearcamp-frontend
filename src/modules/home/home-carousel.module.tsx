@@ -4,6 +4,7 @@ import { makeStyles, Theme as DefaultTheme, useTheme } from "@material-ui/core/s
 import "@material-ui/core/"
 type Props = {
   gradientPercent: number
+  images: { src: string; alt?: string }[]
 }
 
 const responsive: (theme: DefaultTheme) => ResponsiveType = theme => ({
@@ -43,7 +44,10 @@ const useStyle = makeStyles<DefaultTheme, Props>(theme => ({
 
 const arrowStyle = makeStyles(theme => ({
   arrow: {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
+    "&:hover": {
+      backgroundColor: theme.palette.primary.main
+    }
   }
 }))
 const LeftArrow: React.FC = props => {
@@ -63,8 +67,8 @@ const HomeCarousal: React.FC<Props> = props => {
     <div className={classes.container}>
       <div className={classes.cover}></div>
       <Carousel infinite centerMode arrows responsive={responsive(theme)} customLeftArrow={<LeftArrow />} customRightArrow={<RightArrow />}>
-        {[0, 1, 2, 3, 4, 5].map(i => (
-          <img src={`https://picsum.photos/325/183?${i}`}></img>
+        {props.images.map(({ src, alt }) => (
+          <img src={src} alt={alt} />
         ))}
       </Carousel>
     </div>

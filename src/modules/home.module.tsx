@@ -1,8 +1,6 @@
 import React from "react"
-import { makeStyles, Theme, useTheme } from "@material-ui/core/styles"
+import { makeStyles } from "@material-ui/core/styles"
 import { CoverComponent } from "../core/components/cover.component"
-import Box from "@material-ui/core/Box"
-import useMediaQuery from "@material-ui/core/useMediaQuery"
 
 import HomeTitle from "./home/home-title.module"
 import HomeLarngearDescription from "./home/home-description.module"
@@ -17,7 +15,7 @@ import q2 from "../assets/images/icon/qualification-2.svg"
 import q3 from "../assets/images/icon/qualification-3.svg"
 import q4 from "../assets/images/icon/qualification-4.svg"
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles(() => ({
   title: {
     marginTop: "80px"
   },
@@ -40,7 +38,16 @@ const HomeModule: React.FC = () => {
 
       <HomeLarngearDescription className={classes.description} />
 
-      <HomeCarousal gradientPercent={20} />
+      <HomeCarousal
+        gradientPercent={20}
+        images={[
+          { src: "https://picsum.photos/325/183?1" },
+          { src: "https://picsum.photos/325/183?2" },
+          { src: "https://picsum.photos/325/183?3" },
+          { src: "https://picsum.photos/325/183?4" },
+          { src: "https://picsum.photos/325/183?5" }
+        ]}
+      />
 
       <HomeQualification
         qualifications={[
