@@ -8,6 +8,7 @@ type Props = {
   aspectRatio: number
   minHeightPx?: number
   objectFit?: string
+  objectPosition?: string
   contentPercentage?: number
   offsetPercentage?: number
   disableAutoColor?: boolean
@@ -19,7 +20,8 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
     width: "100%",
     position: "absolute",
     minHeight: props => `${props.minHeightPx ?? 0}px`,
-    objectFit: props => (props.objectFit ?? "cover") as any
+    objectFit: props => (props.objectFit ?? "cover") as any,
+    objectPosition: props => props.objectPosition
   },
   contentContainer: {
     width: "100%",
@@ -41,7 +43,7 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
     top: props => `${props.offsetPercentage ?? 0}%`,
     left: 0,
     width: "100%",
-    height: "100%",
+    height: props => `${100 - (props.offsetPercentage ?? 0)}%`,
     color: props => (props.disableAutoColor ? "" : theme.palette.primary.contrastText),
     overflowY: "auto"
   }
@@ -58,7 +60,7 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
  * note that other element are only effected by content height
  */
 const BackgroundOverlay: React.FC<Props & BoxProps> = props => {
-  const { src, alt, aspectRatio, contentPercentage, offsetPercentage, disableAutoColor, minHeightPx, ...rest }: Props = props
+  const { src, alt, aspectRatio, contentPercentage, offsetPercentage, objectPosition, disableAutoColor, minHeightPx, ...rest }: Props = props
 
   const classes = useStyle(props)
 
