@@ -51,7 +51,7 @@ const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
     const values = getValues()
     try {
       await ApplicationService.updateApplication(values)
-      history.push(`/application/step/${step}`)
+      history.push(`/application/step/${parseInt(step) + 1}`)
     } catch (error) {
       // show modal
     }
