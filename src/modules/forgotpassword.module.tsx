@@ -3,14 +3,15 @@ import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 import { CardComponent } from "../core/components/card.component"
 import { LogoComponent } from "../core/components/logo.component"
-import { Box, Button, makeStyles, TextField, Typography } from "@material-ui/core"
+import { Box, Button, makeStyles, Typography } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
-import { useForm } from "react-hook-form"
+import { FormProvider, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers"
 import ForgotPasswordSchema from "../schemas/forgotpassword.schema"
 import { useGlobalContext } from "../core/providers/global.provider"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { useHistory } from "react-router-dom"
+import { TextFieldComponent } from "../core/components/textField.component"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -47,9 +48,10 @@ const ForgotPasswordModule: React.FC = () => {
   const { forgotPassword } = useAuthContext()
   const [finished, setFinished] = useState(false)
 
-  const { register, handleSubmit, setValue, getValues, errors } = useForm({
+  const methods = useForm({
     resolver: yupResolver(ForgotPasswordSchema)
   })
+  const { handleSubmit, getValues } = methods
 
   const onSubmit = useCallback(async () => {
     setLoading(true)
@@ -58,13 +60,6 @@ const ForgotPasswordModule: React.FC = () => {
     setLoading(false)
     setFinished(true)
   }, [getValues, setLoading, forgotPassword])
-
-  const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValue(event.target.name, event.target.value)
-    },
-    [setValue]
-  )
 
   const changePage = useCallback(
     (path: string) => () => {
@@ -79,23 +74,14 @@ const ForgotPasswordModule: React.FC = () => {
         ขอให้น้องกรอกอีเมลที่ใช้สร้างบัญชีเพื่อยืนยันตัวตน
       </Typography>
 
-      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-        <TextField
-          id="email"
-          name="email"
-          label="อีเมล"
-          variant="outlined"
-          type="email"
-          onChange={handleChange}
-          ref={register}
-          size="small"
-          error={Boolean(errors?.email)}
-          helperText={errors?.email?.message}
-        />
-        <Button type="submit" variant="contained" color="primary">
-          <Typography variant="h6">ยืนยันอีเมล</Typography>
-        </Button>
-      </form>
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+          <TextFieldComponent name="email" label="อีเมล" type="email" />
+          <Button type="submit" variant="contained" color="primary">
+            <Typography variant="h6">ยืนยันอีเมล</Typography>
+          </Button>
+        </form>
+      </FormProvider>
     </>
   )
 

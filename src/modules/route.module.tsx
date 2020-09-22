@@ -37,7 +37,7 @@ const RouteModule: React.FC = () => {
         <GuestGuardedRoute exact path="/register">
           <RegisterModule />
         </GuestGuardedRoute>
-        <GuestGuardedRoute exact path="/forgotpassword">
+        <GuestGuardedRoute exact path="/forgot-password">
           <ForgotPasswordModule />
         </GuestGuardedRoute>
 
