@@ -20,7 +20,7 @@ const useStyle = makeStyles(theme => ({
 const HomeTimeline: React.FC<TimelineProps & BoxProps> = props => {
   const classes = useStyle()
   return (
-    <Box {...props}>
+    <Box {...props} textAlign="center">
       <Typography variant="h2" align="center" className={classes.title}>
         TIMELINE
       </Typography>

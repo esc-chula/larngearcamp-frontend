@@ -5,6 +5,9 @@ import { pxToRem } from "../../utils/conversion"
 import { Link } from "react-router-dom"
 
 const useStyle = makeStyles(theme => ({
+  container: {
+    maxWidth: "100vw"
+  },
   primaryAnnounce: {
     color: theme.palette.primary.main,
     fontSize: pxToRem(52),
@@ -13,7 +16,7 @@ const useStyle = makeStyles(theme => ({
     fontWeight: 500
   },
   subscribeButton: {
-    width: "370px",
+    width: "min(370px, 80%)",
     height: "60px"
   },
   subscribeButtonText: {
@@ -25,8 +28,8 @@ const useStyle = makeStyles(theme => ({
 const HomeAnnouce: React.FC<BoxProps> = props => {
   const classes = useStyle()
   return (
-    <Box textAlign="center" {...props}>
-      <h3 className={classes.primaryAnnounce + " kanit"}>รับสมัคร 18 กันยายน - 10 ตุลาคม 2563</h3>
+    <Box textAlign="center" className={classes.container + " " + props.className} {...props}>
+      <Typography className={classes.primaryAnnounce}>รับสมัคร 18&nbsp;กันยายน - 10&nbsp;ตุลาคม 2563</Typography>
       <Link to="/application" className="no-underline">
         <Button variant="contained" color="secondary" className={classes.subscribeButton}>
           <Typography variant="subtitle1" className={classes.subscribeButtonText}>

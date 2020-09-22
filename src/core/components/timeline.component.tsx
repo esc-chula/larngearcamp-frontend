@@ -2,46 +2,51 @@ import React from "react"
 import { Box, BoxProps, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-const UseStyleTL = makeStyles(theme => ({
-  title: {
-    marginBottom: "60px"
+const useStyle = makeStyles(theme => ({
+  container: {
+    display: "inline-grid",
+    gridTemplateColumns: "1fr min-content 1fr",
+    margin: "auto"
   },
-  line: {
-    height: "32px"
+  middleContainer: {
+    display: "inline-grid",
+    gridTemplateColumns: "min-content",
+    gridTemplateRows: "max-content 1fr",
+    marginLeft: "min(3.7vw, 37px)",
+    marginRight: "min(3.2vw, 32px)",
+    justifyItems: "center"
   },
   numberCircle: {
     backgroundColor: theme.palette.primary.main,
     width: "32px",
     height: "32px",
-    borderRadius: "50%",
-    position: "absolute",
-    left: "calc(50% - 16px)"
+    borderRadius: "50%"
   },
   numberText: {
-    position: "absolute",
     lineHeight: "32px",
     width: "32px",
-    left: "calc(50% - 16px)",
     color: "white",
     textAlign: "center"
   },
-  NCLeftText: {
+  hline: {
+    margin: "8px 0 8px 0",
+    width: "0px",
+    paddingLeft: "1px",
+    paddingRight: "1px",
+    height: "48px",
+    backgroundColor: "#BDBDBD"
+  },
+  leftText: {
+    textAlign: "right",
     color: "#828282",
-    position: "absolute",
     lineHeight: "32px",
-    right: "calc(50% + 16px + 32px)",
+    fontSize: `min(4.425vw, ${theme.typography.body2.fontSize})`,
     fontWeight: "normal"
   },
-  NCRightText: {
-    position: "absolute",
+  rightText: {
+    textAlign: "left",
     lineHeight: "32px",
-    left: "calc(50% + 16px + 32px)"
-  },
-  hline: {
-    margin: "5px auto 5px auto",
-    width: "3px",
-    height: "calc(48px - 10px)",
-    backgroundColor: "#BDBDBD"
+    fontSize: `min(5.9vw, ${theme.typography.h6.fontSize})`
   }
 }))
 
@@ -59,10 +64,35 @@ export interface TimelineProps extends BoxProps {
 export const TimelineDisplay: React.FC<TimelineProps> = props => {
   const { label, startNumber, includeFinalLine, ...rest } = props
 
-  const classes = UseStyleTL()
+  const classes = useStyle()
 
   return (
-    <Box {...rest}>
+    <Box className={classes.container + " " + rest.className} {...rest}>
+      {label.map(({ left, right }, i, arr) => (
+        <React.Fragment key={i}>
+          <Typography variant="body2" className={classes.leftText}>
+            {left}
+          </Typography>
+
+          <div className={classes.middleContainer}>
+            <div className={classes.numberCircle}>
+              <Typography variant="body2" className={classes.numberText}>
+                {(startNumber ?? 1) + i}
+              </Typography>
+            </div>
+            {(includeFinalLine || i < arr.length - 1) && (
+              <Box>
+                <div className={classes.hline} />
+              </Box>
+            )}
+          </div>
+
+          <Typography variant="h6" className={classes.rightText}>
+            {right}
+          </Typography>
+        </React.Fragment>
+      ))}
+      {/*
       {props.label.map(({ left, right }, i, arr) => (
         <div key={i}>
           <div className={classes.line}>
@@ -81,6 +111,7 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
           {(props.includeFinalLine || i < arr.length - 1) && <div className={classes.hline} />}
         </div>
       ))}
+      */}
     </Box>
   )
 }

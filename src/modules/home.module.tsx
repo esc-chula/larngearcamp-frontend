@@ -1,6 +1,8 @@
 import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
+import { makeStyles, Theme, useTheme } from "@material-ui/core/styles"
 import { CoverComponent } from "../core/components/cover.component"
+import Box from "@material-ui/core/Box"
+import useMediaQuery from "@material-ui/core/useMediaQuery"
 
 import HomeTitle from "./home/home-title.module"
 import HomeLarngearDescription from "./home/home-description.module"
@@ -19,7 +21,6 @@ import q1 from "../assets/images/icon/qualification-1.svg"
 import q2 from "../assets/images/icon/qualification-2.svg"
 import q3 from "../assets/images/icon/qualification-3.svg"
 import q4 from "../assets/images/icon/qualification-4.svg"
-import { Box } from "@material-ui/core"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -37,6 +38,9 @@ const useStyle = makeStyles(theme => ({
 const HomeModule: React.FC = () => {
   const classes = useStyle()
 
+  const theme = useTheme()
+  const isSmall = useMediaQuery<Theme>(theme.breakpoints.down("md"))
+
   return (
     <>
       <CoverComponent />
@@ -48,7 +52,13 @@ const HomeModule: React.FC = () => {
 
       <HomeCarousal gradientPercent={20} />
 
-      <BackgroundOverlay src={landing2} aspectRatio={1440 / 692} contentPercentage={100} offsetPercentage={37} minHeightPx={1000}>
+      <BackgroundOverlay
+        src={landing2}
+        aspectRatio={1440 / 692}
+        contentPercentage={100}
+        offsetPercentage={isSmall ? 35 : 37}
+        minHeightPx={isSmall ? 900 : 0}
+        objectPosition="50% 50%">
         <HomeQualification
           qualifications={[
             { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: q1 },

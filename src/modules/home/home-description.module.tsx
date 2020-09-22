@@ -20,7 +20,7 @@ const HomeLarngearDescription: React.FC<HomeContainerProps> = props => {
   return (
     <HomeContainer {...props}>
       <Typography variant="h4" align="right" className={classes.title}>
-        What is Larngear Camp?
+        What is Larngear&nbsp;Camp?
       </Typography>
       <Grid container justify="flex-end">
         <Grid item sm={12} md={12} lg={9}>

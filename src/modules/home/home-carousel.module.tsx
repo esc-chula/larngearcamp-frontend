@@ -1,21 +1,27 @@
 import React from "react"
 import Carousel, { ResponsiveType } from "react-multi-carousel"
-import { makeStyles, Theme as DefaultTheme } from "@material-ui/core/styles"
+import { makeStyles, Theme as DefaultTheme, useTheme } from "@material-ui/core/styles"
 import "@material-ui/core/"
 type Props = {
   gradientPercent: number
 }
 
-const responsive: ResponsiveType = {
-  all: {
+const responsive: (theme: DefaultTheme) => ResponsiveType = theme => ({
+  default: {
     breakpoint: {
-      max: 10000,
-      min: 0
+      min: 0,
+      max: 10000
     },
     items: 3
-    // partialVisibilityGutter: 40,
+  },
+  mid: {
+    breakpoint: {
+      min: 0,
+      max: theme.breakpoints.width("lg")
+    },
+    items: 1
   }
-}
+})
 
 const useStyle = makeStyles<DefaultTheme, Props>(theme => ({
   container: {
@@ -52,10 +58,11 @@ const RightArrow: React.FC = props => {
 // TODO
 const HomeCarousal: React.FC<Props> = props => {
   const classes = useStyle(props)
+  const theme = useTheme()
   return (
     <div className={classes.container}>
       <div className={classes.cover}></div>
-      <Carousel infinite centerMode arrows responsive={responsive} customLeftArrow={<LeftArrow />} customRightArrow={<RightArrow />}>
+      <Carousel infinite centerMode arrows responsive={responsive(theme)} customLeftArrow={<LeftArrow />} customRightArrow={<RightArrow />}>
         {[0, 1, 2, 3, 4, 5].map(i => (
           <img src={`https://picsum.photos/325/183?${i}`}></img>
         ))}
