@@ -2,6 +2,7 @@ import LoginModel from "../models/login.model"
 import { AxiosResponse } from "axios"
 import { httpClient } from "../../utils/http"
 import ForgotPasswordModel from "../models/forgotPassword.model"
+import ResetPasswordModel from "../models/resetPassword.model"
 
 const login = async (params: LoginModel): Promise<AxiosResponse> => {
   return await httpClient.post(`/auth/login`, params)
@@ -27,7 +28,7 @@ const forgotPassword = async (params: ForgotPasswordModel): Promise<AxiosRespons
   return await httpClient.post(`/auth/forget-password`, params)
 }
 
-const resetPassword = async (params: { password: string }): Promise<AxiosResponse> => {
+const resetPassword = async (params: ResetPasswordModel): Promise<AxiosResponse> => {
   return await httpClient.patch(`/auth/reset-password`, params)
 }
 

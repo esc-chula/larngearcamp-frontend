@@ -7,11 +7,12 @@ import { Box, Button, makeStyles, Typography } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import { FormProvider, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers"
-import ForgotPasswordSchema from "../schemas/forgotpassword.schema"
 import { useGlobalContext } from "../core/providers/global.provider"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { useHistory } from "react-router-dom"
 import { TextFieldComponent } from "../core/components/textField.component"
+import ResetPasswordSchema from "../schemas/resetpassword.schema"
+import { useQueryString } from "../utils/hooks"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -41,25 +42,47 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ForgotPasswordModule: React.FC = () => {
+const ResetPasswordModule: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
   const { setLoading } = useGlobalContext()
-  const { forgotPassword } = useAuthContext()
+  const { resetPassword } = useAuthContext()
   const [finished, setFinished] = useState(false)
+  const query = useQueryString()
+  const token = query.token as string
 
   const methods = useForm({
-    resolver: yupResolver(ForgotPasswordSchema)
+    resolver: yupResolver(ResetPasswordSchema)
   })
-  const { handleSubmit, getValues } = methods
+  const { handleSubmit, getValues, setError, errors } = methods
 
   const onSubmit = useCallback(async () => {
     setLoading(true)
-    const values = getValues(["email"])
-    await forgotPassword(values)
+    const { password } = getValues(["password"])
+    try {
+      await resetPassword({ token, password })
+      setFinished(true)
+    } catch (error) {
+      switch (error.response?.status) {
+        case 400:
+          setError("invalid", {
+            type: "invalid"
+          })
+          break
+        case 401:
+          setError("expired", {
+            type: "expired"
+          })
+          break
+        case 404:
+          setError("notFound", {
+            type: "notFound"
+          })
+          break
+      }
+    }
     setLoading(false)
-    setFinished(true)
-  }, [getValues, setLoading, forgotPassword])
+  }, [getValues, setLoading, resetPassword, setError, token])
 
   const changePage = useCallback(
     (path: string) => () => {
@@ -71,15 +94,31 @@ const ForgotPasswordModule: React.FC = () => {
   const UnfinishedComponent = (
     <>
       <Typography align="center" className={classes.remark}>
-        ขอให้น้องกรอกอีเมลที่ใช้สร้างบัญชีเพื่อยืนยันตัวตน
+        โปรดระบุรหัสผ่านใหม่
       </Typography>
 
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-          <TextFieldComponent name="email" label="อีเมล" type="email" />
+          <TextFieldComponent name="password" label="รหัสผ่านใหม่" type="password" />
+          <TextFieldComponent name="passwordConfirmation" label="ยืนยันรหัสผ่าน" type="passwordConfirmation" />
           <Button type="submit" variant="contained" color="primary">
-            <Typography variant="h6">ยืนยันอีเมล</Typography>
+            <Typography variant="h6">เปลี่ยนรหัสผ่าน</Typography>
           </Button>
+          {errors.invalid && (
+            <Typography color="error" variant="body2" className={classes.clearMargin}>
+              Reset Token หรือรหัสผ่านไม่ถูกต้อง
+            </Typography>
+          )}
+          {errors.expired && (
+            <Typography color="error" variant="body2" className={classes.clearMargin}>
+              Reset Token หมดอายุ
+            </Typography>
+          )}
+          {errors.notFound && (
+            <Typography color="error" variant="body2" className={classes.clearMargin}>
+              ไม่พบบัญชีที่ต้องการเปลี่ยนรหัสผ่าน
+            </Typography>
+          )}
         </form>
       </FormProvider>
     </>
@@ -88,7 +127,7 @@ const ForgotPasswordModule: React.FC = () => {
   const FinishedComponent = (
     <Box textAlign="center">
       <CheckCircleIcon style={{ color: "#38A169", fontSize: "48px" }} />
-      <Typography className={classes.remark}>ระบบได้ทำการส่งลิงก์เปลี่ยนรหัสผ่านไปยังอีเมลที่ระบุแล้ว กรุณาเช็คอีเมลเพื่อดำเนินการต่อไป</Typography>
+      <Typography className={classes.remark}>การเปลี่ยนรหัสผ่านเสร็จสมบูรณ์ กรุณาเข้าสู่ระบบอีกครั้งด้วยรหัสผ่านใหม่</Typography>
       <Button onClick={changePage("/login")} variant="contained" color="primary" className={classes.marginTop} fullWidth>
         <ChevronLeftIcon style={{ fontSize: "32px" }} />
         <Typography variant="h6">กลับสู่หน้าเข้าสู่ระบบ</Typography>
@@ -110,4 +149,4 @@ const ForgotPasswordModule: React.FC = () => {
   )
 }
 
-export { ForgotPasswordModule }
+export { ResetPasswordModule }

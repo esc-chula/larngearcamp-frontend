@@ -24,35 +24,46 @@ const useStyles = makeStyles(theme => ({
   container: {
     marginTop: theme.spacing(2),
     display: "flex"
+  },
+  errorMSG: {
+    marginTop: theme.spacing(2)
   }
 }))
 
 const RankingTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents }) => {
   const classes = useStyles()
-
   const { register, errors } = useFormContext()
+  const selfTopError = resolve(name, errors)
+  console.log(errors)
   return (
-    <Box mt={2} display="flex" flexDirection="column">
-      {contents?.map((content, index) => {
-        const newName = `${name}.${sequenceConstant[index + 1]}`
-        const selfError = resolve(newName, errors)
-        return (
-          <div className={classes.container} key={index}>
-            <TextField
-              name={newName}
-              placeholder="อันดับ"
-              size="small"
-              inputRef={register}
-              className={classes.input}
-              error={!!selfError}
-              helperText={selfError?.message}
-              inputProps={{ min: 0, style: { textAlign: "center" } }}
-            />
-            <Typography>{content.label}</Typography>
-          </div>
-        )
-      })}
-    </Box>
+    <>
+      <Box mt={2} display="flex" flexDirection="column">
+        {contents?.map((content, index) => {
+          const newName = `${name}.${sequenceConstant[index + 1]}`
+          const selfError = resolve(newName, errors)
+          return (
+            <div className={classes.container} key={index}>
+              <TextField
+                name={newName}
+                placeholder="อันดับ"
+                size="small"
+                inputRef={register}
+                className={classes.input}
+                error={!!selfError}
+                helperText={selfError?.message}
+                inputProps={{ min: 0, style: { textAlign: "center" } }}
+              />
+              <Typography>{content.label}</Typography>
+            </div>
+          )
+        })}
+      </Box>
+      {!!selfTopError && (
+        <Typography variant="caption" color="error" className={classes.errorMSG}>
+          {selfTopError?.message}
+        </Typography>
+      )}
+    </>
   )
 }
 

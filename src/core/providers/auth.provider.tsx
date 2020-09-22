@@ -7,6 +7,7 @@ import { AxiosResponse } from "axios"
 import ForgotPasswordModel from "../models/forgotPassword.model"
 import useSWR, { responseInterface } from "swr"
 import { LoadingComponent } from "../components/loading.component"
+import ResetPasswordModel from "../models/resetPassword.model"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -20,7 +21,7 @@ interface AuthConstruct {
   logout: () => Promise<AxiosResponse<any>>
   me: responseInterface<any, Error>
   forgotPassword: (email: ForgotPasswordModel) => Promise<AxiosResponse<any>>
-  resetPassword: (params: { password: string }) => Promise<AxiosResponse<any>>
+  resetPassword: (params: ResetPasswordModel) => Promise<AxiosResponse<any>>
 }
 
 export const AuthContext = createContext({} as AuthConstruct)
@@ -49,6 +50,33 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const isLoggedIn = useMemo(() => Boolean(accessToken), [accessToken])
 
+  const refresh = useCallback(async (): Promise<Boolean> => {
+    if (accessToken) {
+      const { exp } = jwt_decode(accessToken)
+      const currentTime = new Date()
+      const expireTime = new Date(exp * 1000)
+      const expireTimeNext3Day = new Date(exp * 1000 + 1000 * 60 * 60 * 24 * 3)
+      if (currentTime > expireTimeNext3Day) {
+        try {
+          await AuthService.logout()
+          process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out (inactive in 3 days)")
+          setAccessToken(null)
+          removeLocalStorage("ACCESS_TOKEN")
+        } catch (error) {}
+        return true
+      } else if (currentTime > expireTime) {
+        try {
+          const result = await AuthService.refresh()
+          process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh (active in 3 days)")
+          setAccessToken(result.data.token)
+          setLocalStorage("ACCESS_TOKEN", result.data.token)
+        } catch (error) {}
+        return true
+      }
+    }
+    return false
+  }, [accessToken])
+
   const login = useCallback(async (params: LoginModel) => {
     const result = await AuthService.login(params)
     if (result.status === 200) {
@@ -67,56 +95,35 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     return result
   }, [])
 
-  const logout = useCallback(async () => {
-    const result = await AuthService.logout()
-    setAccessToken(null)
-    removeLocalStorage("ACCESS_TOKEN")
-    return result
-  }, [])
-
-  const me = useSWR(
-    () => (accessToken ? `me (${accessToken})` : null),
-    async () => (await AuthService.me()).data,
-    {
-      refreshInterval: 0,
-      revalidateOnFocus: process.env.NODE_ENV === "production"
-    }
-  )
-
-  const refresh = useCallback(async (): Promise<Boolean> => {
-    if (accessToken) {
-      const { exp } = jwt_decode(accessToken)
-      const currentTime = new Date()
-      const expireTime = new Date(exp * 1000)
-      const expireTimeNext3Day = new Date(exp * 1000 + 1000 * 60 * 60 * 24 * 3)
-      if (currentTime > expireTimeNext3Day) {
-        await AuthService.logout()
-        process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out (inactive in 3 days)")
-        setAccessToken(null)
-        removeLocalStorage("ACCESS_TOKEN")
-        return true
-      } else if (currentTime > expireTime) {
-        const result = await AuthService.refresh()
-        process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh (active in 3 days)")
-        if (result.status === 200) {
-          setAccessToken(result.data.token)
-          setLocalStorage("ACCESS_TOKEN", result.data.token)
-        }
-        return true
-      }
-    }
-    return false
-  }, [accessToken])
-
   const forgotPassword = useCallback(async (params: ForgotPasswordModel) => {
     const result = await AuthService.forgotPassword(params)
     return result
   }, [])
 
-  const resetPassword = useCallback(async (params: { password: string }) => {
+  const resetPassword = useCallback(async (params: ResetPasswordModel) => {
     const result = await AuthService.resetPassword(params)
     return result
   }, [])
+
+  const logout = useCallback(async () => {
+    await refresh()
+    const result = await AuthService.logout()
+    setAccessToken(null)
+    removeLocalStorage("ACCESS_TOKEN")
+    return result
+  }, [refresh])
+
+  const me = useSWR(
+    () => (accessToken ? `me (${accessToken})` : null),
+    async () => {
+      await refresh()
+      return (await AuthService.me()).data
+    },
+    {
+      refreshInterval: 0,
+      revalidateOnFocus: process.env.NODE_ENV === "production"
+    }
+  )
 
   useEffect(() => {
     refresh()

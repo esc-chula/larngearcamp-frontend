@@ -76,7 +76,7 @@ const AddressFieldComponent: React.FC<AddressFieldComponentProps> = ({ label, ty
       }}
       id="controllable-states-demo"
       options={options}
-      renderInput={params => <TextFieldComponent name={type} label={label} {...params} />}
+      renderInput={params => <TextFieldComponent name={inputNames[type]} label={label} {...params} />}
     />
   )
 }

@@ -47,7 +47,7 @@ const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
                   question={`${index + 1}. ${question.question}`}
                   caption={question.caption}
                   imagePath={question.imagePath}>
-                  {question.type === "multiline" && <MultilineTypeComponent name={`firstPart.answer${index + 1}`} />}
+                  {question.type === "multiline" && <MultilineTypeComponent name={`firstPart.answer${index + 1}`} wordCount={question.wordCount} />}
                   {question.type === "checkbox" && <CheckboxTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} />}
                   {question.type === "radio" && (
                     <RadioTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} className={classes.input} />

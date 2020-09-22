@@ -1,16 +1,16 @@
 import { ref, string, object } from "yup"
 
 const RegisterSchema = object().shape({
-  firstName: string().trim().required("Enter your name"),
-  lastName: string().trim().required("Enter your surname"),
-  email: string().trim().required("Enter your email").email("Invalid email"),
+  firstName: string().trim().required("กรุณากรอกชื่อจริง"),
+  lastName: string().trim().required("กรุณากรอกนามสกุล"),
+  email: string().trim().required("กรุณากรอกอีเมล").email("อีเมลไม่ถูกต้อง"),
   password: string()
     .trim()
-    .required("Enter your password")
-    .matches(/^.{8,16}$/, "Password should contain 8 - 16 characters"),
+    .required("กรุณากรอกรหัสผ่าน")
+    .matches(/^.{8,16}$/, "รหัสผ่านควรมีความยาว 8-16 ตัวอักษร"),
   passwordConfirmation: string()
     .trim()
-    .oneOf([ref("password")], "Password doesn't match")
+    .oneOf([ref("password")], "รหัสผ่านไม่ตรงกัน")
 })
 
 export default RegisterSchema
