@@ -1,8 +1,9 @@
 import React from "react"
-import { Controller, useFormContext } from "react-hook-form"
-import { Checkbox, FormControlLabel, Box } from "@material-ui/core"
+import { Controller, useFormContext, useWatch } from "react-hook-form"
+import { Checkbox, FormControlLabel, Typography, TextField, makeStyles } from "@material-ui/core"
 import ChoiceModel from "../../models/choice.model"
 import { sequenceConstant } from "../../constants/sequence.constant"
+import { resolve } from "../../../utils/other"
 
 interface CheckboxTypeProps {
   name: string
@@ -10,30 +11,77 @@ interface CheckboxTypeProps {
   className?: any
 }
 
-const CheckboxTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents, ...other }) => {
-  const { control } = useFormContext()
+const useStyles = makeStyles(theme => ({
+  errorMSG: {
+    marginTop: theme.spacing(2)
+  },
+  textField: {
+    marginLeft: theme.spacing(-2)
+  },
+  container: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column"
+  },
+  formControlLabel: {
+    width: "fit-content"
+  },
+  inputContainer: {
+    display: "flex",
+    alignItems: "center"
+  }
+}))
+
+const CheckboxTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents }) => {
+  const classes = useStyles()
+  const { control, errors } = useFormContext()
+  const checkedValues: any | undefined = useWatch({ name: name })
+  const selfError = resolve(name, errors)
+  console.log(checkedValues)
   return (
-    <Box mt={3} display="flex" flexDirection="column">
+    <div className={classes.container}>
       {contents?.map((content, index) => {
-        const newName = `${name}.${sequenceConstant[index + 1]}`
+        const seq = `${sequenceConstant[index + 1]}`
+        const newName = `${name}.${seq}`
         return (
-          <Controller
-            key={index}
-            name={newName}
-            control={control}
-            defaultValue={false}
-            {...other}
-            render={({ onChange, onBlur, value, name }) => (
-              <FormControlLabel
-                name={name}
-                label={content.label}
-                control={<Checkbox color="primary" onBlur={onBlur} onChange={e => onChange(e.target.checked)} checked={value} />}
+          <div key={index} className={classes.inputContainer}>
+            <Controller
+              name={content.textfield ? `${newName}.checked` : newName}
+              control={control}
+              defaultValue={false}
+              render={({ onChange, onBlur, value, name }) => (
+                <FormControlLabel
+                  name={name}
+                  label={content.textfield ? "" : content.label}
+                  className={classes.formControlLabel}
+                  control={<Checkbox color="primary" onBlur={onBlur} onChange={e => onChange(e.target.checked)} checked={value} />}
+                />
+              )}
+            />
+            {content.textfield && (
+              <Controller
+                name={`${newName}.text`}
+                control={control}
+                defaultValue=""
+                as={
+                  <TextField
+                    size="small"
+                    disabled={!!checkedValues ? !checkedValues[seq]?.checked : true}
+                    label={content.label}
+                    className={classes.textField}
+                  />
+                }
               />
             )}
-          />
+          </div>
         )
       })}
-    </Box>
+      {!!selfError && (
+        <Typography variant="caption" color="error" className={classes.errorMSG}>
+          {selfError?.message}
+        </Typography>
+      )}
+    </div>
   )
 }
 
