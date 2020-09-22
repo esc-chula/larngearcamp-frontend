@@ -33,11 +33,11 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     flexDirection: "column",
     "& > *:not(:last-child)": {
-      marginBottom: theme.spacing(4)
+      marginBottom: theme.spacing(3)
     }
   },
   marginTop: {
-    marginTop: "24px"
+    marginTop: "16px"
   }
 }))
 
