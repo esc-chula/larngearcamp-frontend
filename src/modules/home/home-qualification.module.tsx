@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from "react"
-import { Typography, Avatar } from "@material-ui/core"
+import { Typography, Avatar, useTheme, useMediaQuery, Theme } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../utils/conversion"
 import HomeContainer, { HomeContainerProps } from "./home-container.module"
+
+import landing2 from "../../assets/images/background/landing-2.svg"
+import BackgroundOverlay from "../../core/components/backgroundOverlay.component"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -25,6 +28,9 @@ const HomeQualification: React.FC<
   } & HomeContainerProps
 > = props => {
   const classes = useStyle()
+
+  const theme = useTheme()
+  const isSmall = useMediaQuery<Theme>(theme.breakpoints.down("md"))
 
   const leftsRef = useRef<(HTMLDivElement | null)[]>([])
   const rightsRef = useRef<(HTMLDivElement | null)[]>([])
@@ -56,12 +62,20 @@ const HomeQualification: React.FC<
     })
 
   return (
-    <HomeContainer {...props}>
-      <Typography variant="h3" className={classes.title}>
-        คุณสมบัติผู้สมัคร
-      </Typography>
-      <div className={classes.container}>{items}</div>
-    </HomeContainer>
+    <BackgroundOverlay
+      src={landing2}
+      aspectRatio={1440 / 692}
+      contentPercentage={100}
+      offsetPercentage={isSmall ? 35 : 37}
+      minHeightPx={isSmall ? 900 : 0}
+      objectPosition="50% 50%">
+      <HomeContainer {...props}>
+        <Typography variant="h3" className={classes.title}>
+          คุณสมบัติผู้สมัคร
+        </Typography>
+        <div className={classes.container}>{items}</div>
+      </HomeContainer>
+    </BackgroundOverlay>
   )
 }
 

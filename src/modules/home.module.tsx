@@ -12,11 +12,6 @@ import HomeTimeline from "./home/home-timeline.module"
 import HomeCarousal from "./home/home-carousel.module"
 import HomeAnnouce from "./home/home-annouce.module"
 
-import landing1 from "../assets/images/background/landing-1.svg"
-import landing2 from "../assets/images/background/landing-2.svg"
-import landing3 from "../assets/images/background/landing-3.svg"
-import BackgroundOverlay from "../core/components/backgroundOverlay.component"
-
 import q1 from "../assets/images/icon/qualification-1.svg"
 import q2 from "../assets/images/icon/qualification-2.svg"
 import q3 from "../assets/images/icon/qualification-3.svg"
@@ -38,36 +33,23 @@ const useStyle = makeStyles(theme => ({
 const HomeModule: React.FC = () => {
   const classes = useStyle()
 
-  const theme = useTheme()
-  const isSmall = useMediaQuery<Theme>(theme.breakpoints.down("md"))
-
   return (
     <>
       <CoverComponent />
-      <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70} minHeightPx={800}>
-        <HomeTitle className={classes.title} />
-      </BackgroundOverlay>
+      <HomeTitle className={classes.title} />
 
       <HomeLarngearDescription className={classes.description} />
 
       <HomeCarousal gradientPercent={20} />
 
-      <BackgroundOverlay
-        src={landing2}
-        aspectRatio={1440 / 692}
-        contentPercentage={100}
-        offsetPercentage={isSmall ? 35 : 37}
-        minHeightPx={isSmall ? 900 : 0}
-        objectPosition="50% 50%">
-        <HomeQualification
-          qualifications={[
-            { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: q1 },
-            { description: "ไม่ป่วยเป็นโรคติดต่อร้ายแรง", src: q2 },
-            { description: "สามารถค้างคืนได้ที่คณะวิศวกรรมศาสตร์\nจุฬาลงกรณ์มหาวิทยาลัย ตลอดระยะเวลาจัดค่าย", src: q3 },
-            { description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน", src: q4 }
-          ]}
-        />
-      </BackgroundOverlay>
+      <HomeQualification
+        qualifications={[
+          { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: q1 },
+          { description: "ไม่ป่วยเป็นโรคติดต่อร้ายแรง", src: q2 },
+          { description: "สามารถค้างคืนได้ที่คณะวิศวกรรมศาสตร์\nจุฬาลงกรณ์มหาวิทยาลัย ตลอดระยะเวลาจัดค่าย", src: q3 },
+          { description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน", src: q4 }
+        ]}
+      />
 
       <HomeTimeline
         className={classes.timeline}
@@ -81,11 +63,7 @@ const HomeModule: React.FC = () => {
         ]}
       />
 
-      <BackgroundOverlay src={landing3} aspectRatio={1440 / 534} offsetPercentage={10} minHeightPx={400}>
-        <Box display="flex" height="100%" alignItems="center" justifyContent="center">
-          <HomeAnnouce height="max-content" />
-        </Box>
-      </BackgroundOverlay>
+      <HomeAnnouce height="max-content" />
 
       <HomeFooter
         contacts={[

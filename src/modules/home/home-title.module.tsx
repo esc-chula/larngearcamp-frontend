@@ -4,6 +4,9 @@ import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../utils/conversion"
 import { Link } from "react-router-dom"
 
+import landing1 from "../../assets/images/background/landing-1.svg"
+import BackgroundOverlay from "../../core/components/backgroundOverlay.component"
+
 const useStyle = makeStyles(theme => ({
   title: {
     fontSize: pxToRem(64),
@@ -29,21 +32,23 @@ const useStyle = makeStyles(theme => ({
 const HomeTitle: React.FC<BoxProps> = props => {
   const classes = useStyle()
   return (
-    <Box textAlign="center" {...props}>
-      <h2 className={classes.title}>LARNGEAR CAMP 20th</h2>
-      <Typography variant="subtitle1" className={classes.subtitle}>
-        ค้นหาความเป็นวิศวกร
-        <Hidden smUp>
-          <br />
-        </Hidden>{" "}
-        ด้วยมือของคุณเอง
-      </Typography>
-      <Link to="/application" className="no-underline">
-        <Button variant="contained" color="primary" className={classes.button}>
-          <p className={classes.buttonText}>Apply Now</p>
-        </Button>
-      </Link>
-    </Box>
+    <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70} minHeightPx={800}>
+      <Box textAlign="center" {...props}>
+        <h2 className={classes.title}>LARNGEAR CAMP 20th</h2>
+        <Typography variant="subtitle1" className={classes.subtitle}>
+          ค้นหาความเป็นวิศวกร
+          <Hidden smUp>
+            <br />
+          </Hidden>{" "}
+          ด้วยมือของคุณเอง
+        </Typography>
+        <Link to="/application" className="no-underline">
+          <Button variant="contained" color="primary" className={classes.button}>
+            <p className={classes.buttonText}>Apply Now</p>
+          </Button>
+        </Link>
+      </Box>
+    </BackgroundOverlay>
   )
 }
 
