@@ -27,7 +27,7 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
   return (
     <Box textAlign="center" {...props}>
       <h3 className={classes.primaryAnnounce + " kanit"}>รับสมัคร 18 กันยายน - 10 ตุลาคม 2563</h3>
-      <Link to="/application">
+      <Link to="/application" className="no-underline">
         <Button variant="contained" color="secondary" className={classes.subscribeButton}>
           <Typography variant="subtitle1" className={classes.subscribeButtonText}>
             สมัครค่ายลานเกียร์

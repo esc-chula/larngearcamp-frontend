@@ -34,7 +34,7 @@ const HomeTitle: React.FC<BoxProps> = props => {
       <Typography variant="subtitle1" className={classes.subtitle}>
         ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
       </Typography>
-      <Link to="/application">
+      <Link to="/application" className="no-underline">
         <Button variant="contained" color="primary" className={classes.button}>
           <p className={classes.buttonText}>Apply Now</p>
         </Button>
