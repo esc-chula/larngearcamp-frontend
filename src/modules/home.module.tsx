@@ -71,7 +71,7 @@ const HomeModule: React.FC = () => {
         ]}
       />
 
-      <BackgroundOverlay src={landing3} aspectRatio={1617 / 525.84} offsetPercentage={10}>
+      <BackgroundOverlay src={landing3} aspectRatio={1440 / 534} offsetPercentage={10} minHeightPx={400}>
         <Box display="flex" height="100%" alignItems="center" justifyContent="center">
           <HomeAnnouce height="max-content" />
         </Box>
