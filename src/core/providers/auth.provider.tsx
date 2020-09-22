@@ -7,6 +7,7 @@ import { AxiosResponse } from "axios"
 import ForgotPasswordModel from "../models/forgotPassword.model"
 import useSWR, { responseInterface } from "swr"
 import { LoadingComponent } from "../components/loading.component"
+import ResetPasswordModel from "../models/resetPassword.model"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -20,7 +21,7 @@ interface AuthConstruct {
   logout: () => Promise<AxiosResponse<any>>
   me: responseInterface<any, Error>
   forgotPassword: (email: ForgotPasswordModel) => Promise<AxiosResponse<any>>
-  resetPassword: (params: { password: string }) => Promise<AxiosResponse<any>>
+  resetPassword: (params: ResetPasswordModel) => Promise<AxiosResponse<any>>
 }
 
 export const AuthContext = createContext({} as AuthConstruct)
@@ -113,7 +114,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     return result
   }, [])
 
-  const resetPassword = useCallback(async (params: { password: string }) => {
+  const resetPassword = useCallback(async (params: ResetPasswordModel) => {
     const result = await AuthService.resetPassword(params)
     return result
   }, [])

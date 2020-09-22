@@ -16,6 +16,7 @@ import { AdminDashboardModule } from "./admin/dashboard.module"
 import { QandAModule } from "./qna.module"
 import { ForgotPasswordModule } from "./forgotpassword.module"
 import { Box } from "@material-ui/core"
+import { ResetPasswordModule } from "./resetpassword.module"
 
 const RouteModule: React.FC = () => {
   return (
@@ -39,6 +40,9 @@ const RouteModule: React.FC = () => {
         </GuestGuardedRoute>
         <GuestGuardedRoute exact path="/forgot-password">
           <ForgotPasswordModule />
+        </GuestGuardedRoute>
+        <GuestGuardedRoute exact path="/reset-password">
+          <ResetPasswordModule />
         </GuestGuardedRoute>
 
         {/* User Guard */}

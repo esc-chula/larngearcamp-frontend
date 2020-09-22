@@ -79,7 +79,9 @@ const RegisterModule = () => {
       await UsersService.createUser(values)
       await login({ email: values["email"], password: values["password"] })
       history.push("/profile")
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   }, [getValues, history, login])
 
   return (
