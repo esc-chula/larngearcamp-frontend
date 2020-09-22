@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react"
 import { Typography, Avatar } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { pxToRem } from "../../../utils/conversion"
-import HomeContainer, { HomeContainerProps } from "./home-container.component"
+import { pxToRem } from "../../utils/conversion"
+import HomeContainer, { HomeContainerProps } from "./home-container.module"
 
 const useStyle = makeStyles(theme => ({
   title: {

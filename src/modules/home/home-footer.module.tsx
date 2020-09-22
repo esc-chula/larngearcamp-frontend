@@ -1,10 +1,10 @@
 import React from "react"
 import { Typography, Grid, Paper, PaperProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import HomeContainer from "./home-container.component"
-import gearIcon from "../../../assets/images/icon/gear-icon.svg"
-import facebookIcon from "../../../assets/images/icon/facebook-icon.svg"
-import phoneIcon from "../../../assets/images/icon/communication-icon.svg"
+import HomeContainer from "./home-container.module"
+import gearIcon from "../../assets/images/icon/gear-icon.svg"
+import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
+import phoneIcon from "../../assets/images/icon/communication-icon.svg"
 
 const GearIcon: React.FC = props => {
   return (

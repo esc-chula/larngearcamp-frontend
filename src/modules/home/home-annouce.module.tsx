@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, BoxProps, Button, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { pxToRem } from "../../../utils/conversion"
+import { pxToRem } from "../../utils/conversion"
 
 const useStyle = makeStyles(theme => ({
   primaryAnnounce: {

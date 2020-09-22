@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, BoxProps, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { TimelineDisplay, TimelineProps } from "../timeline.component"
+import { TimelineDisplay, TimelineProps } from "../../core/components/timeline.component"
 
 const useStyle = makeStyles(theme => ({
   title: {
