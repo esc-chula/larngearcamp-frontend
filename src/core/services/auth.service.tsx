@@ -8,7 +8,7 @@ import MeDTO from "../models/dto/me.dto"
 
 export interface AuthServiceConstruct {
   loginAPI: (params: LoginModel) => Promise<AxiosResponse>
-  loginFbAPI: (accessToken: string) => Promise<AxiosResponse>
+  loginFbAPI: (signedRequest: string) => Promise<AxiosResponse>
   logoutAPI: () => Promise<AxiosResponse>
   meAPI: () => Promise<AxiosResponse<MeDTO>>
   refreshAPI: () => Promise<AxiosResponse>
@@ -25,8 +25,8 @@ export const AuthServiceProvider = ({ ...other }) => {
     return await httpClient.post(`/auth/login`, params)
   }, [])
 
-  const loginFbAPI = useCallback(async (accessToken: string): Promise<AxiosResponse> => {
-    return await httpClient.post(`/auth/loginFb`, { accessToken })
+  const loginFbAPI = useCallback(async (signedRequest: string): Promise<AxiosResponse> => {
+    return await httpClient.post(`/auth/loginFb`, { signedRequest })
   }, [])
 
   const logoutAPI = useCallback(async (): Promise<AxiosResponse> => {

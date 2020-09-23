@@ -16,8 +16,8 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
     setLoading(true)
     const fbResponse = (await waitFbInit) || (await fbLogin())
     if (fbResponse) {
-      const { accessToken } = fbResponse.authResponse
-      loginFb(accessToken)
+      const { signedRequest } = fbResponse.authResponse
+      loginFb(signedRequest)
     }
     setLoading(false)
   }, [loading, loginFb])
