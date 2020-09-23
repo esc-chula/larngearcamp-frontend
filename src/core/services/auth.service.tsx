@@ -4,12 +4,13 @@ import { httpClient } from "../../utils/http"
 import ForgotPasswordModel from "../models/forgotPassword.model"
 import ResetPasswordModel from "../models/resetPassword.model"
 import React, { createContext, useContext, useCallback } from "react"
+import MeModel from "../models/me.model"
 
 export interface AuthServiceConstruct {
   loginAPI: (params: LoginModel) => Promise<AxiosResponse>
   loginFbAPI: (accessToken: string) => Promise<AxiosResponse>
   logoutAPI: () => Promise<AxiosResponse>
-  meAPI: () => Promise<AxiosResponse>
+  meAPI: () => Promise<AxiosResponse<MeModel>>
   refreshAPI: () => Promise<AxiosResponse>
   forgotPasswordAPI: (params: ForgotPasswordModel) => Promise<AxiosResponse>
   resetPasswordAPI: (params: ResetPasswordModel) => Promise<AxiosResponse>
@@ -32,7 +33,7 @@ export const AuthServiceProvider = ({ ...other }) => {
     return await httpClient.post(`/auth/logout`, {})
   }, [])
 
-  const meAPI = useCallback(async (): Promise<AxiosResponse> => {
+  const meAPI = useCallback(async (): Promise<AxiosResponse<MeModel>> => {
     return await httpClient.get(`/auth/me`)
   }, [])
 

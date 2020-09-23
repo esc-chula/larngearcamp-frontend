@@ -7,6 +7,7 @@ import useSWR, { responseInterface } from "swr"
 import { LoadingComponent } from "../components/loading.component"
 import ResetPasswordModel from "../models/resetPassword.model"
 import { useAuthServiceContext } from "../services/auth.service"
+import MeModel from "../models/me.model"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -18,7 +19,7 @@ interface AuthConstruct {
   login: (params: LoginModel) => Promise<void>
   loginFb: (facebookAccessToken: string) => Promise<void>
   logout: () => Promise<void>
-  me: responseInterface<any, Error>
+  me: responseInterface<MeModel, Error>
   forgotPassword: (email: ForgotPasswordModel) => Promise<void>
   resetPassword: (params: ResetPasswordModel) => Promise<void>
 }
