@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import { ProfileComponent } from "../core/components/profile.component"
 import { Container, Paper, Typography, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
-import ApplicationService from "../core/services/application.service"
 import { useGlobalContext } from "../core/providers/global.provider"
+import { useApplicationContext } from "../core/providers/application.provider"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -27,20 +27,20 @@ const useStyles = makeStyles(theme => ({
 const ProfileModule = () => {
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
-  const createApplication = useCallback(async () => {
+  const { createApplication } = useApplicationContext()
+
+  const initApplication = useCallback(async () => {
     setLoading(true)
     try {
-      await ApplicationService.createApplication()
-    } catch (error) {
-      // fails silently
-    }
+      await createApplication()
+    } catch (error) {}
     setLoading(false)
-  }, [setLoading])
+  }, [setLoading, createApplication])
 
   return (
     <Container maxWidth="lg">
       <ProfileComponent />
-      <Link to="/application/step/1" onClick={createApplication}>
+      <Link to="/application/step/1" onClick={initApplication}>
         <Button className={classes.button} color="primary" variant="contained" fullWidth>
           สมัครเข้าค่าย
         </Button>

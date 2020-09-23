@@ -4,25 +4,22 @@ import { BrowserRouter } from "react-router-dom"
 import { LoadingComponent } from "../core/components/loading.component"
 import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../styles/theme"
-import { AuthProvider } from "../core/providers/auth.provider"
 import { ErrorBoundary } from "../core/providers/error.provider"
-import { GlobalProvider } from "../core/providers/global.provider"
-import { ApplicationProvider } from "../core/providers/application.provider"
+import AppProvider from "../core/providers/index.provider"
+import AppService from "../core/services/index.service"
 
 const AppModule = () => {
   return (
     <ErrorBoundary>
       <ThemeProvider theme={theme}>
         <Suspense fallback={<LoadingComponent loading={true} />}>
-          <AuthProvider>
-            <ApplicationProvider>
-              <GlobalProvider>
-                <BrowserRouter>
-                  <RouteModule />
-                </BrowserRouter>
-              </GlobalProvider>
-            </ApplicationProvider>
-          </AuthProvider>
+          <AppService>
+            <AppProvider>
+              <BrowserRouter>
+                <RouteModule />
+              </BrowserRouter>
+            </AppProvider>
+          </AppService>
         </Suspense>
       </ThemeProvider>
     </ErrorBoundary>
