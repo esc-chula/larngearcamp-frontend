@@ -12,8 +12,9 @@ interface Answer1DTO {
       first: boolean
       second: boolean
       third: boolean
-      fourth: string
+      fourth: boolean
       fifth: string
+      sixth: string
     }
     answer5: string
     answer6: number

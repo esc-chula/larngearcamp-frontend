@@ -10,7 +10,10 @@ import { CheckboxTypeComponent } from "../../core/components/questionType/checkb
 import { RankingTypeComponent } from "../../core/components/questionType/ranking.component"
 import ApplicationStepModule from "./stepLayout.module"
 import { yupResolver } from "@hookform/resolvers"
-import AnswerSchema from "../../schemas/answer.schema"
+import { Answer1Model } from "../../schemas/answer1.schema"
+import Answer1Schema from "../../schemas/answer1.schema"
+import { useApplicationContext } from "../../core/providers/application.provider"
+import { convertAnswer1SchemaToAnswer1DTO } from "../../utils/modify"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -24,14 +27,22 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
-  const methods = useForm({
-    resolver: yupResolver(AnswerSchema)
+  const methods = useForm<Answer1Model>({
+    reValidateMode: "onBlur",
+    resolver: yupResolver(Answer1Schema)
   })
-  const { handleSubmit } = methods
+  const { updateApplication } = useApplicationContext()
+  const { handleSubmit, getValues } = methods
   const classes = useStyles()
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback(async () => {
     console.log("Success")
-  }, [])
+    const values = convertAnswer1SchemaToAnswer1DTO(getValues())
+    try {
+      await updateApplication(values)
+    } catch (error) {
+      // show modal
+    }
+  }, [updateApplication, getValues])
   return (
     <ApplicationStepModule>
       {({ ButtonBar }) => (
@@ -44,12 +55,12 @@ const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
                   question={`${index + 1}. ${question.question}`}
                   caption={question.caption}
                   imagePath={question.imagePath}>
-                  {question.type === "multiline" && <MultilineTypeComponent name={`firstPart.answer${index + 1}`} wordCount={question.wordCount} />}
-                  {question.type === "checkbox" && <CheckboxTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} />}
+                  {question.type === "multiline" && <MultilineTypeComponent name={`answer${index + 1}`} wordCount={question.wordCount} />}
+                  {question.type === "checkbox" && <CheckboxTypeComponent name={`answer${index + 1}`} contents={question.contents} />}
                   {question.type === "radio" && (
-                    <RadioTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} className={classes.input} />
+                    <RadioTypeComponent name={`answer${index + 1}`} contents={question.contents} className={classes.input} />
                   )}
-                  {question.type === "ranking" && <RankingTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} />}
+                  {question.type === "ranking" && <RankingTypeComponent name={`answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
               <ButtonBar />
