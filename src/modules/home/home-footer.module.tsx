@@ -6,7 +6,7 @@ import gearIcon from "../../assets/images/icon/gear-icon.svg"
 import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
 import phoneIcon from "../../assets/images/icon/communication-icon.svg"
 
-const GearIcon: React.FC = props => {
+const GearIcon: React.FC<React.ObjectHTMLAttributes<HTMLObjectElement>> = props => {
   return (
     <object data={gearIcon} {...props}>
       Gear Icon
@@ -20,7 +20,7 @@ const FacebookIcon: React.FC<React.ObjectHTMLAttributes<HTMLObjectElement>> = pr
     </object>
   )
 }
-const PhoneIcon: React.FC = props => {
+const PhoneIcon: React.FC<React.ObjectHTMLAttributes<HTMLObjectElement>> = props => {
   return (
     <object data={phoneIcon} {...props}>
       Phone Icon
@@ -36,7 +36,7 @@ const useStyle = makeStyles(theme => ({
     paddingBottom: "92px"
   },
   phoneIcon: {
-    margin: theme.spacing(0, 0, 0, 1)
+    marginLeft: theme.spacing(2)
   },
   facebookContainer: {
     textAlign: "center"
@@ -67,12 +67,15 @@ const HomeFooter: React.FC<
 
   const left = (
     <>
-      <Grid container alignItems="center" spacing={2}>
+      <Grid container alignItems="center">
         <Grid item>
-          <Typography variant="subtitle1">หากมีข้อสงสัยเพิ่มเติม สามารถติดต่อได้ที่</Typography>
+          <Typography variant="subtitle1">หากมีข้อสงสัยเพิ่มเติม</Typography>
         </Grid>
         <Grid item>
-          <PhoneIcon />
+          <Typography variant="subtitle1">
+            สามารถติดต่อได้ที่
+            <PhoneIcon className={classes.phoneIcon} />
+          </Typography>
         </Grid>
       </Grid>
 
@@ -106,7 +109,7 @@ const HomeFooter: React.FC<
   return (
     <Paper className={classes.container} {...props}>
       <HomeContainer>
-        <Grid container justify="space-between">
+        <Grid container justify="space-between" spacing={3}>
           <Grid item>{left}</Grid>
           <Grid item>{right}</Grid>
         </Grid>
