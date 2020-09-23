@@ -32,17 +32,19 @@ const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
     resolver: yupResolver(Answer1Schema)
   })
   const { updateApplication } = useApplicationContext()
-  const { handleSubmit, getValues } = methods
+  const { handleSubmit } = methods
   const classes = useStyles()
-  const onSubmit = useCallback(async () => {
-    console.log("Success")
-    const values = convertAnswer1SchemaToAnswer1DTO(getValues())
-    try {
-      await updateApplication(values)
-    } catch (error) {
-      // show modal
-    }
-  }, [updateApplication, getValues])
+  const onSubmit = useCallback(
+    async data => {
+      const values = convertAnswer1SchemaToAnswer1DTO(data)
+      try {
+        await updateApplication(values)
+      } catch (error) {
+        // show modal
+      }
+    },
+    [updateApplication]
+  )
   return (
     <ApplicationStepModule>
       {({ ButtonBar }) => (

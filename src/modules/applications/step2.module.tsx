@@ -46,20 +46,23 @@ const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
     reValidateMode: "onBlur",
     resolver: yupResolver(ProfileSchema)
   })
-  const { handleSubmit, getValues } = methods
+  const { handleSubmit } = methods
 
-  const onSubmit = useCallback(async () => {
-    setLoading(true)
-    const values = convertProfileSchemaToProfileDTO(getValues())
-    try {
-      console.log(values)
-      await updateApplication(values)
-      history.push(`/application/step/${parseInt(step) + 1}`)
-    } catch (error) {
-      // show modal
-    }
-    setLoading(false)
-  }, [setLoading, getValues, history, step, updateApplication])
+  const onSubmit = useCallback(
+    async data => {
+      setLoading(true)
+      const values = convertProfileSchemaToProfileDTO(data)
+      try {
+        console.log(values)
+        await updateApplication(values)
+        history.push(`/application/step/${parseInt(step) + 1}`)
+      } catch (error) {
+        // show modal
+      }
+      setLoading(false)
+    },
+    [setLoading, history, step, updateApplication]
+  )
 
   return (
     <ApplicationStepModule>
