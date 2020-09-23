@@ -45,9 +45,7 @@ const HomeTitle: React.FC<BoxProps> = props => {
         </Typography>
         <Link to="/application" className="no-underline">
           <Button variant="contained" color="primary" className={classes.button}>
-            <Typography variant="button" className={classes.buttonText}>
-              Apply Now
-            </Typography>
+            <Typography className={classes.buttonText}>Apply Now</Typography>
           </Button>
         </Link>
       </Box>

@@ -1,5 +1,5 @@
 import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
+import { createMuiTheme, makeStyles, ThemeProvider } from "@material-ui/core/styles"
 import { CoverComponent } from "../core/components/cover.component"
 
 import HomeTitle from "./home/home-title.module"
@@ -19,6 +19,8 @@ import c1 from "../assets/images/carousel/1.png"
 import c2 from "../assets/images/carousel/2.jpg"
 import c3 from "../assets/images/carousel/3.jpg"
 
+import { theme } from "../styles/theme"
+
 const useStyle = makeStyles(() => ({
   title: {
     marginTop: "80px"
@@ -34,11 +36,36 @@ const useStyle = makeStyles(() => ({
   }
 }))
 
+const homeTheme = createMuiTheme({
+  ...theme,
+  typography: {
+    ...theme.typography,
+    h6: {
+      fontWeight: 500,
+      fontSize: "2rem",
+      lineHeight: 1.6,
+      letterSpacing: "0.0075em"
+    },
+    subtitle1: {
+      fontWeight: 400,
+      fontSize: "1.75rem",
+      lineHeight: 1.75,
+      letterSpacing: "0.00938em"
+    },
+    body2: {
+      fontWeight: 300,
+      fontSize: "1.5rem",
+      lineHeight: 1.43,
+      letterSpacing: "0.01071em"
+    }
+  }
+})
+
 const HomeModule: React.FC = () => {
   const classes = useStyle()
 
   return (
-    <>
+    <ThemeProvider theme={homeTheme}>
       <CoverComponent />
       <HomeTitle className={classes.title} />
 
@@ -78,7 +105,7 @@ const HomeModule: React.FC = () => {
           { name: "พี่มายดี", tel: "084-899-5449" }
         ]}
       />
-    </>
+    </ThemeProvider>
   )
 }
 

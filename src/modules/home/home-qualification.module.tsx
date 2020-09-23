@@ -9,7 +9,8 @@ import BackgroundOverlay from "../../core/components/backgroundOverlay.component
 
 const useStyle = makeStyles(theme => ({
   title: {
-    fontWeight: "normal",
+    fontWeight: 400,
+    fontSize: "48px",
     textDecoration: "underline",
     lineHeight: pxToRem(72),
     marginBottom: "40px"
@@ -74,9 +75,7 @@ const HomeQualification: React.FC<
       objectPosition="50% 50%"
       {...props}>
       <HomeContainer>
-        <Typography variant="h3" className={classes.title}>
-          คุณสมบัติผู้สมัคร
-        </Typography>
+        <Typography className={classes.title}>คุณสมบัติผู้สมัคร</Typography>
         <div className={classes.container}>{items}</div>
       </HomeContainer>
     </BackgroundOverlay>
