@@ -8,6 +8,7 @@ import { LoadingComponent } from "../components/loading.component"
 import ResetPasswordModel from "../models/resetPassword.model"
 import { useAuthServiceContext } from "../services/auth.service"
 import MeDTO from "../models/dto/me.dto"
+import { httpClient } from "../../utils/http"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -135,6 +136,16 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   useEffect(() => {
     refresh()
   }, [accessToken, refresh])
+
+  useEffect(() => {
+    const id = httpClient.interceptors.response.use(undefined, error => {
+      if (error?.response?.status === 401) {
+        setAccessToken(null)
+        removeLocalStorage("ACCESS_TOKEN")
+      }
+    })
+    return () => httpClient.interceptors.response.eject(id)
+  }, [])
 
   const value: AuthConstruct = {
     accessToken,
