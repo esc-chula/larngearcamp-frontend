@@ -15,6 +15,10 @@ import q2 from "../assets/images/icon/qualification-2.svg"
 import q3 from "../assets/images/icon/qualification-3.svg"
 import q4 from "../assets/images/icon/qualification-4.svg"
 
+import c1 from "../assets/images/carousel/1.png"
+import c2 from "../assets/images/carousel/2.jpg"
+import c3 from "../assets/images/carousel/3.jpg"
+
 const useStyle = makeStyles(() => ({
   title: {
     marginTop: "80px"
@@ -38,16 +42,7 @@ const HomeModule: React.FC = () => {
 
       <HomeLarngearDescription className={classes.description} />
 
-      <HomeCarousal
-        gradientPercent={20}
-        images={[
-          { src: "https://picsum.photos/325/183?1" },
-          { src: "https://picsum.photos/325/183?2" },
-          { src: "https://picsum.photos/325/183?3" },
-          { src: "https://picsum.photos/325/183?4" },
-          { src: "https://picsum.photos/325/183?5" }
-        ]}
-      />
+      <HomeCarousal gradientPercent={20} images={[{ src: c1 }, { src: c2 }, { src: c3 }]} />
 
       <HomeQualification
         qualifications={[
