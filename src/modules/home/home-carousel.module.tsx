@@ -1,13 +1,13 @@
 import React from "react"
-import Carousel, { ResponsiveType } from "react-multi-carousel"
+import Carousel, { CarouselProps, ResponsiveType } from "react-multi-carousel"
 import { makeStyles, Theme as DefaultTheme, useTheme } from "@material-ui/core/styles"
 import "@material-ui/core/"
-type Props = {
-  gradientPercent: number
+interface Props extends Partial<CarouselProps> {
+  gradientPercent: { white: number; fade: number }
   images: { src: string; alt?: string }[]
 }
 
-const responsive: (theme: DefaultTheme) => ResponsiveType = theme => ({
+const responsiveSetting: (theme: DefaultTheme) => ResponsiveType = theme => ({
   default: {
     breakpoint: {
       min: 0,
@@ -35,9 +35,15 @@ const useStyle = makeStyles<DefaultTheme, Props>(theme => ({
     width: "100%",
     height: "100%",
     background: props =>
-      `linear-gradient(90deg, rgba(252,252,252,1) 0%, rgba(252,252,252,0) ${props.gradientPercent}%, rgba(252,252,252,0) ${
-        100 - props.gradientPercent
-      }%, rgba(252,252,252,1) 100%)`,
+      `linear-gradient(
+        90deg, 
+        #eeeeeeFF 0%,
+        #eeeeeeFF ${props.gradientPercent.white}%,
+        #eeeeee00 ${props.gradientPercent.white + props.gradientPercent.fade}%,
+        #eeeeee00 ${100 - (props.gradientPercent.white + props.gradientPercent.fade)}%,
+        #eeeeeeFF ${100 - props.gradientPercent.white}%,
+        #eeeeeeFF 100%)
+      `,
     zIndex: 1
   }
 }))
@@ -61,14 +67,24 @@ const RightArrow: React.FC = props => {
 
 // TODO
 const HomeCarousal: React.FC<Props> = props => {
+  const { gradientPercent, images, ...rest } = props
+
   const classes = useStyle(props)
   const theme = useTheme()
+
   return (
     <div className={classes.container}>
       <div className={classes.cover}></div>
-      <Carousel infinite centerMode arrows responsive={responsive(theme)} customLeftArrow={<LeftArrow />} customRightArrow={<RightArrow />}>
-        {props.images.map(({ src, alt }) => (
-          <img src={src} alt={alt} />
+      <Carousel
+        infinite
+        centerMode
+        arrows
+        responsive={responsiveSetting(theme)}
+        customLeftArrow={<LeftArrow />}
+        customRightArrow={<RightArrow />}
+        {...rest}>
+        {props.images.map(({ src, alt }, i) => (
+          <img src={src} alt={alt} key={i} />
         ))}
       </Carousel>
     </div>

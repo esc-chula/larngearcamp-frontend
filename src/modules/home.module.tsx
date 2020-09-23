@@ -42,7 +42,7 @@ const HomeModule: React.FC = () => {
 
       <HomeLarngearDescription className={classes.description} />
 
-      <HomeCarousal gradientPercent={20} images={[{ src: c1 }, { src: c2 }, { src: c3 }]} />
+      <HomeCarousal gradientPercent={{ white: 3, fade: 15 }} images={[{ src: c1 }, { src: c2 }, { src: c3 }]} />
 
       <HomeQualification
         qualifications={[
