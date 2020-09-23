@@ -1,13 +1,12 @@
 import React, { createContext, useContext, useState, useMemo, useCallback, useEffect } from "react"
 import { getLocalStorage, setLocalStorage, removeLocalStorage } from "../../utils/storage"
 import jwt_decode from "jwt-decode"
-import AuthService from "../services/auth.service"
 import LoginModel from "../models/login.model"
-import { AxiosResponse } from "axios"
 import ForgotPasswordModel from "../models/forgotPassword.model"
 import useSWR, { responseInterface } from "swr"
 import { LoadingComponent } from "../components/loading.component"
 import ResetPasswordModel from "../models/resetPassword.model"
+import { useAuthServiceContext } from "../services/auth.service"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -16,21 +15,20 @@ interface AuthConstruct {
   isUserLoggedIn: boolean
   isAdminLoggedIn: boolean
   refresh: () => Promise<Boolean>
-  login: (params: LoginModel) => Promise<AxiosResponse<any>>
-  loginFb: (facebookAccessToken: string) => Promise<AxiosResponse<any>>
-  logout: () => Promise<AxiosResponse<any>>
+  login: (params: LoginModel) => Promise<void>
+  loginFb: (facebookAccessToken: string) => Promise<void>
+  logout: () => Promise<void>
   me: responseInterface<any, Error>
-  forgotPassword: (email: ForgotPasswordModel) => Promise<AxiosResponse<any>>
-  resetPassword: (params: ResetPasswordModel) => Promise<AxiosResponse<any>>
+  forgotPassword: (email: ForgotPasswordModel) => Promise<void>
+  resetPassword: (params: ResetPasswordModel) => Promise<void>
 }
 
 export const AuthContext = createContext({} as AuthConstruct)
 
-export const useAuthContext = () => {
-  return useContext(AuthContext)
-}
+export const useAuthContext = () => useContext(AuthContext)
 
 export const AuthProvider: React.FC = ({ ...other }) => {
+  const { loginAPI, loginFbAPI, meAPI, logoutAPI, refreshAPI, forgotPasswordAPI, resetPasswordAPI } = useAuthServiceContext()
   const [accessToken, setAccessToken] = useState(() => getLocalStorage("ACCESS_TOKEN"))
   const isUserLoggedIn = useMemo(() => {
     if (accessToken) {
@@ -58,7 +56,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       const expireTimeNext3Day = new Date(exp * 1000 + 1000 * 60 * 60 * 24 * 3)
       if (currentTime > expireTimeNext3Day) {
         try {
-          await AuthService.logout()
+          await logoutAPI()
           process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out (inactive in 3 days)")
           setAccessToken(null)
           removeLocalStorage("ACCESS_TOKEN")
@@ -66,7 +64,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
         return true
       } else if (currentTime > expireTime) {
         try {
-          const result = await AuthService.refresh()
+          const result = await refreshAPI()
           process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh (active in 3 days)")
           setAccessToken(result.data.token)
           setLocalStorage("ACCESS_TOKEN", result.data.token)
@@ -75,54 +73,62 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       }
     }
     return false
-  }, [accessToken])
+  }, [accessToken, logoutAPI, refreshAPI])
 
-  const login = useCallback(async (params: LoginModel) => {
-    const result = await AuthService.login(params)
-    if (result.status === 200) {
-      setAccessToken(result.data.token)
-      setLocalStorage("ACCESS_TOKEN", result.data.token)
-    }
-    return result
-  }, [])
+  const login = useCallback(
+    async (params: LoginModel) => {
+      try {
+        const result = await loginAPI(params)
+        setAccessToken(result.data.token)
+        setLocalStorage("ACCESS_TOKEN", result.data.token)
+      } catch (error) {}
+    },
+    [loginAPI]
+  )
 
-  const loginFb = useCallback(async (accessToken: string) => {
-    const result = await AuthService.loginFb(accessToken)
-    if (result.status === 200) {
-      setAccessToken(result.data.token)
-      setLocalStorage("ACCESS_TOKEN", result.data.token)
-    }
-    return result
-  }, [])
-
-  const forgotPassword = useCallback(async (params: ForgotPasswordModel) => {
-    const result = await AuthService.forgotPassword(params)
-    return result
-  }, [])
-
-  const resetPassword = useCallback(async (params: ResetPasswordModel) => {
-    const result = await AuthService.resetPassword(params)
-    return result
-  }, [])
+  const loginFb = useCallback(
+    async (accessToken: string) => {
+      try {
+        const result = await loginFbAPI(accessToken)
+        setAccessToken(result.data.token)
+        setLocalStorage("ACCESS_TOKEN", result.data.token)
+      } catch (error) {}
+    },
+    [loginFbAPI]
+  )
 
   const logout = useCallback(async () => {
-    await refresh()
-    const result = await AuthService.logout()
-    setAccessToken(null)
-    removeLocalStorage("ACCESS_TOKEN")
-    return result
-  }, [refresh])
+    try {
+      await refresh()
+      await logoutAPI()
+      setAccessToken(null)
+      removeLocalStorage("ACCESS_TOKEN")
+    } catch (error) {}
+  }, [refresh, logoutAPI])
 
   const me = useSWR(
     () => (accessToken ? `me (${accessToken})` : null),
     async () => {
       await refresh()
-      return (await AuthService.me()).data
+      return (await meAPI()).data
     },
     {
       refreshInterval: 0,
       revalidateOnFocus: process.env.NODE_ENV === "production"
     }
+  )
+
+  const forgotPassword = useCallback(
+    async (params: ForgotPasswordModel) => {
+      await forgotPasswordAPI(params)
+    },
+    [forgotPasswordAPI]
+  )
+  const resetPassword = useCallback(
+    async (params: ResetPasswordModel) => {
+      await resetPasswordAPI(params)
+    },
+    [resetPasswordAPI]
   )
 
   useEffect(() => {

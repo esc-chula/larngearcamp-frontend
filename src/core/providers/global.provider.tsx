@@ -13,9 +13,7 @@ interface GlobalConstruct {
 
 export const GlobalContext = createContext({} as GlobalConstruct)
 
-export const useGlobalContext = () => {
-  return useContext(GlobalContext)
-}
+export const useGlobalContext = () => useContext(GlobalContext)
 
 export const GlobalProvider: React.FC = ({ children, ...other }) => {
   const [step, setStep] = useState(1)
