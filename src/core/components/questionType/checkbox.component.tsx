@@ -3,7 +3,7 @@ import { Controller, useFormContext, useWatch } from "react-hook-form"
 import { Checkbox, FormControlLabel, Typography, TextField, makeStyles } from "@material-ui/core"
 import ChoiceModel from "../../models/choice.model"
 import { sequenceConstant } from "../../constants/sequence.constant"
-import { resolve } from "../../../utils/other"
+import { resolve } from "../../../utils/modify"
 
 interface CheckboxTypeProps {
   name: string

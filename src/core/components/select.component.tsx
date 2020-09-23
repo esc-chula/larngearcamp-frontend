@@ -2,7 +2,7 @@ import React from "react"
 import { InputLabel, Select, MenuItem, FormControlProps, FormControl, FormHelperText } from "@material-ui/core"
 import SelectModel from "../models/select.model"
 import { Controller, useFormContext } from "react-hook-form"
-import { resolve } from "../../utils/other"
+import { resolve } from "../../utils/modify"
 
 interface SelectProps extends FormControlProps {
   data: SelectModel

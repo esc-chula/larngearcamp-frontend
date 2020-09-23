@@ -2,7 +2,7 @@ import React from "react"
 import { Controller, useFormContext } from "react-hook-form"
 import { RadioGroup, FormControlLabel, Radio, Typography } from "@material-ui/core"
 import ChoiceModel from "../../models/choice.model"
-import { resolve } from "../../../utils/other"
+import { resolve } from "../../../utils/modify"
 
 interface RadioTypeProps {
   name: string

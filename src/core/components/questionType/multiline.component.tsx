@@ -2,7 +2,7 @@ import React, { useMemo } from "react"
 import { StandardTextFieldProps, TextField, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useFormContext, useWatch } from "react-hook-form"
-import { resolve } from "../../../utils/other"
+import { resolve } from "../../../utils/modify"
 
 interface MultiLineTypeProps {
   name: string

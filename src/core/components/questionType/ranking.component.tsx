@@ -4,7 +4,7 @@ import { Box, TextField, Typography } from "@material-ui/core"
 import ChoiceModel from "../../models/choice.model"
 import { makeStyles } from "@material-ui/core/styles"
 import { sequenceConstant } from "../../constants/sequence.constant"
-import { resolve } from "../../../utils/other"
+import { resolve } from "../../../utils/modify"
 
 interface CheckboxTypeProps {
   name: string
