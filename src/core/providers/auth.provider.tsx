@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useMemo, useCallback, useEffect } from "react"
+import React, { createContext, useContext, useState, useMemo, useCallback, useEffect, useRef } from "react"
 import { getLocalStorage, setLocalStorage, removeLocalStorage } from "../../utils/storage"
 import jwt_decode from "jwt-decode"
 import LoginModel from "../models/login.model"
@@ -9,6 +9,7 @@ import ResetPasswordModel from "../models/resetPassword.model"
 import { useAuthServiceContext } from "../services/auth.service"
 import MeDTO from "../models/dto/me.dto"
 import { httpClient } from "../../utils/http"
+import { AxiosRequestConfig } from "axios"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -16,7 +17,6 @@ interface AuthConstruct {
   isLoggedIn: boolean
   isUserLoggedIn: boolean
   isAdminLoggedIn: boolean
-  refresh: () => Promise<Boolean>
   login: (params: LoginModel) => Promise<void>
   loginFb: (facebookAccessToken: string) => Promise<void>
   logout: () => Promise<void>
@@ -25,13 +25,55 @@ interface AuthConstruct {
   resetPassword: (params: ResetPasswordModel) => Promise<void>
 }
 
+interface AccessTokenState {
+  accessToken: string | null
+  exp: number
+  getAccessTokenPromise: Promise<string | null> | null
+}
+
+function initAccessTokenState(accessToken: string, accessTokenState: AccessTokenState) {
+  if (accessToken) {
+    const { exp } = jwt_decode(accessToken)
+    accessTokenState.accessToken = accessToken
+    accessTokenState.exp = exp
+  } else {
+    accessTokenState.accessToken = null
+    accessTokenState.exp = 0
+  }
+}
+
 export const AuthContext = createContext({} as AuthConstruct)
 
 export const useAuthContext = () => useContext(AuthContext)
 
 export const AuthProvider: React.FC = ({ ...other }) => {
   const { loginAPI, loginFbAPI, meAPI, logoutAPI, refreshAPI, forgotPasswordAPI, resetPasswordAPI } = useAuthServiceContext()
-  const [accessToken, setAccessToken] = useState(() => getLocalStorage("ACCESS_TOKEN"))
+  const [accessToken, setStateAccessToken] = useState(() => getLocalStorage("ACCESS_TOKEN"))
+  const accessTokenStateRef = useRef<AccessTokenState>((null as unknown) as AccessTokenState)
+
+  const setAccessToken = useCallback(newAccessToken => {
+    initAccessTokenState(newAccessToken, accessTokenStateRef.current)
+    setStateAccessToken(newAccessToken)
+    if (newAccessToken !== null) {
+      setLocalStorage("ACCESS_TOKEN", newAccessToken)
+    } else {
+      removeLocalStorage("ACCESS_TOKEN")
+    }
+  }, [])
+
+  if (accessTokenStateRef.current === null) {
+    accessTokenStateRef.current = {
+      accessToken: null,
+      exp: 0,
+      getAccessTokenPromise: null
+    }
+    initAccessTokenState(accessToken, accessTokenStateRef.current)
+  }
+
+  useEffect(() => {
+    initAccessTokenState(accessToken, accessTokenStateRef.current)
+  }, [accessToken])
+
   const isUserLoggedIn = useMemo(() => {
     if (accessToken) {
       const { role } = jwt_decode(accessToken)
@@ -50,75 +92,110 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const isLoggedIn = useMemo(() => Boolean(accessToken), [accessToken])
 
-  const refresh = useCallback(async (): Promise<Boolean> => {
-    if (accessToken) {
-      const { exp } = jwt_decode(accessToken)
-      const currentTime = new Date()
-      const expireTime = new Date(exp * 1000)
-      const expireTimeNext3Day = new Date(exp * 1000 + 1000 * 60 * 60 * 24 * 3)
-      if (currentTime > expireTimeNext3Day) {
-        try {
-          await logoutAPI()
-          process.env.REACT_APP_DEBUG && console.log("Token Expired, logged out (inactive in 3 days)")
-          setAccessToken(null)
-          removeLocalStorage("ACCESS_TOKEN")
-        } catch (error) {}
-        return true
-      } else if (currentTime > expireTime) {
-        try {
-          const result = await refreshAPI()
-          process.env.REACT_APP_DEBUG && console.log("Token Expired, refresh (active in 3 days)")
-          setAccessToken(result.data.token)
-          setLocalStorage("ACCESS_TOKEN", result.data.token)
-        } catch (error) {}
-        return true
-      }
-    }
-    return false
-  }, [accessToken, logoutAPI, refreshAPI])
-
   const login = useCallback(
     async (params: LoginModel) => {
       try {
         const result = await loginAPI(params)
-        setAccessToken(result.data.token)
-        setLocalStorage("ACCESS_TOKEN", result.data.token)
+        const accessToken = result.data.token
+        setAccessToken(accessToken)
       } catch (error) {}
     },
-    [loginAPI]
+    [loginAPI, setAccessToken]
   )
 
   const loginFb = useCallback(
-    async (accessToken: string) => {
+    async (signedRequest: string) => {
       try {
-        const result = await loginFbAPI(accessToken)
-        setAccessToken(result.data.token)
-        setLocalStorage("ACCESS_TOKEN", result.data.token)
+        const result = await loginFbAPI(signedRequest)
+        const accessToken = result.data.token
+        setAccessToken(accessToken)
       } catch (error) {}
     },
-    [loginFbAPI]
+    [loginFbAPI, setAccessToken]
   )
 
   const logout = useCallback(async () => {
-    try {
-      await refresh()
-      await logoutAPI()
-      setAccessToken(null)
-      removeLocalStorage("ACCESS_TOKEN")
-    } catch (error) {}
-  }, [refresh, logoutAPI])
-
-  const me = useSWR(
-    () => (accessToken ? `me (${accessToken})` : null),
-    async () => {
-      await refresh()
-      return (await meAPI()).data
-    },
-    {
-      refreshInterval: 0,
-      revalidateOnFocus: process.env.NODE_ENV === "production"
+    const { accessToken } = accessTokenStateRef.current
+    if (accessToken === null) {
+      return
     }
-  )
+    try {
+      await logoutAPI(accessToken)
+    } catch (error) {}
+    setAccessToken(null)
+  }, [logoutAPI, setAccessToken])
+
+  // returns current token or refresh and returns a new one
+  const getAccessTokenImpl: () => Promise<string | null> = useCallback(async () => {
+    const { accessToken, exp } = accessTokenStateRef.current
+    if (!accessToken) {
+      return null
+    }
+
+    const expireTime = new Date(exp * 1000)
+    const currentTime = new Date()
+    if (currentTime > expireTime) {
+      process.env.REACT_APP_DEBUG && console.log("Token Expired, trying to refresh")
+      try {
+        const result = await refreshAPI(accessToken)
+        const newAccessToken = result.data.token
+        setAccessToken(newAccessToken)
+        return newAccessToken
+      } catch (error) {
+        if (error?.response?.status === 401) {
+          logout()
+          return null
+        }
+        // maybe connection is down? let's return the old token
+        return accessToken
+      }
+    } else {
+      return accessToken
+    }
+  }, [refreshAPI, logout, setAccessToken])
+
+  // ensure getAccessTokenImpl can't be called in parallel
+  const getAccessToken: () => Promise<string | null> = useCallback(async () => {
+    const accessTokenState = accessTokenStateRef.current
+    if (accessTokenState.getAccessTokenPromise) {
+      return await accessTokenState.getAccessTokenPromise
+    } else {
+      const promise = getAccessTokenImpl()
+      accessTokenState.getAccessTokenPromise = promise
+      try {
+        return await promise
+      } finally {
+        accessTokenState.getAccessTokenPromise = null
+      }
+    }
+  }, [getAccessTokenImpl])
+
+  // add access token to all requests through httpClient
+  useEffect(() => {
+    const id = httpClient.interceptors.request.use(async (config: AxiosRequestConfig) => {
+      const accessToken = await getAccessToken()
+      config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : ""
+      return config
+    })
+    return () => httpClient.interceptors.request.eject(id)
+  }, [getAccessToken])
+
+  const meFetcher = useCallback(async () => {
+    try {
+      return (await meAPI(await getAccessToken())).data
+    } catch (error) {
+      if (error?.response?.status === 401) {
+        // token not expired yet but invalid
+        logout()
+      }
+      throw error
+    }
+  }, [meAPI, getAccessToken, logout])
+
+  const me = useSWR(() => (accessToken ? `me (${accessToken})` : null), meFetcher, {
+    refreshInterval: 0,
+    revalidateOnFocus: process.env.NODE_ENV === "production"
+  })
 
   const forgotPassword = useCallback(
     async (params: ForgotPasswordModel) => {
@@ -134,18 +211,13 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   )
 
   useEffect(() => {
-    refresh()
-  }, [accessToken, refresh])
-
-  useEffect(() => {
     const id = httpClient.interceptors.response.use(undefined, error => {
       if (error?.response?.status === 401) {
         setAccessToken(null)
-        removeLocalStorage("ACCESS_TOKEN")
       }
     })
     return () => httpClient.interceptors.response.eject(id)
-  }, [])
+  }, [setAccessToken])
 
   const value: AuthConstruct = {
     accessToken,
@@ -153,7 +225,6 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     isLoggedIn,
     isUserLoggedIn,
     isAdminLoggedIn,
-    refresh,
     login,
     loginFb,
     logout,
