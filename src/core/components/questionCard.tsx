@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     margin: theme.spacing(2, 0)
+  },
+  title: {
+    marginBottom: theme.spacing(2)
   }
 }))
 
@@ -26,7 +29,7 @@ const QuestionCardComponent: React.FC<QuestionCard> = ({ question, questionProps
   const classes = useStyles()
   return (
     <Paper elevation={0} className={classes.paper}>
-      <Typography variant="body1" {...questionProps} dangerouslySetInnerHTML={{ __html: question }} />
+      <Typography variant="body1" {...questionProps} dangerouslySetInnerHTML={{ __html: question }} className={classes.title} />
       {imagePath && <img src={imagePath} alt={question} className={classes.image} />}
       {caption && (
         <Typography variant="caption" {...captionProps}>

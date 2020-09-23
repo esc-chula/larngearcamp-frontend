@@ -6,7 +6,8 @@ const gradesConstant: SelectModel = {
   contents: [
     { text: "ม.4", value: "มัญยมศึกษาปีที่ 4" },
     { text: "ม.5", value: "มัญยมศึกษาปีที่ 5" },
-    { text: "ม.6", value: "มัญยมศึกษาปีที่ 6" }
+    { text: "ปวช. ปี1", value: "ปวช. ปี1" },
+    { text: "ปวช. ปี2", value: "ปวช. ปี2" }
   ]
 }
 

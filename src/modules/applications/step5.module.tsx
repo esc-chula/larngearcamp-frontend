@@ -1,9 +1,16 @@
 import React, { useCallback } from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { Button, Divider, Typography, Box } from "@material-ui/core"
+import { Divider, Typography } from "@material-ui/core"
 import { CardComponent } from "../../core/components/card.component"
-import AddToPhotosOutlinedIcon from "@material-ui/icons/AddToPhotosOutlined"
 import ApplicationStepModule from "./stepLayout.module"
+import { FormProvider, useForm } from "react-hook-form"
+import { uploadFileConstant } from "../../core/constants/uploadFile.constant"
+import UploadBlockComponent from "../../core/components/uploadBlock.component"
+import { yupResolver } from "@hookform/resolvers"
+import DocumentSchema from "../../schemas/document.schema"
+import { DocumentModel } from "../../schemas/document.schema"
+import { useApplicationContext } from "../../core/providers/application.provider"
+import { convertDocumentSchemaSchemaToDocumentDTO } from "../../utils/modify"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -26,9 +33,23 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationStepFiveModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
-  const onSubmit = useCallback(() => {
-    console.log("Success")
-  }, [])
+  const methods = useForm<DocumentModel>({
+    resolver: yupResolver(DocumentSchema)
+  })
+  const { handleSubmit } = methods
+  const { updateApplication } = useApplicationContext()
+
+  const onSubmit = useCallback(
+    async data => {
+      const values = convertDocumentSchemaSchemaToDocumentDTO(data)
+      try {
+        await updateApplication(values)
+      } catch (error) {
+        // show modal
+      }
+    },
+    [updateApplication]
+  )
 
   return (
     <ApplicationStepModule>
@@ -37,59 +58,17 @@ const ApplicationStepFiveModule: React.FC<{ step: string }> = ({ step }) => {
           <Typography variant="h5" align="center" className={classes.bold}>
             อัพโหลดเอกสารประกอบการรับสมัคร
           </Typography>
-
-          <Divider className={classes.divider} />
-
-          <Box display="flex" mb={2}>
-            <Typography variant="body1">1.</Typography>
-            <Box ml={2}>
-              <Typography variant="body1">รูปถ่ายผู้สมัคร (รูปถ่ายหน้าตรง เห็นหน้าชัดเจน เช่น รูปติดบัตร เป็นต้น)</Typography>
-              <Typography variant="body2">ไฟล์รูปภาพประเภท .jpg / .png ขนาดไม่เกิน 2 MB</Typography>
-              <Button variant="contained" component="label" color="primary" className={classes.upload}>
-                <div className={classes.withIcon}>
-                  <Typography>อัพโหลด</Typography>
-                  <AddToPhotosOutlinedIcon fontSize="small" />
-                </div>
-                <input type="file" style={{ display: "none" }} />
-              </Button>
-            </Box>
-          </Box>
-
-          <Divider className={classes.divider} />
-
-          <Box display="flex" mb={2}>
-            <Typography variant="body1">2.</Typography>
-            <Box ml={2}>
-              <Typography variant="body1">หนังสือรับรองจากผู้ปกครองเพื่อเข้าร่วมค่ายลานเกียร์ครั้งที่ 20</Typography>
-              <Typography variant="body2">ไฟล์รูปภาพประเภท .pdf ขนาดไม่เกิน 2 MB</Typography>
-              <Button variant="contained" component="label" color="primary" className={classes.upload}>
-                <div className={classes.withIcon}>
-                  <Typography>อัพโหลด</Typography>
-                  <AddToPhotosOutlinedIcon fontSize="small" />
-                </div>
-                <input type="file" style={{ display: "none" }} />
-              </Button>
-            </Box>
-          </Box>
-
-          <Divider className={classes.divider} />
-
-          <Box display="flex" mb={4}>
-            <Typography variant="body1">3.</Typography>
-            <Box ml={2}>
-              <Typography variant="body1">ใบ ปพ. 1 หรือ ปพ.7 หรือ เอกสารยืนยันตัวตนอื่นๆ</Typography>
-              <Typography variant="body2">ไฟล์รูปภาพประเภท .pdf ขนาดไม่เกิน 2 MB</Typography>
-              <Button variant="contained" component="label" color="primary" className={classes.upload}>
-                <div className={classes.withIcon}>
-                  <Typography>อัพโหลด</Typography>
-                  <AddToPhotosOutlinedIcon fontSize="small" />
-                </div>
-                <input type="file" style={{ display: "none" }} />
-              </Button>
-            </Box>
-          </Box>
-
-          <ButtonBar />
+          <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {uploadFileConstant.map((content, index) => (
+                <React.Fragment key={index}>
+                  <Divider className={classes.divider} />
+                  <UploadBlockComponent {...content} order={index + 1} />
+                </React.Fragment>
+              ))}
+              <ButtonBar />
+            </form>
+          </FormProvider>
         </CardComponent>
       )}
     </ApplicationStepModule>

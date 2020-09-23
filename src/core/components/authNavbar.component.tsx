@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react"
 import { Avatar, Menu, MenuItem, ListItemIcon, ListItemText } from "@material-ui/core"
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { useGlobalContext } from "../providers/global.provider"
 import { useAuthContext } from "../providers/auth.provider"
 import { makeStyles } from "@material-ui/core/styles"
@@ -31,13 +31,9 @@ const AuthNavbarComponent: React.FC = () => {
     setAnchorEl(null)
   }, [])
 
-  const nextPage = useCallback(
-    (path: string) => () => {
-      setAnchorEl(null)
-      history.push(path)
-    },
-    [history]
-  )
+  const clearAnchorEl = useCallback(() => {
+    setAnchorEl(null)
+  }, [])
 
   const logoutClicked = useCallback(async () => {
     setAnchorEl(null)
@@ -68,20 +64,24 @@ const AuthNavbarComponent: React.FC = () => {
           vertical: "top",
           horizontal: "right"
         }}>
-        <MenuItem onClick={nextPage("/profile")}>
-          <ListItemIcon>
-            <AccountCircleIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Profile" />
-        </MenuItem>
+        <Link onClick={clearAnchorEl} className="no-underline" to="/profile">
+          <MenuItem>
+            <ListItemIcon>
+              <AccountCircleIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </MenuItem>
+        </Link>
 
         {isAdminLoggedIn && (
-          <MenuItem onClick={nextPage("/admin/dashboard")}>
-            <ListItemIcon>
-              <SupervisorAccountIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText primary="Admin" />
-          </MenuItem>
+          <Link onClick={clearAnchorEl} className="no-underline" to="/admin/dashboard">
+            <MenuItem>
+              <ListItemIcon>
+                <SupervisorAccountIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Admin" />
+            </MenuItem>
+          </Link>
         )}
 
         <MenuItem onClick={logoutClicked}>

@@ -2,7 +2,7 @@ import React, { useMemo } from "react"
 import { StandardTextFieldProps, TextField, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useFormContext, useWatch } from "react-hook-form"
-import { resolve } from "../../../utils/other"
+import { resolve } from "../../../utils/modify"
 
 interface MultiLineTypeProps {
   name: string
@@ -16,15 +16,11 @@ interface MultiLineTypeProps {
 
 const useStyles = makeStyles(theme => ({
   mutiline: {
-    marginTop: theme.spacing(3),
     "&>*:not(p)": {
       minHeight: 80,
       display: "flex",
       alignItems: "flex-start"
     }
-  },
-  wordCount: {
-    marginTop: theme.spacing(2)
   }
 }))
 
@@ -37,6 +33,11 @@ const MultilineTypeComponent: React.FC<StandardTextFieldProps & MultiLineTypePro
 
   return (
     <>
+      {wordCount && (
+        <Typography color={isOutOfRange ? "error" : "initial"} variant="caption">
+          จำนวนตัวอักษร: {value ? value.length : "0"}
+        </Typography>
+      )}
       <TextField
         variant="outlined"
         size="small"
@@ -48,11 +49,6 @@ const MultilineTypeComponent: React.FC<StandardTextFieldProps & MultiLineTypePro
         helperText={selfError?.message}
         {...other}
       />
-      {wordCount && (
-        <Typography color={isOutOfRange ? "error" : "initial"} variant="caption" className={classes.wordCount}>
-          จำนวนตัวอักษร: {value ? value.length : "0"}
-        </Typography>
-      )}
     </>
   )
 }

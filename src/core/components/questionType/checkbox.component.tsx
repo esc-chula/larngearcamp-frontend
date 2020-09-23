@@ -3,7 +3,7 @@ import { Controller, useFormContext, useWatch } from "react-hook-form"
 import { Checkbox, FormControlLabel, Typography, TextField, makeStyles } from "@material-ui/core"
 import ChoiceModel from "../../models/choice.model"
 import { sequenceConstant } from "../../constants/sequence.constant"
-import { resolve } from "../../../utils/other"
+import { resolve } from "../../../utils/modify"
 
 interface CheckboxTypeProps {
   name: string
@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(-2)
   },
   container: {
-    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column"
   },
@@ -37,7 +36,7 @@ const CheckboxTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents }) 
   const { control, errors } = useFormContext()
   const checkedValues: any | undefined = useWatch({ name: name })
   const selfError = resolve(name, errors)
-  console.log(checkedValues)
+
   return (
     <div className={classes.container}>
       {contents?.map((content, index) => {

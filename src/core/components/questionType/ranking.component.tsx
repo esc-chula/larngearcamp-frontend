@@ -4,7 +4,7 @@ import { Box, TextField, Typography } from "@material-ui/core"
 import ChoiceModel from "../../models/choice.model"
 import { makeStyles } from "@material-ui/core/styles"
 import { sequenceConstant } from "../../constants/sequence.constant"
-import { resolve } from "../../../utils/other"
+import { resolve } from "../../../utils/modify"
 
 interface CheckboxTypeProps {
   name: string
@@ -34,10 +34,10 @@ const RankingTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents }) =
   const classes = useStyles()
   const { register, errors } = useFormContext()
   const selfTopError = resolve(name, errors)
-  console.log(errors)
+
   return (
     <>
-      <Box mt={2} display="flex" flexDirection="column">
+      <Box display="flex" flexDirection="column">
         {contents?.map((content, index) => {
           const newName = `${name}.${sequenceConstant[index + 1]}`
           const selfError = resolve(newName, errors)

@@ -9,11 +9,12 @@ import { PersonalEducationComponent } from "../../core/components/personalInfo/e
 import { PersonalHealthComponent } from "../../core/components/personalInfo/health.component"
 import { PersonalEmergencyComponent } from "../../core/components/personalInfo/emergency.component"
 import { yupResolver } from "@hookform/resolvers"
-import ProfileSchema from "../../schemas/profile.schema"
+import ProfileSchema, { ProfileModel } from "../../schemas/profile.schema"
 import ApplicationStepModule from "./stepLayout.module"
 import { useGlobalContext } from "../../core/providers/global.provider"
-import ApplicationService from "../../core/services/application.service"
 import { useHistory } from "react-router-dom"
+import { useApplicationContext } from "../../core/providers/application.provider"
+import { convertProfileSchemaToProfileDTO } from "../../utils/modify"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -39,24 +40,29 @@ const useStyles = makeStyles(theme => ({
 const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
+  const { updateApplication } = useApplicationContext()
   const history = useHistory()
-  const methods = useForm({
+  const methods = useForm<ProfileModel>({
     reValidateMode: "onBlur",
     resolver: yupResolver(ProfileSchema)
   })
-  const { handleSubmit, getValues } = methods
+  const { handleSubmit } = methods
 
-  const onSubmit = useCallback(async () => {
-    setLoading(true)
-    const values = getValues()
-    try {
-      await ApplicationService.updateApplication(values)
-      history.push(`/application/step/${parseInt(step) + 1}`)
-    } catch (error) {
-      // show modal
-    }
-    setLoading(false)
-  }, [setLoading, getValues, history, step])
+  const onSubmit = useCallback(
+    async data => {
+      setLoading(true)
+      const values = convertProfileSchemaToProfileDTO(data)
+      try {
+        console.log(values)
+        await updateApplication(values)
+        history.push(`/application/step/${parseInt(step) + 1}`)
+      } catch (error) {
+        // show modal
+      }
+      setLoading(false)
+    },
+    [setLoading, history, step, updateApplication]
+  )
 
   return (
     <ApplicationStepModule>

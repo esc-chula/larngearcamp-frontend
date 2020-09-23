@@ -26,21 +26,23 @@ const ApplicationStepSixModule: React.FC<{ step: string }> = ({ step }) => {
   return (
     <ApplicationStepModule>
       {({ ButtonBar }) => (
-        <CardComponent maxWidth="lg">
-          <Typography variant="h5" align="center" className={classes.bold}>
-            อัพโหลดเอกสารประกอบการรับสมัคร
-          </Typography>
+        <form onSubmit={onSubmit}>
+          <CardComponent maxWidth="lg">
+            <Typography variant="h5" align="center" className={classes.bold}>
+              อัพโหลดเอกสารประกอบการรับสมัคร
+            </Typography>
 
-          <Divider className={classes.divider} />
+            <Divider className={classes.divider} />
 
-          <Typography variant="body1">
-            หลังจากน้อง ๆ ได้กดยืนยันการสมัครแล้วน้อง ๆ จะ <span className={classes.highlight}>ไม่สามารถ</span> กลับไปแก้ไขคำตอบของ
-            คำถามทั้งสองส่วนและ เอกสารที่แนบได้อีก โดยน้อง ๆ สามารถกลับไปตรวจสอบคำตอบ และเอกสารต่าง ๆ ได้
-            <span className={classes.highlight}>ผ่านการกดหมายเลขขั้นตอนที่แถบทางด้านบน</span>
-          </Typography>
+            <Typography variant="body1">
+              หลังจากน้อง ๆ ได้กดยืนยันการสมัครแล้วน้อง ๆ จะ <span className={classes.highlight}>ไม่สามารถ</span> กลับไปแก้ไขคำตอบของ
+              คำถามทั้งสองส่วนและ เอกสารที่แนบได้อีก โดยน้อง ๆ สามารถกลับไปตรวจสอบคำตอบ และเอกสารต่าง ๆ ได้
+              <span className={classes.highlight}>ผ่านการกดหมายเลขขั้นตอนที่แถบทางด้านบน</span>
+            </Typography>
 
-          <ButtonBar />
-        </CardComponent>
+            <ButtonBar />
+          </CardComponent>
+        </form>
       )}
     </ApplicationStepModule>
   )

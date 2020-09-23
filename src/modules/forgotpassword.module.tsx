@@ -56,7 +56,11 @@ const ForgotPasswordModule: React.FC = () => {
   const onSubmit = useCallback(async () => {
     setLoading(true)
     const values = getValues(["email"])
-    await forgotPassword(values)
+    try {
+      await forgotPassword(values)
+    } catch (error) {
+      console.error(error)
+    }
     setLoading(false)
     setFinished(true)
   }, [getValues, setLoading, forgotPassword])
@@ -78,7 +82,7 @@ const ForgotPasswordModule: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
           <TextFieldComponent name="email" label="อีเมล" type="email" />
           <Button type="submit" variant="contained" color="primary">
-            <Typography variant="h6">ยืนยันอีเมล</Typography>
+            <Typography variant="button">ยืนยันอีเมล</Typography>
           </Button>
         </form>
       </FormProvider>
@@ -90,8 +94,8 @@ const ForgotPasswordModule: React.FC = () => {
       <CheckCircleIcon style={{ color: "#38A169", fontSize: "48px" }} />
       <Typography className={classes.remark}>ระบบได้ทำการส่งลิงก์เปลี่ยนรหัสผ่านไปยังอีเมลที่ระบุแล้ว กรุณาเช็คอีเมลเพื่อดำเนินการต่อไป</Typography>
       <Button onClick={changePage("/login")} variant="contained" color="primary" className={classes.marginTop} fullWidth>
-        <ChevronLeftIcon style={{ fontSize: "32px" }} />
-        <Typography variant="h6">กลับสู่หน้าเข้าสู่ระบบ</Typography>
+        <ChevronLeftIcon style={{ fontSize: "28px" }} />
+        <Typography variant="button">กลับสู่หน้าเข้าสู่ระบบ</Typography>
       </Button>
     </Box>
   )

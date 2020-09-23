@@ -1,5 +1,5 @@
-import React, { useCallback } from "react"
-import { useHistory } from "react-router-dom"
+import React from "react"
+import { Link } from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { CardComponent } from "../../core/components/card.component"
@@ -48,13 +48,6 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationFinishModule = () => {
   const classes = useStyles()
-  const history = useHistory()
-  const nextPage = useCallback(
-    (path: string) => () => {
-      history.push(path)
-    },
-    [history]
-  )
   return (
     <>
       <CardComponent maxWidth="lg">
@@ -73,9 +66,11 @@ const ApplicationFinishModule = () => {
           สถานะการสมัครและแก้ไขข้อมูลส่วนตัวที่ได้กรอกไปแล้วได้ในหน้าถัดไป
         </Typography>
 
-        <Button onClick={nextPage("/profile")} variant="contained" className={classes.buttonSuccess} fullWidth>
-          ไปหน้าตรวจสอบสถานะ
-        </Button>
+        <Link to="/profile">
+          <Button variant="contained" className={classes.buttonSuccess} fullWidth>
+            ไปหน้าตรวจสอบสถานะ
+          </Button>
+        </Link>
       </CardComponent>
     </>
   )
