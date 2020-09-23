@@ -1,14 +1,14 @@
-interface MeModel {
+interface MeDTO {
+  id: string
+  email: string
+  role: string
   name: {
     first: string
     last: string
     display: string
   }
-  surname: string
-  email: string
-  id: string
   createdAt: Date
   updatedAt: Date
 }
 
-export default MeModel
+export default MeDTO

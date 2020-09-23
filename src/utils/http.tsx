@@ -1,19 +1,14 @@
 import axios from "axios"
-import { AxiosRequestConfig } from "axios"
-import { getLocalStorage } from "./storage"
 
 const httpClient = axios.create({
   baseURL: process.env.REACT_APP_API_SERVER,
   timeout: 5000
 })
 
-const authHeaderConfig = (config: AxiosRequestConfig) => {
-  const accessToken = getLocalStorage("ACCESS_TOKEN")
-  config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : ""
-  return config
-}
-
-httpClient.interceptors.request.use(authHeaderConfig)
+const authHttpClient = axios.create({
+  baseURL: process.env.REACT_APP_API_SERVER,
+  timeout: 5000
+})
 
 async function get<T>(url: string, params?: any): Promise<T> {
   return await httpClient.get(url, params)
@@ -31,4 +26,4 @@ async function del(url: string): Promise<void> {
   await httpClient.delete(url)
 }
 
-export { httpClient, get, post, put, del }
+export { httpClient, authHttpClient, get, post, put, del }

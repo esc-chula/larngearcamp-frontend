@@ -1,8 +1,9 @@
-import React, { useCallback } from "react"
-import { Link, useHistory } from "react-router-dom"
+import React from "react"
+import { Link } from "react-router-dom"
 import { Drawer, Box, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useAuthContext } from "../providers/auth.provider"
+import { useNavBarContext } from "./navbar.component"
 
 interface Props {
   open: boolean
@@ -17,24 +18,32 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const SideBarLink: React.FC<React.PropsWithChildren<{ to: string }>> = ({ to, children }) => {
+  const { closeDrawer } = useNavBarContext()
+  return (
+    <Link to={to} onClick={closeDrawer}>
+      {children}
+    </Link>
+  )
+}
+
 const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
   const classes = useStyles()
-  const history = useHistory()
   const { isAdminLoggedIn } = useAuthContext()
-
-  const nextPage = useCallback((path: string) => () => history.push(path), [history])
 
   return (
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box minWidth={200} height="100%" display="flex" flexDirection="column" alignItems="center" py={6} px={5} className={classes.content}>
         <div>Logo</div>
-        <Link to="/docs">เอกสารการสมัคร</Link>
-        <Link to="/qna">คำถามที่พบบ่อย</Link>
-        {isAdminLoggedIn && <Link to="/admin/dashboard">dashboard</Link>}
-        <Link to="/login">เข้าสู่ระบบ</Link>
-        <Button color="primary" variant="contained" fullWidth onClick={nextPage("/register")}>
-          ลงทะเบียน
-        </Button>
+        <SideBarLink to="/docs">เอกสารการสมัคร</SideBarLink>
+        <SideBarLink to="/qna">คำถามที่พบบ่อย</SideBarLink>
+        {isAdminLoggedIn && <SideBarLink to="/admin/dashboard">dashboard</SideBarLink>}
+        <SideBarLink to="/login">เข้าสู่ระบบ</SideBarLink>
+        <SideBarLink to="/register">
+          <Button color="primary" variant="contained" fullWidth>
+            ลงทะเบียน
+          </Button>
+        </SideBarLink>
       </Box>
     </Drawer>
   )
