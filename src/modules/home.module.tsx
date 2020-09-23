@@ -71,7 +71,13 @@ const HomeModule: React.FC = () => {
 
       <HomeLarngearDescription className={classes.description} />
 
-      <HomeCarousal gradientPercent={{ white: 3, fade: 15 }} images={[{ src: c1 }, { src: c2 }, { src: c3 }]} />
+      <HomeCarousal
+        autoPlay
+        autoPlaySpeed={3000}
+        swipeable
+        gradientPercent={{ white: 3, fade: 15 }}
+        images={[{ src: c1 }, { src: c2 }, { src: c3 }]}
+      />
 
       <HomeQualification
         className={classes.qualification}

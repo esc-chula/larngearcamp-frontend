@@ -30,6 +30,7 @@ const useStyle = makeStyles<DefaultTheme, Props>(theme => ({
   },
   cover: {
     position: "absolute",
+    pointerEvents: "none",
     top: 0,
     left: 0,
     width: "100%",
@@ -45,6 +46,9 @@ const useStyle = makeStyles<DefaultTheme, Props>(theme => ({
         #eeeeeeFF 100%)
       `,
     zIndex: 1
+  },
+  img: {
+    pointerEvents: "none"
   }
 }))
 
@@ -84,7 +88,7 @@ const HomeCarousal: React.FC<Props> = props => {
         customRightArrow={<RightArrow />}
         {...rest}>
         {props.images.map(({ src, alt }, i) => (
-          <img src={src} alt={alt} key={i} />
+          <img className={classes.img} src={src} alt={alt} key={i} />
         ))}
       </Carousel>
     </div>
