@@ -1,7 +1,7 @@
 import React, { useState, useCallback, createContext, useContext } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import { makeStyles } from "@material-ui/core/styles"
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { AppBar, Button, IconButton, Toolbar, Box, Hidden } from "@material-ui/core"
 import { SideBarComponent } from "./sidebar.component"
 import { AuthNavbarComponent } from "./authNavbar.component"
@@ -46,7 +46,6 @@ const useStyles = makeStyles(theme => ({
 
 const NavBarComponent = () => {
   const classes = useStyles()
-  const history = useHistory()
   const [open, setOpen] = useState(false)
   const { isLoggedIn } = useAuthContext()
   const { setLoading, setModal } = useGlobalContext()
@@ -60,8 +59,6 @@ const NavBarComponent = () => {
   )
 
   const closeDrawer = useCallback(() => setOpen(false), [])
-
-  const nextPage = useCallback((path: string) => () => history.push(path), [history])
 
   return (
     <NavBarContext.Provider value={{ closeDrawer }}>
@@ -103,9 +100,11 @@ const NavBarComponent = () => {
                   <Link className={classes.underlineWhite} to="/login">
                     เข้าสู่ระบบ
                   </Link>
-                  <Button color="primary" variant="contained" onClick={nextPage("/register")}>
-                    ลงทะเบียน
-                  </Button>
+                  <Link to="/register">
+                    <Button color="primary" variant="contained">
+                      ลงทะเบียน
+                    </Button>
+                  </Link>
                 </>
               )}
             </Box>
