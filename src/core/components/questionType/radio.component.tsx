@@ -18,7 +18,7 @@ const RadioTypeComponent: React.FC<RadioTypeProps> = ({ name, contents, ...other
       <Controller
         name={name}
         control={control}
-        defaultValue={""}
+        defaultValue=""
         as={
           <RadioGroup aria-label={name}>
             {contents?.map((content, index) => (

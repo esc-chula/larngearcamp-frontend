@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(-2)
   },
   container: {
-    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column"
   },
@@ -37,7 +36,7 @@ const CheckboxTypeComponent: React.FC<CheckboxTypeProps> = ({ name, contents }) 
   const { control, errors } = useFormContext()
   const checkedValues: any | undefined = useWatch({ name: name })
   const selfError = resolve(name, errors)
-  console.log(checkedValues)
+
   return (
     <div className={classes.container}>
       {contents?.map((content, index) => {
