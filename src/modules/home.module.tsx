@@ -26,9 +26,11 @@ const useStyle = makeStyles(() => ({
   description: {
     marginBottom: "80px"
   },
+  qualification: {
+    marginTop: "280px"
+  },
   timeline: {
-    marginTop: "80px",
-    marginBottom: "80px"
+    marginTop: "80px"
   }
 }))
 
@@ -45,6 +47,7 @@ const HomeModule: React.FC = () => {
       <HomeCarousal gradientPercent={{ white: 3, fade: 15 }} images={[{ src: c1 }, { src: c2 }, { src: c3 }]} />
 
       <HomeQualification
+        className={classes.qualification}
         qualifications={[
           { description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2", src: q1 },
           { description: "ไม่ป่วยเป็นโรคติดต่อร้ายแรง", src: q2 },
@@ -65,7 +68,7 @@ const HomeModule: React.FC = () => {
         ]}
       />
 
-      <HomeAnnouce height="max-content" />
+      <HomeAnnouce />
 
       <HomeFooter
         contacts={[

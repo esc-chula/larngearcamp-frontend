@@ -9,7 +9,10 @@ import landing3 from "../../assets/images/background/landing-3.svg"
 
 const useStyle = makeStyles(theme => ({
   container: {
-    maxWidth: "100vw"
+    position: "relative",
+    maxWidth: "100vw",
+    top: "20%",
+    height: "80%"
   },
   primaryAnnounce: {
     color: theme.palette.primary.main,
@@ -31,9 +34,9 @@ const useStyle = makeStyles(theme => ({
 const HomeAnnouce: React.FC<BoxProps> = props => {
   const classes = useStyle()
   return (
-    <BackgroundOverlay src={landing3} aspectRatio={1440 / 534} offsetPercentage={10} minHeightPx={400}>
-      <Box display="flex" height="100%" alignItems="center" justifyContent="center">
-        <Box textAlign="center" className={classes.container + " " + props.className} {...props}>
+    <BackgroundOverlay src={landing3} aspectRatio={1617 / 654} offsetPercentage={7} minHeightPx={600}>
+      <Box display="flex" height="100%" alignItems="center" justifyContent="center" className={classes.container + " " + props.className} {...props}>
+        <Box textAlign="center">
           <Typography className={classes.primaryAnnounce}>รับสมัคร 18&nbsp;กันยายน - 10&nbsp;ตุลาคม 2563</Typography>
           <Link to="/application" className="no-underline">
             <Button variant="contained" color="secondary" className={classes.subscribeButton}>

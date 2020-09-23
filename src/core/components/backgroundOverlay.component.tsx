@@ -16,9 +16,18 @@ type Props = {
 
 const useStyle = makeStyles<Theme, Props>(theme => ({
   backgroundImg: {
-    zIndex: -1,
-    width: "100%",
     position: "absolute",
+    top: props => {
+      const or = -(props.offsetPercentage ?? 0) / 100
+
+      return `min(
+        ${or / props.aspectRatio} * 100vw,
+        ${or * (props.minHeightPx ?? 0)}px
+      )`
+    },
+    left: 0,
+    width: "100%",
+    zIndex: -1,
     minHeight: props => `${props.minHeightPx ?? 0}px`,
     objectFit: props => (props.objectFit ?? "cover") as any,
     objectPosition: props => props.objectPosition
@@ -26,24 +35,24 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
   contentContainer: {
     width: "100%",
     height: 0,
-    paddingTop: props => {
+    paddingBottom: props => {
       const contentPercentage = props.contentPercentage ?? 100
-      const contentRatio = contentPercentage / 100
       const minHeightPx = props.minHeightPx ?? 0
+      const offsetPercentage = props.offsetPercentage ?? 0
 
       return `max(
-      ${contentPercentage / props.aspectRatio}%,
-      ${contentRatio * minHeightPx}px
+      ${(contentPercentage - offsetPercentage) / props.aspectRatio}%,
+      ${((contentPercentage - offsetPercentage) * minHeightPx) / 100}px
     )`
     },
     position: "relative"
   },
   content: {
     position: "absolute",
-    top: props => `${props.offsetPercentage ?? 0}%`,
+    top: 0,
     left: 0,
     width: "100%",
-    height: props => `${100 - (props.offsetPercentage ?? 0)}%`,
+    height: "100%",
     color: props => (props.disableAutoColor ? "" : theme.palette.primary.contrastText),
     overflowY: "auto"
   }
@@ -66,10 +75,10 @@ const BackgroundOverlay: React.FC<Props & BoxProps> = props => {
 
   return (
     <Box {...rest}>
-      <img src={src} alt={alt} className={classes.backgroundImg} />
-      <div className={classes.contentContainer}>
+      <Box className={classes.contentContainer}>
+        <img src={src} alt={alt} className={classes.backgroundImg} />
         <div className={classes.content}>{props.children}</div>
-      </div>
+      </Box>
     </Box>
   )
 }

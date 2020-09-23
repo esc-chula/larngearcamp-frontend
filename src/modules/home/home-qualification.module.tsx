@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Typography, Avatar, useTheme, useMediaQuery, Theme } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../utils/conversion"
@@ -29,8 +29,10 @@ const HomeQualification: React.FC<
 > = props => {
   const classes = useStyle()
 
+  const [width, setWidth] = useState(0)
+
   const theme = useTheme()
-  const isSmall = useMediaQuery<Theme>(theme.breakpoints.down("md"))
+  const isSmall = useMediaQuery<Theme>(theme.breakpoints.down(width + 64))
 
   const leftsRef = useRef<(HTMLDivElement | null)[]>([])
   const rightsRef = useRef<(HTMLDivElement | null)[]>([])
@@ -43,8 +45,9 @@ const HomeQualification: React.FC<
       return maxWidth
     }
 
-    allToMaxWidth(leftsRef.current.filter(x => x !== null) as HTMLDivElement[])
-    allToMaxWidth(rightsRef.current.filter(x => x !== null) as HTMLDivElement[])
+    const w1 = allToMaxWidth(leftsRef.current.filter(x => x !== null) as HTMLDivElement[])
+    const w2 = allToMaxWidth(rightsRef.current.filter(x => x !== null) as HTMLDivElement[])
+    setWidth(w1 + w2)
   }, [])
 
   const items = Array.from(Array(props.qualifications.length / 2).keys())
@@ -64,12 +67,13 @@ const HomeQualification: React.FC<
   return (
     <BackgroundOverlay
       src={landing2}
-      aspectRatio={1440 / 692}
-      contentPercentage={100}
-      offsetPercentage={isSmall ? 35 : 37}
-      minHeightPx={isSmall ? 900 : 0}
-      objectPosition="50% 50%">
-      <HomeContainer {...props}>
+      aspectRatio={1440 / 913}
+      contentPercentage={isSmall ? 79 : 79}
+      offsetPercentage={isSmall ? 25 : 30}
+      minHeightPx={isSmall ? 1100 : 0}
+      objectPosition="50% 50%"
+      {...props}>
+      <HomeContainer>
         <Typography variant="h3" className={classes.title}>
           คุณสมบัติผู้สมัคร
         </Typography>
