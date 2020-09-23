@@ -1,27 +1,42 @@
 import { AxiosResponse } from "axios"
-import axios from "axios"
 import UserModel from "../models/user.model"
 import { httpClient } from "../../utils/http"
+import React, { createContext, useCallback, useContext } from "react"
 
-const getUsers = async (): Promise<AxiosResponse> => {
-  return await httpClient.get(`${process.env.REACT_APP_API_SERVER}/users`)
+export interface UserServiceConstruct {
+  getUsersAPI: () => Promise<AxiosResponse>
+  getUserAPI: (userId: string) => Promise<AxiosResponse>
+  createUserAPI: (params: UserModel) => Promise<AxiosResponse>
+  updateUserAPI: (params: UserModel) => Promise<AxiosResponse>
+  deleteUserAPI: (userId: string) => Promise<AxiosResponse>
 }
 
-const getUser = async (params: { userId: string }): Promise<AxiosResponse> => {
-  return await httpClient.get(`${process.env.REACT_APP_API_SERVER}/users/${params?.userId}`)
-}
+export const UserSercviceContext = createContext({} as UserServiceConstruct)
 
-const createUser = async (params: UserModel): Promise<AxiosResponse> => {
-  return await httpClient.post(`${process.env.REACT_APP_API_SERVER}/users`, params)
-}
+export const useUserServiceContext = () => useContext(UserSercviceContext)
 
-const updateUser = async (params: UserModel): Promise<AxiosResponse> => {
-  return await httpClient.patch(`${process.env.REACT_APP_API_SERVER}/users`, params)
-}
+export const UserServiceProvider = ({ ...other }) => {
+  const getUsersAPI = useCallback(async (): Promise<AxiosResponse> => {
+    return await httpClient.get(`/users`)
+  }, [])
 
-const deleteUser = async (params: { userId: string }): Promise<AxiosResponse> => {
-  return await axios.delete(`${process.env.REACT_APP_API_SERVER}/users/${params?.userId}`)
-}
+  const getUserAPI = useCallback(async (userId: string): Promise<AxiosResponse> => {
+    return await httpClient.get(`/users/${userId}`)
+  }, [])
 
-const UsersService = { getUsers, getUser, createUser, updateUser, deleteUser }
-export default UsersService
+  const createUserAPI = useCallback(async (params: UserModel): Promise<AxiosResponse> => {
+    return await httpClient.post(`/users`, params)
+  }, [])
+
+  const updateUserAPI = useCallback(async (params: UserModel): Promise<AxiosResponse> => {
+    return await httpClient.patch(`/users`, params)
+  }, [])
+
+  const deleteUserAPI = useCallback(async (userId: string): Promise<AxiosResponse> => {
+    return await httpClient.delete(`/users/${userId}`)
+  }, [])
+
+  const value = { getUsersAPI, getUserAPI, createUserAPI, updateUserAPI, deleteUserAPI }
+
+  return <UserSercviceContext.Provider value={value} {...other} />
+}
