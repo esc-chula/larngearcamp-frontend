@@ -1,4 +1,4 @@
-interface MeModel {
+interface MeDTO {
   id: string
   email: string
   role: string
@@ -11,4 +11,4 @@ interface MeModel {
   updatedAt: Date
 }
 
-export default MeModel
+export default MeDTO
