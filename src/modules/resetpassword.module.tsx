@@ -102,7 +102,7 @@ const ResetPasswordModule: React.FC = () => {
           <TextFieldComponent name="password" label="รหัสผ่านใหม่" type="password" />
           <TextFieldComponent name="passwordConfirmation" label="ยืนยันรหัสผ่าน" type="passwordConfirmation" />
           <Button type="submit" variant="contained" color="primary">
-            <Typography variant="h6">เปลี่ยนรหัสผ่าน</Typography>
+            <Typography variant="button">เปลี่ยนรหัสผ่าน</Typography>
           </Button>
           {errors.invalid && (
             <Typography color="error" variant="body2" className={classes.clearMargin}>
@@ -129,8 +129,8 @@ const ResetPasswordModule: React.FC = () => {
       <CheckCircleIcon style={{ color: "#38A169", fontSize: "48px" }} />
       <Typography className={classes.remark}>การเปลี่ยนรหัสผ่านเสร็จสมบูรณ์ กรุณาเข้าสู่ระบบอีกครั้งด้วยรหัสผ่านใหม่</Typography>
       <Button onClick={changePage("/login")} variant="contained" color="primary" className={classes.marginTop} fullWidth>
-        <ChevronLeftIcon style={{ fontSize: "32px" }} />
-        <Typography variant="h6">กลับสู่หน้าเข้าสู่ระบบ</Typography>
+        <ChevronLeftIcon style={{ fontSize: "28px" }} />
+        <Typography variant="button">กลับสู่หน้าเข้าสู่ระบบ</Typography>
       </Button>
     </Box>
   )
