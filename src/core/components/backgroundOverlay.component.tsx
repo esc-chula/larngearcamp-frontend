@@ -54,7 +54,7 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
     width: "100%",
     height: "100%",
     color: props => (props.disableAutoColor ? "" : theme.palette.primary.contrastText),
-    overflowY: "auto"
+    overflow: "hidden"
   }
 }))
 

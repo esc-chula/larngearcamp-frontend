@@ -49,7 +49,7 @@ const HomeQualification: React.FC<
     const w1 = allToMaxWidth(leftsRef.current.filter(x => x !== null) as HTMLDivElement[])
     const w2 = allToMaxWidth(rightsRef.current.filter(x => x !== null) as HTMLDivElement[])
     setWidth(w1 + w2)
-  }, [])
+  })
 
   const items = Array.from(Array(props.qualifications.length / 2).keys())
     .map(i => 2 * i)
@@ -71,7 +71,7 @@ const HomeQualification: React.FC<
       aspectRatio={1440 / 913}
       contentPercentage={isSmall ? 79 : 79}
       offsetPercentage={isSmall ? 25 : 30}
-      minHeightPx={isSmall ? 1100 : 0}
+      minHeightPx={isSmall ? 1200 : 0}
       objectPosition="50% 50%"
       {...props}>
       <HomeContainer>
@@ -91,6 +91,7 @@ const useStyleItem = makeStyles(theme => ({
     gap: "0 20px"
   },
   description: {
+    fontSize: `clamp(1rem, 4.5vw,${theme.typography.body2.fontSize})`,
     fontWeight: "normal",
     lineHeight: pxToRem(36),
     alignSelf: "center"
@@ -98,19 +99,29 @@ const useStyleItem = makeStyles(theme => ({
   logoImg: {
     width: "80px",
     height: "80px",
-    justifySelf: "center"
+    justifySelf: "c,enter"
+  },
+  line: {
+    lineHeight: "0px"
   }
 }))
 const QualificationItem = React.forwardRef<HTMLDivElement, { qualification: Qualification }>((props, ref) => {
+  const theme = useTheme()
+  const isSmall = useMediaQuery<Theme>(theme.breakpoints.down("sm"))
   const classes = useStyleItem()
+
+  let description = props.qualification.description
+  if (isSmall) {
+    description = description.replaceAll("\t", "\n")
+  }
 
   return (
     <div className={classes.container} ref={ref}>
       <Avatar src={props.qualification.src} className={classes.logoImg}></Avatar>
-      <Typography variant="body2" align="left" className={classes.description}>
-        {props.qualification.description.split("\n").map((line, i) => (
+      <Typography align="left" className={classes.description}>
+        {description.split("\n").map((line, i) => (
           <React.Fragment key={i}>
-            <span>{line}</span>
+            <span className={classes.line}>{line}</span>
             <br />
           </React.Fragment>
         ))}
