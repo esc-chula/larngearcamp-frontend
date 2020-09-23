@@ -27,14 +27,11 @@ const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
   const methods = useForm({
     resolver: yupResolver(AnswerSchema)
   })
-  const { handleSubmit, getValues } = methods
+  const { handleSubmit } = methods
   const classes = useStyles()
   const onSubmit = useCallback(() => {
     console.log("Success")
   }, [])
-  const check = () => {
-    console.log(getValues())
-  }
   return (
     <ApplicationStepModule>
       {({ ButtonBar }) => (
@@ -55,9 +52,6 @@ const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
                   {question.type === "ranking" && <RankingTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
-              <button placeholder="check" onClick={check}>
-                Check
-              </button>
               <ButtonBar />
             </form>
           </FormProvider>

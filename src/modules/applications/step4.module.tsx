@@ -27,14 +27,11 @@ const ApplicationStepFourModule: React.FC<{ step: string }> = ({ step }) => {
   const methods = useForm({
     resolver: yupResolver(AnswerSchema)
   })
-  const { handleSubmit, getValues } = methods
+  const { handleSubmit } = methods
   const classes = useStyles()
   const onSubmit = useCallback(() => {
     console.log("Success")
   }, [])
-  const check = () => {
-    console.log(getValues())
-  }
   return (
     <ApplicationStepModule>
       {({ ButtonBar }) => (
@@ -47,17 +44,14 @@ const ApplicationStepFourModule: React.FC<{ step: string }> = ({ step }) => {
                   question={`${index + 1}. ${question.question}`}
                   caption={question.caption}
                   imagePath={question.imagePath}>
-                  {question.type === "multiline" && <MultilineTypeComponent name={`secondPart.${index + 1}`} wordCount={question.wordCount} />}
-                  {question.type === "checkbox" && <CheckboxTypeComponent name={`secondPart.${index + 1}`} contents={question.contents} />}
+                  {question.type === "multiline" && <MultilineTypeComponent name={`secondPart.answer${index + 1}`} wordCount={question.wordCount} />}
+                  {question.type === "checkbox" && <CheckboxTypeComponent name={`secondPart.answer${index + 1}`} contents={question.contents} />}
                   {question.type === "radio" && (
-                    <RadioTypeComponent name={`secondPart.${index + 1}`} contents={question.contents} className={classes.input} />
+                    <RadioTypeComponent name={`secondPart.answer${index + 1}`} contents={question.contents} className={classes.input} />
                   )}
-                  {question.type === "ranking" && <RankingTypeComponent name={`secondPart.${index + 1}`} contents={question.contents} />}
+                  {question.type === "ranking" && <RankingTypeComponent name={`secondPart.answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
-              <button placeholder="check" onClick={check}>
-                Check
-              </button>
               <ButtonBar />
             </form>
           </FormProvider>
