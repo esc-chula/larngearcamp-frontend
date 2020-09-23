@@ -11,6 +11,7 @@ const useStyle = makeStyles(theme => ({
   title: {
     fontSize: pxToRem(64),
     lineHeight: pxToRem(75),
+    fontWeight: 300,
     margin: "0 0 20px 0"
   },
   subtitle: {
@@ -44,7 +45,9 @@ const HomeTitle: React.FC<BoxProps> = props => {
         </Typography>
         <Link to="/application" className="no-underline">
           <Button variant="contained" color="primary" className={classes.button}>
-            <p className={classes.buttonText}>Apply Now</p>
+            <Typography variant="button" className={classes.buttonText}>
+              Apply Now
+            </Typography>
           </Button>
         </Link>
       </Box>
