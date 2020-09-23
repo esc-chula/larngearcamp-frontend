@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, createContext, useContext } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link, useHistory } from "react-router-dom"
@@ -7,6 +7,16 @@ import { SideBarComponent } from "./sidebar.component"
 import { AuthNavbarComponent } from "./authNavbar.component"
 import { useAuthContext } from "../providers/auth.provider"
 import { useGlobalContext } from "../providers/global.provider"
+
+interface NavBarContextValue {
+  closeDrawer: () => void
+}
+
+const NavBarContext = createContext({} as NavBarContextValue)
+
+export function useNavBarContext() {
+  return useContext(NavBarContext)
+}
 
 const useStyles = makeStyles(theme => ({
   appbar: {
@@ -49,10 +59,12 @@ const NavBarComponent = () => {
     []
   )
 
+  const closeDrawer = useCallback(() => setOpen(false), [])
+
   const nextPage = useCallback((path: string) => () => history.push(path), [history])
 
   return (
-    <>
+    <NavBarContext.Provider value={{ closeDrawer }}>
       <AppBar position="static" color="secondary" className={classes.appbar}>
         <Toolbar>
           <Hidden lgUp>
@@ -100,7 +112,7 @@ const NavBarComponent = () => {
           </Hidden>
         </Toolbar>
       </AppBar>
-    </>
+    </NavBarContext.Provider>
   )
 }
 
