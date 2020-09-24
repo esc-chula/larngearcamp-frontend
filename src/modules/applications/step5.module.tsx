@@ -2,7 +2,7 @@ import React, { useCallback } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Divider, Typography } from "@material-ui/core"
 import { CardComponent } from "../../core/components/card.component"
-import ApplicationStepModule from "./stepLayout.module"
+import ApplicationStepModule, { useHandleSubmit } from "./stepLayout.module"
 import { FormProvider } from "react-hook-form"
 import { uploadFileConstant } from "../../core/constants/uploadFile.constant"
 import UploadBlockComponent from "../../core/components/uploadBlock.component"
@@ -11,7 +11,6 @@ import DocumentSchema from "../../schemas/document.schema"
 import { DocumentModel } from "../../schemas/document.schema"
 import { convertDocumentSchemaSchemaToDocumentDTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
-import { useNextStep } from "./stepRouter.module"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -37,39 +36,40 @@ const ApplicationStepFiveModule: React.FC = () => {
   const methods = useApplicationForm<DocumentModel>({
     resolver: yupResolver(DocumentSchema)
   })
-  const { handleSubmit } = methods
   const { updateApplication } = useApplicationStateContext()
-  const nextStep = useNextStep()
 
   const onSubmit = useCallback(
     async data => {
       const values = convertDocumentSchemaSchemaToDocumentDTO(data)
       try {
         await updateApplication(values)
-        nextStep()
+        return true
       } catch (error) {
         // show modal
+        return false
       }
     },
-    [updateApplication, nextStep]
+    [updateApplication]
   )
 
+  const handleSubmit = useHandleSubmit(methods, onSubmit)
+
   return (
-    <ApplicationStepModule>
-      {({ ButtonBar }) => (
+    <ApplicationStepModule beforeNavigate={handleSubmit}>
+      {({ buttonBar }) => (
         <CardComponent maxWidth="lg">
           <Typography variant="h5" align="center" className={classes.bold}>
             อัพโหลดเอกสารประกอบการรับสมัคร
           </Typography>
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit}>
               {uploadFileConstant.map((content, index) => (
                 <React.Fragment key={index}>
                   <Divider className={classes.divider} />
                   <UploadBlockComponent {...content} order={index + 1} />
                 </React.Fragment>
               ))}
-              <ButtonBar />
+              {buttonBar}
             </form>
           </FormProvider>
         </CardComponent>

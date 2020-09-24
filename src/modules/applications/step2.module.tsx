@@ -10,11 +10,9 @@ import { PersonalHealthComponent } from "../../core/components/personalInfo/heal
 import { PersonalEmergencyComponent } from "../../core/components/personalInfo/emergency.component"
 import { yupResolver } from "@hookform/resolvers"
 import ProfileSchema, { ProfileModel } from "../../schemas/profile.schema"
-import ApplicationStepModule from "./stepLayout.module"
-import { useGlobalContext } from "../../core/providers/global.provider"
+import ApplicationStepModule, { useHandleSubmit } from "./stepLayout.module"
 import { convertProfileSchemaToProfileDTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
-import { useNextStep } from "./stepRouter.module"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -39,35 +37,33 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationStepTwoModule: React.FC = () => {
   const classes = useStyles()
-  const { setLoading } = useGlobalContext()
   const { updateApplication } = useApplicationStateContext()
   const methods = useApplicationForm<ProfileModel>({
     reValidateMode: "onBlur",
     resolver: yupResolver(ProfileSchema)
   })
-  const { handleSubmit } = methods
-  const nextStep = useNextStep()
 
   const onSubmit = useCallback(
     async data => {
-      setLoading(true)
       const values = convertProfileSchemaToProfileDTO(data)
       try {
         await updateApplication(values)
-        nextStep()
+        return true
       } catch (error) {
         // show modal
+        return false
       }
-      setLoading(false)
     },
-    [setLoading, nextStep, updateApplication]
+    [updateApplication]
   )
 
+  const handleSubmit = useHandleSubmit(methods, onSubmit)
+
   return (
-    <ApplicationStepModule>
-      {({ ButtonBar }) => (
+    <ApplicationStepModule beforeNavigate={handleSubmit}>
+      {({ buttonBar }) => (
         <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit}>
             <CardComponent maxWidth="lg" className={classes.card}>
               <Typography variant="h5" align="center" className={classes.bold}>
                 ข้อมูลส่วนตัว
@@ -80,7 +76,7 @@ const ApplicationStepTwoModule: React.FC = () => {
                 <PersonalContactComponent />
                 <PersonalEmergencyComponent />
               </div>
-              <ButtonBar />
+              {buttonBar}
             </CardComponent>
           </form>
         </FormProvider>

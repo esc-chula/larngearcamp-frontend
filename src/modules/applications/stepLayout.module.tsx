@@ -1,13 +1,38 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { Container } from "@material-ui/core"
-import ButtonBar from "../../core/components/buttonBar.component"
+import ButtonBar, { ButtonBarProps } from "../../core/components/buttonBar.component"
+import { FieldValues, UseFormMethods, UnpackNestedValue } from "react-hook-form"
 
-type ApplicationStepModuleProps = {
-  children: (props: { ButtonBar: () => JSX.Element }) => React.ReactElement
+type ApplicationStepModuleProps = ButtonBarProps & {
+  children: (props: { buttonBar: React.ReactNode }) => React.ReactElement
 }
 
-const ApplicationStepModule: React.FC<ApplicationStepModuleProps> = ({ children }) => {
-  return <Container maxWidth="lg">{children({ ButtonBar })}</Container>
+const ApplicationStepModule: React.FC<ApplicationStepModuleProps> = ({ beforeNavigate, children }) => {
+  return <Container maxWidth="lg">{children({ buttonBar: <ButtonBar beforeNavigate={beforeNavigate} /> })}</Container>
+}
+
+export function verifyAndSubmit<TFieldValues extends FieldValues = FieldValues>(
+  trigger: UseFormMethods<TFieldValues>["trigger"],
+  getValues: UseFormMethods<TFieldValues>["getValues"],
+  onValid: (data: UnpackNestedValue<TFieldValues>) => boolean | Promise<boolean>
+) {
+  return async (e?: React.BaseSyntheticEvent) => {
+    e?.preventDefault()
+    if (await trigger()) {
+      return await onValid(getValues())
+    } else {
+      return false
+    }
+  }
+}
+
+export function useHandleSubmit<TFieldValues extends FieldValues = FieldValues>(
+  methods: UseFormMethods<TFieldValues>,
+  onValid: (data: UnpackNestedValue<TFieldValues>) => boolean | Promise<boolean>
+) {
+  return useMemo(() => {
+    return verifyAndSubmit(methods.trigger, methods.getValues, onValid)
+  }, [methods.trigger, methods.getValues, onValid])
 }
 
 export default ApplicationStepModule
