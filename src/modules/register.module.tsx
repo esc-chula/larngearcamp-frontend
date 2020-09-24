@@ -13,6 +13,7 @@ import RegisterSchema from "../schemas/register.schema"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import UserServiceAPI from "../core/services/users.service"
+import { useGlobalContext } from "../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -72,17 +73,21 @@ const RegisterModule = () => {
   const methods = useForm({
     resolver: yupResolver(RegisterSchema)
   })
+  const { setLoading } = useGlobalContext()
   const { handleSubmit, getValues } = methods
   const onSubmit = useCallback(async () => {
+    setLoading(true)
     const values = getValues(["email", "password", "firstName", "lastName"])
     try {
       await UserServiceAPI.createUserAPI(values)
       await login({ email: values["email"], password: values["password"] })
+      setLoading(false)
       history.push("/profile")
     } catch (error) {
       console.log(error)
     }
-  }, [getValues, history, login])
+    setLoading(true)
+  }, [getValues, history, login, setLoading])
 
   return (
     <>
