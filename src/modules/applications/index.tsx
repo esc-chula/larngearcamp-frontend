@@ -3,8 +3,16 @@ import { Switch, Redirect } from "react-router-dom"
 import { UserGuardedRoute } from "../../core/guards/user.guard"
 import StepRouterModule from "./stepRouter.module"
 import FinishModule from "./finish.module"
+import { ShowLoadingComponent } from "../../core/components/loading.component"
 
-const ApplicationModule: React.FC = () => {
+interface ApplicationModuleProps {
+  render: boolean
+}
+
+const ApplicationModule: React.FC<ApplicationModuleProps> = ({ render }) => {
+  if (!render) {
+    return <ShowLoadingComponent />
+  }
   return (
     <Switch>
       <UserGuardedRoute exact path="/application">

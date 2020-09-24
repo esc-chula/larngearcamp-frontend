@@ -50,9 +50,7 @@ const RouteModule: React.FC = () => {
           <ProfileModule />
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
-          <ApplicationStateProvider>
-            <ApplicationModule />
-          </ApplicationStateProvider>
+          <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
         </UserGuardedRoute>
 
         {/* Admin Guard */}
