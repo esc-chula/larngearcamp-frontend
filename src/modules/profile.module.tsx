@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(4)
+  },
+  profile: {
+    marginTop: theme.spacing(4)
   }
 }))
 
@@ -38,7 +41,7 @@ const ProfileModule = () => {
 
   return (
     <Container maxWidth="lg">
-      <ProfileComponent />
+      <ProfileComponent className={classes.profile} />
       <Link to="/application/step/1" onClick={initApplication} className="no-underline">
         <Button className={classes.button} color="primary" variant="contained" fullWidth>
           สมัครเข้าค่าย

@@ -72,7 +72,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
     }
   }, [serverFile])
   const displayFile =
-    (currentFile?.length || 0) > 0
+    (currentFile ? Object.keys(currentFile).length : 0) > 0
       ? {
           name: currentFile![0].name,
           url
