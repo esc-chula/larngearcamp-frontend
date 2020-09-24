@@ -3,6 +3,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Divider, Typography } from "@material-ui/core"
 import { CardComponent } from "../../core/components/card.component"
 import ApplicationStepModule from "./stepLayout.module"
+import { useApplicationContext } from "../../core/providers/application.provider"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -18,15 +20,26 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationStepSixModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
+  const history = useHistory()
+  const { finalizeApplication } = useApplicationContext()
 
-  const onSubmit = useCallback(() => {
-    console.log("Success")
-  }, [])
+  const onSubmit = useCallback(
+    async event => {
+      event.preventDefault()
+      try {
+        await finalizeApplication()
+        history.push(`/application/finish`)
+      } catch (error) {
+        // show modal
+      }
+    },
+    [finalizeApplication, history]
+  )
 
   return (
     <ApplicationStepModule>
       {({ ButtonBar }) => (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} noValidate>
           <CardComponent maxWidth="lg">
             <Typography variant="h5" align="center" className={classes.bold}>
               อัพโหลดเอกสารประกอบการรับสมัคร

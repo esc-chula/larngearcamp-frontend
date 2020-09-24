@@ -30,13 +30,11 @@ const CardComponent: React.FC<CardProps> = ({ padding, children, ...other }) => 
   }
 
   return (
-    <>
-      <Container {...other}>
-        <Paper elevation={0} className={classes.paper} style={paddingStyle}>
-          {children}
-        </Paper>
-      </Container>
-    </>
+    <Container {...other}>
+      <Paper elevation={0} className={classes.paper} style={paddingStyle}>
+        {children}
+      </Paper>
+    </Container>
   )
 }
 
