@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useMemo, useCallback, useEffect, useRef } from "react"
+import React, { createContext, useContext, useState, useCallback, useEffect, useRef } from "react"
 import { getLocalStorage, setLocalStorage, removeLocalStorage } from "../../utils/storage"
 import jwt_decode from "jwt-decode"
 import LoginModel from "../models/login.model"
@@ -12,7 +12,7 @@ import { AxiosRequestConfig } from "axios"
 import AuthServiceAPI from "../services/auth.service"
 
 interface AuthConstruct {
-  accessToken: string | null
+  userId: string | null
   setAccessToken: React.Dispatch<any>
   isLoggedIn: boolean
   isUserLoggedIn: boolean
@@ -25,20 +25,31 @@ interface AuthConstruct {
   resetPassword: (params: ResetPasswordModel) => Promise<void>
 }
 
-interface AccessTokenState {
-  accessToken: string | null
+interface AccessTokenPayload {
+  iss: string
+  sub: string
+  userId: string
+  role: string
   exp: number
+  iat: number
+}
+
+interface AccessTokenState {
+  currentToken: {
+    jwt: string
+    payload: AccessTokenPayload
+  } | null
   getAccessTokenPromise: Promise<string | null> | null
 }
 
 function initAccessTokenState(accessToken: string, accessTokenState: AccessTokenState) {
   if (accessToken) {
-    const { exp } = jwt_decode(accessToken)
-    accessTokenState.accessToken = accessToken
-    accessTokenState.exp = exp
+    accessTokenState.currentToken = {
+      jwt: accessToken,
+      payload: jwt_decode(accessToken)
+    }
   } else {
-    accessTokenState.accessToken = null
-    accessTokenState.exp = 0
+    accessTokenState.currentToken = null
   }
 }
 
@@ -47,8 +58,21 @@ export const AuthContext = createContext({} as AuthConstruct)
 export const useAuthContext = () => useContext(AuthContext)
 
 export const AuthProvider: React.FC = ({ ...other }) => {
-  const [accessToken, setStateAccessToken] = useState(() => getLocalStorage("ACCESS_TOKEN"))
+  const [_accessToken, setStateAccessToken] = useState(() => getLocalStorage("ACCESS_TOKEN"))
   const accessTokenStateRef = useRef<AccessTokenState>((null as unknown) as AccessTokenState)
+
+  if (accessTokenStateRef.current === null) {
+    accessTokenStateRef.current = {
+      currentToken: null,
+      getAccessTokenPromise: null
+    }
+    initAccessTokenState(_accessToken, accessTokenStateRef.current)
+  }
+
+  const accessTokenPayload = accessTokenStateRef.current.currentToken?.payload
+  const isUserLoggedIn = accessTokenPayload?.role === "user"
+  const isAdminLoggedIn = accessTokenPayload?.role === "admin"
+  const userId = accessTokenPayload?.userId || null
 
   const setAccessToken = useCallback(newAccessToken => {
     initAccessTokenState(newAccessToken, accessTokenStateRef.current)
@@ -60,36 +84,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     }
   }, [])
 
-  if (accessTokenStateRef.current === null) {
-    accessTokenStateRef.current = {
-      accessToken: null,
-      exp: 0,
-      getAccessTokenPromise: null
-    }
-    initAccessTokenState(accessToken, accessTokenStateRef.current)
-  }
-
-  useEffect(() => {
-    initAccessTokenState(accessToken, accessTokenStateRef.current)
-  }, [accessToken])
-
-  const isUserLoggedIn = useMemo(() => {
-    if (accessToken) {
-      const { role } = jwt_decode(accessToken)
-      return role === "user"
-    }
-    return false
-  }, [accessToken])
-
-  const isAdminLoggedIn = useMemo(() => {
-    if (accessToken) {
-      const { role } = jwt_decode(accessToken)
-      return role === "admin"
-    }
-    return false
-  }, [accessToken])
-
-  const isLoggedIn = useMemo(() => Boolean(accessToken), [accessToken])
+  const isLoggedIn = !!accessTokenPayload
 
   const login = useCallback(
     async (params: LoginModel) => {
@@ -114,29 +109,31 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   )
 
   const logout = useCallback(async () => {
-    const { accessToken } = accessTokenStateRef.current
-    if (accessToken === null) {
+    const { currentToken } = accessTokenStateRef.current
+    if (currentToken === null) {
       return
     }
     try {
-      await AuthServiceAPI.logoutAPI(accessToken)
+      await AuthServiceAPI.logoutAPI(currentToken.jwt)
     } catch (error) {}
     setAccessToken(null)
   }, [setAccessToken])
 
   // returns current token or refresh and returns a new one
   const getAccessTokenImpl: () => Promise<string | null> = useCallback(async () => {
-    const { accessToken, exp } = accessTokenStateRef.current
-    if (!accessToken) {
+    const { currentToken } = accessTokenStateRef.current
+    if (!currentToken) {
       return null
     }
+
+    const { exp } = currentToken.payload
 
     const expireTime = new Date(exp * 1000)
     const currentTime = new Date()
     if (currentTime > expireTime) {
       process.env.REACT_APP_DEBUG && console.log("Token Expired, trying to refresh")
       try {
-        const result = await AuthServiceAPI.refreshAPI(accessToken)
+        const result = await AuthServiceAPI.refreshAPI(currentToken.jwt)
         const newAccessToken = result.data.token
         setAccessToken(newAccessToken)
         return newAccessToken
@@ -146,10 +143,10 @@ export const AuthProvider: React.FC = ({ ...other }) => {
           return null
         }
         // maybe connection is down? let's return the old token
-        return accessToken
+        return currentToken.jwt
       }
     } else {
-      return accessToken
+      return currentToken.jwt
     }
   }, [logout, setAccessToken])
 
@@ -191,7 +188,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     }
   }, [getAccessToken, logout])
 
-  const me = useSWR(() => (accessToken ? `me (${accessToken})` : null), meFetcher, {
+  const me = useSWR(() => (userId ? `me (${userId})` : null), meFetcher, {
     refreshInterval: 0,
     revalidateOnFocus: process.env.NODE_ENV === "production"
   })
@@ -215,7 +212,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   }, [setAccessToken])
 
   const value: AuthConstruct = {
-    accessToken,
+    userId,
     setAccessToken,
     isLoggedIn,
     isUserLoggedIn,
@@ -228,7 +225,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     resetPassword
   }
 
-  if (accessToken && !me.data) {
+  if (isLoggedIn && !me.data) {
     return <ShowLoadingComponent />
   }
 

@@ -36,9 +36,9 @@ export function useApplicationForm<TFieldValues extends FieldValues = FieldValue
 }
 
 export const ApplicationStateProvider: React.FC<{ children: (render: boolean) => React.ReactElement }> = ({ children }) => {
-  const { accessToken } = useAuthContext()
+  const { userId } = useAuthContext()
   const { data: application, mutate: mutateApplication } = useSWR(
-    accessToken ? `application (${accessToken})` : null,
+    userId ? `application (${userId})` : null,
     ApplicationServiceAPI.getApplicationAPI,
     { revalidateOnFocus: false }
   )
