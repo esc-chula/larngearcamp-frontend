@@ -76,9 +76,9 @@ const RegisterModule = () => {
   const { setLoading } = useGlobalContext()
   const { handleSubmit, getValues } = methods
   const onSubmit = useCallback(async () => {
-    setLoading(true)
     const values = getValues(["email", "password", "firstName", "lastName"])
     try {
+      setLoading(true)
       await UserServiceAPI.createUserAPI(values)
       await login({ email: values["email"], password: values["password"] })
       setLoading(false)
@@ -86,7 +86,7 @@ const RegisterModule = () => {
     } catch (error) {
       console.log(error)
     }
-    setLoading(true)
+    setLoading(false)
   }, [getValues, history, login, setLoading])
 
   return (
