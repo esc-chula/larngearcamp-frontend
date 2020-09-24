@@ -1,7 +1,6 @@
 import React from "react"
-import { Typography, Grid } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-//import PhoneIcon from "@material-ui/icons/Phone"
 import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
 import PhoneIcon from "@material-ui/icons/Phone"
 import { ContactModel } from "../../core/constants/contact.constant"
@@ -14,7 +13,11 @@ const useStyles = makeStyles(theme => ({
   container: {
     background: "#4F4F4F",
     color: "#E0E0E0",
-    padding: theme.spacing(6, 6)
+    padding: theme.spacing(6, 6),
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      justifyContent: "space-between"
+    }
   },
   icon: {
     height: 16
@@ -60,8 +63,8 @@ const HomeFooter: React.FC<{ contacts: Array<ContactModel> }> = props => {
   const classes = useStyles()
 
   return (
-    <Grid container spacing={2} className={classes.container} justify="space-between">
-      <Grid item xs={12} sm={12} md={6}>
+    <div className={classes.container}>
+      <div>
         <Typography variant="subtitle1" className={classes.title}>
           หากมีข้อสงสัยเพิ่มเติม สามารถติดต่อได้ที่
         </Typography>
@@ -72,8 +75,8 @@ const HomeFooter: React.FC<{ contacts: Array<ContactModel> }> = props => {
             <Typography variant="body2">{tel}</Typography>
           </div>
         ))}
-      </Grid>
-      <Grid item xs={12} sm={12} md={6}>
+      </div>
+      <div>
         <div className={classes.alignRight}>
           <Typography variant="subtitle1" className={classes.title}>
             ติดตามข่าวสารเพิ่มเติมได้ที่
@@ -85,8 +88,8 @@ const HomeFooter: React.FC<{ contacts: Array<ContactModel> }> = props => {
             </a>
           </div>
         </div>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   )
 }
 
