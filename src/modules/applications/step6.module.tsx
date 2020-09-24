@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Divider, Typography } from "@material-ui/core"
 import { CardComponent } from "../../core/components/card.component"
 import ApplicationStepModule from "./stepLayout.module"
-import { useApplicationContext } from "../../core/providers/application.provider"
 import { useHistory } from "react-router-dom"
+import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 const ApplicationStepSixModule: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
-  const { finalizeApplication } = useApplicationContext()
+  const { finalizeApplication } = useApplicationStateContext()
 
   const onSubmit = useCallback(
     async event => {

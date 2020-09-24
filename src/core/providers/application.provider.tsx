@@ -1,22 +1,19 @@
 import React, { createContext, useContext } from "react"
-import { useApplicationServiceContext } from "../services/application.service"
-import { AxiosResponse } from "axios"
 import DocumentType from "../models/documentType.constant"
+import ApplicationServiceAPI from "../services/application.service"
+import FileDTO from "../models/dto/file.dto"
 
 interface ApplicationConstruct {
-  createApplication: () => Promise<AxiosResponse<any>>
-  uploadDocument: (data: FormData, type: DocumentType) => Promise<AxiosResponse>
+  createApplication: () => Promise<void>
+  uploadDocument: (data: FormData, type: DocumentType) => Promise<FileDTO>
 }
 
 export const ApplicationContext = createContext({} as ApplicationConstruct)
 
 export const useApplicationContext = () => useContext(ApplicationContext)
-
 export const ApplicationProvider: React.FC = ({ ...other }) => {
-  const { createApplicationAPI, uploadDocumentAPI } = useApplicationServiceContext()
-
-  const createApplication = createApplicationAPI
-  const uploadDocument = uploadDocumentAPI
+  const createApplication = ApplicationServiceAPI.createApplicationAPI
+  const uploadDocument = ApplicationServiceAPI.uploadDocumentAPI
 
   const value = { createApplication, uploadDocument }
   return <ApplicationContext.Provider value={value} {...other} />

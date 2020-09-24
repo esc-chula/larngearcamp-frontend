@@ -12,7 +12,7 @@ import { yupResolver } from "@hookform/resolvers"
 import RegisterSchema from "../schemas/register.schema"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
-import { useUserServiceContext } from "../core/services/users.service"
+import UserServiceAPI from "../core/services/users.service"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -69,7 +69,6 @@ const RegisterModule = () => {
   const classes = useStyles()
   const history = useHistory()
   const { login } = useAuthContext()
-  const { createUserAPI } = useUserServiceContext()
   const methods = useForm({
     resolver: yupResolver(RegisterSchema)
   })
@@ -77,13 +76,13 @@ const RegisterModule = () => {
   const onSubmit = useCallback(async () => {
     const values = getValues(["email", "password", "firstName", "lastName"])
     try {
-      await createUserAPI(values)
+      await UserServiceAPI.createUserAPI(values)
       await login({ email: values["email"], password: values["password"] })
       history.push("/profile")
     } catch (error) {
       console.log(error)
     }
-  }, [getValues, history, login, createUserAPI])
+  }, [getValues, history, login])
 
   return (
     <>

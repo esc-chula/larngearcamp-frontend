@@ -70,8 +70,8 @@ const UploadBlockComponent: React.FC<UploadFileModel & { order: number }> = ({ o
         const formData = new FormData()
         formData.append("file", file)
         const result = await uploadDocument(formData, name)
-        setValue(`${name}URL`, result.data.file.url)
-        setUrl(result.data.file.url)
+        setValue(`${name}URL`, result.file.url)
+        setUrl(result.file.url)
       }
     },
     [uploadDocument, name, setError, clearErrors, size, setValue]

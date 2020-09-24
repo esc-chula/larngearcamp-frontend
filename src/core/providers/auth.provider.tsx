@@ -6,10 +6,10 @@ import ForgotPasswordModel from "../models/forgotPassword.model"
 import useSWR, { responseInterface } from "swr"
 import { LoadingComponent } from "../components/loading.component"
 import ResetPasswordModel from "../models/resetPassword.model"
-import { useAuthServiceContext } from "../services/auth.service"
 import MeDTO from "../models/dto/me.dto"
 import { httpClient } from "../../utils/http"
 import { AxiosRequestConfig } from "axios"
+import AuthServiceAPI from "../services/auth.service"
 
 interface AuthConstruct {
   accessToken: string | null
@@ -47,7 +47,6 @@ export const AuthContext = createContext({} as AuthConstruct)
 export const useAuthContext = () => useContext(AuthContext)
 
 export const AuthProvider: React.FC = ({ ...other }) => {
-  const { loginAPI, loginFbAPI, meAPI, logoutAPI, refreshAPI, forgotPasswordAPI, resetPasswordAPI } = useAuthServiceContext()
   const [accessToken, setStateAccessToken] = useState(() => getLocalStorage("ACCESS_TOKEN"))
   const accessTokenStateRef = useRef<AccessTokenState>((null as unknown) as AccessTokenState)
 
@@ -95,23 +94,23 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   const login = useCallback(
     async (params: LoginModel) => {
       try {
-        const result = await loginAPI(params)
+        const result = await AuthServiceAPI.loginAPI(params)
         const accessToken = result.data.token
         setAccessToken(accessToken)
       } catch (error) {}
     },
-    [loginAPI, setAccessToken]
+    [setAccessToken]
   )
 
   const loginFb = useCallback(
     async (signedRequest: string) => {
       try {
-        const result = await loginFbAPI(signedRequest)
+        const result = await AuthServiceAPI.loginFbAPI(signedRequest)
         const accessToken = result.data.token
         setAccessToken(accessToken)
       } catch (error) {}
     },
-    [loginFbAPI, setAccessToken]
+    [setAccessToken]
   )
 
   const logout = useCallback(async () => {
@@ -120,10 +119,10 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       return
     }
     try {
-      await logoutAPI(accessToken)
+      await AuthServiceAPI.logoutAPI(accessToken)
     } catch (error) {}
     setAccessToken(null)
-  }, [logoutAPI, setAccessToken])
+  }, [setAccessToken])
 
   // returns current token or refresh and returns a new one
   const getAccessTokenImpl: () => Promise<string | null> = useCallback(async () => {
@@ -137,7 +136,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     if (currentTime > expireTime) {
       process.env.REACT_APP_DEBUG && console.log("Token Expired, trying to refresh")
       try {
-        const result = await refreshAPI(accessToken)
+        const result = await AuthServiceAPI.refreshAPI(accessToken)
         const newAccessToken = result.data.token
         setAccessToken(newAccessToken)
         return newAccessToken
@@ -152,7 +151,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     } else {
       return accessToken
     }
-  }, [refreshAPI, logout, setAccessToken])
+  }, [logout, setAccessToken])
 
   // ensure getAccessTokenImpl can't be called in parallel
   const getAccessToken: () => Promise<string | null> = useCallback(async () => {
@@ -182,7 +181,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const meFetcher = useCallback(async () => {
     try {
-      return (await meAPI(await getAccessToken())).data
+      return (await AuthServiceAPI.meAPI(await getAccessToken())).data
     } catch (error) {
       if (error?.response?.status === 401) {
         // token not expired yet but invalid
@@ -190,25 +189,19 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       }
       throw error
     }
-  }, [meAPI, getAccessToken, logout])
+  }, [getAccessToken, logout])
 
   const me = useSWR(() => (accessToken ? `me (${accessToken})` : null), meFetcher, {
     refreshInterval: 0,
     revalidateOnFocus: process.env.NODE_ENV === "production"
   })
 
-  const forgotPassword = useCallback(
-    async (params: ForgotPasswordModel) => {
-      await forgotPasswordAPI(params)
-    },
-    [forgotPasswordAPI]
-  )
-  const resetPassword = useCallback(
-    async (params: ResetPasswordModel) => {
-      await resetPasswordAPI(params)
-    },
-    [resetPasswordAPI]
-  )
+  const forgotPassword = useCallback(async (params: ForgotPasswordModel) => {
+    await AuthServiceAPI.forgotPasswordAPI(params)
+  }, [])
+  const resetPassword = useCallback(async (params: ResetPasswordModel) => {
+    await AuthServiceAPI.resetPasswordAPI(params)
+  }, [])
 
   useEffect(() => {
     const id = httpClient.interceptors.response.use(undefined, error => {

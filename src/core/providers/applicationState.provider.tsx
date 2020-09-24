@@ -1,14 +1,14 @@
 import React, { createContext, useContext, useEffect, useCallback, useState } from "react"
 import useSWR from "swr"
 import { useAuthContext } from "./auth.provider"
-import { ApplicationDTO, UpdateApplicationDTO, ApplicationInfo } from "../models/dto/application.dto"
+import { ApplicationDTO, UpdateApplicationDTO } from "../models/dto/application.dto"
 import { LoadingComponent } from "../components/loading.component"
 import { FieldValues, UseFormOptions, UseFormMethods, useForm } from "react-hook-form"
-import { httpClient } from "../../utils/http"
 import { format } from "date-fns"
 import { ProfileModel } from "../../schemas/profile.schema"
 import { Answer1Model } from "../../schemas/answer1.schema"
 import { Answer2Model } from "../../schemas/answer2.schema"
+import ApplicationServiceAPI from "../services/application.service"
 
 interface ApplicationStateContextValue {
   application?: ApplicationDTO
@@ -18,9 +18,7 @@ interface ApplicationStateContextValue {
 
 const ApplicationStateContext = createContext({} as ApplicationStateContextValue)
 
-export function useApplicationStateContext() {
-  return useContext(ApplicationStateContext)
-}
+export const useApplicationStateContext = () => useContext(ApplicationStateContext)
 
 export function useApplicationForm<TFieldValues extends FieldValues = FieldValues, TContext extends object = object>(
   options?: UseFormOptions<TFieldValues, TContext>
@@ -30,16 +28,9 @@ export function useApplicationForm<TFieldValues extends FieldValues = FieldValue
   const form = useForm(options)
   const { setValue } = form
   useEffect(() => {
-    if (!application) {
-      return
-    }
-    if (filled) {
-      return
-    }
+    if (!application || filled) return
     setFilled(true)
-    const transformSetValue = (key: string, value: any) => {
-      setValue(key.substring(1), value)
-    }
+    const transformSetValue = (key: string, value: any) => setValue(key.substring(1), value)
     setAll(mapApplication(application), transformSetValue)
   }, [filled, application, setValue])
   return form
@@ -47,20 +38,21 @@ export function useApplicationForm<TFieldValues extends FieldValues = FieldValue
 
 export const ApplicationStateProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const { accessToken } = useAuthContext()
-  const { data: application, mutate: mutateApplication } = useSWR(accessToken ? `application (${accessToken})` : null, getApplicationAPI, {
-    revalidateOnFocus: false
-  })
+  const { data: application, mutate: mutateApplication } = useSWR(
+    accessToken ? `application (${accessToken})` : null,
+    ApplicationServiceAPI.getApplicationAPI,
+    { revalidateOnFocus: false }
+  )
 
   const updateApplication = useCallback(
     async (application: UpdateApplicationDTO) => {
-      await mutateApplication(await updateApplicationAPI(application), false)
+      await mutateApplication(await ApplicationServiceAPI.updateApplicationAPI(application), false)
     },
     [mutateApplication]
   )
-
   const finalizeApplication = useCallback(async () => {
     await mutateApplication(async application => {
-      const result = await finalizeApplicationAPI()
+      const result = await ApplicationServiceAPI.finalizeApplicationAPI()
       return { ...application, ...result.application }
     }, false)
   }, [mutateApplication])
@@ -118,16 +110,4 @@ function mapApplication(application: ApplicationDTO): ApplicationModel {
   }
   const answer2Model: Answer2Model = application.answer?.secondPart
   return { ...profileModel, ...(answer1Model as any), ...answer2Model }
-}
-
-async function getApplicationAPI(): Promise<ApplicationDTO> {
-  return (await httpClient.get(`/application`)).data
-}
-
-async function updateApplicationAPI(application: UpdateApplicationDTO): Promise<ApplicationDTO> {
-  return (await httpClient.patch(`/application`, application)).data
-}
-
-async function finalizeApplicationAPI(): Promise<{ message: string; application: ApplicationInfo }> {
-  return (await httpClient.post(`/application/final`)).data
 }
