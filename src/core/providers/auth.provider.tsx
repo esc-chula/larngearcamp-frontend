@@ -214,6 +214,8 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     const id = httpClient.interceptors.response.use(undefined, error => {
       if (error?.response?.status === 401) {
         setAccessToken(null)
+      } else {
+        return Promise.reject(error)
       }
     })
     return () => httpClient.interceptors.response.eject(id)
