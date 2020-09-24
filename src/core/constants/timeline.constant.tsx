@@ -1,4 +1,9 @@
-const timelineConstant = [
+export interface TimelineModel {
+  left: string
+  right: string
+}
+
+const timelineConstant: Array<TimelineModel> = [
   { left: "18 กันยายน - 10 ตุลาคม 2563", right: "รับสมัคร" },
   { left: "24 ตุลาคม 2563", right: "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" },
   { left: "31 ตุลาคม 2563", right: "สัมภาษณ์รอบกรุงเทพ" },

@@ -1,4 +1,4 @@
-import UploadFileModel from "../models/uploadFile.constant"
+import UploadFileModel from "../models/uploadFile.model"
 
 const uploadFileConstant: Array<UploadFileModel> = [
   {

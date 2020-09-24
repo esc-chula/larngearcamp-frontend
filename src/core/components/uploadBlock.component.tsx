@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react"
 import { Typography, makeStyles, Button } from "@material-ui/core"
 import ReplayIcon from "@material-ui/icons/Replay"
 import AddToPhotosOutlinedIcon from "@material-ui/icons/AddToPhotosOutlined"
-import UploadFileModel from "../models/uploadFile.constant"
+import UploadFileModel from "../models/uploadFile.model"
 import { useFormContext, useWatch } from "react-hook-form"
 import { useApplicationContext } from "../providers/application.provider"
 
