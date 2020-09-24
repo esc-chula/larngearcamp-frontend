@@ -40,7 +40,7 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
     <BackgroundOverlayComponent src={landing3} aspectRatio={1617 / 654} offsetPercentage={7} minHeightPx={600}>
       <Box display="flex" height="100%" alignItems="center" justifyContent="center" className={classes.container + " " + props.className} {...props}>
         <div className={classes.textCenter}>
-          <Typography className={classes.primaryAnnounce + " kanit"}>รับสมัคร 18&nbsp;กันยายน - 10&nbsp;ตุลาคม 2563</Typography>
+          <Typography className={classes.primaryAnnounce + " kanit"}>รับสมัคร 25&nbsp;กันยายน - 10&nbsp;ตุลาคม 2563</Typography>
           <Link to="/application" className="no-underline">
             <Button variant="contained" color="secondary" className={classes.subscribeButton}>
               <Typography variant="subtitle1" className={classes.subscribeButtonText + " kanit"}>
