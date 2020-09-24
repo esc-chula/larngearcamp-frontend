@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    "& > *": {
+    "& > *:not(:last-child)": {
       marginBottom: theme.spacing(2)
     }
   },
@@ -58,6 +58,9 @@ const useStyles = makeStyles(theme => ({
     "&:after": {
       backgroundColor: theme.palette.primary.main
     }
+  },
+  fb: {
+    marginTop: theme.spacing(2)
   }
 }))
 
@@ -120,15 +123,10 @@ const LoginModule = () => {
               </Typography>
             )}
           </form>
-
           <div className={classes.divider}>OR</div>
-
-          <FacebookButtonComponent type="submit" variant="contained" color="primary">
+          <FacebookButtonComponent variant="contained" color="primary" className={classes.fb}>
             เข้าสู่ระบบด้วยบัญชี Facebook
           </FacebookButtonComponent>
-          <GoogleButtonComponent type="submit" variant="contained" color="primary">
-            เข้าสู่ระบบด้วยบัญชี Google
-          </GoogleButtonComponent>
         </CardComponent>
       </FormProvider>
 
