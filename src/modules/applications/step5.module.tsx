@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers"
 import DocumentSchema from "../../schemas/document.schema"
 import { DocumentModel } from "../../schemas/document.schema"
 import { useApplicationForm } from "../../core/providers/applicationState.provider"
+import { ApplicationDTO } from "../../core/models/dto/application.dto"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -30,9 +31,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+function mapApplicationToDocument(_: ApplicationDTO): DocumentModel {
+  return {} as any
+}
+
 const ApplicationStepFiveModule: React.FC = () => {
   const classes = useStyles()
-  const methods = useApplicationForm<DocumentModel>({
+  const methods = useApplicationForm<DocumentModel>(mapApplicationToDocument, {
     resolver: yupResolver(DocumentSchema)
   })
 

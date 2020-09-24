@@ -14,6 +14,7 @@ import { Answer1Model } from "../../schemas/answer1.schema"
 import Answer1Schema from "../../schemas/answer1.schema"
 import { convertAnswer1SchemaToAnswer1DTO } from "../../utils/modify"
 import { useApplicationStateContext, useApplicationForm } from "../../core/providers/applicationState.provider"
+import { ApplicationDTO } from "../../core/models/dto/application.dto"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -26,8 +27,32 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
+  const {
+    answer4: { fifth: answer4fifth, sixth: answer4sixth, ...answer4Rest },
+    ...firstPartRest
+  } = application.answer?.firstPart || { answer4: {} }
+  return {
+    firstPart: {
+      ...firstPartRest,
+      answer4: {
+        ...answer4Rest,
+        fifth: {
+          text: answer4fifth ? answer4fifth : "",
+          checked: !!answer4fifth
+        },
+        sixth: {
+          text: answer4sixth ? answer4sixth : "",
+          checked: !!answer4sixth
+        }
+      },
+      answer6: firstPartRest.answer6 ? `${firstPartRest.answer6}` : ""
+    }
+  }
+}
+
 const ApplicationStepThreeModule: React.FC = () => {
-  const methods = useApplicationForm<Answer1Model>({
+  const methods = useApplicationForm<Answer1Model>(mapApplicationToAnswer1, {
     reValidateMode: "onBlur",
     resolver: yupResolver(Answer1Schema)
   })

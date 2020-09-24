@@ -14,6 +14,7 @@ import { Answer2Model } from "../../schemas/answer2.schema"
 import Answer2Schema from "../../schemas/answer2.schema"
 import { convertAnswer2SchemaToAnswer2DTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { ApplicationDTO } from "../../core/models/dto/application.dto"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -26,8 +27,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+function mapApplicationToAnswer2(application: ApplicationDTO): Answer2Model {
+  return {
+    secondPart: application.answer?.secondPart
+  }
+}
+
 const ApplicationStepFourModule: React.FC = () => {
-  const methods = useApplicationForm<Answer2Model>({
+  const methods = useApplicationForm<Answer2Model>(mapApplicationToAnswer2, {
     reValidateMode: "onBlur",
     resolver: yupResolver(Answer2Schema)
   })

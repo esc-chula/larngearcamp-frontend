@@ -13,6 +13,8 @@ import ProfileSchema, { ProfileModel } from "../../schemas/profile.schema"
 import ApplicationStepModule, { useHandleSubmit } from "./stepLayout.module"
 import { convertProfileSchemaToProfileDTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { ApplicationDTO } from "../../core/models/dto/application.dto"
+import { format } from "date-fns"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -35,10 +37,19 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+function mapApplicationToProfile(application: ApplicationDTO): ProfileModel {
+  const birthDateDate = new Date(application.birthDate)
+  const formattedBirthDate = format(birthDateDate, "yyyy-MM-dd")
+  return {
+    ...application,
+    birthDate: formattedBirthDate
+  }
+}
+
 const ApplicationStepTwoModule: React.FC = () => {
   const classes = useStyles()
   const { updateApplication } = useApplicationStateContext()
-  const methods = useApplicationForm<ProfileModel>({
+  const methods = useApplicationForm<ProfileModel>(mapApplicationToProfile, {
     reValidateMode: "onBlur",
     resolver: yupResolver(ProfileSchema)
   })

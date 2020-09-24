@@ -3,10 +3,6 @@ import useSWR from "swr"
 import { useAuthContext } from "./auth.provider"
 import { ApplicationDTO, UpdateApplicationDTO } from "../models/dto/application.dto"
 import { FieldValues, UseFormOptions, UseFormMethods, useForm } from "react-hook-form"
-import { format } from "date-fns"
-import { ProfileModel } from "../../schemas/profile.schema"
-import { Answer1Model } from "../../schemas/answer1.schema"
-import { Answer2Model } from "../../schemas/answer2.schema"
 import ApplicationServiceAPI from "../services/application.service"
 
 interface ApplicationStateContextValue {
@@ -20,6 +16,7 @@ const ApplicationStateContext = createContext({} as ApplicationStateContextValue
 export const useApplicationStateContext = () => useContext(ApplicationStateContext)
 
 export function useApplicationForm<TFieldValues extends FieldValues = FieldValues, TContext extends object = object>(
+  mapApplicationToModel: (application: ApplicationDTO) => TFieldValues,
   options?: UseFormOptions<TFieldValues, TContext>
 ): UseFormMethods<TFieldValues> {
   const { application } = useApplicationStateContext()
@@ -30,8 +27,8 @@ export function useApplicationForm<TFieldValues extends FieldValues = FieldValue
     if (!application || filled) return
     setFilled(true)
     const transformSetValue = (key: string, value: any) => setValue(key.substring(1), value)
-    setAll(mapApplication(application), transformSetValue)
-  }, [filled, application, setValue])
+    setAll(mapApplicationToModel(application), transformSetValue)
+  }, [filled, application, setValue, mapApplicationToModel])
   return form
 }
 
@@ -75,38 +72,4 @@ function setAll(data: any, setValue: (key: string, value: any) => void, prefix: 
   } else {
     setValue(prefix, data)
   }
-}
-
-type ApplicationModel = ProfileModel & Answer1Model & Answer2Model
-
-function mapApplication(application: ApplicationDTO): ApplicationModel {
-  const birthDateDate = new Date(application.birthDate)
-  const formattedBirthDate = format(birthDateDate, "yyyy-MM-dd")
-  const profileModel: ProfileModel = {
-    ...application,
-    birthDate: formattedBirthDate
-  }
-  const {
-    answer4: { fifth: answer4fifth, sixth: answer4sixth, ...answer4Rest },
-    ...firstPartRest
-  } = application.answer?.firstPart || { answer4: {} }
-  const answer1Model: Answer1Model = {
-    firstPart: {
-      ...firstPartRest,
-      answer4: {
-        ...answer4Rest,
-        fifth: {
-          text: answer4fifth ? answer4fifth : "",
-          checked: !!answer4fifth
-        },
-        sixth: {
-          text: answer4sixth ? answer4sixth : "",
-          checked: !!answer4sixth
-        }
-      },
-      answer6: firstPartRest.answer6 ? `${firstPartRest.answer6}` : ""
-    }
-  }
-  const answer2Model: Answer2Model = { secondPart: application.answer?.secondPart }
-  return { ...profileModel, ...answer1Model, ...answer2Model }
 }
