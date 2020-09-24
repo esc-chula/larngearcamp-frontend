@@ -32,13 +32,13 @@ const ButtonBar = () => {
       <Grid xs={12} sm={6} item>
         <Link className="no-underline" to={previousPage}>
           <Button variant="contained" className={classes.buttonWarning} fullWidth>
-            ย้อนกลับ
+            {step === 6 ? "กลับไปแก้ไขหน้าที่แล้ว" : "ย้อนกลับ"}
           </Button>
         </Link>
       </Grid>
       <Grid xs={12} sm={6} item>
         <Button variant="contained" className={classes.buttonSuccess} fullWidth type="submit">
-          ไปขั้นตอนถัดไป
+          {step === 6 ? "ยืนยันการสมัคร" : "ไปขั้นตอนถัดไป"}
         </Button>
       </Grid>
     </Grid>
