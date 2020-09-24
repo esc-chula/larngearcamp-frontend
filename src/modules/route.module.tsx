@@ -8,7 +8,7 @@ import { LoginModule } from "./login.module"
 import { UserGuardedRoute } from "../core/guards/user.guard"
 import { AdminGuardedRoute } from "../core/guards/admin.guard"
 import { ProfileModule } from "./profile.module"
-import { StepRouter, Finish } from "./applications"
+import { StepRouterModule, FinishModule } from "./applications"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
 import { AdminDashboardModule } from "./admin/dashboard.module"
@@ -55,10 +55,10 @@ const RouteModule: React.FC = () => {
                 <Redirect to="/application/step/1" />
               </UserGuardedRoute>
               <UserGuardedRoute exact path="/application/step/:step">
-                <StepRouter />
+                <StepRouterModule />
               </UserGuardedRoute>
               <UserGuardedRoute exact path="/application/finish">
-                <Finish />
+                <FinishModule />
               </UserGuardedRoute>
             </Switch>
           </ApplicationStateProvider>

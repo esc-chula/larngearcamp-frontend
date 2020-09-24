@@ -1,6 +1,6 @@
 import React from "react"
 
-const StepRouter = React.lazy(() => import("./stepRouter.module"))
-const Finish = React.lazy(() => import("./finish.module"))
+const StepRouterModule = React.lazy(() => import("./stepRouter.module"))
+const FinishModule = React.lazy(() => import("./finish.module"))
 
-export { StepRouter, Finish }
+export { StepRouterModule, FinishModule }
