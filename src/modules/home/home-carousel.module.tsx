@@ -52,7 +52,10 @@ const useStyle = makeStyles<DefaultTheme, Props>(theme => ({
     zIndex: 1
   },
   img: {
-    pointerEvents: "none"
+    pointerEvents: "none",
+    width: "325px",
+    height: "183px",
+    objectFit: "cover"
   }
 }))
 
