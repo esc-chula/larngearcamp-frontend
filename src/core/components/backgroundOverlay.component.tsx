@@ -1,8 +1,7 @@
 import React from "react"
 import { makeStyles, Theme } from "@material-ui/core/styles"
-import { Box, BoxProps } from "@material-ui/core"
 
-type Props = {
+type BackgroundOverlayProps = {
   src: string
   alt?: string
   aspectRatio: number
@@ -14,7 +13,7 @@ type Props = {
   disableAutoColor?: boolean
 }
 
-const useStyle = makeStyles<Theme, Props>(theme => ({
+const useStyle = makeStyles<Theme, BackgroundOverlayProps>(theme => ({
   backgroundImg: {
     position: "absolute",
     top: props => {
@@ -68,19 +67,29 @@ const useStyle = makeStyles<Theme, Props>(theme => ({
  * contentPercentage: percentage of content height will be (with respected to image height),
  * note that other element are only effected by content height
  */
-const BackgroundOverlay: React.FC<Props & BoxProps> = props => {
-  const { src, alt, aspectRatio, contentPercentage, offsetPercentage, objectPosition, disableAutoColor, minHeightPx, ...rest }: Props = props
+const BackgroundOverlayComponent: React.FC<BackgroundOverlayProps & React.HTMLAttributes<HTMLDivElement>> = props => {
+  const {
+    src,
+    alt,
+    aspectRatio,
+    contentPercentage,
+    offsetPercentage,
+    objectPosition,
+    disableAutoColor,
+    minHeightPx,
+    ...rest
+  }: BackgroundOverlayProps = props
 
   const classes = useStyle(props)
 
   return (
-    <Box {...rest}>
-      <Box className={classes.contentContainer}>
+    <div {...rest}>
+      <div className={classes.contentContainer}>
         <img src={src} alt={alt} className={classes.backgroundImg} />
         <div className={classes.content}>{props.children}</div>
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 
-export default BackgroundOverlay
+export default BackgroundOverlayComponent
