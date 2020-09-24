@@ -7,7 +7,7 @@ interface MeDTO {
     last: string
     display: string
   }
-  application: {
+  application?: {
     code: string
     picture: string
     applicationState: string
