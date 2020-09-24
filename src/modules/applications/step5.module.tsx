@@ -9,8 +9,9 @@ import UploadBlockComponent from "../../core/components/uploadBlock.component"
 import { yupResolver } from "@hookform/resolvers"
 import DocumentSchema from "../../schemas/document.schema"
 import { DocumentModel } from "../../schemas/document.schema"
-import { useApplicationForm } from "../../core/providers/applicationState.provider"
+import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
+import { DocumentItem, isDefaultUrl } from "../../core/models/dto/document.dto"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -31,8 +32,20 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function mapApplicationToDocument(_: ApplicationDTO): DocumentModel {
-  return {} as any
+function getUrl(document: DocumentItem): string {
+  if (isDefaultUrl(document.url)) {
+    return ""
+  } else {
+    return document.url
+  }
+}
+
+function mapApplicationToDocument(application: ApplicationDTO): DocumentModel {
+  return ({
+    pictureURL: getUrl(application.picture),
+    transcriptURL: getUrl(application.transcript),
+    letterOfConsentURL: getUrl(application.letterOfConsent)
+  } as Partial<DocumentModel>) as any
 }
 
 const ApplicationStepFiveModule: React.FC = () => {
@@ -40,6 +53,7 @@ const ApplicationStepFiveModule: React.FC = () => {
   const methods = useApplicationForm<DocumentModel>(mapApplicationToDocument, {
     resolver: yupResolver(DocumentSchema)
   })
+  const { application } = useApplicationStateContext()
 
   const onSubmit = useCallback(async () => true, [])
 
@@ -57,7 +71,8 @@ const ApplicationStepFiveModule: React.FC = () => {
               {uploadFileConstant.map((content, index) => (
                 <React.Fragment key={index}>
                   <Divider className={classes.divider} />
-                  <UploadBlockComponent {...content} order={index + 1} />
+                  <UploadBlockComponent serverFile={application![content.name]} {...content} order={index + 1} />
+                  <input ref={methods.register} name={`${content.name}URL`} type="hidden" />
                 </React.Fragment>
               ))}
               {buttonBar}

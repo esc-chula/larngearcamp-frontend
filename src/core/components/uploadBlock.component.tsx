@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useState, useMemo } from "react"
 import { Typography, makeStyles, Button } from "@material-ui/core"
 import ReplayIcon from "@material-ui/icons/Replay"
 import AddToPhotosOutlinedIcon from "@material-ui/icons/AddToPhotosOutlined"
 import UploadFileModel from "../models/uploadFile.constant"
 import { useFormContext, useWatch } from "react-hook-form"
 import { useApplicationContext } from "../providers/application.provider"
+import { DocumentItem, isDefaultUrl, friendlyFileName } from "../models/dto/document.dto"
 
 const useStyles = makeStyles(theme => ({
   withIcon: {
@@ -49,12 +50,34 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const UploadBlockComponent: React.FC<UploadFileModel & { order: number }> = ({ order, name, size, accept, body1, body2 }) => {
+type UploadBlockComponentProps = UploadFileModel & {
+  serverFile: DocumentItem
+  order: number
+}
+
+const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile, order, name, size, accept, body1, body2 }) => {
   const classes = useStyles()
   const [url, setUrl] = useState("")
   const { register, setError, errors, clearErrors, setValue } = useFormContext()
   const currentFile: FileList | undefined = useWatch({ name: name })
   const { uploadDocument } = useApplicationContext()
+
+  const uploadedFile = useMemo(() => {
+    if (isDefaultUrl(serverFile.url)) {
+      return null
+    }
+    return {
+      name: friendlyFileName(serverFile.name),
+      url: serverFile.url
+    }
+  }, [serverFile])
+  const displayFile =
+    (currentFile?.length || 0) > 0
+      ? {
+          name: currentFile![0].name,
+          url
+        }
+      : uploadedFile
 
   const uploadFile = useCallback(
     async event => {
@@ -76,6 +99,9 @@ const UploadBlockComponent: React.FC<UploadFileModel & { order: number }> = ({ o
     },
     [uploadDocument, name, setError, clearErrors, size, setValue]
   )
+  const fileError = errors[name]
+  const urlError = errors[`${name}URL`]
+  const currentError = fileError || urlError
 
   return (
     <div className={classes.container}>
@@ -83,28 +109,28 @@ const UploadBlockComponent: React.FC<UploadFileModel & { order: number }> = ({ o
       <div className={classes.block}>
         <Typography variant="body1">{body1}</Typography>
         <Typography variant="body2">{body2}</Typography>
-        <Button variant="contained" component="label" color="primary" className={`${classes.upload} ${!!currentFile && classes.warningButton}`}>
+        <Button variant="contained" component="label" color="primary" className={`${classes.upload} ${!!displayFile && classes.warningButton}`}>
           <div className={classes.withIcon}>
-            <Typography variant="button">{!!currentFile ? "อัพโหลดอีกครั้ง" : "อัพโหลด"}</Typography>
-            {!!currentFile ? <ReplayIcon fontSize="small" /> : <AddToPhotosOutlinedIcon fontSize="small" />}
+            <Typography variant="button">{!!displayFile ? "อัพโหลดอีกครั้ง" : "อัพโหลด"}</Typography>
+            {!!displayFile ? <ReplayIcon fontSize="small" /> : <AddToPhotosOutlinedIcon fontSize="small" />}
           </div>
           <input type="file" name={name} style={{ display: "none" }} accept={accept} ref={register} onChange={uploadFile} />
         </Button>
-        {!!currentFile && !errors[name] && (
+        {!!displayFile && !currentError && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <Typography variant="caption" className={classes.caption} component="div">
               ไฟล์ที่อัพโหลดในขณะนี้ :
             </Typography>
             <Typography className={classes.fit} component="div" variant="caption">
-              <a href={url} className={classes.fileName} target="_blank" rel="noopener noreferrer">
-                {currentFile[0]?.name}
+              <a href={displayFile.url} className={classes.fileName} target="_blank" rel="noopener noreferrer">
+                {displayFile.name}
               </a>
             </Typography>
           </div>
         )}
-        {errors[name] && (
+        {currentError && (
           <Typography variant="caption" color="error" className={classes.caption} component="div">
-            {errors[name].message}
+            {currentError.message}
           </Typography>
         )}
       </div>
