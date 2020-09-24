@@ -1,5 +1,5 @@
 import React, { Suspense } from "react"
-import { Switch, Route, Redirect } from "react-router-dom"
+import { Switch, Route } from "react-router-dom"
 
 // COMPONENTS
 import { HomeModule } from "./home.module"
@@ -8,7 +8,6 @@ import { LoginModule } from "./login.module"
 import { UserGuardedRoute } from "../core/guards/user.guard"
 import { AdminGuardedRoute } from "../core/guards/admin.guard"
 import { ProfileModule } from "./profile.module"
-import { StepRouterModule, FinishModule } from "./applications"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
 import { AdminDashboardModule } from "./admin/dashboard.module"
@@ -17,6 +16,8 @@ import { ForgotPasswordModule } from "./forgotpassword.module"
 import { ResetPasswordModule } from "./resetpassword.module"
 import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
 import { ShowLoadingComponent } from "../core/components/loading.component"
+
+const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
 const RouteModule: React.FC = () => {
   return (
@@ -50,17 +51,7 @@ const RouteModule: React.FC = () => {
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
           <ApplicationStateProvider>
-            <Switch>
-              <UserGuardedRoute exact path="/application">
-                <Redirect to="/application/step/1" />
-              </UserGuardedRoute>
-              <UserGuardedRoute exact path="/application/step/:step">
-                <StepRouterModule />
-              </UserGuardedRoute>
-              <UserGuardedRoute exact path="/application/finish">
-                <FinishModule />
-              </UserGuardedRoute>
-            </Switch>
+            <ApplicationModule />
           </ApplicationStateProvider>
         </UserGuardedRoute>
 
