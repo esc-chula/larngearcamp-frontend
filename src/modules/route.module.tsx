@@ -16,6 +16,7 @@ import { AdminDashboardModule } from "./admin/dashboard.module"
 import { QandAModule } from "./qna.module"
 import { ForgotPasswordModule } from "./forgotpassword.module"
 import { ResetPasswordModule } from "./resetpassword.module"
+import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
 
 const RouteModule: React.FC = () => {
   return (
@@ -48,14 +49,20 @@ const RouteModule: React.FC = () => {
         <UserGuardedRoute exact path="/profile">
           <ProfileModule />
         </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application">
-          <Redirect to="/application/step/1" />
-        </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application/step/:step">
-          <StepRouter />
-        </UserGuardedRoute>
-        <UserGuardedRoute exact path="/application/finish">
-          <Finish />
+        <UserGuardedRoute path="/application">
+          <ApplicationStateProvider>
+            <Switch>
+              <UserGuardedRoute exact path="/application">
+                <Redirect to="/application/step/1" />
+              </UserGuardedRoute>
+              <UserGuardedRoute exact path="/application/step/:step">
+                <StepRouter />
+              </UserGuardedRoute>
+              <UserGuardedRoute exact path="/application/finish">
+                <Finish />
+              </UserGuardedRoute>
+            </Switch>
+          </ApplicationStateProvider>
         </UserGuardedRoute>
 
         {/* Admin Guard */}

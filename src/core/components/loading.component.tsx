@@ -4,7 +4,7 @@ import HashLoader from "react-spinners/HashLoader"
 import { Backdrop } from "@material-ui/core"
 
 interface LoadingProps {
-  loading: boolean
+  loading?: boolean
 }
 
 const useStyles = makeStyles(theme => ({
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const LoadingComponent: React.FC<LoadingProps> = ({ loading }) => {
+const LoadingComponent: React.FC<LoadingProps> = ({ loading = true }) => {
   const classes = useStyles()
   const theme = useTheme()
   return (

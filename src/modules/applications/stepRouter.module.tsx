@@ -1,5 +1,5 @@
-import React from "react"
-import { useRouteMatch } from "react-router-dom"
+import React, { useCallback } from "react"
+import { useRouteMatch, useHistory } from "react-router-dom"
 import ApplicationStepOneModule from "./step1.module"
 import ApplicationStepTwoModule from "./step2.module"
 import ApplicationStepThreeModule from "./step3.module"
@@ -10,6 +10,15 @@ import { NotFoundModule } from "../notfound.module"
 import { NavigatorComponent } from "../../core/components/navigator.component"
 import { Container } from "@material-ui/core"
 
+export function useNextStep() {
+  const { params } = useRouteMatch<{ step: string }>()
+  const step = parseInt(params.step)
+  const history = useHistory()
+  return useCallback(() => {
+    history.push(`/application/step/${step + 1}`)
+  }, [history, step])
+}
+
 const StepRouter: React.FC = () => {
   const { params } = useRouteMatch<{ step: string }>()
   const { step } = params
@@ -19,19 +28,19 @@ const StepRouter: React.FC = () => {
       component = <ApplicationStepOneModule />
       break
     case "2":
-      component = <ApplicationStepTwoModule step={step} />
+      component = <ApplicationStepTwoModule />
       break
     case "3":
-      component = <ApplicationStepThreeModule step={step} />
+      component = <ApplicationStepThreeModule />
       break
     case "4":
-      component = <ApplicationStepFourModule step={step} />
+      component = <ApplicationStepFourModule />
       break
     case "5":
-      component = <ApplicationStepFiveModule step={step} />
+      component = <ApplicationStepFiveModule />
       break
     case "6":
-      component = <ApplicationStepSixModule step={step} />
+      component = <ApplicationStepSixModule />
       break
     default:
       return <NotFoundModule />

@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { useForm, FormProvider } from "react-hook-form"
+import { FormProvider } from "react-hook-form"
 import { questionsSection2Constant } from "../../core/constants/questionsSection2.constant"
 import { QuestionCardComponent } from "../../core/components/questionCard"
 import QuestionModel from "../../core/models/question.model"
@@ -11,10 +11,10 @@ import { RankingTypeComponent } from "../../core/components/questionType/ranking
 import ApplicationStepModule from "./stepLayout.module"
 import { yupResolver } from "@hookform/resolvers"
 import { Answer2Model } from "../../schemas/answer2.schema"
-import { useApplicationContext } from "../../core/providers/application.provider"
 import Answer2Schema from "../../schemas/answer2.schema"
 import { convertAnswer2SchemaToAnswer2DTO } from "../../utils/modify"
-import { useHistory } from "react-router-dom"
+import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { useNextStep } from "./stepRouter.module"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -27,27 +27,26 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepFourModule: React.FC<{ step: string }> = ({ step }) => {
-  const classes = useStyles()
-  const history = useHistory()
-  const methods = useForm<Answer2Model>({
+const ApplicationStepFourModule: React.FC = () => {
+  const methods = useApplicationForm<Answer2Model>({
     reValidateMode: "onBlur",
     resolver: yupResolver(Answer2Schema)
   })
-  const { updateApplication } = useApplicationContext()
+  const { updateApplication } = useApplicationStateContext()
   const { handleSubmit } = methods
-
+  const classes = useStyles()
+  const nextStep = useNextStep()
   const onSubmit = useCallback(
     async data => {
       const values = convertAnswer2SchemaToAnswer2DTO(data)
       try {
         await updateApplication(values)
-        history.push(`/application/step/${parseInt(step) + 1}`)
+        nextStep()
       } catch (error) {
         // show modal
       }
     },
-    [updateApplication, history, step]
+    [updateApplication, nextStep]
   )
   return (
     <ApplicationStepModule>
