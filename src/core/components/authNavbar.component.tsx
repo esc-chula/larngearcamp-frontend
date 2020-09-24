@@ -3,10 +3,10 @@ import { Avatar, Menu, MenuItem, ListItemIcon, ListItemText } from "@material-ui
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom"
 import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import { useHistory, Link } from "react-router-dom"
-import { useGlobalContext } from "../providers/global.provider"
 import { useAuthContext } from "../providers/auth.provider"
 import { makeStyles } from "@material-ui/core/styles"
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount"
+import { useLoadingCallback } from "./loading.component"
 
 const useStyles = makeStyles(theme => ({
   cursor: {
@@ -18,7 +18,6 @@ const AuthNavbarComponent: React.FC = () => {
   const history = useHistory()
   const classes = useStyles()
   const { isAdminLoggedIn, logout } = useAuthContext()
-  const { setLoading } = useGlobalContext()
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClick = useCallback(event => {
@@ -35,13 +34,13 @@ const AuthNavbarComponent: React.FC = () => {
     setAnchorEl(null)
   }, [])
 
-  const logoutClicked = useCallback(async () => {
-    setAnchorEl(null)
-    setLoading(true)
-    await logout()
-    setLoading(false)
-    history.push("/")
-  }, [history, setLoading, logout])
+  const logoutClicked = useLoadingCallback(
+    useCallback(async () => {
+      setAnchorEl(null)
+      await logout()
+      history.push("/")
+    }, [history, logout])
+  )
 
   return (
     <>

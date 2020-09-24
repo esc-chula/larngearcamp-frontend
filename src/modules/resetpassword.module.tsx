@@ -7,12 +7,12 @@ import { Box, Button, makeStyles, Typography } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import { FormProvider, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers"
-import { useGlobalContext } from "../core/providers/global.provider"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { useHistory } from "react-router-dom"
 import { TextFieldComponent } from "../core/components/textField.component"
 import ResetPasswordSchema from "../schemas/resetpassword.schema"
 import { useQueryString } from "../utils/hooks"
+import { useLoadingCallback } from "../core/components/loading.component"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -45,7 +45,6 @@ const useStyles = makeStyles(theme => ({
 const ResetPasswordModule: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
-  const { setLoading } = useGlobalContext()
   const { resetPassword } = useAuthContext()
   const [finished, setFinished] = useState(false)
   const query = useQueryString()
@@ -56,33 +55,33 @@ const ResetPasswordModule: React.FC = () => {
   })
   const { handleSubmit, getValues, setError, errors } = methods
 
-  const onSubmit = useCallback(async () => {
-    setLoading(true)
-    const { password } = getValues(["password"])
-    try {
-      await resetPassword({ token, password })
-      setFinished(true)
-    } catch (error) {
-      switch (error.response?.status) {
-        case 400:
-          setError("invalid", {
-            type: "invalid"
-          })
-          break
-        case 401:
-          setError("expired", {
-            type: "expired"
-          })
-          break
-        case 404:
-          setError("notFound", {
-            type: "notFound"
-          })
-          break
+  const onSubmit = useLoadingCallback(
+    useCallback(async () => {
+      const { password } = getValues(["password"])
+      try {
+        await resetPassword({ token, password })
+        setFinished(true)
+      } catch (error) {
+        switch (error.response?.status) {
+          case 400:
+            setError("invalid", {
+              type: "invalid"
+            })
+            break
+          case 401:
+            setError("expired", {
+              type: "expired"
+            })
+            break
+          case 404:
+            setError("notFound", {
+              type: "notFound"
+            })
+            break
+        }
       }
-    }
-    setLoading(false)
-  }, [getValues, setLoading, resetPassword, setError, token])
+    }, [getValues, resetPassword, setError, token])
+  )
 
   const changePage = useCallback(
     (path: string) => () => {

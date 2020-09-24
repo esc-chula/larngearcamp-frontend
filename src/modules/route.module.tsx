@@ -1,11 +1,10 @@
-import React from "react"
+import React, { Suspense } from "react"
 import { Switch, Route, Redirect } from "react-router-dom"
 
 // COMPONENTS
 import { HomeModule } from "./home.module"
 import { RegisterModule } from "./register.module"
 import { LoginModule } from "./login.module"
-import { NavBarComponent } from "../core/components/navbar.component"
 import { UserGuardedRoute } from "../core/guards/user.guard"
 import { AdminGuardedRoute } from "../core/guards/admin.guard"
 import { ProfileModule } from "./profile.module"
@@ -17,11 +16,11 @@ import { QandAModule } from "./qna.module"
 import { ForgotPasswordModule } from "./forgotpassword.module"
 import { ResetPasswordModule } from "./resetpassword.module"
 import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
+import { ShowLoadingComponent } from "../core/components/loading.component"
 
 const RouteModule: React.FC = () => {
   return (
-    <>
-      <NavBarComponent />
+    <Suspense fallback={<ShowLoadingComponent />}>
       <Switch>
         {/* No Guard */}
         <Route exact path="/">
@@ -76,7 +75,7 @@ const RouteModule: React.FC = () => {
           <NotFoundModule />
         </Route>
       </Switch>
-    </>
+    </Suspense>
   )
 }
 

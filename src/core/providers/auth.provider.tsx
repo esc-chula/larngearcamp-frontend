@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode"
 import LoginModel from "../models/login.model"
 import ForgotPasswordModel from "../models/forgotPassword.model"
 import useSWR, { responseInterface } from "swr"
-import { LoadingComponent } from "../components/loading.component"
+import { ShowLoadingComponent } from "../components/loading.component"
 import ResetPasswordModel from "../models/resetPassword.model"
 import MeDTO from "../models/dto/me.dto"
 import { httpClient } from "../../utils/http"
@@ -229,7 +229,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   }
 
   if (accessToken && !me.data) {
-    return <LoadingComponent loading={true} />
+    return <ShowLoadingComponent />
   }
 
   return <AuthContext.Provider value={value} {...other} />

@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import { ProfileComponent } from "../core/components/profile.component"
 import { Container, Paper, Typography, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
-import { useGlobalContext } from "../core/providers/global.provider"
 import { useApplicationContext } from "../core/providers/application.provider"
+import { useLoadingCallback } from "../core/components/loading.component"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -26,16 +26,15 @@ const useStyles = makeStyles(theme => ({
 
 const ProfileModule = () => {
   const classes = useStyles()
-  const { setLoading } = useGlobalContext()
   const { createApplication } = useApplicationContext()
 
-  const initApplication = useCallback(async () => {
-    setLoading(true)
-    try {
-      await createApplication()
-    } catch (error) {}
-    setLoading(false)
-  }, [setLoading, createApplication])
+  const initApplication = useLoadingCallback(
+    useCallback(async () => {
+      try {
+        await createApplication()
+      } catch (error) {}
+    }, [createApplication])
+  )
 
   return (
     <Container maxWidth="lg">
