@@ -88,11 +88,9 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const login = useCallback(
     async (params: LoginModel) => {
-      try {
-        const result = await AuthServiceAPI.loginAPI(params)
-        const accessToken = result.data.token
-        setAccessToken(accessToken)
-      } catch (error) {}
+      const result = await AuthServiceAPI.loginAPI(params)
+      const accessToken = result.data.token
+      setAccessToken(accessToken)
     },
     [setAccessToken]
   )
