@@ -3,12 +3,14 @@ import yup from "yup"
 
 const Answer2Schema = object()
   .shape({
-    answer1: string().trim().required("กรุณากรอกคำตอบ"),
-    answer2: string().trim().required("กรุณากรอกคำตอบ"),
-    answer3: string().trim().required("กรุณากรอกคำตอบ"),
-    answer4: string().trim().required("กรุณากรอกคำตอบ"),
-    answer5: string().trim().required("กรุณากรอกคำตอบ"),
-    answer6: string().trim().required("กรุณากรอกคำตอบ")
+    secondPart: object({
+      answer1: string().trim().required("กรุณากรอกคำตอบ"),
+      answer2: string().trim().required("กรุณากรอกคำตอบ"),
+      answer3: string().trim().required("กรุณากรอกคำตอบ"),
+      answer4: string().trim().required("กรุณากรอกคำตอบ"),
+      answer5: string().trim().required("กรุณากรอกคำตอบ"),
+      answer6: string().trim().required("กรุณากรอกคำตอบ")
+    }).required()
   })
   .defined()
 

@@ -94,20 +94,22 @@ function mapApplication(application: ApplicationDTO): ApplicationModel {
     ...firstPartRest
   } = application.answer?.firstPart || { answer4: {} }
   const answer1Model: Answer1Model = {
-    ...firstPartRest,
-    answer4: {
-      ...answer4Rest,
-      fifth: {
-        text: answer4fifth ? answer4fifth : "",
-        checked: !!answer4fifth
+    firstPart: {
+      ...firstPartRest,
+      answer4: {
+        ...answer4Rest,
+        fifth: {
+          text: answer4fifth ? answer4fifth : "",
+          checked: !!answer4fifth
+        },
+        sixth: {
+          text: answer4sixth ? answer4sixth : "",
+          checked: !!answer4sixth
+        }
       },
-      sixth: {
-        text: answer4sixth ? answer4sixth : "",
-        checked: !!answer4sixth
-      }
-    },
-    answer6: `${firstPartRest.answer6}`
+      answer6: firstPartRest.answer6 ? `${firstPartRest.answer6}` : ""
+    }
   }
-  const answer2Model: Answer2Model = application.answer?.secondPart
-  return { ...profileModel, ...(answer1Model as any), ...answer2Model }
+  const answer2Model: Answer2Model = { secondPart: application.answer?.secondPart }
+  return { ...profileModel, ...answer1Model, ...answer2Model }
 }

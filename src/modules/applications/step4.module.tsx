@@ -46,8 +46,7 @@ const ApplicationStepFourModule: React.FC = () => {
     },
     [updateApplication]
   )
-  const { getValues } = methods
-  console.log(getValues())
+  const { getValues, errors } = methods
   const handleSubmit = useHandleSubmit(methods, onSubmit)
   return (
     <ApplicationStepModule beforeNavigate={handleSubmit}>
@@ -61,14 +60,15 @@ const ApplicationStepFourModule: React.FC = () => {
                   question={`${index + 1}. ${question.question}`}
                   caption={question.caption}
                   imagePath={question.imagePath}>
-                  {question.type === "multiline" && <MultilineTypeComponent name={`answer${index + 1}`} />}
-                  {question.type === "checkbox" && <CheckboxTypeComponent name={`answer${index + 1}`} contents={question.contents} />}
+                  {question.type === "multiline" && <MultilineTypeComponent name={`secondPart.answer${index + 1}`} />}
+                  {question.type === "checkbox" && <CheckboxTypeComponent name={`secondPart.answer${index + 1}`} contents={question.contents} />}
                   {question.type === "radio" && (
-                    <RadioTypeComponent name={`answer${index + 1}`} contents={question.contents} className={classes.input} />
+                    <RadioTypeComponent name={`secondPart.answer${index + 1}`} contents={question.contents} className={classes.input} />
                   )}
-                  {question.type === "ranking" && <RankingTypeComponent name={`answer${index + 1}`} contents={question.contents} />}
+                  {question.type === "ranking" && <RankingTypeComponent name={`secondPart.answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
+              <button onClick={() => console.log(getValues(), errors)}>check value </button>
               {buttonBar}
             </form>
           </FormProvider>
