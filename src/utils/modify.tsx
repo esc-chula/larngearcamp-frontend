@@ -4,8 +4,6 @@ import { Answer1Model } from "../schemas/answer1.schema"
 import Answer1DTO from "../core/models/dto/answer1.dto"
 import { Answer2Model } from "../schemas/answer2.schema"
 import Answer2DTO from "../core/models/dto/answer2.dto"
-import { DocumentModel } from "../schemas/document.schema"
-import DocumentDTO from "../core/models/dto/document.dto"
 
 export const resolve = (path: string, obj: any) => {
   return path.split(".").reduce((prev, curr) => {
@@ -84,20 +82,6 @@ export const convertAnswer2SchemaToAnswer2DTO = (props: Answer2Model): Answer2DT
       answer4: props.answer4,
       answer5: props.answer5,
       answer6: props.answer6
-    }
-  }
-}
-
-export const convertDocumentSchemaSchemaToDocumentDTO = (props: DocumentModel): DocumentDTO => {
-  return {
-    picture: {
-      url: props.pictureURL
-    },
-    transcript: {
-      url: props.transcriptURL
-    },
-    letterOfConsent: {
-      url: props.letterOfConsentURL
     }
   }
 }
