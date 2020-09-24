@@ -1,4 +1,9 @@
-const qualificationsConstant = [
+export interface QualificationModel {
+  description: string
+  src: string
+}
+
+const qualificationsConstant: Array<QualificationModel> = [
   {
     description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2",
     src: require("../../assets/images/icon/qualification-1.svg")

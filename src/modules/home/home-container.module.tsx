@@ -13,7 +13,7 @@ const useStyle = makeStyles(theme => ({
 
 export interface HomeContainerProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const HomeContainer: React.FC<HomeContainerProps> = props => {
+const HomeContainer: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
   return (
     <div {...props} className={`${classes.container} ${props.className}`}>

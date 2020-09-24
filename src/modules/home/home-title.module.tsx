@@ -8,7 +8,7 @@ import BackgroundOverlay from "../../core/components/backgroundOverlay.component
 
 const useStyle = makeStyles(theme => ({
   title: {
-    width: "100%",
+    padding: theme.spacing(0, 6),
     margin: "auto",
     fontFamily: "Raleway",
     fontWeight: 300,
@@ -16,17 +16,14 @@ const useStyle = makeStyles(theme => ({
       fontSize: "1.4em"
     },
     [theme.breakpoints.down("md")]: {
-      width: "75%",
       fontSize: "3rem"
     }
   },
   subtitle: {
     fontSize: "1.5rem",
     fontWeight: 200,
-    margin: theme.spacing(1, "auto", 3, "auto"),
-    [theme.breakpoints.down("sm")]: {
-      width: "50%"
-    }
+    padding: theme.spacing(0, 6),
+    margin: theme.spacing(1, "auto", 3, "auto")
   },
   button: {
     padding: theme.spacing(1, 6),

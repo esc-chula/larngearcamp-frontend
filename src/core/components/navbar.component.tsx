@@ -19,7 +19,7 @@ export function useNavBarContext() {
 
 const useStyles = makeStyles(theme => ({
   appbar: {
-    padding: theme.spacing(0, 10),
+    padding: theme.spacing(0, 5),
     [theme.breakpoints.down("md")]: {
       padding: theme.spacing(0, 2)
     }

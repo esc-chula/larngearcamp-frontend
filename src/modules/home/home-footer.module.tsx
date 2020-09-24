@@ -1,45 +1,23 @@
 import React from "react"
-import { Typography, Grid, Paper, PaperProps } from "@material-ui/core"
+import { Typography, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import HomeContainer from "./home-container.module"
-import gearIcon from "../../assets/images/icon/gear-icon.svg"
+//import PhoneIcon from "@material-ui/icons/Phone"
 import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
-import phoneIcon from "../../assets/images/icon/communication-icon.svg"
+import PhoneIcon from "@material-ui/icons/Phone"
+import { ContactModel } from "../../core/constants/contact.constant"
 
-const GearIcon: React.FC<React.ObjectHTMLAttributes<HTMLObjectElement>> = props => {
-  return (
-    <object data={gearIcon} {...props}>
-      Gear Icon
-    </object>
-  )
-}
-const FacebookIcon: React.FC<React.ObjectHTMLAttributes<HTMLObjectElement>> = props => {
-  return (
-    <object data={facebookIcon} {...props}>
-      Facebook Icon
-    </object>
-  )
-}
-const PhoneIcon: React.FC<React.ObjectHTMLAttributes<HTMLObjectElement>> = props => {
-  return (
-    <object data={phoneIcon} {...props}>
-      Phone Icon
-    </object>
-  )
+const FacebookIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
+  return <img src={facebookIcon} alt="" {...props} />
 }
 
-const useStyle = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
     background: "#4F4F4F",
     color: "#E0E0E0",
-    paddingTop: "92px",
-    paddingBottom: "92px"
+    padding: theme.spacing(6, 6)
   },
-  phoneIcon: {
-    marginLeft: theme.spacing(2)
-  },
-  facebookContainer: {
-    textAlign: "center"
+  icon: {
+    height: 16
   },
   larngearContainer: {
     marginTop: theme.spacing(3)
@@ -48,73 +26,67 @@ const useStyle = makeStyles(theme => ({
     display: "flex",
     alignItems: "center"
   },
-  grid: {
-    marginTop: theme.spacing(1.5),
-    display: "grid",
-    gridTemplateColumns: "max-content max-content max-content",
-    gridTemplateRows: "repeat(auto-fill, minmax(auto, 1fr))",
-    placeItems: "center start",
-    gap: `${theme.spacing(1)}px ${theme.spacing(3)}px`
+  inline: {
+    display: "flex",
+    "&>*:not(:last-child)": {
+      marginRight: theme.spacing(2)
+    },
+    marginTop: theme.spacing(1)
+  },
+  alignRight: {
+    display: "flex",
+    flexDirection: "column",
+    marginTop: theme.spacing(4),
+    [theme.breakpoints.up("md")]: {
+      marginTop: theme.spacing(0),
+      alignItems: "flex-end"
+    }
+  },
+  title: {
+    width: "fit-content",
+    fontWeight: 500,
+    fontSize: "1.2rem",
+    textDecoration: "underline"
+  },
+  link: {
+    color: "#fff",
+    "&:after": {
+      background: "#fff"
+    }
   }
 }))
 
-const HomeFooter: React.FC<
-  {
-    contacts: { name: string; tel: string }[]
-  } & PaperProps
-> = props => {
-  const classes = useStyle()
-
-  const left = (
-    <>
-      <Grid container alignItems="center">
-        <Grid item>
-          <Typography variant="subtitle1">หากมีข้อสงสัยเพิ่มเติม</Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="subtitle1">
-            สามารถติดต่อได้ที่
-            <PhoneIcon className={classes.phoneIcon} />
-          </Typography>
-        </Grid>
-      </Grid>
-
-      <div className={classes.grid}>
-        {props.contacts.map(({ name, tel }) => (
-          <React.Fragment key={name}>
-            <GearIcon />
-            <Typography variant="body2">{name}</Typography>
-            <Typography variant="body2">{tel}</Typography>
-          </React.Fragment>
-        ))}
-      </div>
-    </>
-  )
-
-  const right = (
-    <>
-      <Typography variant="subtitle1">ติดตามข่าวสารเพิ่มเติมได้ที่</Typography>
-
-      <Grid container className={classes.larngearContainer}>
-        <Grid item xs={3} className={classes.facebookContainer}>
-          <FacebookIcon />
-        </Grid>
-        <Grid item xs={9}>
-          <Typography variant="body2">LarnGear Camp</Typography>
-        </Grid>
-      </Grid>
-    </>
-  )
+const HomeFooter: React.FC<{ contacts: Array<ContactModel> }> = props => {
+  const classes = useStyles()
 
   return (
-    <Paper className={classes.container} {...props}>
-      <HomeContainer>
-        <Grid container justify="space-between" spacing={3}>
-          <Grid item>{left}</Grid>
-          <Grid item>{right}</Grid>
-        </Grid>
-      </HomeContainer>
-    </Paper>
+    <Grid container spacing={2} className={classes.container} justify="space-between">
+      <Grid item xs={12} sm={12} md={6}>
+        <Typography variant="subtitle1" className={classes.title}>
+          หากมีข้อสงสัยเพิ่มเติม สามารถติดต่อได้ที่
+        </Typography>
+        {props.contacts.map(({ name, tel }) => (
+          <div key={name} className={classes.inline}>
+            <PhoneIcon className={classes.icon} />
+            <Typography variant="body2">{name}</Typography>
+            <Typography variant="body2">{tel}</Typography>
+          </div>
+        ))}
+      </Grid>
+      <Grid item xs={12} sm={12} md={6}>
+        <div className={classes.alignRight}>
+          <Typography variant="subtitle1" className={classes.title}>
+            ติดตามข่าวสารเพิ่มเติมได้ที่
+          </Typography>
+          <div className={classes.inline}>
+            <FacebookIcon className={classes.icon} />
+            <a href="https://www.facebook.com/LARNGEARCAMP/" target="_blank" rel="noopener noreferrer" className={classes.link}>
+              LarnGear Camp
+            </a>
+          </div>
+        </div>
+      </Grid>
+    </Grid>
   )
 }
 

@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const useStyle = makeStyles(theme => ({
   container: {
+    padding: theme.spacing(0, 5),
     display: "inline-grid",
     gridTemplateColumns: "1fr min-content 1fr",
     margin: "auto"
@@ -67,7 +68,7 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
   const classes = useStyle()
 
   return (
-    <Box className={classes.container + " " + rest.className} {...rest}>
+    <Box className={`${classes.container} ${rest.className}`} {...rest}>
       {label.map(({ left, right }, i, arr) => (
         <React.Fragment key={i}>
           <Typography variant="body2" className={classes.leftText}>

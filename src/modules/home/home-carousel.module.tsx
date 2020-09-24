@@ -2,7 +2,7 @@ import React from "react"
 import Carousel, { CarouselProps, ResponsiveType, ArrowProps } from "react-multi-carousel"
 import { makeStyles, Theme as DefaultTheme, useTheme } from "@material-ui/core/styles"
 import "@material-ui/core/"
-interface Props extends Partial<CarouselProps> {
+interface HomeCarouselProps extends Partial<CarouselProps> {
   gradientPercent: { white: number; fade: number }
   images: { src: string; alt?: string }[]
 }
@@ -28,7 +28,7 @@ const responsiveSetting: (theme: DefaultTheme) => ResponsiveType = theme => ({
   }
 })
 
-const useStyle = makeStyles<DefaultTheme, Props>(theme => ({
+const useStyle = makeStyles<DefaultTheme, HomeCarouselProps>(theme => ({
   container: {
     position: "relative"
   },
@@ -71,7 +71,7 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({ onClick, direction }) => {
 }
 
 // TODO
-const HomeCarousal: React.FC<Props> = props => {
+const HomeCarousel: React.FC<HomeCarouselProps> = props => {
   const { gradientPercent, images, ...rest } = props
 
   const classes = useStyle(props)
@@ -88,12 +88,12 @@ const HomeCarousal: React.FC<Props> = props => {
         customLeftArrow={<ArrowButton direction="left" />}
         customRightArrow={<ArrowButton direction="right" />}
         {...rest}>
-        {props.images.map(({ src, alt }, i) => (
-          <img className={classes.img} src={src} alt={alt} key={i} />
+        {props.images.map(({ src, alt }, index) => (
+          <img className={classes.img} src={src} alt={alt} key={index} />
         ))}
       </Carousel>
     </div>
   )
 }
 
-export default HomeCarousal
+export default HomeCarousel

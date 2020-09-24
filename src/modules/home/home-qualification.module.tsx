@@ -5,14 +5,14 @@ import { pxToRem } from "../../utils/conversion"
 import HomeContainer, { HomeContainerProps } from "./home-container.module"
 
 import landing2 from "../../assets/images/background/landing-2.svg"
-import BackgroundOverlay from "../../core/components/backgroundOverlay.component"
+import BackgroundOverlayComponent from "../../core/components/backgroundOverlay.component"
+import { QualificationModel } from "../../core/constants/qualifications.constant"
 
 const useStyle = makeStyles(theme => ({
   title: {
-    fontWeight: 400,
-    fontSize: "48px",
+    fontWeight: 300,
+    fontSize: "2rem",
     textDecoration: "underline",
-    lineHeight: pxToRem(72),
     marginBottom: "40px"
   },
   container: {
@@ -22,26 +22,17 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-type Qualification = { description: string; src: string }
-const HomeQualification: React.FC<
-  {
-    qualifications: Qualification[]
-  } & HomeContainerProps
-> = props => {
+const HomeQualification: React.FC<{ qualifications: QualificationModel[] } & HomeContainerProps> = props => {
   const classes = useStyle()
-
   const [width, setWidth] = useState(0)
-
   const theme = useTheme()
   const isSmall = useMediaQuery<Theme>(theme.breakpoints.down(width + 64))
-
   const leftsRef = useRef<(HTMLDivElement | null)[]>([])
   const rightsRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const allToMaxWidth = (elements: HTMLElement[]) => {
       const maxWidth = elements.map(ele => ele?.clientWidth ?? 0).reduce((acc, w) => (w > acc ? w : acc), 0)
-
       elements.forEach(ele => (ele.style.width = `${maxWidth}px`))
       return maxWidth
     }
@@ -66,7 +57,7 @@ const HomeQualification: React.FC<
     })
 
   return (
-    <BackgroundOverlay
+    <BackgroundOverlayComponent
       src={landing2}
       aspectRatio={1440 / 913}
       contentPercentage={isSmall ? 79 : 79}
@@ -75,10 +66,12 @@ const HomeQualification: React.FC<
       objectPosition="50% 50%"
       {...props}>
       <HomeContainer>
-        <Typography className={classes.title}>คุณสมบัติผู้สมัคร</Typography>
+        <Typography className={classes.title} variant="h5">
+          คุณสมบัติผู้สมัคร
+        </Typography>
         <div className={classes.container}>{items}</div>
       </HomeContainer>
-    </BackgroundOverlay>
+    </BackgroundOverlayComponent>
   )
 }
 
@@ -105,7 +98,7 @@ const useStyleItem = makeStyles(theme => ({
     lineHeight: "0px"
   }
 }))
-const QualificationItem = React.forwardRef<HTMLDivElement, { qualification: Qualification }>((props, ref) => {
+const QualificationItem = React.forwardRef<HTMLDivElement, { qualification: QualificationModel }>((props, ref) => {
   const theme = useTheme()
   const isSmall = useMediaQuery<Theme>(theme.breakpoints.down("sm"))
   const classes = useStyleItem()

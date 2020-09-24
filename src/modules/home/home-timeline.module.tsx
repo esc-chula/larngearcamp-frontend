@@ -1,14 +1,13 @@
 import React from "react"
-import { Box, BoxProps, Typography } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { TimelineDisplay, TimelineProps } from "../../core/components/timeline.component"
-import { pxToRem } from "../../utils/conversion"
 
 const useStyle = makeStyles(theme => ({
   title: {
     marginBottom: "50px",
     fontWeight: 400,
-    fontSize: pxToRem(80),
+    fontSize: "4rem",
     fontFamily: "Raleway"
   },
   endCard: {
@@ -21,10 +20,10 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const HomeTimeline: React.FC<TimelineProps & BoxProps> = props => {
+const HomeTimeline: React.FC<TimelineProps & React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
   return (
-    <Box {...props} textAlign="center">
+    <div {...props}>
       <Typography variant="h2" align="center" className={classes.title}>
         TIMELINE
       </Typography>
@@ -37,7 +36,7 @@ const HomeTimeline: React.FC<TimelineProps & BoxProps> = props => {
           8 - 11 มกราคม 2564
         </Typography>
       </div>
-    </Box>
+    </div>
   )
 }
 
