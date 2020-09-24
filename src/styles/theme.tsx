@@ -8,6 +8,12 @@ const theme = createMuiTheme({
     secondary: {
       main: "#333333"
     },
+    warning: {
+      main: "#E4A527"
+    },
+    success: {
+      main: "#39B774"
+    },
     contrastThreshold: 3,
     tonalOffset: 0.2
   },
