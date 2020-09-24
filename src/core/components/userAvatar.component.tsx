@@ -21,7 +21,7 @@ const UserAvatar: React.FC = () => {
   } = me.data as MeDTO
 
   if (!application) {
-    return <Avatar className={classes.avatar}>{first.charAt(0)}</Avatar>
+    return <Avatar className={classes.avatar}>{first[0]}</Avatar>
   }
 
   const { picture } = application
