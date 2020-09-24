@@ -42,10 +42,16 @@ const AuthNavbarComponent: React.FC = () => {
     }, [history, logout])
   )
 
+  const { me } = useAuthContext()
+  const name = me.data && `${me.data.name.first} ${me.data.name.last}`
+  const imageUrl = me.data?.application?.picture
+
   return (
     <>
       <div onClick={handleClick} className={classes.cursor}>
-        <Avatar alt="avatar">H</Avatar>
+        <Avatar alt={name} src={imageUrl}>
+          {name}
+        </Avatar>
       </div>
       <Menu
         id="menu"

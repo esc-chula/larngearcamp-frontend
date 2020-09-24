@@ -35,11 +35,11 @@ const Answer1Schema = object()
           third: boolean().required(),
           fourth: boolean().required(),
           fifth: object({
-            text: string().required(),
+            text: string().optional(),
             checked: boolean().required()
           }).required(),
           sixth: object({
-            text: string().required(),
+            text: string().optional(),
             checked: boolean().required()
           }).required()
         })

@@ -12,5 +12,5 @@ export interface ApplicationInfo {
   documentState: string
 }
 
-export declare type ApplicationDTO = ApplicationInfo & ProfileDTO & { answer: Answer1DTO & Answer2DTO } & DocumentDTO
+export declare type ApplicationDTO = ApplicationInfo & ProfileDTO & Answer1DTO & Answer2DTO & DocumentDTO
 export declare type UpdateApplicationDTO = ProfileDTO | Answer1DTO | Answer2DTO | DocumentDTO

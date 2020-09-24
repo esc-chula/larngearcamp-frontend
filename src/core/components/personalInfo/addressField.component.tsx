@@ -66,6 +66,7 @@ const AddressFieldComponent: React.FC<AddressFieldComponentProps> = ({ label, ty
       onChange={handleChange}
       inputValue={value}
       onInputChange={handleInputChange}
+      disableClearable
       renderOption={option => <span>{`${option.district} ${option.amphoe} ${option.province} ${option.zipcode}`}</span>}
       getOptionLabel={option => {
         if (typeof option === "string") {
