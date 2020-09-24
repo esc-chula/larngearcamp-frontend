@@ -1,5 +1,5 @@
 import React, { useCallback } from "react"
-import { useRouteMatch, useHistory } from "react-router-dom"
+import { useRouteMatch, useHistory, Redirect } from "react-router-dom"
 import ApplicationStepOneModule from "./step1.module"
 import ApplicationStepTwoModule from "./step2.module"
 import ApplicationStepThreeModule from "./step3.module"
@@ -9,6 +9,8 @@ import ApplicationStepSixModule from "./step6.module"
 import { NotFoundModule } from "../notfound.module"
 import { NavigatorComponent } from "../../core/components/navigator.component"
 import { Container } from "@material-ui/core"
+import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { EditingState } from "../../core/models/dto/application.dto"
 
 export function useNextStep() {
   const { params } = useRouteMatch<{ step: string }>()
@@ -19,36 +21,65 @@ export function useNextStep() {
   }, [history, step])
 }
 
+interface Step {
+  Component: React.ComponentType
+  allowedStates: EditingState[]
+}
+
+const steps: Record<string, Step> = {
+  "1": {
+    Component: ApplicationStepOneModule,
+    allowedStates: ["FULL"]
+  },
+  "2": {
+    Component: ApplicationStepTwoModule,
+    allowedStates: ["FULL"]
+  },
+  "3": {
+    Component: ApplicationStepThreeModule,
+    allowedStates: ["FULL"]
+  },
+  "4": {
+    Component: ApplicationStepFourModule,
+    allowedStates: ["FULL"]
+  },
+  "5": {
+    Component: ApplicationStepFiveModule,
+    allowedStates: ["FULL", "DOCUMENT_ONLY"]
+  },
+  "6": {
+    Component: ApplicationStepSixModule,
+    allowedStates: ["FULL", "DOCUMENT_ONLY"]
+  }
+}
+
 const StepRouter: React.FC = () => {
   const { params } = useRouteMatch<{ step: string }>()
   const { step } = params
-  let component: React.ReactElement
-  switch (step) {
-    case "1":
-      component = <ApplicationStepOneModule />
-      break
-    case "2":
-      component = <ApplicationStepTwoModule />
-      break
-    case "3":
-      component = <ApplicationStepThreeModule />
-      break
-    case "4":
-      component = <ApplicationStepFourModule />
-      break
-    case "5":
-      component = <ApplicationStepFiveModule />
-      break
-    case "6":
-      component = <ApplicationStepSixModule />
-      break
-    default:
-      return <NotFoundModule />
+  const {
+    application: { editingState }
+  } = useApplicationStateContext()
+
+  if (!steps[step]) {
+    return <NotFoundModule />
   }
+
+  const { Component, allowedStates } = steps[step]
+  if (!allowedStates.includes(editingState)) {
+    switch (editingState) {
+      case "DOCUMENT_ONLY":
+        return <Redirect to="/application/step/5" />
+      case "LOCKED":
+        return <Redirect to="/application/finish" />
+    }
+  }
+
   return (
     <>
       <NavigatorComponent step={parseInt(step)} />
-      <Container maxWidth="lg">{component}</Container>
+      <Container maxWidth="lg">
+        <Component />
+      </Container>
     </>
   )
 }

@@ -1,9 +1,10 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles"
 import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { CardComponent } from "../../core/components/card.component"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
+import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -51,6 +52,12 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationFinishModule = () => {
   const classes = useStyles()
+  const { application } = useApplicationStateContext()
+
+  if (application.editingState !== "LOCKED") {
+    return <Redirect to="/application/step/1" />
+  }
+
   return (
     <>
       <CardComponent maxWidth="lg" className={classes.container}>

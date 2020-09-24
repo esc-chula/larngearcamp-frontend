@@ -6,7 +6,7 @@ import { FieldValues, UseFormOptions, UseFormMethods, useForm } from "react-hook
 import ApplicationServiceAPI from "../services/application.service"
 
 interface ApplicationStateContextValue {
-  application?: ApplicationDTO
+  application: ApplicationDTO
   updateApplication: (application: UpdateApplicationDTO) => Promise<void>
   finalizeApplication: () => Promise<void>
 }
@@ -54,7 +54,7 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean) =>
   }, [mutateApplication])
 
   return (
-    <ApplicationStateContext.Provider value={{ application, updateApplication, finalizeApplication }}>
+    <ApplicationStateContext.Provider value={{ application: application as any, updateApplication, finalizeApplication }}>
       {children(!!application)}
     </ApplicationStateContext.Provider>
   )

@@ -71,7 +71,7 @@ const ApplicationStepFiveModule: React.FC = () => {
               {uploadFileConstant.map((content, index) => (
                 <React.Fragment key={index}>
                   <Divider className={classes.divider} />
-                  <UploadBlockComponent serverFile={application![content.name]} {...content} order={index + 1} />
+                  <UploadBlockComponent serverFile={application[content.name]} {...content} order={index + 1} />
                   <input ref={methods.register} name={`${content.name}URL`} type="hidden" />
                 </React.Fragment>
               ))}

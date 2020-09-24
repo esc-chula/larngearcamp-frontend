@@ -3,11 +3,13 @@ import Answer1DTO from "./answer1.dto"
 import Answer2DTO from "./answer2.dto"
 import DocumentDTO from "./document.dto"
 
+export type EditingState = "FULL" | "DOCUMENT_ONLY" | "LOCKED"
+
 export interface ApplicationInfo {
   id: string
   userId: string
   code?: string
-  editingState: string
+  editingState: EditingState
   applicationState: string
   documentState: string
 }
