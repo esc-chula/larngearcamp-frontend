@@ -4,6 +4,10 @@ import { Grid, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useGlobalContext } from "../providers/global.provider"
 
+export type ButtonBarProps = {
+  beforeNavigate?: () => boolean | Promise<boolean>
+}
+
 const useStyles = makeStyles(theme => ({
   buttonSuccess: {
     marginTop: theme.spacing(2),
@@ -23,10 +27,6 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export type ButtonBarProps = {
-  beforeNavigate?: () => boolean | Promise<boolean>
-}
-
 const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
   const step = parseInt(useRouteMatch<{ step: string }>().params.step)
   const history = useHistory()
@@ -36,9 +36,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
   const { setLoading } = useGlobalContext()
 
   const wrappedBeforeNavigate = useMemo(() => {
-    if (!beforeNavigate) {
-      return null
-    }
+    if (!beforeNavigate) return null
     return async () => {
       try {
         setLoading(true)
@@ -50,9 +48,9 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
   }, [beforeNavigate, setLoading])
 
   const handlePrevious = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>) => {
+    async (event: React.MouseEvent<HTMLButtonElement>) => {
       if (wrappedBeforeNavigate) {
-        e.preventDefault()
+        event.preventDefault()
         if (await wrappedBeforeNavigate()) {
           history.push(previousPage)
         }
@@ -62,9 +60,9 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
   )
 
   const handleNext = useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>) => {
+    async (event: React.MouseEvent<HTMLButtonElement>) => {
       if (wrappedBeforeNavigate) {
-        e.preventDefault()
+        event.preventDefault()
         if (await wrappedBeforeNavigate()) {
           history.push(nextPage)
         }
