@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: "100% 100%",
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
-    backgroundImage: (type: BackgroundProps["type"]) => `url(${require(`../../assets/images/background/${type}`)})`,
+    //backgroundImage: (type: BackgroundProps["type"]) => `url(${require(`../../assets/images/background/${type}.svg`)})`,
+    backgroundImage: `url(${require("../../assets/images/background/bg1.svg")})`,
     zIndex: -1
   }
 }))
