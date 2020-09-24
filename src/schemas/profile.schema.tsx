@@ -25,12 +25,21 @@ const ProfileSchema = object()
       district: string().trim().required("กรุณาระบุอำเภอ/เขต"),
       province: string().trim().required("กรุณาระบุจังหวัด"),
       zip: string().trim().required("กรุณาระบุรหัสไปรษณี"),
-      phoneNumber: string().trim().required("กรุณาระบุเบอร์โทร"),
-      homeNumber: string().trim().required("กรุณาระบุเบอร์บ้าน"),
+      phoneNumber: string()
+        .trim()
+        .required("กรุณาระบุเบอร์โทร")
+        .matches(/^((((0\d{2})|(\+66\d{2})|(02))*-?(\d{3})*-?(\d{4})))|-$/, "เบอร์โทรศัพท์ไม่ถูกต้อง"),
+      homeNumber: string()
+        .trim()
+        .required("กรุณาระบุเบอร์บ้าน")
+        .matches(/^((((0\d{2})|(\+66\d{2})|(02))*-?(\d{3})*-?(\d{4})))|-$/, "เบอร์โทรศัพท์บ้านไม่ถูกต้อง"),
       facebookName: string().trim().required("กรุณาระบุชื่อเฟสบุ๊ค"),
       lineId: string().trim().required("กรุณาระบุไลน์ไอดี"),
       parentName: string().trim().required("กรุณาระบุชื่อผู้ปกครอง"),
-      parentNumber: string().trim().required("กรุณาระบุเบอร์โทรผู้ปกครอง"),
+      parentNumber: string()
+        .trim()
+        .required("กรุณาระบุเบอร์โทรผู้ปกครอง")
+        .matches(/^((02)*-?(\d{3})*-?(\d{4}))|-$/, "เบอร์โทรศัพท์ผู้ปกครองไม่ถูกต้อง"),
       parentRelationship: string().trim().required("กรุณาระบุความเกี่ยวข้อง")
     }).required()
   })
