@@ -7,6 +7,13 @@ interface MeDTO {
     last: string
     display: string
   }
+  application: {
+    code: string
+    picture: string
+    applicationState: string
+    documentState: string
+    editingState: string
+  }
   createdAt: Date
   updatedAt: Date
 }
