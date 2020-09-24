@@ -16,8 +16,8 @@ export function verifyAndSubmit<TFieldValues extends FieldValues = FieldValues>(
   getValues: UseFormMethods<TFieldValues>["getValues"],
   onValid: (data: UnpackNestedValue<TFieldValues>) => boolean | Promise<boolean>
 ) {
-  return async (e?: React.BaseSyntheticEvent) => {
-    e?.preventDefault()
+  return async (event?: React.BaseSyntheticEvent) => {
+    event?.preventDefault()
     if (await trigger()) {
       return await onValid(getValues())
     } else {

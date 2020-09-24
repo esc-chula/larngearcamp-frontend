@@ -98,11 +98,11 @@ function mapApplication(application: ApplicationDTO): ApplicationModel {
     answer4: {
       ...answer4Rest,
       fifth: {
-        text: answer4fifth,
+        text: answer4fifth ? answer4fifth : "",
         checked: !!answer4fifth
       },
       sixth: {
-        text: answer4sixth,
+        text: answer4sixth ? answer4sixth : "",
         checked: !!answer4sixth
       }
     },

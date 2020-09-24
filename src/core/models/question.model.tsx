@@ -6,10 +6,6 @@ interface QuestionModel {
   caption?: string | null
   imagePath?: string | null
   contents?: Array<ChoiceModel>
-  wordCount?: {
-    min: number
-    max: number
-  }
 }
 
 export default QuestionModel

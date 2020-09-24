@@ -46,6 +46,8 @@ const ApplicationStepThreeModule: React.FC = () => {
     },
     [updateApplication]
   )
+  const { getValues } = methods
+  console.log(getValues())
   const handleSubmit = useHandleSubmit(methods, onSubmit)
   return (
     <ApplicationStepModule beforeNavigate={handleSubmit}>
@@ -59,7 +61,7 @@ const ApplicationStepThreeModule: React.FC = () => {
                   question={`${index + 1}. ${question.question}`}
                   caption={question.caption}
                   imagePath={question.imagePath}>
-                  {question.type === "multiline" && <MultilineTypeComponent name={`answer${index + 1}`} wordCount={question.wordCount} />}
+                  {question.type === "multiline" && <MultilineTypeComponent name={`answer${index + 1}`} />}
                   {question.type === "checkbox" && <CheckboxTypeComponent name={`answer${index + 1}`} contents={question.contents} />}
                   {question.type === "radio" && (
                     <RadioTypeComponent name={`answer${index + 1}`} contents={question.contents} className={classes.input} />

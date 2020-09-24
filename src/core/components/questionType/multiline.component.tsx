@@ -6,12 +6,6 @@ import { resolve } from "../../../utils/modify"
 
 interface MultiLineTypeProps {
   name: string
-  wordCount?:
-    | {
-        min: number
-        max: number
-      }
-    | undefined
 }
 
 const useStyles = makeStyles(theme => ({
