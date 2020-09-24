@@ -38,8 +38,8 @@ const ApplicationStepSixModule: React.FC = () => {
 
   return (
     <ApplicationStepModule>
-      {({ ButtonBar }) => (
-        <form onSubmit={onSubmit} noValidate>
+      {({ buttonBar }) => (
+        <form onSubmit={onSubmit}>
           <CardComponent maxWidth="lg">
             <Typography variant="h5" align="center" className={classes.bold}>
               อัพโหลดเอกสารประกอบการรับสมัคร
@@ -53,7 +53,7 @@ const ApplicationStepSixModule: React.FC = () => {
               <span className={classes.highlight}>ผ่านการกดหมายเลขขั้นตอนที่แถบทางด้านบน</span>
             </Typography>
 
-            <ButtonBar />
+            {buttonBar}
           </CardComponent>
         </form>
       )}

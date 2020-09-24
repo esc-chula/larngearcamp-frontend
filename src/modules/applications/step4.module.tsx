@@ -8,13 +8,12 @@ import { MultilineTypeComponent } from "../../core/components/questionType/multi
 import { RadioTypeComponent } from "../../core/components/questionType/radio.component"
 import { CheckboxTypeComponent } from "../../core/components/questionType/checkbox.component"
 import { RankingTypeComponent } from "../../core/components/questionType/ranking.component"
-import ApplicationStepModule from "./stepLayout.module"
+import ApplicationStepModule, { useHandleSubmit } from "./stepLayout.module"
 import { yupResolver } from "@hookform/resolvers"
 import { Answer2Model } from "../../schemas/answer2.schema"
 import Answer2Schema from "../../schemas/answer2.schema"
 import { convertAnswer2SchemaToAnswer2DTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
-import { useNextStep } from "./stepRouter.module"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -33,27 +32,27 @@ const ApplicationStepFourModule: React.FC = () => {
     resolver: yupResolver(Answer2Schema)
   })
   const { updateApplication } = useApplicationStateContext()
-  const { handleSubmit } = methods
   const classes = useStyles()
-  const nextStep = useNextStep()
   const onSubmit = useCallback(
     async data => {
       const values = convertAnswer2SchemaToAnswer2DTO(data)
       try {
         await updateApplication(values)
-        nextStep()
+        return true
       } catch (error) {
         // show modal
+        return false
       }
     },
-    [updateApplication, nextStep]
+    [updateApplication]
   )
+  const handleSubmit = useHandleSubmit(methods, onSubmit)
   return (
-    <ApplicationStepModule>
-      {({ ButtonBar }) => (
+    <ApplicationStepModule beforeNavigate={handleSubmit}>
+      {({ buttonBar }) => (
         <>
           <FormProvider {...methods}>
-            <form className={classes.question} onSubmit={handleSubmit(onSubmit)}>
+            <form className={classes.question} onSubmit={handleSubmit}>
               {questionsSection2Constant.map((question: QuestionModel, index) => (
                 <QuestionCardComponent
                   key={`secondPart.${index + 1}`}
@@ -68,7 +67,7 @@ const ApplicationStepFourModule: React.FC = () => {
                   {question.type === "ranking" && <RankingTypeComponent name={`answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
-              <ButtonBar />
+              {buttonBar}
             </form>
           </FormProvider>
         </>
