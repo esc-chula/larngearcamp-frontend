@@ -2,7 +2,7 @@ import React, { useCallback } from "react"
 import { CardComponent } from "../../core/components/card.component"
 import { Divider, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { FormProvider, useForm } from "react-hook-form"
+import { FormProvider } from "react-hook-form"
 import { PersonalProfileComponent } from "../../core/components/personalInfo/profile.component"
 import { PersonalContactComponent } from "../../core/components/personalInfo/contact.component"
 import { PersonalEducationComponent } from "../../core/components/personalInfo/education.component"
@@ -13,8 +13,8 @@ import ProfileSchema, { ProfileModel } from "../../schemas/profile.schema"
 import ApplicationStepModule from "./stepLayout.module"
 import { useGlobalContext } from "../../core/providers/global.provider"
 import { useHistory } from "react-router-dom"
-import { useApplicationContext } from "../../core/providers/application.provider"
 import { convertProfileSchemaToProfileDTO } from "../../utils/modify"
+import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -40,9 +40,9 @@ const useStyles = makeStyles(theme => ({
 const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
-  const { updateApplication } = useApplicationContext()
   const history = useHistory()
-  const methods = useForm<ProfileModel>({
+  const { updateApplication } = useApplicationStateContext()
+  const methods = useApplicationForm<ProfileModel>({
     reValidateMode: "onBlur",
     resolver: yupResolver(ProfileSchema)
   })
@@ -53,7 +53,6 @@ const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
       setLoading(true)
       const values = convertProfileSchemaToProfileDTO(data)
       try {
-        console.log(values)
         await updateApplication(values)
         history.push(`/application/step/${parseInt(step) + 1}`)
       } catch (error) {

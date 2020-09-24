@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { useForm, FormProvider } from "react-hook-form"
+import { FormProvider } from "react-hook-form"
 import { questionsSection1Constant } from "../../core/constants/questionsSection1.constant"
 import { QuestionCardComponent } from "../../core/components/questionCard"
 import QuestionModel from "../../core/models/question.model"
@@ -12,8 +12,8 @@ import ApplicationStepModule from "./stepLayout.module"
 import { yupResolver } from "@hookform/resolvers"
 import { Answer1Model } from "../../schemas/answer1.schema"
 import Answer1Schema from "../../schemas/answer1.schema"
-import { useApplicationContext } from "../../core/providers/application.provider"
 import { convertAnswer1SchemaToAnswer1DTO } from "../../utils/modify"
+import { useApplicationStateContext, useApplicationForm } from "../../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -27,11 +27,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
-  const methods = useForm<Answer1Model>({
+  const methods = useApplicationForm<Answer1Model>({
     reValidateMode: "onBlur",
     resolver: yupResolver(Answer1Schema)
   })
-  const { updateApplication } = useApplicationContext()
+  const { updateApplication } = useApplicationStateContext()
   const { handleSubmit } = methods
   const classes = useStyles()
   const onSubmit = useCallback(
