@@ -188,7 +188,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     }
   }, [getAccessToken, logout])
 
-  const me = useSWR(() => (userId ? `me (${userId})` : null), meFetcher, {
+  const me = useSWR(userId ? `me (${userId})` : null, meFetcher, {
     refreshInterval: 0,
     revalidateOnFocus: process.env.NODE_ENV === "production"
   })
