@@ -1,7 +1,6 @@
 import React from "react"
-import { Typography, Button, Box, BoxProps, Hidden } from "@material-ui/core"
+import { Typography, Button, Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { pxToRem } from "../../utils/conversion"
 import { Link } from "react-router-dom"
 
 import landing1 from "../../assets/images/background/landing-1.svg"
@@ -9,55 +8,49 @@ import BackgroundOverlay from "../../core/components/backgroundOverlay.component
 
 const useStyle = makeStyles(theme => ({
   title: {
-    fontSize: pxToRem(60),
-    lineHeight: pxToRem(75),
+    width: "100%",
+    margin: "auto",
     fontFamily: "Raleway",
     fontWeight: 300,
-    margin: "0 0 20px 0"
-  },
-  titleBig: {
-    fontSize: pxToRem(64)
-  },
-  titleSmall: {
-    fontSize: pxToRem(48)
+    "&>.big": {
+      fontSize: "1.4em"
+    },
+    [theme.breakpoints.down("md")]: {
+      width: "75%",
+      fontSize: "3rem"
+    }
   },
   subtitle: {
-    fontSize: pxToRem(28),
+    fontSize: "1.5rem",
     fontWeight: 200,
-    lineHeight: pxToRem(42),
-    margin: " 0 0 28px 0"
+    margin: theme.spacing(1, "auto", 3, "auto"),
+    [theme.breakpoints.down("sm")]: {
+      width: "50%"
+    }
   },
   button: {
-    width: "200px",
-    height: "50px"
-  },
-  buttonText: {
-    fontWeight: 600,
-    fontSize: pxToRem(20),
-    lineHeight: pxToRem(23)
+    padding: theme.spacing(1, 6),
+    "&>*": {
+      fontSize: "1.1rem"
+    }
   }
 }))
 
-const HomeTitle: React.FC<BoxProps> = props => {
+const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
   return (
     <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70} minHeightPx={800}>
       <Box display="flex" justifyContent="center" alignItems="center" height="80%">
-        <Box textAlign="center" height="min-content" {...props}>
-          <h2 className={classes.title}>
-            <span className={classes.titleBig}>L</span>
-            <span className={classes.titleSmall}>ARNGEAR CAMP</span> <span>20th</span>
-          </h2>
+        <Box textAlign="center" height="min-content">
+          <Typography variant="h2" className={classes.title}>
+            <span className="big">L</span>ARNGEAR CAMP 20th
+          </Typography>
           <Typography variant="subtitle1" className={classes.subtitle}>
-            ค้นหาความเป็นวิศวกร
-            <Hidden smUp>
-              <br />
-            </Hidden>{" "}
-            ด้วยมือของคุณเอง
+            ค้นหาความเป็นวิศวกรด้วยมือของคุณเอง
           </Typography>
           <Link to="/application" className="no-underline">
             <Button variant="contained" color="primary" className={classes.button}>
-              <Typography className={classes.buttonText}>Apply Now</Typography>
+              Apply Now
             </Button>
           </Link>
         </Box>

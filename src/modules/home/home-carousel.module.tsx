@@ -1,10 +1,14 @@
 import React from "react"
-import Carousel, { CarouselProps, ResponsiveType } from "react-multi-carousel"
+import Carousel, { CarouselProps, ResponsiveType, ArrowProps } from "react-multi-carousel"
 import { makeStyles, Theme as DefaultTheme, useTheme } from "@material-ui/core/styles"
 import "@material-ui/core/"
 interface Props extends Partial<CarouselProps> {
   gradientPercent: { white: number; fade: number }
   images: { src: string; alt?: string }[]
+}
+
+interface ArrowButtonProps extends ArrowProps {
+  direction: "left" | "right"
 }
 
 const responsiveSetting: (theme: DefaultTheme) => ResponsiveType = theme => ({
@@ -60,13 +64,10 @@ const arrowStyle = makeStyles(theme => ({
     }
   }
 }))
-const LeftArrow: React.FC = props => {
+
+const ArrowButton: React.FC<ArrowButtonProps> = ({ onClick, direction }) => {
   const classes = arrowStyle()
-  return <button {...props} className={classes.arrow + " react-multiple-carousel__arrow react-multiple-carousel__arrow--left"} />
-}
-const RightArrow: React.FC = props => {
-  const classes = arrowStyle()
-  return <button {...props} className={classes.arrow + " react-multiple-carousel__arrow react-multiple-carousel__arrow--right"} />
+  return <button className={classes.arrow + ` react-multiple-carousel__arrow react-multiple-carousel__arrow--${direction}`} onClick={onClick} />
 }
 
 // TODO
@@ -84,8 +85,8 @@ const HomeCarousal: React.FC<Props> = props => {
         centerMode
         arrows
         responsive={responsiveSetting(theme)}
-        customLeftArrow={<LeftArrow />}
-        customRightArrow={<RightArrow />}
+        customLeftArrow={<ArrowButton direction="left" />}
+        customRightArrow={<ArrowButton direction="right" />}
         {...rest}>
         {props.images.map(({ src, alt }, i) => (
           <img className={classes.img} src={src} alt={alt} key={i} />
