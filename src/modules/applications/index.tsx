@@ -1,6 +1,23 @@
 import React from "react"
+import { Switch, Redirect } from "react-router-dom"
+import { UserGuardedRoute } from "../../core/guards/user.guard"
+import StepRouterModule from "./stepRouter.module"
+import FinishModule from "./finish.module"
 
-const StepRouterModule = React.lazy(() => import("./stepRouter.module"))
-const FinishModule = React.lazy(() => import("./finish.module"))
+const ApplicationModule: React.FC = () => {
+  return (
+    <Switch>
+      <UserGuardedRoute exact path="/application">
+        <Redirect to="/application/step/1" />
+      </UserGuardedRoute>
+      <UserGuardedRoute exact path="/application/step/:step">
+        <StepRouterModule />
+      </UserGuardedRoute>
+      <UserGuardedRoute exact path="/application/finish">
+        <FinishModule />
+      </UserGuardedRoute>
+    </Switch>
+  )
+}
 
-export { StepRouterModule, FinishModule }
+export default ApplicationModule
