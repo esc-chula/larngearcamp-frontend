@@ -43,6 +43,9 @@ const useStyles = makeStyles(theme => ({
   check: {
     fontSize: "3.5rem",
     color: theme.palette.success.main
+  },
+  container: {
+    marginTop: theme.spacing(8)
   }
 }))
 
@@ -50,7 +53,7 @@ const ApplicationFinishModule = () => {
   const classes = useStyles()
   return (
     <>
-      <CardComponent maxWidth="lg">
+      <CardComponent maxWidth="lg" className={classes.container}>
         <Box display="flex" justifyContent="center">
           <CheckCircleIcon fontSize="large" className={classes.check} />
         </Box>
@@ -66,7 +69,7 @@ const ApplicationFinishModule = () => {
           สถานะการสมัครและแก้ไขข้อมูลส่วนตัวที่ได้กรอกไปแล้วได้ในหน้าถัดไป
         </Typography>
 
-        <Link to="/profile">
+        <Link to="/profile" className="no-underline">
           <Button variant="contained" className={classes.buttonSuccess} fullWidth>
             ไปหน้าตรวจสอบสถานะ
           </Button>

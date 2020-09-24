@@ -15,7 +15,6 @@ import { NotFoundModule } from "./notfound.module"
 import { AdminDashboardModule } from "./admin/dashboard.module"
 import { QandAModule } from "./qna.module"
 import { ForgotPasswordModule } from "./forgotpassword.module"
-import { Box } from "@material-ui/core"
 import { ResetPasswordModule } from "./resetpassword.module"
 
 const RouteModule: React.FC = () => {
@@ -56,7 +55,6 @@ const RouteModule: React.FC = () => {
           <StepRouter />
         </UserGuardedRoute>
         <UserGuardedRoute exact path="/application/finish">
-          <Box my={3} />
           <Finish />
         </UserGuardedRoute>
 
