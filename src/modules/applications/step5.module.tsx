@@ -11,6 +11,7 @@ import DocumentSchema from "../../schemas/document.schema"
 import { DocumentModel } from "../../schemas/document.schema"
 import { convertDocumentSchemaSchemaToDocumentDTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { useNextStep } from "./stepRouter.module"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -31,24 +32,26 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepFiveModule: React.FC<{ step: string }> = ({ step }) => {
+const ApplicationStepFiveModule: React.FC = () => {
   const classes = useStyles()
   const methods = useApplicationForm<DocumentModel>({
     resolver: yupResolver(DocumentSchema)
   })
   const { handleSubmit } = methods
   const { updateApplication } = useApplicationStateContext()
+  const nextStep = useNextStep()
 
   const onSubmit = useCallback(
     async data => {
       const values = convertDocumentSchemaSchemaToDocumentDTO(data)
       try {
         await updateApplication(values)
+        nextStep()
       } catch (error) {
         // show modal
       }
     },
-    [updateApplication]
+    [updateApplication, nextStep]
   )
 
   return (

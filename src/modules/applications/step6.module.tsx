@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepSixModule: React.FC<{ step: string }> = ({ step }) => {
+const ApplicationStepSixModule: React.FC = () => {
   const classes = useStyles()
 
   const onSubmit = useCallback(() => {

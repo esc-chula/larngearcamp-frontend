@@ -14,6 +14,7 @@ import { Answer2Model } from "../../schemas/answer2.schema"
 import Answer2Schema from "../../schemas/answer2.schema"
 import { convertAnswer2SchemaToAnswer2DTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { useNextStep } from "./stepRouter.module"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepFourModule: React.FC<{ step: string }> = ({ step }) => {
+const ApplicationStepFourModule: React.FC = () => {
   const methods = useApplicationForm<Answer2Model>({
     reValidateMode: "onBlur",
     resolver: yupResolver(Answer2Schema)
@@ -34,16 +35,18 @@ const ApplicationStepFourModule: React.FC<{ step: string }> = ({ step }) => {
   const { updateApplication } = useApplicationStateContext()
   const { handleSubmit } = methods
   const classes = useStyles()
+  const nextStep = useNextStep()
   const onSubmit = useCallback(
     async data => {
       const values = convertAnswer2SchemaToAnswer2DTO(data)
       try {
         await updateApplication(values)
+        nextStep()
       } catch (error) {
         // show modal
       }
     },
-    [updateApplication]
+    [updateApplication, nextStep]
   )
   return (
     <ApplicationStepModule>

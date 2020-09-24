@@ -12,9 +12,9 @@ import { yupResolver } from "@hookform/resolvers"
 import ProfileSchema, { ProfileModel } from "../../schemas/profile.schema"
 import ApplicationStepModule from "./stepLayout.module"
 import { useGlobalContext } from "../../core/providers/global.provider"
-import { useHistory } from "react-router-dom"
 import { convertProfileSchemaToProfileDTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { useNextStep } from "./stepRouter.module"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -37,16 +37,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
+const ApplicationStepTwoModule: React.FC = () => {
   const classes = useStyles()
   const { setLoading } = useGlobalContext()
-  const history = useHistory()
   const { updateApplication } = useApplicationStateContext()
   const methods = useApplicationForm<ProfileModel>({
     reValidateMode: "onBlur",
     resolver: yupResolver(ProfileSchema)
   })
   const { handleSubmit } = methods
+  const nextStep = useNextStep()
 
   const onSubmit = useCallback(
     async data => {
@@ -54,13 +54,13 @@ const ApplicationStepTwoModule: React.FC<{ step: string }> = ({ step }) => {
       const values = convertProfileSchemaToProfileDTO(data)
       try {
         await updateApplication(values)
-        history.push(`/application/step/${parseInt(step) + 1}`)
+        nextStep()
       } catch (error) {
         // show modal
       }
       setLoading(false)
     },
-    [setLoading, history, step, updateApplication]
+    [setLoading, nextStep, updateApplication]
   )
 
   return (
