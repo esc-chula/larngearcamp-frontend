@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import { useLoadingCallback } from "../core/components/loading.component"
+import BackgroundComponent from "../core/components/background.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -86,6 +87,7 @@ const LoginModule = () => {
 
   return (
     <>
+      <BackgroundComponent type="bg1" />
       <LogoComponent />
       <FormProvider {...methods}>
         <CardComponent maxWidth="sm">

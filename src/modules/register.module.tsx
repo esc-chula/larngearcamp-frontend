@@ -14,6 +14,7 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import UserServiceAPI from "../core/services/users.service"
 import { useLoadingCallback } from "../core/components/loading.component"
+import BackgroundComponent from "../core/components/background.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -89,6 +90,7 @@ const RegisterModule = () => {
 
   return (
     <>
+      <BackgroundComponent type="bg1" />
       <LogoComponent />
       <FormProvider {...methods}>
         <CardComponent maxWidth="sm">

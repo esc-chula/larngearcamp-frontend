@@ -13,6 +13,7 @@ import { TextFieldComponent } from "../core/components/textField.component"
 import ResetPasswordSchema from "../schemas/resetpassword.schema"
 import { useQueryString } from "../utils/hooks"
 import { useLoadingCallback } from "../core/components/loading.component"
+import BackgroundComponent from "../core/components/background.component"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -92,6 +93,7 @@ const ResetPasswordModule: React.FC = () => {
 
   const UnfinishedComponent = (
     <>
+      <BackgroundComponent type="bg1" />
       <Typography align="center" className={classes.remark}>
         โปรดระบุรหัสผ่านใหม่
       </Typography>

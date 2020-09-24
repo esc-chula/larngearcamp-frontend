@@ -12,6 +12,7 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import { useHistory } from "react-router-dom"
 import { TextFieldComponent } from "../core/components/textField.component"
 import { useLoadingCallback } from "../core/components/loading.component"
+import BackgroundComponent from "../core/components/background.component"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -101,6 +102,7 @@ const ForgotPasswordModule: React.FC = () => {
 
   return (
     <>
+      <BackgroundComponent type="bg1" />
       <LogoComponent />
       <CardComponent maxWidth="sm" padding={4}>
         <Typography variant="h6" align="center">
