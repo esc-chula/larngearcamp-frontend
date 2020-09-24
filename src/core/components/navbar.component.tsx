@@ -40,6 +40,13 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(2),
       color: "#fff"
     }
+  },
+  link: {
+    color: "#fff",
+    marginRight: theme.spacing(6),
+    "&>:after": {
+      background: "#fff"
+    }
   }
 }))
 
@@ -68,7 +75,9 @@ const NavBarComponent = () => {
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <Box mr={6}>Logo</Box>
+          <Link className={classes.link} to="/">
+            Logo
+          </Link>
           <Hidden lgUp>
             <Box display="flex" alignItems="center" marginLeft="auto">
               {isLoggedIn && <AuthNavbarComponent />}
