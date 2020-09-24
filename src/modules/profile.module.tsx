@@ -39,7 +39,7 @@ const ProfileModule = () => {
   return (
     <Container maxWidth="lg">
       <ProfileComponent />
-      <Link to="/application/step/1" onClick={initApplication}>
+      <Link to="/application/step/1" onClick={initApplication} className="no-underline">
         <Button className={classes.button} color="primary" variant="contained" fullWidth>
           สมัครเข้าค่าย
         </Button>

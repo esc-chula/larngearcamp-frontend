@@ -17,7 +17,7 @@ import { ResetPasswordModule } from "./resetpassword.module"
 import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
 import { ShowLoadingComponent } from "../core/components/loading.component"
 
-const ApplicationModule = React.lazy(() => import("./applications"))
+const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
 const RouteModule: React.FC = () => {
   return (
@@ -50,9 +50,7 @@ const RouteModule: React.FC = () => {
           <ProfileModule />
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
-          <ApplicationStateProvider>
-            <ApplicationModule />
-          </ApplicationStateProvider>
+          <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
         </UserGuardedRoute>
 
         {/* Admin Guard */}

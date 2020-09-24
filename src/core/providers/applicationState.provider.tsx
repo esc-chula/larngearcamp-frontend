@@ -2,7 +2,6 @@ import React, { createContext, useContext, useEffect, useCallback, useState } fr
 import useSWR from "swr"
 import { useAuthContext } from "./auth.provider"
 import { ApplicationDTO, UpdateApplicationDTO } from "../models/dto/application.dto"
-import { ShowLoadingComponent } from "../components/loading.component"
 import { FieldValues, UseFormOptions, UseFormMethods, useForm } from "react-hook-form"
 import { format } from "date-fns"
 import { ProfileModel } from "../../schemas/profile.schema"
@@ -36,10 +35,10 @@ export function useApplicationForm<TFieldValues extends FieldValues = FieldValue
   return form
 }
 
-export const ApplicationStateProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-  const { accessToken } = useAuthContext()
+export const ApplicationStateProvider: React.FC<{ children: (render: boolean) => React.ReactElement }> = ({ children }) => {
+  const { userId } = useAuthContext()
   const { data: application, mutate: mutateApplication } = useSWR(
-    accessToken ? `application (${accessToken})` : null,
+    userId ? `application (${userId})` : null,
     ApplicationServiceAPI.getApplicationAPI,
     { revalidateOnFocus: false }
   )
@@ -57,12 +56,10 @@ export const ApplicationStateProvider: React.FC<React.PropsWithChildren<{}>> = (
     }, false)
   }, [mutateApplication])
 
-  if (!application) {
-    return <ShowLoadingComponent />
-  }
-
   return (
-    <ApplicationStateContext.Provider value={{ application, updateApplication, finalizeApplication }}>{children}</ApplicationStateContext.Provider>
+    <ApplicationStateContext.Provider value={{ application, updateApplication, finalizeApplication }}>
+      {children(!!application)}
+    </ApplicationStateContext.Provider>
   )
 }
 
