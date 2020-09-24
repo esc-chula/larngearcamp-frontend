@@ -14,6 +14,7 @@ import { Answer2Model } from "../../schemas/answer2.schema"
 import { useApplicationContext } from "../../core/providers/application.provider"
 import Answer2Schema from "../../schemas/answer2.schema"
 import { convertAnswer2SchemaToAnswer2DTO } from "../../utils/modify"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -27,23 +28,26 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const ApplicationStepFourModule: React.FC<{ step: string }> = ({ step }) => {
+  const classes = useStyles()
+  const history = useHistory()
   const methods = useForm<Answer2Model>({
     reValidateMode: "onBlur",
     resolver: yupResolver(Answer2Schema)
   })
   const { updateApplication } = useApplicationContext()
   const { handleSubmit } = methods
-  const classes = useStyles()
+
   const onSubmit = useCallback(
     async data => {
       const values = convertAnswer2SchemaToAnswer2DTO(data)
       try {
         await updateApplication(values)
+        history.push(`/application/step/${parseInt(step) + 1}`)
       } catch (error) {
         // show modal
       }
     },
-    [updateApplication]
+    [updateApplication, history, step]
   )
   return (
     <ApplicationStepModule>

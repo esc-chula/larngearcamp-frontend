@@ -14,6 +14,7 @@ import { Answer1Model } from "../../schemas/answer1.schema"
 import Answer1Schema from "../../schemas/answer1.schema"
 import { useApplicationContext } from "../../core/providers/application.provider"
 import { convertAnswer1SchemaToAnswer1DTO } from "../../utils/modify"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -31,6 +32,7 @@ const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
     reValidateMode: "onBlur",
     resolver: yupResolver(Answer1Schema)
   })
+  const history = useHistory()
   const { updateApplication } = useApplicationContext()
   const { handleSubmit } = methods
   const classes = useStyles()
@@ -39,11 +41,12 @@ const ApplicationStepThreeModule: React.FC<{ step: string }> = ({ step }) => {
       const values = convertAnswer1SchemaToAnswer1DTO(data)
       try {
         await updateApplication(values)
+        history.push(`/application/step/${parseInt(step) + 1}`)
       } catch (error) {
         // show modal
       }
     },
-    [updateApplication]
+    [updateApplication, history, step]
   )
   return (
     <ApplicationStepModule>

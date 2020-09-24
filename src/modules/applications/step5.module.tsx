@@ -9,8 +9,7 @@ import UploadBlockComponent from "../../core/components/uploadBlock.component"
 import { yupResolver } from "@hookform/resolvers"
 import DocumentSchema from "../../schemas/document.schema"
 import { DocumentModel } from "../../schemas/document.schema"
-import { useApplicationContext } from "../../core/providers/application.provider"
-import { convertDocumentSchemaSchemaToDocumentDTO } from "../../utils/modify"
+import { useHistory } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -33,23 +32,12 @@ const useStyles = makeStyles(theme => ({
 
 const ApplicationStepFiveModule: React.FC<{ step: string }> = ({ step }) => {
   const classes = useStyles()
+  const history = useHistory()
   const methods = useForm<DocumentModel>({
     resolver: yupResolver(DocumentSchema)
   })
   const { handleSubmit } = methods
-  const { updateApplication } = useApplicationContext()
-
-  const onSubmit = useCallback(
-    async data => {
-      const values = convertDocumentSchemaSchemaToDocumentDTO(data)
-      try {
-        await updateApplication(values)
-      } catch (error) {
-        // show modal
-      }
-    },
-    [updateApplication]
-  )
+  const onSubmit = useCallback(() => history.push(`/application/step/${parseInt(step) + 1}`), [history, step])
 
   return (
     <ApplicationStepModule>
