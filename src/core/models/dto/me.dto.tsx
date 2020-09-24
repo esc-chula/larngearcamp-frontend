@@ -1,3 +1,5 @@
+import { ApplicationState, DocumentState, EditingState } from "./application.dto"
+
 interface MeDTO {
   id: string
   email: string
@@ -10,9 +12,9 @@ interface MeDTO {
   application?: {
     code: string
     picture: string
-    applicationState: string
-    documentState: string
-    editingState: string
+    applicationState: ApplicationState
+    documentState: DocumentState
+    editingState: EditingState
   }
   createdAt: Date
   updatedAt: Date
