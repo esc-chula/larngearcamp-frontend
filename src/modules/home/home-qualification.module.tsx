@@ -49,7 +49,7 @@ const HomeQualification: React.FC<
     const w1 = allToMaxWidth(leftsRef.current.filter(x => x !== null) as HTMLDivElement[])
     const w2 = allToMaxWidth(rightsRef.current.filter(x => x !== null) as HTMLDivElement[])
     setWidth(w1 + w2)
-  })
+  }, [])
 
   const items = Array.from(Array(props.qualifications.length / 2).keys())
     .map(i => 2 * i)
