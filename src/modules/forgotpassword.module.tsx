@@ -8,10 +8,10 @@ import { grey } from "@material-ui/core/colors"
 import { FormProvider, useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers"
 import ForgotPasswordSchema from "../schemas/forgotpassword.schema"
-import { useGlobalContext } from "../core/providers/global.provider"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { useHistory } from "react-router-dom"
 import { TextFieldComponent } from "../core/components/textField.component"
+import { useLoadingCallback } from "../core/components/loading.component"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -44,7 +44,6 @@ const useStyles = makeStyles(theme => ({
 const ForgotPasswordModule: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
-  const { setLoading } = useGlobalContext()
   const { forgotPassword } = useAuthContext()
   const [finished, setFinished] = useState(false)
 
@@ -53,17 +52,17 @@ const ForgotPasswordModule: React.FC = () => {
   })
   const { handleSubmit, getValues } = methods
 
-  const onSubmit = useCallback(async () => {
-    setLoading(true)
-    const values = getValues(["email"])
-    try {
-      await forgotPassword(values)
-    } catch (error) {
-      console.error(error)
-    }
-    setLoading(false)
-    setFinished(true)
-  }, [getValues, setLoading, forgotPassword])
+  const onSubmit = useLoadingCallback(
+    useCallback(async () => {
+      const values = getValues(["email"])
+      try {
+        await forgotPassword(values)
+      } catch (error) {
+        console.error(error)
+      }
+      setFinished(true)
+    }, [getValues, forgotPassword])
+  )
 
   const changePage = useCallback(
     (path: string) => () => {

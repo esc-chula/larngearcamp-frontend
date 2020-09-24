@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useCallback, useState } fr
 import useSWR from "swr"
 import { useAuthContext } from "./auth.provider"
 import { ApplicationDTO, UpdateApplicationDTO } from "../models/dto/application.dto"
-import { LoadingComponent } from "../components/loading.component"
+import { ShowLoadingComponent } from "../components/loading.component"
 import { FieldValues, UseFormOptions, UseFormMethods, useForm } from "react-hook-form"
 import { format } from "date-fns"
 import { ProfileModel } from "../../schemas/profile.schema"
@@ -58,7 +58,7 @@ export const ApplicationStateProvider: React.FC<React.PropsWithChildren<{}>> = (
   }, [mutateApplication])
 
   if (!application) {
-    return <LoadingComponent />
+    return <ShowLoadingComponent />
   }
 
   return (

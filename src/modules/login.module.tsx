@@ -12,8 +12,8 @@ import { yupResolver } from "@hookform/resolvers"
 import LoginSchema from "../schemas/login.schema"
 import { useHistory } from "react-router-dom"
 import { useAuthContext } from "../core/providers/auth.provider"
-import { useGlobalContext } from "../core/providers/global.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
+import { useLoadingCallback } from "../core/components/loading.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -63,27 +63,26 @@ const useStyles = makeStyles(theme => ({
 const LoginModule = () => {
   const history = useHistory()
   const classes = useStyles()
-  const { setLoading } = useGlobalContext()
   const { login } = useAuthContext()
   const methods = useForm({
     resolver: yupResolver(LoginSchema)
   })
   const { handleSubmit, control, getValues, setError, errors } = methods
 
-  const onSubmit = useCallback(async () => {
-    setLoading(true)
-    const values = getValues(["email", "password"])
-    try {
-      await login(values)
-      history.push("/profile")
-    } catch (error) {
-      setError("validate", {
-        type: "validate",
-        message: error.response.data.message
-      })
-    }
-    setLoading(false)
-  }, [getValues, history, setError, setLoading, login])
+  const onSubmit = useLoadingCallback(
+    useCallback(async () => {
+      const values = getValues(["email", "password"])
+      try {
+        await login(values)
+        history.push("/profile")
+      } catch (error) {
+        setError("validate", {
+          type: "validate",
+          message: error.response.data.message
+        })
+      }
+    }, [getValues, history, setError, login])
+  )
 
   return (
     <>

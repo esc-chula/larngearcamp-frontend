@@ -13,7 +13,7 @@ import RegisterSchema from "../schemas/register.schema"
 import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import UserServiceAPI from "../core/services/users.service"
-import { useGlobalContext } from "../core/providers/global.provider"
+import { useLoadingCallback } from "../core/components/loading.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -73,21 +73,19 @@ const RegisterModule = () => {
   const methods = useForm({
     resolver: yupResolver(RegisterSchema)
   })
-  const { setLoading } = useGlobalContext()
   const { handleSubmit, getValues } = methods
-  const onSubmit = useCallback(async () => {
-    const values = getValues(["email", "password", "firstName", "lastName"])
-    try {
-      setLoading(true)
-      await UserServiceAPI.createUserAPI(values)
-      await login({ email: values["email"], password: values["password"] })
-      setLoading(false)
-      history.push("/profile")
-    } catch (error) {
-      console.log(error)
-    }
-    setLoading(false)
-  }, [getValues, history, login, setLoading])
+  const onSubmit = useLoadingCallback(
+    useCallback(async () => {
+      const values = getValues(["email", "password", "firstName", "lastName"])
+      try {
+        await UserServiceAPI.createUserAPI(values)
+        await login({ email: values["email"], password: values["password"] })
+        history.push("/profile")
+      } catch (error) {
+        console.log(error)
+      }
+    }, [getValues, history, login])
+  )
 
   return (
     <>

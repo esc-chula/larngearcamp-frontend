@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from "react"
 import { useRouteMatch, Link, useHistory } from "react-router-dom"
 import { Grid, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { useGlobalContext } from "../providers/global.provider"
+import { useLoadingStatus } from "./loading.component"
 
 const useStyles = makeStyles(theme => ({
   buttonSuccess: {
@@ -33,7 +33,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
   const previousPage = `/application/step/${step - 1}`
   const nextPage = `/application/step/${step + 1}`
   const classes = useStyles()
-  const { setLoading } = useGlobalContext()
+  const setLoading = useLoadingStatus()
 
   const wrappedBeforeNavigate = useMemo(() => {
     if (!beforeNavigate) {
