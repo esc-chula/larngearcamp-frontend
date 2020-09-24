@@ -49,39 +49,43 @@ export const convertProfileSchemaToProfileDTO = (props: ProfileModel): ProfileDT
 
 export const convertAnswer1SchemaToAnswer1DTO = (props: Answer1Model): Answer1DTO => {
   return {
-    firstPart: {
-      answer1: props.firstPart.answer1,
-      answer2: {
-        first: props.firstPart.answer2.first,
-        second: props.firstPart.answer2.second,
-        third: props.firstPart.answer2.third,
-        fourth: props.firstPart.answer2.fourth
-      },
-      answer3: props.firstPart.answer3,
-      answer4: {
-        first: props.firstPart.answer4.first,
-        second: props.firstPart.answer4.second,
-        third: props.firstPart.answer4.third,
-        fourth: props.firstPart.answer4.fourth,
-        fifth: props.firstPart.answer4.fifth.text,
-        sixth: props.firstPart.answer4.fifth.text
-      },
-      answer5: props.firstPart.answer5,
-      answer6: parseInt(props.firstPart.answer6),
-      answer7: props.firstPart.answer7
+    answer: {
+      firstPart: {
+        answer1: props.firstPart.answer1,
+        answer2: {
+          first: props.firstPart.answer2.first,
+          second: props.firstPart.answer2.second,
+          third: props.firstPart.answer2.third,
+          fourth: props.firstPart.answer2.fourth
+        },
+        answer3: props.firstPart.answer3,
+        answer4: {
+          first: props.firstPart.answer4.first,
+          second: props.firstPart.answer4.second,
+          third: props.firstPart.answer4.third,
+          fourth: props.firstPart.answer4.fourth,
+          fifth: props.firstPart.answer4.fifth.text || "",
+          sixth: props.firstPart.answer4.fifth.text || ""
+        },
+        answer5: props.firstPart.answer5,
+        answer6: parseInt(props.firstPart.answer6),
+        answer7: props.firstPart.answer7
+      }
     }
   }
 }
 
 export const convertAnswer2SchemaToAnswer2DTO = (props: Answer2Model): Answer2DTO => {
   return {
-    secondPart: {
-      answer1: props.secondPart.answer1,
-      answer2: props.secondPart.answer2,
-      answer3: props.secondPart.answer3,
-      answer4: props.secondPart.answer4,
-      answer5: props.secondPart.answer5,
-      answer6: props.secondPart.answer6
+    answer: {
+      secondPart: {
+        answer1: props.secondPart.answer1,
+        answer2: props.secondPart.answer2,
+        answer3: props.secondPart.answer3,
+        answer4: props.secondPart.answer4,
+        answer5: props.secondPart.answer5,
+        answer6: props.secondPart.answer6
+      }
     }
   }
 }
