@@ -9,11 +9,13 @@ import { StatusInfo } from "../core/components/statusInfo.component"
 import { useAuthContext } from "../core/providers/auth.provider"
 import MeDTO from "../core/models/dto/me.dto"
 import { ProfileStatus } from "../core/models/statusInfo.model"
+import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined"
+import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay"
 
 const useStyles = makeStyles(theme => ({
   button: {
     color: "white",
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(4),
     padding: theme.spacing(1, 4)
   },
   warning: {
@@ -22,12 +24,17 @@ const useStyles = makeStyles(theme => ({
       background: theme.palette.warning.dark
     }
   },
-  paper: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(4)
+  success: {
+    background: theme.palette.success.main,
+    "&:hover": {
+      background: theme.palette.success.dark
+    }
   },
   profile: {
     marginTop: theme.spacing(4)
+  },
+  icon: {
+    marginRight: theme.spacing(1)
   }
 }))
 
@@ -66,6 +73,7 @@ const ProfileModule = () => {
   const classes = useStyles()
   const { createApplication } = useApplicationContext()
   const { me } = useAuthContext()
+  const { mutate } = me
   const { application } = me.data as MeDTO
 
   const profileStatus = resolveStatus(application)
@@ -74,22 +82,29 @@ const ProfileModule = () => {
     useCallback(async () => {
       try {
         await createApplication()
+        mutate()
       } catch (error) {}
-    }, [createApplication])
+    }, [createApplication, mutate])
   )
 
   return (
     <Container maxWidth="lg">
       <ProfileComponent className={classes.profile} />
-      <Link to="/application/step/1" onClick={initApplication} className="no-underline">
-        <Button className={classes.button} color="primary" variant="contained" fullWidth>
-          สมัครเข้าค่าย
-        </Button>
-      </Link>
+      {profileStatus === "start" && (
+        <Link to="/application/step/1" onClick={initApplication} className="no-underline">
+          <Button className={`${classes.button} ${classes.success}`} variant="contained" fullWidth>
+            <FileCopyOutlinedIcon className={classes.icon} />
+            เริ่มต้นการสมัครเข้าค่าย
+          </Button>
+        </Link>
+      )}
 
-      <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
-        แก้ไขข้อมูลส่วนตัวผู้สมัคร (ส่วนที่ 2)
-      </Button>
+      {profileStatus === "continue" && (
+        <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
+          <PlaylistPlayIcon className={classes.icon} />
+          แก้ไขข้อมูลการสมัคร
+        </Button>
+      )}
       <StatusInfo profileStatus={profileStatus} />
     </Container>
   )
