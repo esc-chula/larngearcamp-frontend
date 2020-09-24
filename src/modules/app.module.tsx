@@ -6,6 +6,7 @@ import { ThemeProvider } from "@material-ui/core/styles"
 import { theme } from "../styles/theme"
 import { ErrorBoundary } from "../core/providers/error.provider"
 import AppProvider from "../core/providers/index.provider"
+import { NavBarComponent } from "../core/components/navbar.component"
 
 const AppModule = () => {
   return (
@@ -15,6 +16,7 @@ const AppModule = () => {
           <Suspense fallback={<ShowLoadingComponent />}>
             <AppProvider>
               <BrowserRouter>
+                <NavBarComponent />
                 <RouteModule />
               </BrowserRouter>
             </AppProvider>
