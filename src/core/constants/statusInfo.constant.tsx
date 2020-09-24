@@ -1,16 +1,5 @@
 import StatusInfoModel from "../models/statusInfo.model"
 
-export type ProfileStatus =
-  | "start"
-  | "continue"
-  | "pending"
-  | "docOk"
-  | "docNotOk"
-  | "passedInterview"
-  | "failedInterview"
-  | "passedFinal"
-  | "failedFinal"
-
 const statusInfoConstant: StatusInfoModel = {
   start: {
     title: "เริ่มต้นการสมัครค่ายลานเกียร์ครั้งที่ 20",

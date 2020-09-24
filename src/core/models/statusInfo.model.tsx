@@ -1,5 +1,16 @@
 import QandAModel from "./qna.model"
 
+export type ProfileStatus =
+  | "start"
+  | "continue"
+  | "pending"
+  | "docOk"
+  | "docNotOk"
+  | "passedInterview"
+  | "failedInterview"
+  | "passedFinal"
+  | "failedFinal"
+
 interface StatusInfoModel {
   start: QandAModel
   continue: QandAModel
