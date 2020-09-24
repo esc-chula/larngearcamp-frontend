@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles"
 import { grey } from "@material-ui/core/colors"
 import { LogoComponent } from "../core/components/logo.component"
 import { FacebookButtonComponent } from "../core/components/facebookButton.component"
-import { GoogleButtonComponent } from "../core/components/googleButton.component"
 import { CardComponent } from "../core/components/card.component"
 import { yupResolver } from "@hookform/resolvers"
 import LoginSchema from "../schemas/login.schema"
@@ -38,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     color: grey[500],
-    margin: theme.spacing(2, 0, 4, 0),
+    margin: theme.spacing(1, 0, 4, 0),
     "&:before, &:after": {
       flex: 1,
       content: "''",
@@ -60,7 +59,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   fb: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(1)
   }
 }))
 
@@ -93,7 +92,7 @@ const LoginModule = () => {
       <BackgroundComponent type="bg1" />
       <LogoComponent />
       <FormProvider {...methods}>
-        <CardComponent maxWidth="sm">
+        <CardComponent maxWidth="sm" padding={4}>
           <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
             <TextFieldComponent name="email" label="อีเมล" type="email" />
             <TextFieldComponent name="password" label="รหัสผ่าน" type="password" />

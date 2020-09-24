@@ -18,6 +18,7 @@ import BackgroundComponent from "../core/components/background.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
+    marginTop: theme.spacing(1),
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
@@ -49,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     textAlign: "center",
     color: grey[500],
-    margin: theme.spacing(2, 0, 4, 0),
+    margin: theme.spacing(1, 0, 4, 0),
     "&:before, &:after": {
       flex: 1,
       content: "''",
@@ -93,19 +94,16 @@ const RegisterModule = () => {
       <BackgroundComponent type="bg1" />
       <LogoComponent />
       <FormProvider {...methods}>
-        <CardComponent maxWidth="sm">
+        <CardComponent maxWidth="sm" padding={4}>
           <Box width="100%" margin="auto" mb={4} fontFamily="Kanit">
             <Typography variant="h6" align="center">
               เพื่อทำการสมัครเข้าค่ายลานเกียร์ครั้งที่ 20 น้องจำเป็นต้องสร้างบัญชีเพื่อดำเนินการต่อ
             </Typography>
           </Box>
 
-          <FacebookButtonComponent type="submit" variant="contained" color="primary">
+          <FacebookButtonComponent variant="contained" color="primary">
             เข้าสู่ระบบด้วยบัญชี Facebook
           </FacebookButtonComponent>
-          <GoogleButtonComponent type="submit" variant="contained" color="primary">
-            เข้าสู่ระบบด้วยบัญชี Google
-          </GoogleButtonComponent>
 
           <div className={classes.divider}>OR</div>
 
