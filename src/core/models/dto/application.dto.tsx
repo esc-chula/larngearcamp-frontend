@@ -4,14 +4,16 @@ import Answer2DTO from "./answer2.dto"
 import DocumentDTO from "./document.dto"
 
 export type EditingState = "FULL" | "DOCUMENT_ONLY" | "LOCKED"
+export type ApplicationState = "REVIEW" | "PASSED_INTERVIEW" | "NOT_PASSED_INTERVIEW" | "PASSED_FINAL" | "NOT_PASSED_FINAL"
+export type DocumentState = "REVIEW" | "PASSED" | "NOT_PASSED"
 
 export interface ApplicationInfo {
   id: string
   userId: string
   code?: string
   editingState: EditingState
-  applicationState: string
-  documentState: string
+  applicationState: ApplicationState
+  documentState: DocumentState
 }
 
 export declare type ApplicationDTO = ApplicationInfo & ProfileDTO & Answer1DTO & Answer2DTO & DocumentDTO
