@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useCallback, useMemo } from "react"
 import { useFormContext } from "react-hook-form"
 import { Typography, Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -6,6 +6,7 @@ import { gradesConstant } from "../../constants/grades.constant"
 import { SelectComponent } from "../select.component"
 import { provincesConstant } from "../../constants/provinces.constant"
 import { TextFieldComponent } from "../textField.component"
+import Autocomplete from "@material-ui/lab/Autocomplete"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -17,8 +18,19 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const PersonalEducationComponent = () => {
-  const { control } = useFormContext()
+  const { control, watch, setValue } = useFormContext()
   const classes = useStyles()
+
+  const province = watch("province", "")
+  const handleProvinceChange = useCallback(
+    (_event, newInputValue) => {
+      setValue("province", newInputValue)
+    },
+    [setValue]
+  )
+
+  const options = useMemo(() => ["", ...provincesConstant], [])
+  const filterOptions = useCallback(() => provincesConstant, [])
 
   return (
     <>
@@ -31,7 +43,14 @@ const PersonalEducationComponent = () => {
             <SelectComponent control={control} data={gradesConstant} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <SelectComponent control={control} data={provincesConstant} />
+            <Autocomplete
+              options={options}
+              disableClearable
+              value={province}
+              onChange={handleProvinceChange}
+              filterOptions={filterOptions}
+              renderInput={params => <TextFieldComponent {...params} name="province" label="จังหวัด" />}
+            />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
             <TextFieldComponent name="school" label="โรงเรียน" type="text" />
