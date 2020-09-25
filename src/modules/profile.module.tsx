@@ -31,9 +31,6 @@ const useStyles = makeStyles(theme => ({
       background: theme.palette.success.dark
     }
   },
-  profile: {
-    marginTop: theme.spacing(4)
-  },
   icon: {
     marginRight: theme.spacing(1)
   }
@@ -92,7 +89,7 @@ const ProfileModule = () => {
     <>
       <RedWaveComponent />
       <Container maxWidth="lg">
-        <ProfileComponent className={classes.profile} />
+        <ProfileComponent />
         {profileStatus === "start" && (
           <Link to="/application/step/1" onClick={initApplication} className="no-underline">
             <Button className={`${classes.button} ${classes.success}`} variant="contained" fullWidth>
