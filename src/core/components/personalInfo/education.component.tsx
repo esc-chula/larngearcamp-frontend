@@ -48,7 +48,7 @@ const PersonalEducationComponent = () => {
               disableClearable
               value={province}
               onChange={handleProvinceChange}
-              getOptionSelected={(option: string, value: string) => !value && option.indexOf(value) === 0}
+              getOptionSelected={(option: string, value: string) => (!option && !value) || option === value}
               filterOptions={filterOptions}
               renderInput={params => <TextFieldComponent {...params} name="province" label="จังหวัด" />}
             />
