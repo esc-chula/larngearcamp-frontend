@@ -63,7 +63,6 @@ const ApplicationStepTwoModule: React.FC = () => {
     async data => {
       const values = convertProfileSchemaToProfileDTO(data)
       try {
-        console.log(values)
         await updateApplication(values)
         return true
       } catch (error) {
