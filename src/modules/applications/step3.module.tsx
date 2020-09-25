@@ -15,6 +15,7 @@ import Answer1Schema from "../../schemas/answer1.schema"
 import { convertAnswer1SchemaToAnswer1DTO } from "../../utils/modify"
 import { useApplicationStateContext, useApplicationForm } from "../../core/providers/applicationState.provider"
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
+import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -77,13 +78,13 @@ const ApplicationStepThreeModule: React.FC = () => {
     },
     [updateApplication]
   )
-  const { getValues, errors } = methods
   const handleSubmit = useHandleSubmit(methods, onSubmit)
   return (
     <ApplicationStepModule beforeNavigate={handleSubmit}>
       {({ buttonBar }) => (
         <>
           <FormProvider {...methods}>
+            <FormNavigatePrompt />
             <form className={classes.question} onSubmit={handleSubmit}>
               {questionsSection1Constant.map((question: QuestionModel, index) => (
                 <QuestionCardComponent
@@ -99,7 +100,6 @@ const ApplicationStepThreeModule: React.FC = () => {
                   {question.type === "ranking" && <RankingTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
-              <button onClick={() => console.log(getValues(), errors)}>check value </button>
               {buttonBar}
             </form>
           </FormProvider>

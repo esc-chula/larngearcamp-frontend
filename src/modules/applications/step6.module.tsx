@@ -48,9 +48,8 @@ const ApplicationStepSixModule: React.FC = () => {
             <Divider className={classes.divider} />
 
             <Typography variant="body1">
-              หลังจากน้อง ๆ ได้กดยืนยันการสมัครแล้วน้อง ๆ จะ <span className={classes.highlight}>ไม่สามารถ</span> กลับไปแก้ไขคำตอบของ
-              คำถามทั้งสองส่วนและ เอกสารที่แนบได้อีก โดยน้อง ๆ สามารถกลับไปตรวจสอบคำตอบ และเอกสารต่าง ๆ ได้
-              <span className={classes.highlight}>ผ่านการกดหมายเลขขั้นตอนที่แถบทางด้านบน</span>
+              หลังจากน้อง ๆ ได้กดยืนยันการสมัครแล้วน้อง ๆ จะ <span className={classes.highlight}>ไม่สามารถ</span> กลับไปแก้ไขข้อมูลใด ๆ ได้อีก
+              กรุณาเช็คความถูกต้องของข้อมูลก่อน <span className={classes.highlight}>ยืนยันการสมัคร</span>
             </Typography>
 
             {buttonBar}

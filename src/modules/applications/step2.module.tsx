@@ -15,6 +15,7 @@ import { convertProfileSchemaToProfileDTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { format } from "date-fns"
+import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -63,7 +64,6 @@ const ApplicationStepTwoModule: React.FC = () => {
     async data => {
       const values = convertProfileSchemaToProfileDTO(data)
       try {
-        console.log(values)
         await updateApplication(values)
         return true
       } catch (error) {
@@ -80,6 +80,7 @@ const ApplicationStepTwoModule: React.FC = () => {
     <ApplicationStepModule beforeNavigate={handleSubmit}>
       {({ buttonBar }) => (
         <FormProvider {...methods}>
+          <FormNavigatePrompt />
           <form onSubmit={handleSubmit}>
             <CardComponent maxWidth="lg" className={classes.card}>
               <Typography variant="h5" align="center" className={classes.bold}>

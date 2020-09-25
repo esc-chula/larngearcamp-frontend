@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useCallback, useMemo } from "react"
-import useSWR from "swr"
+import useSWR, { responseInterface } from "swr"
 import { useAuthContext } from "./auth.provider"
 import { ApplicationDTO, UpdateApplicationDTO } from "../models/dto/application.dto"
 import { FieldValues, UseFormOptions, UseFormMethods, useForm, UnpackNestedValue, DeepPartial } from "react-hook-form"
@@ -9,6 +9,7 @@ interface ApplicationStateContextValue {
   application: ApplicationDTO
   updateApplication: (application: UpdateApplicationDTO) => Promise<void>
   finalizeApplication: () => Promise<void>
+  mutateApplication: responseInterface<ApplicationDTO, Error>["mutate"]
 }
 
 const ApplicationStateContext = createContext({} as ApplicationStateContextValue)
@@ -52,7 +53,7 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean) =>
   }, [mutateApplication])
 
   return (
-    <ApplicationStateContext.Provider value={{ application: application as any, updateApplication, finalizeApplication }}>
+    <ApplicationStateContext.Provider value={{ application: application as any, updateApplication, finalizeApplication, mutateApplication }}>
       {children(!!application)}
     </ApplicationStateContext.Provider>
   )

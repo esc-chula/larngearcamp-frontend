@@ -75,7 +75,7 @@ const AuthNavbarComponent: React.FC = () => {
             <ListItemIcon>
               <AccountCircleIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText primary="Profile" />
+            <ListItemText primary="โปรไฟล์" />
           </MenuItem>
         </Link>
 
@@ -85,7 +85,7 @@ const AuthNavbarComponent: React.FC = () => {
               <ListItemIcon>
                 <SupervisorAccountIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary="Admin" />
+              <ListItemText primary="แอดมิน" />
             </MenuItem>
           </Link>
         )}
@@ -94,7 +94,7 @@ const AuthNavbarComponent: React.FC = () => {
           <ListItemIcon>
             <MeetingRoomIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Logout" />
+          <ListItemText primary="ออกจากระบบ" />
         </MenuItem>
       </Menu>
     </>

@@ -4,6 +4,7 @@ import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import { ruleConstant } from "../../core/constants/rule.constant"
+import { documentLink } from "../../core/constants/document.constant"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -22,6 +23,16 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       background: theme.palette.success.dark
     }
+  },
+  download: {
+    width: "fit-content",
+    marginLeft: theme.spacing(2)
+  },
+  downloadText: {
+    color: theme.palette.primary.main,
+    "&:after": {
+      backgroundColor: theme.palette.primary.main
+    }
   }
 }))
 
@@ -35,11 +46,18 @@ const ApplicationStepOneModule = () => {
       </Typography>
       <Divider className={classes.divider} />
       {ruleConstant.map((data, index) => (
-        <Box mt={3} key={index + 1}>
+        <Box mt={2} key={index + 1}>
           <Typography variant="subtitle1">{`${index + 1} ${data.title}`}</Typography>
           {data.contents.map((content, innerIndex) => (
             <Box pl={2} mt={1} key={index + "-" + innerIndex}>
               <Typography variant="body2">{`${index + 1}.${innerIndex + 1} ${content}`}</Typography>
+              {index === 0 && innerIndex === 0 && (
+                <div className={classes.download}>
+                  <a href={documentLink} className={classes.downloadText} target="_blank" rel="noopener noreferrer">
+                    ดาวน์โหลด
+                  </a>
+                </div>
+              )}
             </Box>
           ))}
         </Box>

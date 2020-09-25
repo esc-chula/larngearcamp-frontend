@@ -1,11 +1,14 @@
-import React, { useCallback, useState, useMemo } from "react"
+import React, { useCallback, useMemo } from "react"
 import { Typography, makeStyles, Button } from "@material-ui/core"
 import ReplayIcon from "@material-ui/icons/Replay"
 import AddToPhotosOutlinedIcon from "@material-ui/icons/AddToPhotosOutlined"
 import UploadFileModel from "../models/uploadFile.model"
-import { useFormContext, useWatch } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 import { useApplicationContext } from "../providers/application.provider"
 import { DocumentItem, isDefaultUrl, friendlyFileName } from "../models/dto/document.dto"
+import { useApplicationStateContext } from "../providers/applicationState.provider"
+import { useLoadingCallback } from "./loading.component"
+import { useAuthContext } from "../providers/auth.provider"
 
 const useStyles = makeStyles(theme => ({
   withIcon: {
@@ -57,12 +60,14 @@ type UploadBlockComponentProps = UploadFileModel & {
 
 const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile, order, name, size, accept, body1, body2 }) => {
   const classes = useStyles()
-  const [url, setUrl] = useState("")
   const { register, setError, errors, clearErrors, setValue } = useFormContext()
-  const currentFile: FileList | undefined = useWatch({ name: name })
   const { uploadDocument } = useApplicationContext()
+  const { mutateApplication } = useApplicationStateContext()
+  const {
+    me: { mutate: mutateMe }
+  } = useAuthContext()
 
-  const uploadedFile = useMemo(() => {
+  const displayFile = useMemo(() => {
     if (isDefaultUrl(serverFile.url)) {
       return null
     }
@@ -71,33 +76,40 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
       url: serverFile.url
     }
   }, [serverFile])
-  const displayFile =
-    (currentFile ? Object.keys(currentFile).length : 0) > 0
-      ? {
-          name: currentFile![0].name,
-          url
-        }
-      : uploadedFile
 
-  const uploadFile = useCallback(
-    async event => {
-      const file: File = event.target.files[0]
-      if (size && file.size > size) {
-        setError(name, {
-          type: "fileSize",
-          message: "ขนาดไฟล์ใหญ่เกิน 2MB"
-        })
-        setValue(`${name}URL`, undefined)
-      } else {
-        clearErrors(name)
-        const formData = new FormData()
-        formData.append("file", file)
-        const result = await uploadDocument(formData, name)
-        setValue(`${name}URL`, result.file.url)
-        setUrl(result.file.url)
-      }
-    },
-    [uploadDocument, name, setError, clearErrors, size, setValue]
+  const uploadFile = useLoadingCallback(
+    useCallback(
+      async event => {
+        const file: File = event.target.files[0]
+        if (size && file.size > size) {
+          setError(name, {
+            type: "fileSize",
+            message: "ขนาดไฟล์ใหญ่เกิน 2MB"
+          })
+          setValue(`${name}URL`, undefined)
+        } else {
+          clearErrors(name)
+          const formData = new FormData()
+          formData.append("file", file)
+          const result = await uploadDocument(formData, name)
+          mutateApplication(application => ({ ...application, [name]: result.file }), false)
+          if (name === "picture") {
+            mutateMe(me => {
+              if (me.application) {
+                return {
+                  ...me,
+                  application: { ...me.application, picture: result.file.url }
+                }
+              } else {
+                return me
+              }
+            }, false)
+          }
+          setValue(`${name}URL`, result.file.url)
+        }
+      },
+      [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication, mutateMe]
+    )
   )
   const fileError = errors[name]
   const urlError = errors[`${name}URL`]
