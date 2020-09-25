@@ -5,6 +5,7 @@ import { CardComponent } from "../../core/components/card.component"
 import ApplicationStepModule from "./stepLayout.module"
 import { useHistory } from "react-router-dom"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { useAuthContext } from "../../core/providers/auth.provider"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -22,18 +23,21 @@ const ApplicationStepSixModule: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
   const { finalizeApplication } = useApplicationStateContext()
+  const { me } = useAuthContext()
+  const { mutate } = me
 
   const onSubmit = useCallback(
     async event => {
       event.preventDefault()
       try {
         await finalizeApplication()
+        mutate()
         history.push(`/application/finish`)
       } catch (error) {
         // show modal
       }
     },
-    [finalizeApplication, history]
+    [finalizeApplication, history, mutate]
   )
 
   return (
