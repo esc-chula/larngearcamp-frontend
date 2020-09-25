@@ -15,8 +15,10 @@ const useStyles = makeStyles(theme => ({
   bold: {
     fontWeight: 500
   },
+  nextLink: {
+    marginTop: theme.spacing(2)
+  },
   button: {
-    marginTop: theme.spacing(2),
     color: "white",
     background: theme.palette.success.main,
     "&:hover": {
@@ -49,7 +51,7 @@ const ApplicationStepOneModule = () => {
           น้อง ๆ สามารถกดตัวเลขที่แถบด้านบนเพื่อกลับไปแก้ไขสิ่งที่น้องกรอกไปแล้วได้
         </Typography>
       </Box> */}
-      <Link className="no-underline" to="/application/step/2">
+      <Link className={`no-underline ${classes.nextLink}`} to="/application/step/2">
         <Button variant="contained" className={classes.button} fullWidth>
           ไปขั้นตอนถัดไป
         </Button>
