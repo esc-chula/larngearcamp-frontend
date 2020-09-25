@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: "cover",
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
-    zIndex: -1
+    zIndex: -2
   },
   bg1: { backgroundImage: `url(${require("../../assets/images/background/bg1.svg")})` },
   bg2: { backgroundImage: `url(${require("../../assets/images/background/bg2.svg")})` },
