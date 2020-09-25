@@ -97,11 +97,9 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const loginFb = useCallback(
     async (signedRequest: string) => {
-      try {
-        const result = await AuthServiceAPI.loginFbAPI(signedRequest)
-        const accessToken = result.data.token
-        setAccessToken(accessToken)
-      } catch (error) {}
+      const result = await AuthServiceAPI.loginFbAPI(signedRequest)
+      const accessToken = result.data.token
+      setAccessToken(accessToken)
     },
     [setAccessToken]
   )

@@ -50,7 +50,7 @@ const AuthNavbarComponent: React.FC = () => {
     <>
       <div onClick={handleClick} className={classes.cursor}>
         <Avatar alt={name} src={imageUrl}>
-          {name}
+          {name ? name[0] : null}
         </Avatar>
       </div>
       <Menu

@@ -9,23 +9,34 @@ export const GlobalContext = createContext({} as GlobalConstruct)
 
 export const useGlobalContext = () => useContext(GlobalContext)
 
+let currentSnackbarId = 0
+
 export const GlobalProvider: React.FC = ({ children, ...other }) => {
-  const [open, setOpen] = useState(false)
-  const [snackbar, setSnackbar] = useState<CustomSnackbarProps>()
+  const [snackbars, setSnackbars] = useState<Record<string, CustomSnackbarProps>>({})
 
   const activeSnackBar = useCallback((props: CustomSnackbarProps) => {
-    setSnackbar(props)
-    setOpen(true)
+    setSnackbars(snackbars => ({ ...snackbars, [`${++currentSnackbarId}`]: props }))
   }, [])
 
-  const handleClose = useCallback(() => {
-    setOpen(false)
+  const removeSnackbar = useCallback((snackbarId: string) => {
+    setSnackbars(snackbars => {
+      const newSnackbars: Record<string, CustomSnackbarProps> = {}
+      Object.keys(snackbars).forEach(id => {
+        if (id !== snackbarId) {
+          newSnackbars[id] = snackbars[id]
+        }
+      })
+      return newSnackbars
+    })
   }, [])
 
   const value: GlobalConstruct = { activeSnackBar }
   return (
     <GlobalContext.Provider value={value} {...other}>
-      <SnackbarComponent message={snackbar?.message} type={snackbar?.type} onClose={handleClose} open={open} />
+      {Object.keys(snackbars).map(id => {
+        const snackbar = snackbars[id]
+        return <SnackbarComponent key={id} id={id} {...snackbar} removeSnackbar={removeSnackbar} />
+      })}
       {children}
     </GlobalContext.Provider>
   )
