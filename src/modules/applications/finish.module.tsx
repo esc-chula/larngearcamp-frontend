@@ -5,6 +5,7 @@ import { Box, Button, Divider, Typography } from "@material-ui/core"
 import { CardComponent } from "../../core/components/card.component"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import BackgroundComponent from "../../core/components/background.component"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -60,6 +61,7 @@ const ApplicationFinishModule = () => {
 
   return (
     <>
+      <BackgroundComponent type="bg1" />
       <CardComponent maxWidth="lg" className={classes.container}>
         <Box display="flex" justifyContent="center">
           <CheckCircleIcon fontSize="large" className={classes.check} />
