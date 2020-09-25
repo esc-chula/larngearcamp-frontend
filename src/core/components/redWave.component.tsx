@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundImage: `url(${require("../../assets/images/redWave.svg")})`,
-    backgroundPosition: "center",
+    backgroundPosition: "25% 75%",
     zIndex: -1
   }
 }))
