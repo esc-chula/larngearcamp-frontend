@@ -81,17 +81,14 @@ const NavBarComponent = () => {
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={() => setOpen(!open)}>
               <MenuIcon />
             </IconButton>
-          </Hidden>
-          <Link className={classes.homeLink + " no-underline"} to="/">
-            <LogoInverse />
-          </Link>
-          <Hidden lgUp>
             <Box display="flex" alignItems="center" marginLeft="auto">
               {isLoggedIn && <AuthNavbarComponent />}
             </Box>
           </Hidden>
-
           <Hidden mdDown>
+            <Link className={classes.homeLink + " no-underline"} to="/">
+              <LogoInverse />
+            </Link>
             <Box display="flex" alignItems="center" marginRight="auto" className={classes.itemsLeft}>
               <Link className={classes.underlineWhite} to="/docs">
                 เอกสารการสมัคร
