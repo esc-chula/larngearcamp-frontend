@@ -6,6 +6,7 @@ import { AppBar, Button, IconButton, Toolbar, Box, Hidden } from "@material-ui/c
 import { SideBarComponent } from "./sidebar.component"
 import { AuthNavbarComponent } from "./authNavbar.component"
 import { useAuthContext } from "../providers/auth.provider"
+import { ReactComponent as LogoInverse } from "../../assets/images/logo/logo_inverse.svg"
 
 interface NavBarContextValue {
   closeDrawer: () => void
@@ -19,6 +20,8 @@ export function useNavBarContext() {
 
 const useStyles = makeStyles(theme => ({
   appbar: {
+    width: "100%",
+    maxWidth: "100%",
     padding: theme.spacing(0, 5),
     [theme.breakpoints.down("md")]: {
       padding: theme.spacing(0, 2)
@@ -41,11 +44,15 @@ const useStyles = makeStyles(theme => ({
       color: "#fff"
     }
   },
-  link: {
+  homeLink: {
+    display: "flex",
     color: "#fff",
     marginRight: theme.spacing(6),
-    "&>:after": {
-      background: "#fff"
+    "&:after": {
+      content: "initial"
+    },
+    "&>svg": {
+      height: 30
     }
   }
 }))
@@ -67,7 +74,7 @@ const NavBarComponent = () => {
 
   return (
     <NavBarContext.Provider value={{ closeDrawer }}>
-      <AppBar position="static" color="secondary" className={classes.appbar}>
+      <AppBar position="sticky" color="secondary" className={classes.appbar}>
         <Toolbar>
           <Hidden lgUp>
             <SideBarComponent open={open} onClose={toggleDrawer(open)} />
@@ -75,8 +82,8 @@ const NavBarComponent = () => {
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <Link className={classes.link} to="/">
-            Logo
+          <Link className={classes.homeLink + " no-underline"} to="/">
+            <LogoInverse />
           </Link>
           <Hidden lgUp>
             <Box display="flex" alignItems="center" marginLeft="auto">

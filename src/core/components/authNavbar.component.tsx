@@ -60,6 +60,7 @@ const AuthNavbarComponent: React.FC = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
         elevation={3}
+        disableScrollLock
         getContentAnchorEl={null}
         anchorOrigin={{
           vertical: "bottom",
