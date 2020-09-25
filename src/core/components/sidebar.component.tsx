@@ -4,6 +4,7 @@ import { Drawer, Box, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useAuthContext } from "../providers/auth.provider"
 import { useNavBarContext } from "./navbar.component"
+import { ReactComponent as LogoLong } from "../../assets/images/logo/logo_long.svg"
 
 interface Props {
   open: boolean
@@ -14,6 +15,18 @@ const useStyles = makeStyles(theme => ({
   content: {
     "& > *": {
       marginBottom: theme.spacing(3)
+    }
+  },
+  homeLink: {
+    display: "flex",
+    justifyContent: "center",
+    color: "#fff",
+    "&:after": {
+      content: "initial"
+    },
+    "&>svg": {
+      margin: "auto",
+      height: 30
     }
   }
 }))
@@ -34,7 +47,9 @@ const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
   return (
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box minWidth={200} height="100%" display="flex" flexDirection="column" alignItems="center" py={6} px={5} className={classes.content}>
-        <div>Logo</div>
+        <Link className={classes.homeLink + " no-underline"} to="/">
+          <LogoLong />
+        </Link>
         <SideBarLink to="/docs">เอกสารการสมัคร</SideBarLink>
         <SideBarLink to="/qna">คำถามที่พบบ่อย</SideBarLink>
         {isAdminLoggedIn && <SideBarLink to="/admin/dashboard">dashboard</SideBarLink>}
