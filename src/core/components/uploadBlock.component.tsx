@@ -91,6 +91,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           setValue(`${name}URL`, undefined)
         } else {
           clearErrors(name)
+          clearErrors(`${name}URL`)
           const formData = new FormData()
           formData.append("file", file)
           try {
