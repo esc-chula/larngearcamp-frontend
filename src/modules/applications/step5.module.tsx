@@ -12,6 +12,7 @@ import { DocumentModel } from "../../schemas/document.schema"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { DocumentItem, isDefaultUrl } from "../../core/models/dto/document.dto"
+import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -67,6 +68,7 @@ const ApplicationStepFiveModule: React.FC = () => {
             อัพโหลดเอกสารประกอบการรับสมัคร
           </Typography>
           <FormProvider {...methods}>
+            <FormNavigatePrompt />
             <form onSubmit={handleSubmit}>
               {uploadFileConstant.map((content, index) => (
                 <React.Fragment key={index}>

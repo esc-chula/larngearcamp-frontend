@@ -15,6 +15,7 @@ import { convertProfileSchemaToProfileDTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { format } from "date-fns"
+import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -79,6 +80,7 @@ const ApplicationStepTwoModule: React.FC = () => {
     <ApplicationStepModule beforeNavigate={handleSubmit}>
       {({ buttonBar }) => (
         <FormProvider {...methods}>
+          <FormNavigatePrompt />
           <form onSubmit={handleSubmit}>
             <CardComponent maxWidth="lg" className={classes.card}>
               <Typography variant="h5" align="center" className={classes.bold}>
