@@ -11,6 +11,7 @@ import { NavigatorComponent } from "../../core/components/navigator.component"
 import { Container } from "@material-ui/core"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { EditingState } from "../../core/models/dto/application.dto"
+import BackgroundComponent from "../../core/components/background.component"
 
 export function useNextStep() {
   const { params } = useRouteMatch<{ step: string }>()
@@ -76,6 +77,7 @@ const StepRouter: React.FC = () => {
 
   return (
     <>
+      <BackgroundComponent type="bg1" />
       <NavigatorComponent step={parseInt(step)} />
       <Container maxWidth="lg">
         <Component />
