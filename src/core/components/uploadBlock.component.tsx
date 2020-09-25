@@ -8,6 +8,7 @@ import { useApplicationContext } from "../providers/application.provider"
 import { DocumentItem, isDefaultUrl, friendlyFileName } from "../models/dto/document.dto"
 import { useApplicationStateContext } from "../providers/applicationState.provider"
 import { useLoadingCallback } from "./loading.component"
+import { useAuthContext } from "../providers/auth.provider"
 
 const useStyles = makeStyles(theme => ({
   withIcon: {
@@ -62,6 +63,9 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
   const { register, setError, errors, clearErrors, setValue } = useFormContext()
   const { uploadDocument } = useApplicationContext()
   const { mutateApplication } = useApplicationStateContext()
+  const {
+    me: { mutate: mutateMe }
+  } = useAuthContext()
 
   const displayFile = useMemo(() => {
     if (isDefaultUrl(serverFile.url)) {
@@ -88,13 +92,23 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           const formData = new FormData()
           formData.append("file", file)
           const result = await uploadDocument(formData, name)
-          mutateApplication(application => {
-            return { ...application, [name]: result.file }
-          })
+          mutateApplication(application => ({ ...application, [name]: result.file }), false)
+          if (name === "picture") {
+            mutateMe(me => {
+              if (me.application) {
+                return {
+                  ...me,
+                  application: { ...me.application, picture: result.file.url }
+                }
+              } else {
+                return me
+              }
+            }, false)
+          }
           setValue(`${name}URL`, result.file.url)
         }
       },
-      [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication]
+      [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication, mutateMe]
     )
   )
   const fileError = errors[name]
