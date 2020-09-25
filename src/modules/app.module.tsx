@@ -7,6 +7,7 @@ import { theme } from "../styles/theme"
 import { ErrorBoundary } from "../core/providers/error.provider"
 import AppProvider from "../core/providers/index.provider"
 import { NavBarComponent } from "../core/components/navbar.component"
+import { ScrollToTop } from "../core/components/scrollToTop.component"
 
 const useStyles = makeStyles(theme => ({
   bottomSpace: {
@@ -31,6 +32,7 @@ const AppModule = () => {
           <Suspense fallback={<ShowLoadingComponent />}>
             <AppProvider>
               <BrowserRouter>
+                <ScrollToTop />
                 <NavBarComponent />
                 <RouteModule />
                 <BottomSpace />
