@@ -37,7 +37,7 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
       <Box display="flex" height="100%" alignItems="center" justifyContent="center" className={classes.container + " " + props.className} {...props}>
         <div className={classes.textCenter}>
           <Typography className={classes.primaryAnnounce + " kanit"} variant="h6">
-            รับสมัคร 18&nbsp;กันยายน - 10&nbsp;ตุลาคม 2563
+            รับสมัคร 25&nbsp;กันยายน - 14&nbsp;ตุลาคม 2563
           </Typography>
           <Link to="/application" className="no-underline">
             <Button variant="contained" color="secondary" className={classes.subscribeButton}>
