@@ -7,8 +7,8 @@ import { UserAvatar } from "./userAvatar.component"
 
 const useStyles = makeStyles(theme => ({
   profile: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     margin: "auto",
     background: "#181818",
     borderRadius: "100%",
@@ -46,7 +46,7 @@ const ProfileComponent: React.FC = () => {
   return (
     <div className={classes.container}>
       <div className={classes.flexRow}>
-        <UserAvatar width="200px" height="200px" />
+        <UserAvatar className={classes.profile} />
         <div className={classes.flexCol}>
           <Typography variant="h4" className={classes.name}>
             {fullName}
