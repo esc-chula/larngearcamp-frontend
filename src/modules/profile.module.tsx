@@ -100,10 +100,12 @@ const ProfileModule = () => {
         )}
 
         {profileStatus === "continue" && (
-          <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
-            <PlaylistPlayIcon className={classes.icon} />
-            แก้ไขข้อมูลการสมัคร
-          </Button>
+          <Link to="/application/step/1" className="no-underline">
+            <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
+              <PlaylistPlayIcon className={classes.icon} />
+              แก้ไขข้อมูลการสมัคร
+            </Button>
+          </Link>
         )}
         <StatusInfo profileStatus={profileStatus} />
       </Container>
