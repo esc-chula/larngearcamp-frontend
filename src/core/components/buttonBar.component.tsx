@@ -47,18 +47,6 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
     }
   }, [beforeNavigate, setLoading])
 
-  const handlePrevious = useCallback(
-    async (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (wrappedBeforeNavigate) {
-        event.preventDefault()
-        if (await wrappedBeforeNavigate()) {
-          history.push(previousPage)
-        }
-      }
-    },
-    [wrappedBeforeNavigate, history, previousPage]
-  )
-
   const handleNext = useCallback(
     async (event: React.MouseEvent<HTMLButtonElement>) => {
       if (wrappedBeforeNavigate) {
@@ -75,7 +63,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
     <Grid container spacing={2}>
       <Grid xs={12} sm={6} item>
         <Link className="no-underline" to={previousPage}>
-          <Button variant="contained" className={classes.buttonWarning} fullWidth onClick={handlePrevious}>
+          <Button variant="contained" className={classes.buttonWarning} fullWidth>
             {step === 6 ? "กลับไปแก้ไขหน้าที่แล้ว" : "ย้อนกลับ"}
           </Button>
         </Link>
