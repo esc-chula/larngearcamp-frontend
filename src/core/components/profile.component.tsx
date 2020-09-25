@@ -7,30 +7,38 @@ import { UserAvatar } from "./userAvatar.component"
 
 const useStyles = makeStyles(theme => ({
   profile: {
-    width: 150,
-    height: 150,
-    margin: "auto",
     background: "#181818",
-    borderRadius: "100%",
-    marginTop: theme.spacing(4)
+    borderRadius: "100%"
   },
   name: {
+    textAlign: "center",
     color: "#EEEEEE",
-    margin: `${theme.spacing(2)}px 0 0 ${theme.spacing(8)}px`
-  },
-  container: {
-    marginTop: theme.spacing(4)
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2rem"
+    }
   },
   flexRow: {
-    width: "fit-content",
-    margin: "0 auto",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    flexGrow: 1,
+    margin: theme.spacing(3, 5, 0, 5)
   },
   flexCol: {
+    margin: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
+  },
+  container: {
+    width: 140,
+    height: 140,
+    margin: theme.spacing(0, 3, 0, 0),
+    [theme.breakpoints.down("sm")]: {
+      width: 130,
+      height: 130
+    }
   }
 }))
 
@@ -44,9 +52,11 @@ const ProfileComponent: React.FC = () => {
 
   const fullName = `${first} ${last}`
   return (
-    <div className={classes.container}>
+    <>
       <div className={classes.flexRow}>
-        <UserAvatar className={classes.profile} />
+        <div className={classes.container}>
+          <UserAvatar className={classes.profile} />
+        </div>
         <div className={classes.flexCol}>
           <Typography variant="h4" className={classes.name}>
             {fullName}
@@ -58,7 +68,7 @@ const ProfileComponent: React.FC = () => {
           )}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

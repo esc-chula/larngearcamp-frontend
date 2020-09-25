@@ -22,7 +22,9 @@ const UserAvatar: React.FC<BoxProps> = props => {
   if (!application) {
     return (
       <Box {...props}>
-        <Avatar className={classes.avatar}>{first[0]}</Avatar>
+        <Avatar className={classes.avatar} alt="user">
+          {first[0]}
+        </Avatar>
       </Box>
     )
   }

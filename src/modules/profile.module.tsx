@@ -12,6 +12,7 @@ import { ProfileStatus } from "../core/models/statusInfo.model"
 import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined"
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay"
 import { RedWaveComponent } from "../core/components/redWave.component"
+import BackgroundComponent from "../core/components/background.component"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -87,6 +88,7 @@ const ProfileModule = () => {
 
   return (
     <>
+      <BackgroundComponent type="bg2" />
       <RedWaveComponent />
       <Container maxWidth="lg">
         <ProfileComponent />
