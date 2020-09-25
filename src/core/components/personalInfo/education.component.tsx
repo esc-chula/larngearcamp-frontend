@@ -21,7 +21,7 @@ const PersonalEducationComponent = () => {
   const { control, setValue } = useFormContext()
   const classes = useStyles()
 
-  const province = useWatch<string>({ name: "province" })
+  const province = useWatch({ name: "province", defaultValue: "" })
   const handleProvinceChange = useCallback(
     (_event, newInputValue) => {
       setValue("province", newInputValue)
