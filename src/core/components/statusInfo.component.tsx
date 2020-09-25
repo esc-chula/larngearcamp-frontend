@@ -49,13 +49,9 @@ const StatusInfo: React.FC<StatusInfoProps> = ({ profileStatus }) => {
   if (profileStatus !== "docNotOk" && profileStatus !== "passedInterview") {
     return (
       <Paper elevation={1} className={classes.paper}>
-        <Typography variant="h5" className={classes.title}>
-          <div dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].title }} />
-        </Typography>
-        {statusInfoConstant[profileStatus].contents.map(content => (
-          <Typography variant="body1" className={classes.content}>
-            <div dangerouslySetInnerHTML={{ __html: content }} />
-          </Typography>
+        <Typography variant="h5" className={classes.title} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].title }} />
+        {statusInfoConstant[profileStatus].contents.map((content, index) => (
+          <Typography key={index} variant="body1" className={classes.content} dangerouslySetInnerHTML={{ __html: content }} />
         ))}
         {showFB && (
           <div className={classes.flex}>
@@ -75,12 +71,12 @@ const StatusInfo: React.FC<StatusInfoProps> = ({ profileStatus }) => {
         : `จะอยู่ในช่วงวันที่ <span class="${classes.bold}">2-8 พฤศจิกายน 2563</span> โดยพี่ ๆ ค่ายลานเกียร์จะโทรสัมภาษณ์ทางเบอร์โทรศัพท์มือถือที่น้องได้กรอกไว้ ขอให้น้องคอยรอรับสายจากพี่ ๆ ด้วยนะครับ :)`
     return (
       <Paper elevation={1} className={classes.paper}>
-        <Typography variant="h5" className={classes.title}>
-          <div dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].title }} />
-        </Typography>
-        <Typography variant="body1" className={classes.content}>
-          <div dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].contents[0] + interviewInfo }} />
-        </Typography>
+        <Typography variant="h5" className={classes.title} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].title }} />
+        <Typography
+          variant="body1"
+          className={classes.content}
+          dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].contents[0] + interviewInfo }}
+        />
       </Paper>
     )
   }
