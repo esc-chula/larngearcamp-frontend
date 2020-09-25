@@ -7,7 +7,6 @@ import { SideBarComponent } from "./sidebar.component"
 import { AuthNavbarComponent } from "./authNavbar.component"
 import { useAuthContext } from "../providers/auth.provider"
 import { ReactComponent as LogoInverse } from "../../assets/images/logo/logo_inverse.svg"
-import { useGlobalContext } from "../providers/global.provider"
 
 interface NavBarContextValue {
   closeDrawer: () => void
@@ -62,7 +61,6 @@ const NavBarComponent = () => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
   const { isLoggedIn } = useAuthContext()
-  const { activeSnackBar } = useGlobalContext()
 
   const toggleDrawer = useCallback(
     (open: boolean) => (event: React.KeyboardEvent) => {
@@ -98,7 +96,6 @@ const NavBarComponent = () => {
               <Link className={classes.underlineWhite} to="/qna">
                 คำถามที่พบบ่อย
               </Link>
-              <button onClick={() => activeSnackBar({ type: "error", message: undefined })}>test snack bar</button>
             </Box>
             <Box display="flex" alignItems="center" className={classes.itemsRight}>
               {isLoggedIn ? (
