@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
     height: "100%",
     overflow: "hidden",
     position: "fixed",
+    filter: "blur(20px)",
     backgroundSize: "cover",
     backgroundPosition: "center center",
     backgroundRepeat: "no-repeat",
