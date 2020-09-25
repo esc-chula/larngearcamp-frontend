@@ -4,6 +4,7 @@ import { CardComponent } from "../core/components/card.component"
 import { qandAConstant } from "../core/constants/qna.constant"
 import { makeStyles } from "@material-ui/core/styles"
 import { RedWaveComponent } from "../core/components/redWave.component"
+import BackgroundComponent from "../core/components/background.component"
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -40,6 +41,7 @@ const QandAModule = () => {
   const classes = useStyles()
   return (
     <>
+      <BackgroundComponent type="bg1" />
       <RedWaveComponent />
       <Container maxWidth="lg">
         <Container className={classes.container}>
