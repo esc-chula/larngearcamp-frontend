@@ -23,7 +23,6 @@ const DocModule: React.FC = () => {
   return (
     <>
       <BackgroundComponent type="bg1" />
-      {/* <RedWaveComponent /> */}
       <CardComponent maxWidth="lg" className={classes.card}>
         <DocComponent />
       </CardComponent>
