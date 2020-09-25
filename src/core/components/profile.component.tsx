@@ -2,7 +2,7 @@ import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { useAuthContext } from "../providers/auth.provider"
 import MeDTO from "../models/dto/me.dto"
-import { Container, Typography } from "@material-ui/core"
+import { Typography } from "@material-ui/core"
 import { UserAvatar } from "./userAvatar.component"
 
 const useStyles = makeStyles(theme => ({
@@ -44,7 +44,7 @@ const ProfileComponent: React.FC = () => {
 
   const fullName = `${first} ${last}`
   return (
-    <Container className={classes.container}>
+    <div className={classes.container}>
       <div className={classes.flexRow}>
         <UserAvatar width="200px" height="200px" />
         <div className={classes.flexCol}>
@@ -58,7 +58,7 @@ const ProfileComponent: React.FC = () => {
           )}
         </div>
       </div>
-    </Container>
+    </div>
   )
 }
 

@@ -6,6 +6,7 @@ import ApplicationStepModule from "./stepLayout.module"
 import { useHistory } from "react-router-dom"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { useGlobalContext } from "../../core/providers/global.provider"
+import { useAuthContext } from "../../core/providers/auth.provider"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -24,12 +25,15 @@ const ApplicationStepSixModule: React.FC = () => {
   const history = useHistory()
   const { activeSnackBar } = useGlobalContext()
   const { finalizeApplication } = useApplicationStateContext()
+  const { me } = useAuthContext()
+  const { mutate } = me
 
   const onSubmit = useCallback(
     async event => {
       event.preventDefault()
       try {
         await finalizeApplication()
+        mutate()
         history.push(`/application/finish`)
       } catch (error) {
         activeSnackBar({
@@ -38,7 +42,7 @@ const ApplicationStepSixModule: React.FC = () => {
         })
       }
     },
-    [finalizeApplication, history, activeSnackBar]
+    [finalizeApplication, history, activeSnackBar, mutate]
   )
 
   return (
@@ -47,7 +51,7 @@ const ApplicationStepSixModule: React.FC = () => {
         <form onSubmit={onSubmit}>
           <CardComponent maxWidth="lg">
             <Typography variant="h5" align="center" className={classes.bold}>
-              อัพโหลดเอกสารประกอบการรับสมัคร
+              ยืนยันการสมัคร
             </Typography>
 
             <Divider className={classes.divider} />

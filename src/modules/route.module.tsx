@@ -16,6 +16,7 @@ import { ForgotPasswordModule } from "./forgotpassword.module"
 import { ResetPasswordModule } from "./resetpassword.module"
 import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
 import { ShowLoadingComponent } from "../core/components/loading.component"
+import { DocModule } from "./doc.module"
 
 const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
@@ -29,6 +30,9 @@ const RouteModule: React.FC = () => {
         </Route>
         <Route exact path="/qna">
           <QandAModule />
+        </Route>
+        <Route exact path="/docs">
+          <DocModule />
         </Route>
 
         {/* Guest Guard */}

@@ -21,7 +21,7 @@ const PersonalEducationComponent = () => {
   const { control, setValue } = useFormContext()
   const classes = useStyles()
 
-  const province = useWatch({ name: "province", defaultValue: "" })
+  const province = useWatch<string>({ name: "province" })
   const handleProvinceChange = useCallback(
     (_event, newInputValue) => {
       setValue("province", newInputValue)
@@ -48,7 +48,7 @@ const PersonalEducationComponent = () => {
               disableClearable
               value={province}
               onChange={handleProvinceChange}
-              getOptionSelected={(option: string, value: string) => !value && option.indexOf(value) === 0}
+              getOptionSelected={(option: string, value: string) => (!option && !value) || option === value}
               filterOptions={filterOptions}
               renderInput={params => <TextFieldComponent {...params} name="province" label="จังหวัด" />}
             />

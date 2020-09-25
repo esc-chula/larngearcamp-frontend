@@ -1,10 +1,9 @@
 import React from "react"
 import { CardComponent } from "../../core/components/card.component"
-import { Box, Button, Divider, Typography } from "@material-ui/core"
+import { Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
-import { ruleConstant } from "../../core/constants/rule.constant"
-import { documentLink } from "../../core/constants/document.constant"
+import { DocComponent } from "../../core/components/doc.component"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -16,22 +15,14 @@ const useStyles = makeStyles(theme => ({
   bold: {
     fontWeight: 500
   },
+  nextLink: {
+    marginTop: theme.spacing(2)
+  },
   button: {
-    marginTop: theme.spacing(2),
     color: "white",
     background: theme.palette.success.main,
     "&:hover": {
       background: theme.palette.success.dark
-    }
-  },
-  download: {
-    width: "fit-content",
-    marginLeft: theme.spacing(2)
-  },
-  downloadText: {
-    color: theme.palette.primary.main,
-    "&:after": {
-      backgroundColor: theme.palette.primary.main
     }
   }
 }))
@@ -41,27 +32,7 @@ const ApplicationStepOneModule = () => {
 
   return (
     <CardComponent maxWidth="lg" className={classes.card}>
-      <Typography variant="h5" align="center" className={classes.bold}>
-        รายละเอียดของการสมัครค่ายลานเกียร์ครั้งที่ 20
-      </Typography>
-      <Divider className={classes.divider} />
-      {ruleConstant.map((data, index) => (
-        <Box mt={2} key={index + 1}>
-          <Typography variant="subtitle1">{`${index + 1} ${data.title}`}</Typography>
-          {data.contents.map((content, innerIndex) => (
-            <Box pl={2} mt={1} key={index + "-" + innerIndex}>
-              <Typography variant="body2">{`${index + 1}.${innerIndex + 1} ${content}`}</Typography>
-              {index === 0 && innerIndex === 0 && (
-                <div className={classes.download}>
-                  <a href={documentLink} className={classes.downloadText} target="_blank" rel="noopener noreferrer">
-                    ดาวน์โหลด
-                  </a>
-                </div>
-              )}
-            </Box>
-          ))}
-        </Box>
-      ))}
+      <DocComponent />
       {/* <Box mt={2}>
         <Typography variant="body1" color="error" className={classes.bold}>
           หมายเหตุ
@@ -70,7 +41,7 @@ const ApplicationStepOneModule = () => {
           น้อง ๆ สามารถกดตัวเลขที่แถบด้านบนเพื่อกลับไปแก้ไขสิ่งที่น้องกรอกไปแล้วได้
         </Typography>
       </Box> */}
-      <Link className="no-underline" to="/application/step/2">
+      <Link className={`no-underline ${classes.nextLink}`} to="/application/step/2">
         <Button variant="contained" className={classes.button} fullWidth>
           ไปขั้นตอนถัดไป
         </Button>

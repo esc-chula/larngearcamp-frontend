@@ -1,5 +1,4 @@
 import React, { useCallback } from "react"
-import { Container } from "@material-ui/core"
 import ButtonBar, { ButtonBarProps } from "../../core/components/buttonBar.component"
 import { FieldValues, UseFormMethods, UnpackNestedValue } from "react-hook-form"
 
@@ -8,7 +7,7 @@ type ApplicationStepModuleProps = ButtonBarProps & {
 }
 
 const ApplicationStepModule: React.FC<ApplicationStepModuleProps> = ({ beforeNavigate, children }) => {
-  return <Container maxWidth="lg">{children({ buttonBar: <ButtonBar beforeNavigate={beforeNavigate} /> })}</Container>
+  return children({ buttonBar: <ButtonBar beforeNavigate={beforeNavigate} /> })
 }
 
 export function useHandleSubmit<TFieldValues extends FieldValues = FieldValues>(

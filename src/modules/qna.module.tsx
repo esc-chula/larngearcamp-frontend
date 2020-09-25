@@ -44,7 +44,7 @@ const QandAModule = () => {
       <BackgroundComponent type="bg1" />
       <RedWaveComponent />
       <Container maxWidth="lg">
-        <Container className={classes.container}>
+        <div className={classes.container}>
           <div>
             <Typography variant="h4" align="left" className={classes.pageName}>
               คำถามที่พบบ่อย
@@ -53,7 +53,7 @@ const QandAModule = () => {
               FAQ
             </Typography>
           </div>
-        </Container>
+        </div>
         {qandAConstant.map((content, index) => (
           <CardComponent maxWidth="lg" key={index + content.title} className={classes.paper} elevation={2}>
             <Typography variant="h6" color="primary">
