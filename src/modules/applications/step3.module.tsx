@@ -15,6 +15,7 @@ import Answer1Schema from "../../schemas/answer1.schema"
 import { convertAnswer1SchemaToAnswer1DTO } from "../../utils/modify"
 import { useApplicationStateContext, useApplicationForm } from "../../core/providers/applicationState.provider"
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
+import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -84,6 +85,7 @@ const ApplicationStepThreeModule: React.FC = () => {
       {({ buttonBar }) => (
         <>
           <FormProvider {...methods}>
+            <FormNavigatePrompt />
             <form className={classes.question} onSubmit={handleSubmit}>
               {questionsSection1Constant.map((question: QuestionModel, index) => (
                 <QuestionCardComponent
