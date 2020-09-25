@@ -10,6 +10,7 @@ import MeDTO from "../models/dto/me.dto"
 import { httpClient } from "../../utils/http"
 import { AxiosRequestConfig } from "axios"
 import AuthServiceAPI from "../services/auth.service"
+import { useGlobalContext } from "./global.provider"
 
 interface AuthConstruct {
   userId: string | null
@@ -18,7 +19,7 @@ interface AuthConstruct {
   isUserLoggedIn: boolean
   isAdminLoggedIn: boolean
   login: (params: LoginModel) => Promise<void>
-  loginFb: (facebookAccessToken: string) => Promise<void>
+  loginFb: (facebookAccessToken: string) => Promise<boolean>
   logout: () => Promise<void>
   me: responseInterface<MeDTO, Error>
   forgotPassword: (email: ForgotPasswordModel) => Promise<void>
@@ -60,6 +61,7 @@ export const useAuthContext = () => useContext(AuthContext)
 export const AuthProvider: React.FC = ({ ...other }) => {
   const [_accessToken, setStateAccessToken] = useState(() => getLocalStorage("ACCESS_TOKEN"))
   const accessTokenStateRef = useRef<AccessTokenState>((null as unknown) as AccessTokenState)
+  const { activeSnackBar } = useGlobalContext()
 
   if (accessTokenStateRef.current === null) {
     accessTokenStateRef.current = {
@@ -101,9 +103,16 @@ export const AuthProvider: React.FC = ({ ...other }) => {
         const result = await AuthServiceAPI.loginFbAPI(signedRequest)
         const accessToken = result.data.token
         setAccessToken(accessToken)
-      } catch (error) {}
+        return true // success
+      } catch (error) {
+        activeSnackBar({
+          type: "error",
+          message: `Error connecting to Facebook`
+        })
+        return false // error
+      }
     },
-    [setAccessToken]
+    [setAccessToken, activeSnackBar]
   )
 
   const logout = useCallback(async () => {

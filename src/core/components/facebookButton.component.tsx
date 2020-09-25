@@ -3,10 +3,12 @@ import { withStyles } from "@material-ui/core/styles"
 import { Button, ButtonProps } from "@material-ui/core"
 import { waitFbInit, fbLogin } from "../services/facebook.service"
 import { useAuthContext } from "../providers/auth.provider"
+import { useHistory } from "react-router-dom"
 
 const FacebookButtonComponent: React.FC<ButtonProps> = props => {
   const [loading, setLoading] = useState(false)
   const { loginFb } = useAuthContext()
+  const history = useHistory()
 
   const handleClick = useCallback(async () => {
     if (loading) {
@@ -17,10 +19,13 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
     const fbResponse = (await waitFbInit) || (await fbLogin())
     if (fbResponse) {
       const { signedRequest } = fbResponse.authResponse
-      loginFb(signedRequest)
+      const success = await loginFb(signedRequest)
+      if (success) {
+        history.push("/profile")
+      }
     }
     setLoading(false)
-  }, [loading, loginFb])
+  }, [loading, loginFb, history])
 
   return <Button {...props} disabled={loading} onClick={handleClick} />
 }
