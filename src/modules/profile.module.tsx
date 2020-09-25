@@ -11,6 +11,7 @@ import MeDTO from "../core/models/dto/me.dto"
 import { ProfileStatus } from "../core/models/statusInfo.model"
 import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined"
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay"
+import { RedWaveComponent } from "../core/components/redWave.component"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -88,25 +89,28 @@ const ProfileModule = () => {
   )
 
   return (
-    <Container maxWidth="lg">
-      <ProfileComponent className={classes.profile} />
-      {profileStatus === "start" && (
-        <Link to="/application/step/1" onClick={initApplication} className="no-underline">
-          <Button className={`${classes.button} ${classes.success}`} variant="contained" fullWidth>
-            <FileCopyOutlinedIcon className={classes.icon} />
-            เริ่มต้นการสมัครเข้าค่าย
-          </Button>
-        </Link>
-      )}
+    <>
+      <RedWaveComponent />
+      <Container maxWidth="lg">
+        <ProfileComponent className={classes.profile} />
+        {profileStatus === "start" && (
+          <Link to="/application/step/1" onClick={initApplication} className="no-underline">
+            <Button className={`${classes.button} ${classes.success}`} variant="contained" fullWidth>
+              <FileCopyOutlinedIcon className={classes.icon} />
+              เริ่มต้นการสมัครเข้าค่าย
+            </Button>
+          </Link>
+        )}
 
-      {profileStatus === "continue" && (
-        <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
-          <PlaylistPlayIcon className={classes.icon} />
-          แก้ไขข้อมูลการสมัคร
-        </Button>
-      )}
-      <StatusInfo profileStatus={profileStatus} />
-    </Container>
+        {profileStatus === "continue" && (
+          <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
+            <PlaylistPlayIcon className={classes.icon} />
+            แก้ไขข้อมูลการสมัคร
+          </Button>
+        )}
+        <StatusInfo profileStatus={profileStatus} />
+      </Container>
+    </>
   )
 }
 
