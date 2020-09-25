@@ -24,7 +24,7 @@ const QandAModule = () => {
         FAQ
       </Typography>
       {qandAConstant.map((content, index) => (
-        <CardComponent maxWidth="lg" key={index + content.title} className={classes.paper}>
+        <CardComponent maxWidth="lg" key={index + content.title} className={classes.paper} elevation={2}>
           <Typography variant="h6" color="primary">
             {content.title}
           </Typography>

@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 
 interface CardProps extends ContainerProps {
   padding?: number
+  elevation?: number
 }
 
 const useStyles = makeStyles(theme => ({
@@ -23,15 +24,15 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const CardComponent: React.FC<CardProps> = ({ padding, children, ...other }) => {
+const CardComponent: React.FC<CardProps> = ({ padding, elevation, children, ...other }) => {
   const classes = useStyles()
   const paddingStyle = {
-    padding: padding ? padding * 8 : 40
+    padding: padding ? padding * 8 : 32
   }
 
   return (
     <Container {...other}>
-      <Paper elevation={0} className={classes.paper} style={paddingStyle}>
+      <Paper elevation={elevation ? elevation : 0} className={classes.paper} style={paddingStyle}>
         {children}
       </Paper>
     </Container>
