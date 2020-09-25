@@ -93,7 +93,7 @@ const ResetPasswordModule: React.FC = () => {
 
   const UnfinishedComponent = (
     <>
-      <BackgroundComponent type="bg1" />
+      <BackgroundComponent type="bg2" />
       <Typography align="center" className={classes.remark}>
         โปรดระบุรหัสผ่านใหม่
       </Typography>

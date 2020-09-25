@@ -90,7 +90,7 @@ const RegisterModule = () => {
 
   return (
     <>
-      <BackgroundComponent type="bg1" />
+      <BackgroundComponent type="bg4" />
       <LogoComponent />
       <FormProvider {...methods}>
         <CardComponent maxWidth="sm" padding={4} keepPadding>
