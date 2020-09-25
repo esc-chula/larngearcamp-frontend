@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   push:
     branches: [dev]
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches: [dev]
 
 jobs:
   build_and_deploy:
@@ -24,6 +21,7 @@ jobs:
         run: yarn run build --if-present
         env:
           CI: false
+          REACT_APP_DEBUG: true
       - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@v1.5.0
         with:
