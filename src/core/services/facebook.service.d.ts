@@ -16,3 +16,4 @@ interface StatusResponse {
 
 export const waitFbInit: Promise<StatusResponse | null>
 export function fbLogin(): Promise<StatusResponse | null>
+export function fbLogout(): void

@@ -43,3 +43,7 @@ export const fbLogin = () => {
     )
   })
 }
+
+export const fbLogout = () => {
+  window.FB.logout()
+}
