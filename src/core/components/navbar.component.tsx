@@ -22,9 +22,9 @@ const useStyles = makeStyles(theme => ({
   appbar: {
     width: "100%",
     maxWidth: "100%",
-    padding: theme.spacing(0, 5),
-    [theme.breakpoints.down("md")]: {
-      padding: theme.spacing(0, 2)
+    padding: `0 env(safe-area-inset-right) 0 env(safe-area-inset-left)`,
+    [theme.breakpoints.up("lg")]: {
+      padding: theme.spacing(0, 5)
     }
   },
   underlineWhite: {

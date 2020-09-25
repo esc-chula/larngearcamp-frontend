@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 
 import landing1 from "../../assets/images/background/landing-1.svg"
 import BackgroundOverlay from "../../core/components/backgroundOverlay.component"
+import { safeArea } from "../../core/components/safeArea.component"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -30,14 +31,15 @@ const useStyle = makeStyles(theme => ({
     "&>*": {
       fontSize: "1.1rem"
     }
-  }
+  },
+  safeArea
 }))
 
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
   return (
     <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70} minHeightPx={800}>
-      <Box display="flex" justifyContent="center" alignItems="center" height="80%">
+      <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="80%">
         <Box textAlign="center" height="min-content">
           <Typography variant="h2" className={classes.title}>
             <span className="big">L</span>ARNGEAR CAMP 20th

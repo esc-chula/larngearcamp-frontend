@@ -2,12 +2,14 @@ import React from "react"
 import Carousel, { CarouselProps, ResponsiveType, ArrowProps } from "react-multi-carousel"
 import { makeStyles, Theme as DefaultTheme, useTheme } from "@material-ui/core/styles"
 import "@material-ui/core/"
+import { safeArea } from "../../core/components/safeArea.component"
 interface HomeCarouselProps extends Partial<CarouselProps> {
   gradientPercent: { white: number; fade: number }
   images: { src: string; alt?: string }[]
 }
 
 interface ArrowButtonProps extends ArrowProps {
+  className?: string
   direction: "left" | "right"
 }
 
@@ -56,6 +58,12 @@ const useStyle = makeStyles<DefaultTheme, HomeCarouselProps>(theme => ({
     width: "325px",
     height: "183px",
     objectFit: "cover"
+  },
+  leftArrow: {
+    marginLeft: safeArea.paddingLeft
+  },
+  rightArrow: {
+    marginRight: safeArea.paddingRight
   }
 }))
 
@@ -68,9 +76,14 @@ const arrowStyle = makeStyles(theme => ({
   }
 }))
 
-const ArrowButton: React.FC<ArrowButtonProps> = ({ onClick, direction }) => {
+const ArrowButton: React.FC<ArrowButtonProps> = ({ className = "", onClick, direction }) => {
   const classes = arrowStyle()
-  return <button className={classes.arrow + ` react-multiple-carousel__arrow react-multiple-carousel__arrow--${direction}`} onClick={onClick} />
+  return (
+    <button
+      className={`${className} ${classes.arrow} react-multiple-carousel__arrow react-multiple-carousel__arrow--${direction}`}
+      onClick={onClick}
+    />
+  )
 }
 
 // TODO
@@ -88,8 +101,8 @@ const HomeCarousel: React.FC<HomeCarouselProps> = props => {
         centerMode
         arrows
         responsive={responsiveSetting(theme)}
-        customLeftArrow={<ArrowButton direction="left" />}
-        customRightArrow={<ArrowButton direction="right" />}
+        customLeftArrow={<ArrowButton className={classes.leftArrow} direction="left" />}
+        customRightArrow={<ArrowButton className={classes.rightArrow} direction="right" />}
         {...rest}>
         {props.images.map(({ src, alt }, index) => (
           <img className={classes.img} src={src} alt={alt} key={index} />

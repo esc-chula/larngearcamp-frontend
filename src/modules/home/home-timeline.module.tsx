@@ -2,6 +2,7 @@ import React from "react"
 import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { TimelineDisplay, TimelineProps } from "../../core/components/timeline.component"
+import { SafeArea } from "../../core/components/safeArea.component"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -23,7 +24,7 @@ const useStyle = makeStyles(theme => ({
 const HomeTimeline: React.FC<TimelineProps & React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
   return (
-    <div {...props}>
+    <SafeArea {...props}>
       <Typography variant="h2" align="center" className={classes.title}>
         TIMELINE
       </Typography>
@@ -36,7 +37,7 @@ const HomeTimeline: React.FC<TimelineProps & React.HTMLAttributes<HTMLDivElement
           8 - 11 มกราคม 2564
         </Typography>
       </div>
-    </div>
+    </SafeArea>
   )
 }
 
