@@ -3,6 +3,7 @@ import { Box, BoxProps, Button, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import BackgroundOverlayComponent from "../../core/components/backgroundOverlay.component"
+import { SafeArea } from "../../core/components/safeArea.component"
 
 const useStyle = makeStyles(theme => ({
   container: {
@@ -35,7 +36,7 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
       offsetPercentage={7}
       minHeightPx={600}>
       <Box display="flex" height="100%" alignItems="center" justifyContent="center" className={classes.container + " " + props.className} {...props}>
-        <div className={classes.textCenter}>
+        <SafeArea className={classes.textCenter}>
           <Typography className={classes.primaryAnnounce + " kanit"} variant="h6">
             รับสมัคร 25&nbsp;กันยายน - 14&nbsp;ตุลาคม 2563
           </Typography>
@@ -44,7 +45,7 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
               สมัครค่ายลานเกียร์
             </Button>
           </Link>
-        </div>
+        </SafeArea>
       </Box>
     </BackgroundOverlayComponent>
   )
