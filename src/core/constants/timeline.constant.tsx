@@ -4,7 +4,7 @@ export interface TimelineModel {
 }
 
 const timelineConstant: Array<TimelineModel> = [
-  { left: "25 กันยายน - 10 ตุลาคม 2563", right: "รับสมัคร" },
+  { left: "25 กันยายน - 14 ตุลา 2563", right: "รับสมัคร" },
   { left: "24 ตุลาคม 2563", right: "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" },
   { left: "31 ตุลาคม 2563", right: "สัมภาษณ์รอบกรุงเทพ" },
   { left: "2 - 8 พฤศจิกายน 2563", right: "สัมภาษณ์รอบต่างจังหวัด" },
