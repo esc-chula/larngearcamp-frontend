@@ -61,7 +61,7 @@ const ApplicationFinishModule = () => {
 
   return (
     <>
-      <BackgroundComponent type="bg1" />
+      <BackgroundComponent type="bg5" />
       <CardComponent maxWidth="lg" className={classes.container}>
         <Box display="flex" justifyContent="center">
           <CheckCircleIcon fontSize="large" className={classes.check} />

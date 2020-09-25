@@ -55,7 +55,7 @@ const ProfileComponent: React.FC = () => {
     <>
       <div className={classes.flexRow}>
         <div className={classes.container}>
-          <UserAvatar className={classes.profile} />
+          <UserAvatar className={classes.profile} width="100%" height="100%" />
         </div>
         <div className={classes.flexCol}>
           <Typography variant="h4" className={classes.name}>

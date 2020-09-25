@@ -22,7 +22,7 @@ const DocModule: React.FC = () => {
   const classes = useStyles()
   return (
     <>
-      <BackgroundComponent type="bg1" />
+      <BackgroundComponent type="bg2" />
       <CardComponent maxWidth="lg" className={classes.card}>
         <DocComponent />
       </CardComponent>

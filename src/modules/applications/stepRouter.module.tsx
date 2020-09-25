@@ -77,7 +77,7 @@ const StepRouter: React.FC = () => {
 
   return (
     <>
-      <BackgroundComponent type="bg1" />
+      <BackgroundComponent type="bg6" />
       <NavigatorComponent step={parseInt(step)} />
       <Container maxWidth="lg">
         <Component />

@@ -102,7 +102,7 @@ const ForgotPasswordModule: React.FC = () => {
 
   return (
     <>
-      <BackgroundComponent type="bg1" />
+      <BackgroundComponent type="bg2" />
       <LogoComponent />
       <CardComponent maxWidth="sm" padding={4}>
         <Typography variant="h6" align="center">

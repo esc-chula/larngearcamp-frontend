@@ -14,6 +14,7 @@ import { TextFieldComponent } from "../core/components/textField.component"
 import UserServiceAPI from "../core/services/users.service"
 import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
+import { useGlobalContext } from "../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -74,6 +75,7 @@ const RegisterModule = () => {
   const methods = useForm({
     resolver: yupResolver(RegisterSchema)
   })
+  const { activeSnackBar } = useGlobalContext()
   const { handleSubmit, getValues } = methods
   const onSubmit = useLoadingCallback(
     useCallback(async () => {
@@ -83,14 +85,17 @@ const RegisterModule = () => {
         await login({ email: values["email"], password: values["password"] })
         history.push("/profile")
       } catch (error) {
-        console.log(error)
+        activeSnackBar({
+          type: "error",
+          message: error.response?.data.message
+        })
       }
-    }, [getValues, history, login])
+    }, [getValues, history, login, activeSnackBar])
   )
 
   return (
     <>
-      <BackgroundComponent type="bg1" />
+      <BackgroundComponent type="bg4" />
       <LogoComponent />
       <FormProvider {...methods}>
         <CardComponent maxWidth="sm" padding={4} keepPadding>

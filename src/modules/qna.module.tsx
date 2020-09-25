@@ -41,7 +41,7 @@ const QandAModule = () => {
   const classes = useStyles()
   return (
     <>
-      <BackgroundComponent type="bg1" />
+      <BackgroundComponent type="bg3" />
       <RedWaveComponent />
       <Container maxWidth="lg">
         <div className={classes.container}>
