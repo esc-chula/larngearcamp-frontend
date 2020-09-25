@@ -46,7 +46,7 @@ const ApplicationStepSixModule: React.FC = () => {
         <form onSubmit={onSubmit}>
           <CardComponent maxWidth="lg">
             <Typography variant="h5" align="center" className={classes.bold}>
-              อัพโหลดเอกสารประกอบการรับสมัคร
+              ยืนยันการสมัคร
             </Typography>
 
             <Divider className={classes.divider} />
