@@ -71,16 +71,14 @@ const ApplicationStepTwoModule: React.FC = () => {
       } catch (error) {
         activeSnackBar({
           type: "error",
-          message: error.response?.data.message
+          message: error.response?.data.errors.reduce((prev: any, curr: any) => prev + " " + curr.msg, "")
         })
         return false
       }
     },
     [updateApplication, activeSnackBar]
   )
-
   const handleSubmit = useHandleSubmit(methods, onSubmit)
-
   return (
     <ApplicationStepModule beforeNavigate={handleSubmit}>
       {({ buttonBar }) => (
