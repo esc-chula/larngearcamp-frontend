@@ -36,7 +36,7 @@ const PersonalContactComponent = () => {
             <TextFieldComponent name="contact.recipient" label="ชื่อ-นามสกุลผู้รับส่ง" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <TextFieldComponent name="contact.address" label="บ้านเลขที่ หมูที่ และถนน" type="text" />
+            <TextFieldComponent name="contact.address" label="บ้านเลขที่ หมู่ที่ และถนน" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <AddressFieldComponent type="district" label="ตำบล/แขวง" />

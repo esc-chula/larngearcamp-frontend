@@ -29,20 +29,20 @@ const PersonalHealthComponent = () => {
           หากมีหลายข้อให้คั่นคำตอบด้วย comma
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={2}>
+          <Grid item xs={12} sm={6} md={3}>
             <SelectComponent control={control} data={bloodGroupsConstant} />
           </Grid>
-          <Grid item xs={12} sm={6} md={5}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextFieldComponent name="health.congenitalDisease" label="โรคประจำตัว" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            <TextFieldComponent name="health.allergicFood" label="แพ้อาหาร" type="text" />
+            <TextFieldComponent name="health.allergicFood" label="อาหารที่แพ้" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <TextFieldComponent name="health.allergicDrug" label="แพ้ยา" type="text" />
+            <TextFieldComponent name="health.allergicDrug" label="ยาที่แพ้" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
-            <TextFieldComponent name="health.drug" label="ยาที่ต้องใช้ประจำ" type="text" />
+            <TextFieldComponent name="health.drug" label="ยาประจำตัว" type="text" />
           </Grid>
         </Grid>
       </Box>

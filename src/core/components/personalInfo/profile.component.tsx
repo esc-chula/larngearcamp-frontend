@@ -29,13 +29,13 @@ const PersonalProfileComponent = () => {
           ข้อมูลส่วนตัว
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={12} md={2}>
+          <Grid item xs={12} sm={12} md={4}>
             <SelectComponent control={control} data={titlesConstant} />
           </Grid>
-          <Grid item xs={12} sm={6} md={5}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextFieldComponent name="name" label="ชื่อจริง" type="text" defaultValue={me.data?.name?.first} />
           </Grid>
-          <Grid item xs={12} sm={6} md={5}>
+          <Grid item xs={12} sm={6} md={4}>
             <TextFieldComponent name="surname" label="นามสกุล" type="text" defaultValue={me.data?.name?.last} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
