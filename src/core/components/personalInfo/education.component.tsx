@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react"
-import { useFormContext } from "react-hook-form"
+import { useFormContext, useWatch } from "react-hook-form"
 import { Typography, Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { gradesConstant } from "../../constants/grades.constant"
@@ -18,10 +18,10 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const PersonalEducationComponent = () => {
-  const { control, watch, setValue } = useFormContext()
+  const { control, setValue } = useFormContext()
   const classes = useStyles()
 
-  const province = watch("province", "")
+  const province = useWatch({ name: "province" })
   const handleProvinceChange = useCallback(
     (_event, newInputValue) => {
       setValue("province", newInputValue)
