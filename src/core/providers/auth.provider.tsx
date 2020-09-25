@@ -18,7 +18,7 @@ interface AuthConstruct {
   isUserLoggedIn: boolean
   isAdminLoggedIn: boolean
   login: (params: LoginModel) => Promise<void>
-  loginFb: (facebookAccessToken: string) => Promise<boolean>
+  loginFb: (facebookAccessToken: string) => Promise<void>
   logout: () => Promise<void>
   me: responseInterface<MeDTO, Error>
   forgotPassword: (email: ForgotPasswordModel) => Promise<void>
