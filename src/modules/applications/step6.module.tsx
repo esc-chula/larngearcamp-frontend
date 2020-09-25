@@ -5,6 +5,7 @@ import { CardComponent } from "../../core/components/card.component"
 import ApplicationStepModule from "./stepLayout.module"
 import { useHistory } from "react-router-dom"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
+import { useGlobalContext } from "../../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 const ApplicationStepSixModule: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
+  const { activeSnackBar } = useGlobalContext()
   const { finalizeApplication } = useApplicationStateContext()
 
   const onSubmit = useCallback(
@@ -30,10 +32,13 @@ const ApplicationStepSixModule: React.FC = () => {
         await finalizeApplication()
         history.push(`/application/finish`)
       } catch (error) {
-        // show modal
+        activeSnackBar({
+          type: "error",
+          message: error.response?.data.message
+        })
       }
     },
-    [finalizeApplication, history]
+    [finalizeApplication, history, activeSnackBar]
   )
 
   return (

@@ -1,9 +1,8 @@
 import React, { createContext, useContext, useState, useCallback } from "react"
-import { ModalComponent } from "../components/modal.component"
+import SnackbarComponent, { CustomSnackbarProps } from "../components/snackbar.component"
 
 interface GlobalConstruct {
-  modal: boolean
-  setModal: React.Dispatch<React.SetStateAction<boolean>>
+  activeSnackBar: (props: CustomSnackbarProps) => void
 }
 
 export const GlobalContext = createContext({} as GlobalConstruct)
@@ -11,17 +10,22 @@ export const GlobalContext = createContext({} as GlobalConstruct)
 export const useGlobalContext = () => useContext(GlobalContext)
 
 export const GlobalProvider: React.FC = ({ children, ...other }) => {
-  const [modal, setModal] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [snackbar, setSnackbar] = useState<CustomSnackbarProps>()
 
-  const toggleModal = useCallback(() => {
-    setModal(false)
+  const activeSnackBar = useCallback((props: CustomSnackbarProps) => {
+    setSnackbar(props)
+    setOpen(true)
   }, [])
 
-  const value: GlobalConstruct = { modal, setModal }
+  const handleClose = useCallback(() => {
+    setOpen(false)
+  }, [])
 
+  const value: GlobalConstruct = { activeSnackBar }
   return (
     <GlobalContext.Provider value={value} {...other}>
-      <ModalComponent open={modal} onClick={toggleModal} />
+      <SnackbarComponent message={snackbar?.message} type={snackbar?.type} onClose={handleClose} open={open} />
       {children}
     </GlobalContext.Provider>
   )

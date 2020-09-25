@@ -3,7 +3,7 @@ const applicationStepConstant = [
     title: "คำชี้แจงการสมัคร"
   },
   {
-    title: "ข้อมูลผู้สมัคร"
+    title: "ข้อมูลส่วนตัว"
   },
   {
     title: "คำถามจากพี่ ๆ ส่วนที่ 1"

@@ -16,6 +16,7 @@ import { convertAnswer2SchemaToAnswer2DTO } from "../../utils/modify"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
+import { useGlobalContext } from "../../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -41,6 +42,7 @@ const ApplicationStepFourModule: React.FC = () => {
   })
   const { updateApplication } = useApplicationStateContext()
   const classes = useStyles()
+  const { activeSnackBar } = useGlobalContext()
   const onSubmit = useCallback(
     async data => {
       const values = convertAnswer2SchemaToAnswer2DTO(data)
@@ -48,11 +50,14 @@ const ApplicationStepFourModule: React.FC = () => {
         await updateApplication(values)
         return true
       } catch (error) {
-        // show modal
+        activeSnackBar({
+          type: "error",
+          message: error.response?.data.message
+        })
         return false
       }
     },
-    [updateApplication]
+    [updateApplication, activeSnackBar]
   )
   const handleSubmit = useHandleSubmit(methods, onSubmit)
   return (

@@ -9,6 +9,7 @@ import { DocumentItem, isDefaultUrl, friendlyFileName } from "../models/dto/docu
 import { useApplicationStateContext } from "../providers/applicationState.provider"
 import { useLoadingCallback } from "./loading.component"
 import { useAuthContext } from "../providers/auth.provider"
+import { useGlobalContext } from "../providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   withIcon: {
@@ -66,6 +67,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
   const {
     me: { mutate: mutateMe }
   } = useAuthContext()
+  const { activeSnackBar } = useGlobalContext()
 
   const displayFile = useMemo(() => {
     if (isDefaultUrl(serverFile.url)) {
@@ -91,24 +93,31 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           clearErrors(name)
           const formData = new FormData()
           formData.append("file", file)
-          const result = await uploadDocument(formData, name)
-          mutateApplication(application => ({ ...application, [name]: result.file }), false)
-          if (name === "picture") {
-            mutateMe(me => {
-              if (me.application) {
-                return {
-                  ...me,
-                  application: { ...me.application, picture: result.file.url }
+          try {
+            const result = await uploadDocument(formData, name)
+            mutateApplication(application => ({ ...application, [name]: result.file }), false)
+            if (name === "picture") {
+              mutateMe(me => {
+                if (me.application) {
+                  return {
+                    ...me,
+                    application: { ...me.application, picture: result.file.url }
+                  }
+                } else {
+                  return me
                 }
-              } else {
-                return me
-              }
-            }, false)
+              }, false)
+            }
+            setValue(`${name}URL`, result.file.url)
+          } catch (error) {
+            activeSnackBar({
+              type: "error",
+              message: error.response?.data.message
+            })
           }
-          setValue(`${name}URL`, result.file.url)
         }
       },
-      [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication, mutateMe]
+      [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication, mutateMe, activeSnackBar]
     )
   )
   const fileError = errors[name]

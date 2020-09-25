@@ -16,6 +16,7 @@ import { useApplicationForm, useApplicationStateContext } from "../../core/provi
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { format } from "date-fns"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
+import { useGlobalContext } from "../../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -54,6 +55,7 @@ function mapApplicationToProfile(application: ApplicationDTO): ProfileModel {
 
 const ApplicationStepTwoModule: React.FC = () => {
   const classes = useStyles()
+  const { activeSnackBar } = useGlobalContext()
   const { updateApplication } = useApplicationStateContext()
   const methods = useApplicationForm<ProfileModel>(mapApplicationToProfile, {
     reValidateMode: "onChange",
@@ -67,11 +69,14 @@ const ApplicationStepTwoModule: React.FC = () => {
         await updateApplication(values)
         return true
       } catch (error) {
-        // show modal
+        activeSnackBar({
+          type: "error",
+          message: error.response?.data.message
+        })
         return false
       }
     },
-    [updateApplication]
+    [updateApplication, activeSnackBar]
   )
 
   const handleSubmit = useHandleSubmit(methods, onSubmit)
