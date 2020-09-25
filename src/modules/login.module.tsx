@@ -92,7 +92,7 @@ const LoginModule = () => {
       <BackgroundComponent type="bg1" />
       <LogoComponent />
       <FormProvider {...methods}>
-        <CardComponent maxWidth="sm" padding={4}>
+        <CardComponent maxWidth="sm" padding={4} keepPadding>
           <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
             <TextFieldComponent name="email" label="อีเมล" type="email" />
             <TextFieldComponent name="password" label="รหัสผ่าน" type="password" />

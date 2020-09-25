@@ -93,7 +93,7 @@ const RegisterModule = () => {
       <BackgroundComponent type="bg1" />
       <LogoComponent />
       <FormProvider {...methods}>
-        <CardComponent maxWidth="sm" padding={4}>
+        <CardComponent maxWidth="sm" padding={4} keepPadding>
           <Box width="100%" margin="auto" mb={4} fontFamily="Kanit">
             <Typography variant="h6" align="center">
               เพื่อทำการสมัครเข้าค่ายลานเกียร์ครั้งที่ 20 น้องจำเป็นต้องสร้างบัญชีเพื่อดำเนินการต่อ
