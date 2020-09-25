@@ -75,7 +75,7 @@ const AuthNavbarComponent: React.FC = () => {
             <ListItemIcon>
               <AccountCircleIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText primary="โปรไฟล์" />
+            <ListItemText primary="สถานะการสมัคร" />
           </MenuItem>
         </Link>
 
