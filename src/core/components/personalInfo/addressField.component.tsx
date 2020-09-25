@@ -2,7 +2,7 @@ import React, { useMemo, useEffect, useCallback } from "react"
 import Autocomplete from "@material-ui/lab/Autocomplete"
 import { TextFieldComponent } from "../textField.component"
 import { searchAddressByDistrict, searchAddressByAmphoe, searchAddressByProvince, searchAddressByZipcode } from "./thai-address-database"
-import { useFormContext } from "react-hook-form"
+import { useFormContext, useWatch } from "react-hook-form"
 
 interface AddressFieldComponentProps {
   label: string
@@ -17,8 +17,8 @@ const inputNames: Record<string, string> = {
 }
 
 const AddressFieldComponent: React.FC<AddressFieldComponentProps> = ({ label, type }) => {
-  const { register, watch, setValue } = useFormContext()
-  const value = watch(inputNames[type], "")
+  const { register, setValue } = useFormContext()
+  const value = useWatch<string>({ name: inputNames[type] }) || ""
 
   useEffect(() => {
     register(inputNames[type])

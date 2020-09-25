@@ -40,9 +40,14 @@ const useStyles = makeStyles(theme => ({
 function mapApplicationToProfile(application: ApplicationDTO): ProfileModel {
   const birthDateDate = new Date(application.birthDate)
   const formattedBirthDate = format(birthDateDate, "yyyy-MM-dd")
+  const contact = application.contact
+  if (contact) {
+    contact.zip = `${contact.zip}`
+  }
   return {
     ...application,
-    birthDate: formattedBirthDate
+    birthDate: formattedBirthDate,
+    contact
   }
 }
 
