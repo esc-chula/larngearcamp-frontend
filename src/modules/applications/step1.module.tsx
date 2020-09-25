@@ -24,16 +24,6 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       background: theme.palette.success.dark
     }
-  },
-  download: {
-    width: "fit-content",
-    marginLeft: theme.spacing(2)
-  },
-  downloadText: {
-    color: theme.palette.primary.main,
-    "&:after": {
-      backgroundColor: theme.palette.primary.main
-    }
   }
 }))
 
