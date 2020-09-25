@@ -27,7 +27,7 @@ const SnackbarComponent: React.FC<SnackbarComponentProps> = ({ type, message, id
   return (
     <Snackbar {...props} autoHideDuration={3000} onExited={handleExited} onClose={handleClose} open={isOpen}>
       <Alert severity={type} elevation={6} variant="filled">
-        {message ? message : "Something went wrong."}
+        {message ? message : "มีบางอย่างผิดพลาด"}
       </Alert>
     </Snackbar>
   )
