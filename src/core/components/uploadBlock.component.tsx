@@ -7,6 +7,7 @@ import { useFormContext } from "react-hook-form"
 import { useApplicationContext } from "../providers/application.provider"
 import { DocumentItem, isDefaultUrl, friendlyFileName } from "../models/dto/document.dto"
 import { useApplicationStateContext } from "../providers/applicationState.provider"
+import { useLoadingCallback } from "./loading.component"
 
 const useStyles = makeStyles(theme => ({
   withIcon: {
@@ -72,29 +73,30 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
     }
   }, [serverFile])
 
-  const uploadFile = useCallback(
-    async event => {
-      const file: File = event.target.files[0]
-      if (size && file.size > size) {
-        setError(name, {
-          type: "fileSize",
-          message: "ขนาดไฟล์ใหญ่เกิน 2MB"
-        })
-        setValue(`${name}URL`, undefined)
-      } else {
-        clearErrors(name)
-        const formData = new FormData()
-        formData.append("file", file)
-        const result = await uploadDocument(formData, name)
-        mutateApplication(application => {
-          return { ...application, [name]: result.file }
-        })
-        setValue(`${name}URL`, result.file.url)
-      }
-    },
-    [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication]
+  const uploadFile = useLoadingCallback(
+    useCallback(
+      async event => {
+        const file: File = event.target.files[0]
+        if (size && file.size > size) {
+          setError(name, {
+            type: "fileSize",
+            message: "ขนาดไฟล์ใหญ่เกิน 2MB"
+          })
+          setValue(`${name}URL`, undefined)
+        } else {
+          clearErrors(name)
+          const formData = new FormData()
+          formData.append("file", file)
+          const result = await uploadDocument(formData, name)
+          mutateApplication(application => {
+            return { ...application, [name]: result.file }
+          })
+          setValue(`${name}URL`, result.file.url)
+        }
+      },
+      [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication]
+    )
   )
-
   const fileError = errors[name]
   const urlError = errors[`${name}URL`]
   const currentError = fileError || urlError
