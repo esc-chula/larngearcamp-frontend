@@ -100,7 +100,7 @@ const ProfileModule = () => {
         )}
 
         {profileStatus === "continue" && (
-          <Link to="/application/step/1" className="no-underline">
+          <Link to="/application/step/2" className="no-underline">
             <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
               <PlaylistPlayIcon className={classes.icon} />
               แก้ไขข้อมูลการสมัคร
