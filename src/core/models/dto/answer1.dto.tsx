@@ -3,10 +3,10 @@ interface Answer1DTO {
     firstPart: {
       answer1: string
       answer2: {
-        first: string
-        second: string
-        third: string
-        fourth: string
+        first: number
+        second: number
+        third: number
+        fourth: number
       }
       answer3: string
       answer4: {

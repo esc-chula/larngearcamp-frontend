@@ -53,17 +53,17 @@ export const convertAnswer1SchemaToAnswer1DTO = (props: Answer1Model): Answer1DT
       firstPart: {
         answer1: props.firstPart.answer1,
         answer2: {
-          first: props.firstPart.answer2.first,
-          second: props.firstPart.answer2.second,
-          third: props.firstPart.answer2.third,
-          fourth: props.firstPart.answer2.fourth
+          first: parseInt(props.firstPart.answer2.first),
+          second: parseInt(props.firstPart.answer2.second),
+          third: parseInt(props.firstPart.answer2.third),
+          fourth: parseInt(props.firstPart.answer2.fourth)
         },
         answer3: props.firstPart.answer3,
         answer4: {
-          first: props.firstPart.answer4.first,
-          second: props.firstPart.answer4.second,
-          third: props.firstPart.answer4.third,
-          fourth: props.firstPart.answer4.fourth,
+          first: !!props.firstPart.answer4.first,
+          second: !!props.firstPart.answer4.second,
+          third: !!props.firstPart.answer4.third,
+          fourth: !!props.firstPart.answer4.fourth,
           fifth: props.firstPart.answer4.fifth.text || "",
           sixth: props.firstPart.answer4.fifth.text || ""
         },

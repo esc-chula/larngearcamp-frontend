@@ -39,9 +39,11 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean) =>
     ApplicationServiceAPI.getApplicationAPI,
     { revalidateOnFocus: false }
   )
+  //console.log("application", application)
 
   const updateApplication = useCallback(
     async (application: UpdateApplicationDTO) => {
+      //console.log("application inner ", application)
       await mutateApplication(await ApplicationServiceAPI.updateApplicationAPI(application), false)
     },
     [mutateApplication]

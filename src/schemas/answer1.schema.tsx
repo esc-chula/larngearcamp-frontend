@@ -30,10 +30,10 @@ const Answer1Schema = object()
           }),
         answer3: string().trim().required("กรุณากรอกคำตอบ"),
         answer4: object({
-          first: boolean().required(),
-          second: boolean().required(),
-          third: boolean().required(),
-          fourth: boolean().required(),
+          first: boolean(),
+          second: boolean(),
+          third: boolean(),
+          fourth: boolean(),
           fifth: object({
             text: string().optional(),
             checked: boolean().required()

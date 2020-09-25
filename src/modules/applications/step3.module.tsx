@@ -29,12 +29,19 @@ const useStyles = makeStyles(theme => ({
 
 function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
   const {
+    answer2: { first: answer2first, second: answer2second, third: answer2thrid, fourth: answer2fourth },
     answer4: { fifth: answer4fifth, sixth: answer4sixth, ...answer4Rest },
     ...firstPartRest
-  } = application.answer?.firstPart || { answer4: {} }
+  } = application.answer?.firstPart || { answer2: {}, answer4: {} }
   return {
     firstPart: {
       ...firstPartRest,
+      answer2: {
+        first: answer2first ? `${answer2first}` : "",
+        second: answer2second ? `${answer2second}` : "",
+        third: answer2thrid ? `${answer2thrid}` : "",
+        fourth: answer2fourth ? `${answer2fourth}` : ""
+      },
       answer4: {
         ...answer4Rest,
         fifth: {
@@ -53,7 +60,6 @@ function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
 
 const ApplicationStepThreeModule: React.FC = () => {
   const methods = useApplicationForm<Answer1Model>(mapApplicationToAnswer1, {
-    reValidateMode: "onBlur",
     resolver: yupResolver(Answer1Schema)
   })
   const { updateApplication } = useApplicationStateContext()

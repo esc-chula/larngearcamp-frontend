@@ -50,7 +50,7 @@ const ApplicationStepTwoModule: React.FC = () => {
   const classes = useStyles()
   const { updateApplication } = useApplicationStateContext()
   const methods = useApplicationForm<ProfileModel>(mapApplicationToProfile, {
-    reValidateMode: "onBlur",
+    reValidateMode: "onChange",
     resolver: yupResolver(ProfileSchema)
   })
 
