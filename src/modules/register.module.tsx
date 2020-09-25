@@ -87,7 +87,7 @@ const RegisterModule = () => {
       } catch (error) {
         activeSnackBar({
           type: "error",
-          message: error.response?.data.message
+          message: error.response?.data.errors.reduce((prev: any, curr: any) => prev + " " + curr.msg, "")
         })
       }
     }, [getValues, history, login, activeSnackBar])
