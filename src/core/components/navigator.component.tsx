@@ -1,15 +1,22 @@
 import React from "react"
-import { Box, MobileStepper } from "@material-ui/core"
+import { LinearProgress, Typography, Container } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import applicationStepConstant from "../constants/applicationStep.constant"
 
 interface NavigatorComponentProps {
   step: number
 }
 
 const useStyles = makeStyles(theme => ({
-  stepper: {
-    backgroundColor: "transparent"
+  title: {
+    color: "#fff",
+    marginTop: theme.spacing(5)
   },
+  container: {
+    maxWidth: theme.breakpoints.width("lg"),
+    margin: theme.spacing(2, 0, 5, 0)
+  },
+  linear: {},
   dot: {
     backgroundColor: "#EEEEEE"
   },
@@ -21,21 +28,17 @@ const useStyles = makeStyles(theme => ({
 const NavigatorComponent: React.FC<NavigatorComponentProps> = ({ step }) => {
   const classes = useStyles()
   return (
-    <Box my={3} display="flex" justifyContent="center">
-      <MobileStepper
-        className={classes.stepper}
-        classes={{
-          dot: classes.dot,
-          dotActive: classes.dotActive
-        }}
-        variant="dots"
-        steps={6}
-        position="static"
-        activeStep={step - 1}
-        nextButton={null}
-        backButton={null}
-      />
-    </Box>
+    <>
+      <Container maxWidth="lg">
+        <Typography variant="h4" align="center" className={classes.title}>
+          {applicationStepConstant[step - 1].title}
+        </Typography>
+
+        <div className={classes.container}>
+          <LinearProgress variant="determinate" className={classes.linear} value={(step / 6) * 100} />
+        </div>
+      </Container>
+    </>
   )
 }
 
