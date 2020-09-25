@@ -11,6 +11,28 @@ const useStyles = makeStyles(theme => ({
   },
   footer: {
     marginBottom: theme.spacing(12)
+  },
+  faq: {
+    color: "#EEEEEE",
+    fontSize: "120px",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "200px"
+    },
+    lineHeight: "80%"
+  },
+  pageName: {
+    color: "#EEEEEE",
+    fontSize: "24px",
+    fontWeight: 300,
+    [theme.breakpoints.up("md")]: {
+      fontSize: "40px"
+    }
+  },
+  container: {
+    margin: `${theme.spacing(6)}px 0`,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-end"
   }
 }))
 
@@ -20,12 +42,16 @@ const QandAModule = () => {
     <>
       <RedWaveComponent />
       <Container maxWidth="lg">
-        <Typography variant="h4" align="right">
-          คำถามที่พบบ่อย
-        </Typography>
-        <Typography variant="h1" align="right">
-          FAQ
-        </Typography>
+        <Container className={classes.container}>
+          <div>
+            <Typography variant="h4" align="left" className={classes.pageName}>
+              คำถามที่พบบ่อย
+            </Typography>
+            <Typography variant="h1" align="left" className={classes.faq}>
+              FAQ
+            </Typography>
+          </div>
+        </Container>
         {qandAConstant.map((content, index) => (
           <CardComponent maxWidth="lg" key={index + content.title} className={classes.paper} elevation={2}>
             <Typography variant="h6" color="primary">

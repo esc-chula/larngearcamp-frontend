@@ -4,10 +4,11 @@ import React from "react"
 const useStyles = makeStyles(theme => ({
   wave: {
     width: "100%",
-    height: "500px",
+    height: "440px",
     position: "absolute",
     top: 0,
     backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
     backgroundImage: `url(${require("../../assets/images/redWave.svg")})`,
     backgroundPosition: "center",
     zIndex: -1
