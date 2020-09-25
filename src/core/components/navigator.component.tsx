@@ -9,6 +9,12 @@ interface NavigatorComponentProps {
 const useStyles = makeStyles(theme => ({
   stepper: {
     backgroundColor: "transparent"
+  },
+  dot: {
+    backgroundColor: "#EEEEEE"
+  },
+  dotActive: {
+    backgroundColor: theme.palette.primary.light
   }
 }))
 
@@ -18,6 +24,10 @@ const NavigatorComponent: React.FC<NavigatorComponentProps> = ({ step }) => {
     <Box my={3} display="flex" justifyContent="center">
       <MobileStepper
         className={classes.stepper}
+        classes={{
+          dot: classes.dot,
+          dotActive: classes.dotActive
+        }}
         variant="dots"
         steps={6}
         position="static"
