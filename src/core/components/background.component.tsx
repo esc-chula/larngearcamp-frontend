@@ -7,6 +7,9 @@ interface BackgroundProps {
 
 const useStyles = makeStyles(theme => ({
   bg: {
+    top: 0,
+    left: 0,
+    right: 0,
     width: "100%",
     height: "100%",
     overflow: "hidden",
@@ -17,12 +20,12 @@ const useStyles = makeStyles(theme => ({
     backgroundRepeat: "no-repeat",
     zIndex: -2
   },
-  bg1: { backgroundImage: `url(${require("../../assets/images/background/bg1.jpg")})` },
-  bg2: { backgroundImage: `url(${require("../../assets/images/background/bg2.jpg")})` },
-  bg3: { backgroundImage: `url(${require("../../assets/images/background/bg3.jpg")})` },
-  bg4: { backgroundImage: `url(${require("../../assets/images/background/bg4.jpg")})` },
-  bg5: { backgroundImage: `url(${require("../../assets/images/background/bg5.jpg")})` },
-  bg6: { backgroundImage: `url(${require("../../assets/images/background/bg6.jpg")})` }
+  bg1: { backgroundImage: `url(${require("../../assets/images/background/bg1.svg")})` },
+  bg2: { backgroundImage: `url(${require("../../assets/images/background/bg2.svg")})` },
+  bg3: { backgroundImage: `url(${require("../../assets/images/background/bg3.svg")})` },
+  bg4: { backgroundImage: `url(${require("../../assets/images/background/bg4.svg")})` },
+  bg5: { backgroundImage: `url(${require("../../assets/images/background/bg5.svg")})` },
+  bg6: { backgroundImage: `url(${require("../../assets/images/background/bg6.svg")})` }
 }))
 
 const BackgroundComponent: React.FC<BackgroundProps> = ({ type }) => {

@@ -64,7 +64,12 @@ const useStyles = makeStyles(theme => ({
     }
   },
   rightAlign: {
-    marginLeft: "auto"
+    fontWeight: 500,
+    marginLeft: "auto",
+    color: theme.palette.primary.main,
+    "&:after": {
+      background: theme.palette.primary.main
+    }
   }
 }))
 
@@ -87,7 +92,7 @@ const RegisterModule = () => {
       } catch (error) {
         activeSnackBar({
           type: "error",
-          message: error.response?.data.message
+          message: error.response?.data.errors.reduce((prev: any, curr: any) => prev + " " + curr.msg, "")
         })
       }
     }, [getValues, history, login, activeSnackBar])

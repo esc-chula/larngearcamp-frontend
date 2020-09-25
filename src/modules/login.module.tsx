@@ -51,7 +51,12 @@ const useStyles = makeStyles(theme => ({
     }
   },
   rightAlign: {
-    marginLeft: "auto"
+    fontWeight: 500,
+    marginLeft: "auto",
+    color: theme.palette.primary.main,
+    "&:after": {
+      background: theme.palette.primary.main
+    }
   },
   redBg: {
     "&:after": {
