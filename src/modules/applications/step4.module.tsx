@@ -54,7 +54,6 @@ const ApplicationStepFourModule: React.FC = () => {
     },
     [updateApplication]
   )
-  const { getValues, errors } = methods
   const handleSubmit = useHandleSubmit(methods, onSubmit)
   return (
     <ApplicationStepModule beforeNavigate={handleSubmit}>
