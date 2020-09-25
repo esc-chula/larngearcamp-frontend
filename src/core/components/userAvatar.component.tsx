@@ -1,18 +1,17 @@
-import { Avatar, makeStyles } from "@material-ui/core"
+import { Avatar, Box, BoxProps, makeStyles } from "@material-ui/core"
 import React from "react"
 import MeDTO from "../models/dto/me.dto"
 import { useAuthContext } from "../providers/auth.provider"
 
 const useStyles = makeStyles(theme => ({
   avatar: {
-    width: 200,
-    height: 200,
-    margin: "0 auto",
+    width: "100%",
+    height: "100%",
     fontSize: 72
   }
 }))
 
-const UserAvatar: React.FC = () => {
+const UserAvatar: React.FC<BoxProps> = props => {
   const classes = useStyles()
   const { me } = useAuthContext()
   const {
@@ -21,12 +20,20 @@ const UserAvatar: React.FC = () => {
   } = me.data as MeDTO
 
   if (!application) {
-    return <Avatar className={classes.avatar}>{first[0]}</Avatar>
+    return (
+      <Box {...props}>
+        <Avatar className={classes.avatar}>{first[0]}</Avatar>
+      </Box>
+    )
   }
 
   const { picture } = application
 
-  return <Avatar className={classes.avatar} src={picture} />
+  return (
+    <Box {...props}>
+      <Avatar className={classes.avatar} src={picture} />
+    </Box>
+  )
 }
 
 export { UserAvatar }

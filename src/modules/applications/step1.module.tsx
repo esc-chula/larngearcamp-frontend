@@ -44,15 +44,14 @@ const ApplicationStepOneModule = () => {
           ))}
         </Box>
       ))}
-      <Box mt={2}>
+      {/* <Box mt={2}>
         <Typography variant="body1" color="error" className={classes.bold}>
           หมายเหตุ
         </Typography>
         <Typography variant="body2" color="error">
-          น้อง ๆ สามารถกดตัวเลขที่แถบด้านบนเพื่อกลับไปแก้ไขสิ่งที่น้องกรอกไปแล้วได้ เช่น เมื่อน้องกรอกข้อมูsลไปถึงขั้นตอนที่ 3 แล้ว
-          น้องสามารถกดที่หมายเลข 2 เพื่อย้อนกลับมา แก้ไขข้อมูลในส่วนที่ 2 ได้
+          น้อง ๆ สามารถกดตัวเลขที่แถบด้านบนเพื่อกลับไปแก้ไขสิ่งที่น้องกรอกไปแล้วได้
         </Typography>
-      </Box>
+      </Box> */}
       <Link className="no-underline" to="/application/step/2">
         <Button variant="contained" className={classes.button} fullWidth>
           ไปขั้นตอนถัดไป
