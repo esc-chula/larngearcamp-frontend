@@ -1,15 +1,21 @@
 import React, { useCallback } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { ProfileComponent } from "../core/components/profile.component"
-import { Container, Paper, Typography, Button } from "@material-ui/core"
+import { Container, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { useApplicationContext } from "../core/providers/application.provider"
 import { useLoadingCallback } from "../core/components/loading.component"
+import { StatusInfo } from "../core/components/statusInfo.component"
+import { useAuthContext } from "../core/providers/auth.provider"
+import MeDTO from "../core/models/dto/me.dto"
+import { ProfileStatus } from "../core/models/statusInfo.model"
+import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined"
+import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay"
 
 const useStyles = makeStyles(theme => ({
   button: {
     color: "white",
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(4),
     padding: theme.spacing(1, 4)
   },
   warning: {
@@ -18,46 +24,88 @@ const useStyles = makeStyles(theme => ({
       background: theme.palette.warning.dark
     }
   },
-  paper: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(4)
+  success: {
+    background: theme.palette.success.main,
+    "&:hover": {
+      background: theme.palette.success.dark
+    }
   },
   profile: {
     marginTop: theme.spacing(4)
+  },
+  icon: {
+    marginRight: theme.spacing(1)
   }
 }))
+
+const resolveStatus = (application: MeDTO["application"]): ProfileStatus => {
+  if (!application) {
+    return "start"
+  }
+
+  const { editingState, documentState, applicationState } = application
+
+  if (editingState === "FULL") {
+    return "continue"
+  }
+  if (applicationState === "PASSED_INTERVIEW") {
+    return "passedInterview"
+  }
+  if (applicationState === "NOT_PASSED_INTERVIEW") {
+    return "failedInterview"
+  }
+  if (applicationState === "PASSED_FINAL") {
+    return "passedFinal"
+  }
+  if (applicationState === "NOT_PASSED_FINAL") {
+    return "failedFinal"
+  }
+  if (documentState === "REVIEW") {
+    return "pending"
+  }
+  if (documentState === "PASSED") {
+    return "docOk"
+  }
+  return "docNotOk"
+}
 
 const ProfileModule = () => {
   const classes = useStyles()
   const { createApplication } = useApplicationContext()
+  const { me } = useAuthContext()
+  const { mutate } = me
+  const { application } = me.data as MeDTO
+
+  const profileStatus = resolveStatus(application)
 
   const initApplication = useLoadingCallback(
     useCallback(async () => {
       try {
         await createApplication()
+        mutate()
       } catch (error) {}
-    }, [createApplication])
+    }, [createApplication, mutate])
   )
 
   return (
     <Container maxWidth="lg">
       <ProfileComponent className={classes.profile} />
-      <Link to="/application/step/1" onClick={initApplication} className="no-underline">
-        <Button className={classes.button} color="primary" variant="contained" fullWidth>
-          สมัครเข้าค่าย
-        </Button>
-      </Link>
+      {profileStatus === "start" && (
+        <Link to="/application/step/1" onClick={initApplication} className="no-underline">
+          <Button className={`${classes.button} ${classes.success}`} variant="contained" fullWidth>
+            <FileCopyOutlinedIcon className={classes.icon} />
+            เริ่มต้นการสมัครเข้าค่าย
+          </Button>
+        </Link>
+      )}
 
-      <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
-        แก้ไขข้อมูลส่วนตัวผู้สมัคร (ส่วนที่ 2)
-      </Button>
-      <Paper elevation={2} className={classes.paper}>
-        <Typography variant="h5">รอการตรวจสอบเอกสาร</Typography>
-        <Typography variant="body2">
-          ขณะนี้อยู่ในขั้นตอนการรอตรวจสอบเอกสารที่น้อง ๆ ได้แนบเข้ามาอยู่ ขอให้น้องเข้ามาเช็ค
-          สถานะของเอกสารที่เว็บนี้เป็นประจำเผื่อในกรณีที่เอกสารที่น้องแนบมาไม่ผ่าน
-        </Typography>
-      </Paper>
+      {profileStatus === "continue" && (
+        <Button className={`${classes.button} ${classes.warning}`} variant="contained" fullWidth>
+          <PlaylistPlayIcon className={classes.icon} />
+          แก้ไขข้อมูลการสมัคร
+        </Button>
+      )}
+      <StatusInfo profileStatus={profileStatus} />
     </Container>
   )
 }

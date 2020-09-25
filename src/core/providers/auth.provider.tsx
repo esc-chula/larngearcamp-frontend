@@ -88,11 +88,9 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
   const login = useCallback(
     async (params: LoginModel) => {
-      try {
-        const result = await AuthServiceAPI.loginAPI(params)
-        const accessToken = result.data.token
-        setAccessToken(accessToken)
-      } catch (error) {}
+      const result = await AuthServiceAPI.loginAPI(params)
+      const accessToken = result.data.token
+      setAccessToken(accessToken)
     },
     [setAccessToken]
   )
@@ -188,7 +186,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     }
   }, [getAccessToken, logout])
 
-  const me = useSWR(() => (userId ? `me (${userId})` : null), meFetcher, {
+  const me = useSWR(userId ? `me (${userId})` : null, meFetcher, {
     refreshInterval: 0,
     revalidateOnFocus: process.env.NODE_ENV === "production"
   })

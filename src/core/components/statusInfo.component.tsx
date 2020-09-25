@@ -9,6 +9,9 @@ import { FacebookButtonComponent } from "./facebookButton.component"
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      marginTop: theme.spacing(4)
+    },
     padding: theme.spacing(3)
   },
   title: {
