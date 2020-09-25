@@ -15,13 +15,6 @@ const useStyles = makeStyles(theme => ({
   container: {
     maxWidth: theme.breakpoints.width("lg"),
     margin: theme.spacing(2, 0, 5, 0)
-  },
-  linear: {},
-  dot: {
-    backgroundColor: "#EEEEEE"
-  },
-  dotActive: {
-    backgroundColor: theme.palette.primary.light
   }
 }))
 
@@ -35,7 +28,7 @@ const NavigatorComponent: React.FC<NavigatorComponentProps> = ({ step }) => {
         </Typography>
 
         <div className={classes.container}>
-          <LinearProgress variant="determinate" className={classes.linear} value={(step / 6) * 100} />
+          <LinearProgress variant="determinate" value={(step / 6) * 100} />
         </div>
       </Container>
     </>
