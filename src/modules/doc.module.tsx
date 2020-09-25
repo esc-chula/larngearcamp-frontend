@@ -3,7 +3,6 @@ import React from "react"
 import BackgroundComponent from "../core/components/background.component"
 import { CardComponent } from "../core/components/card.component"
 import { DocComponent } from "../core/components/doc.component"
-import { RedWaveComponent } from "../core/components/redWave.component"
 
 const useStyles = makeStyles(theme => ({
   card: {
