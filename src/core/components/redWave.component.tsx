@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core"
 import React from "react"
-import RedWave from "../../assets/images/redWave.svg"
 
 const useStyles = makeStyles(theme => ({
   wave: {
