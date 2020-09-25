@@ -101,7 +101,6 @@ const ApplicationStepThreeModule: React.FC = () => {
                   {question.type === "ranking" && <RankingTypeComponent name={`firstPart.answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
-              <button onClick={() => console.log(getValues(), errors)}>check value </button>
               {buttonBar}
             </form>
           </FormProvider>
