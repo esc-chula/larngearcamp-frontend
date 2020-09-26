@@ -24,7 +24,7 @@ const NavigatorComponent: React.FC<NavigatorComponentProps> = ({ step }) => {
     <>
       <Container maxWidth="lg">
         <Typography variant="h4" align="center" className={classes.title}>
-          {applicationStepConstant[step - 1].title}
+          {`${step}. ${applicationStepConstant[step - 1].title}`}
         </Typography>
 
         <div className={classes.container}>
