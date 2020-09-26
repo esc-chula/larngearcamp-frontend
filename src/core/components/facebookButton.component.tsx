@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react"
 import { withStyles } from "@material-ui/core/styles"
 import { Button, ButtonProps } from "@material-ui/core"
-import { waitFbInit, fbLogin } from "../services/facebook.service"
+import { waitFbInit, fbLogin, fbLogout } from "../services/facebook.service"
 import { useAuthContext } from "../providers/auth.provider"
 import { useHistory } from "react-router-dom"
 import { useGlobalContext } from "../providers/global.provider"
@@ -30,6 +30,8 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
         } else {
           activeSnackBar({ type: "error", message: "เข้าสู่ระบบด้วย Facebook ไม่สำเร็จ" })
         }
+      } finally {
+        fbLogout()
       }
     }
     setLoading(false)
