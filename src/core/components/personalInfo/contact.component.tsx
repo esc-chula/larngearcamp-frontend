@@ -5,6 +5,7 @@ import { useAuthContext } from "../../providers/auth.provider"
 import { grey } from "@material-ui/core/colors"
 import { TextFieldComponent } from "../textField.component"
 import AddressFieldComponent from "./addressField.component"
+import { NumberTextFieldComponent } from "../numberTextField.component"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -51,10 +52,10 @@ const PersonalContactComponent = () => {
             <AddressFieldComponent type="zipcode" label="รหัสไปรษณีย์" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextFieldComponent name="contact.homeNumber" label="โทรศัพท์บ้าน" type="tel" />
+            <NumberTextFieldComponent name="contact.homeNumber" label="โทรศัพท์บ้าน" type="tel" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextFieldComponent name="contact.phoneNumber" label="โทรศัพท์มือถือ" type="text" />
+            <NumberTextFieldComponent name="contact.phoneNumber" label="โทรศัพท์มือถือ" type="tel" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <TextFieldComponent

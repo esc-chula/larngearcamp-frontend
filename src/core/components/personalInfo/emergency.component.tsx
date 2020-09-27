@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { SelectComponent } from "../select.component"
 import { relationsConstant } from "../../constants/relation.constant"
 import { TextFieldComponent } from "../textField.component"
+import { NumberTextFieldComponent } from "../numberTextField.component"
 
 const useStyles = makeStyles(theme => ({
   bold: {
@@ -30,7 +31,7 @@ const PersonalEmergencyComponent = () => {
             <TextFieldComponent name="contact.parentName" label="ชื่อ-นามสกุลผู้ปกครอง" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <TextFieldComponent name="contact.parentNumber" label="หมายเลขโทรศัพท์" type="tel" />
+            <NumberTextFieldComponent name="contact.parentNumber" label="หมายเลขโทรศัพท์" type="tel" />
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <SelectComponent control={control} data={relationsConstant} />
