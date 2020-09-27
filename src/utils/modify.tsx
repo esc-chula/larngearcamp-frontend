@@ -64,8 +64,8 @@ export const convertAnswer1SchemaToAnswer1DTO = (props: Answer1Model): Answer1DT
           second: !!props.firstPart.answer4.second,
           third: !!props.firstPart.answer4.third,
           fourth: !!props.firstPart.answer4.fourth,
-          fifth: props.firstPart.answer4.fifth.text || "",
-          sixth: props.firstPart.answer4.fifth.text || ""
+          fifth: props.firstPart.answer4.fifth.checked ? props.firstPart.answer4.fifth.text || "" : "",
+          sixth: props.firstPart.answer4.sixth.checked ? props.firstPart.answer4.sixth.text || "" : ""
         },
         answer5: props.firstPart.answer5,
         answer6: parseInt(props.firstPart.answer6),
