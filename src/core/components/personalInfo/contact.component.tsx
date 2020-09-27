@@ -54,7 +54,7 @@ const PersonalContactComponent = () => {
             <TextFieldComponent name="contact.homeNumber" label="โทรศัพท์บ้าน" type="tel" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <TextFieldComponent name="contact.phoneNumber" label="โทรศัพท์มือถือ" type="text" />
+            <TextFieldComponent name="contact.phoneNumber" label="โทรศัพท์มือถือ" type="tel" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <TextFieldComponent
