@@ -3,13 +3,13 @@ import { TextField, TextFieldProps } from "@material-ui/core"
 import { useFormContext } from "react-hook-form"
 import { resolve } from "../../utils/modify"
 
-const inputPropsConstant: TextFieldProps = {
+export const inputPropsConstant: TextFieldProps = {
   size: "small",
   fullWidth: true,
   variant: "outlined"
 }
 
-type TextFieldPropsOverride = TextFieldProps & { name: string }
+export type TextFieldPropsOverride = TextFieldProps & { name: string }
 
 const TextFieldComponent: React.FC<TextFieldPropsOverride> = props => {
   const { errors, register } = useFormContext()
