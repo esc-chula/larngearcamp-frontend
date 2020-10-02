@@ -1,10 +1,11 @@
-import { makeStyles, Paper, Typography } from "@material-ui/core"
+import { Button, makeStyles, Paper, Typography } from "@material-ui/core"
 import React from "react"
+import { Link } from "react-router-dom"
 import statusInfoConstant from "../constants/statusInfo.constant"
-import MeDTO from "../models/dto/me.dto"
 import { ProfileStatus } from "../models/statusInfo.model"
-import { useAuthContext } from "../providers/auth.provider"
+import { useApplicationStateContext } from "../providers/applicationState.provider"
 import { FacebookButtonComponent } from "./facebookButton.component"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,6 +33,20 @@ const useStyles = makeStyles(theme => ({
   },
   bold: {
     fontWeight: 500
+  },
+  marginLeft: {
+    marginLeft: theme.spacing(2)
+  },
+  editButton: {
+    marginTop: theme.spacing(2),
+    color: "white",
+    background: theme.palette.warning.main,
+    "&:hover": {
+      background: theme.palette.warning.dark
+    }
+  },
+  icon: {
+    marginRight: theme.spacing(1)
   }
 }))
 
@@ -41,8 +56,7 @@ interface StatusInfoProps {
 
 const StatusInfo: React.FC<StatusInfoProps> = ({ profileStatus }) => {
   const classes = useStyles()
-  const { me } = useAuthContext()
-  const { application } = me.data as MeDTO
+  const { application } = useApplicationStateContext()
 
   const showFB = profileStatus === "failedInterview" || profileStatus === "passedFinal" || profileStatus === "failedFinal"
 
@@ -64,7 +78,7 @@ const StatusInfo: React.FC<StatusInfoProps> = ({ profileStatus }) => {
     )
   }
   if (profileStatus === "passedInterview") {
-    const { code } = application!
+    const code = application?.code!
     const interviewInfo =
       code[0] === "A" || code[0] === "C"
         ? `จะจัดขึ้นในวันที่ <span class="${classes.bold}">31 ตุลาคม 2563</span> ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย แล้วเจอกันนะครับ :)`
@@ -80,7 +94,43 @@ const StatusInfo: React.FC<StatusInfoProps> = ({ profileStatus }) => {
       </Paper>
     )
   }
-  return null
+  // profileStatus is "docNotOk"
+  const { picture, letterOfConsent, transcript } = application?.documentStateDetails
+  const failedDocuments = [
+    { id: 1, ...picture },
+    { id: 2, ...letterOfConsent },
+    { id: 3, ...transcript }
+  ].filter(detail => !detail.pass)
+  return (
+    <Paper elevation={1} className={classes.paper}>
+      <Typography variant="h5" className={classes.title} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].title }} />
+      <Typography variant="body1" className={classes.content} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].contents[0] }} />
+      {failedDocuments.map((detail, index) => (
+        <>
+          <Typography
+            key={index}
+            variant="body1"
+            className={`${classes.content} ${classes.marginLeft}`}
+            dangerouslySetInnerHTML={{ __html: `${index + 1}. ${statusInfoConstant[profileStatus].contents[detail.id]}` }}
+          />
+          <Typography
+            key={index}
+            variant="body2"
+            color="primary"
+            className={`${classes.content} ${classes.marginLeft}`}
+            dangerouslySetInnerHTML={{ __html: detail.message }}
+          />
+        </>
+      ))}
+      <Typography variant="body1" className={classes.content} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].contents[4] }} />
+      <Link className="no-underline" to="/application/step/5">
+        <Button variant="contained" className={classes.editButton} fullWidth>
+          <ChevronLeftIcon className={classes.icon} />
+          กลับไปแก้ไขเอกสาร
+        </Button>
+      </Link>
+    </Paper>
+  )
 }
 
 export { StatusInfo }

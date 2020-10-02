@@ -29,14 +29,15 @@ export function useApplicationForm<TFieldValues extends FieldValues = FieldValue
   return useForm({ ...options, defaultValues })
 }
 
-export const ApplicationStateProvider: React.FC<{ children: (render: boolean) => React.ReactElement }> = ({ children }) => {
+export const ApplicationStateProvider: React.FC<{ children: (render: boolean, is404: boolean) => React.ReactElement }> = ({ children }) => {
   const { userId } = useAuthContext()
-  const { data: application, mutate: mutateApplication } = useSWR(
+  const { data: application, mutate: mutateApplication, error } = useSWR(
     userId ? `application (${userId})` : null,
     ApplicationServiceAPI.getApplicationAPI,
     { revalidateOnFocus: false }
   )
-  //console.log("application", application)
+  const is404 = error?.response?.status === 404
+  // console.log("application", application)
 
   const updateApplication = useCallback(
     async (application: UpdateApplicationDTO) => {
@@ -54,7 +55,7 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean) =>
 
   return (
     <ApplicationStateContext.Provider value={{ application: application as any, updateApplication, finalizeApplication, mutateApplication }}>
-      {children(!!application)}
+      {children(!!application, is404)}
     </ApplicationStateContext.Provider>
   )
 }

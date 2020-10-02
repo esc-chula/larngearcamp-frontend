@@ -4,7 +4,7 @@ import { ProfileComponent } from "../core/components/profile.component"
 import { Container, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { useApplicationContext } from "../core/providers/application.provider"
-import { useLoadingCallback } from "../core/components/loading.component"
+import { useLoadingCallback, useLoadingStatus } from "../core/components/loading.component"
 import { StatusInfo } from "../core/components/statusInfo.component"
 import { useAuthContext } from "../core/providers/auth.provider"
 import MeDTO from "../core/models/dto/me.dto"
@@ -13,6 +13,7 @@ import FileCopyOutlinedIcon from "@material-ui/icons/FileCopyOutlined"
 import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay"
 import { RedWaveComponent } from "../core/components/redWave.component"
 import BackgroundComponent from "../core/components/background.component"
+import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -70,9 +71,11 @@ const resolveStatus = (application: MeDTO["application"]): ProfileStatus => {
 
 const ProfileModule = () => {
   const classes = useStyles()
+  const setLoading = useLoadingStatus()
   const { createApplication } = useApplicationContext()
+  const { mutateApplication } = useApplicationStateContext()
   const { me } = useAuthContext()
-  const { mutate } = me
+  const { mutate: mutateMe } = me
   const { application } = me.data as MeDTO
 
   const profileStatus = resolveStatus(application)
@@ -80,10 +83,13 @@ const ProfileModule = () => {
   const initApplication = useLoadingCallback(
     useCallback(async () => {
       try {
+        setLoading(true)
         await createApplication()
-        mutate()
+        await mutateMe()
+        await mutateApplication()
+        setLoading(true)
       } catch (error) {}
-    }, [createApplication, mutate])
+    }, [createApplication, mutateMe, mutateApplication, setLoading])
   )
 
   return (

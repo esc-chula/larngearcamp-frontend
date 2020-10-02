@@ -14,6 +14,7 @@ import { useGlobalContext } from "../providers/global.provider"
 const useStyles = makeStyles(theme => ({
   withIcon: {
     display: "flex",
+    alignItems: "center",
     "&>*:first-child": {
       marginRight: theme.spacing(1)
     }
@@ -57,9 +58,21 @@ const useStyles = makeStyles(theme => ({
 type UploadBlockComponentProps = UploadFileModel & {
   serverFile: DocumentItem
   order: number
+  clearDisplayFile?: boolean
+  disabled?: boolean
 }
 
-const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile, order, name, size, accept, body1, body2 }) => {
+const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({
+  serverFile,
+  order,
+  name,
+  size,
+  accept,
+  body1,
+  body2,
+  clearDisplayFile,
+  disabled
+}) => {
   const classes = useStyles()
   const { register, setError, errors, clearErrors, setValue } = useFormContext()
   const { uploadDocument } = useApplicationContext()
@@ -70,14 +83,14 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
   const { activeSnackBar } = useGlobalContext()
 
   const displayFile = useMemo(() => {
-    if (isDefaultUrl(serverFile.url)) {
+    if (clearDisplayFile || isDefaultUrl(serverFile.url)) {
       return null
     }
     return {
       name: friendlyFileName(serverFile.name),
       url: serverFile.url
     }
-  }, [serverFile])
+  }, [serverFile, clearDisplayFile])
 
   const uploadFile = useLoadingCallback(
     useCallback(
@@ -131,7 +144,12 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
       <div className={classes.block}>
         <Typography variant="body1">{body1}</Typography>
         <Typography variant="body2">{body2}</Typography>
-        <Button variant="contained" component="label" color="primary" className={`${classes.upload} ${!!displayFile && classes.warningButton}`}>
+        <Button
+          variant="contained"
+          component="label"
+          color="primary"
+          disabled={disabled}
+          className={`${classes.upload} ${!!displayFile && classes.warningButton}`}>
           <div className={classes.withIcon}>
             <Typography variant="button">{!!displayFile ? "อัพโหลดอีกครั้ง" : "อัพโหลด"}</Typography>
             {!!displayFile ? <ReplayIcon fontSize="small" /> : <AddToPhotosOutlinedIcon fontSize="small" />}
