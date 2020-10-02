@@ -95,10 +95,6 @@ const StatusInfo: React.FC<StatusInfoProps> = ({ profileStatus }) => {
     )
   }
   // profileStatus is "docNotOk"
-  console.log({ application })
-  if (!application) {
-    return null
-  }
   const { picture, letterOfConsent, transcript } = application?.documentStateDetails
   const failedDocuments = [
     { id: 1, ...picture },
