@@ -3,6 +3,7 @@ import { useRouteMatch, Link, useHistory } from "react-router-dom"
 import { Grid, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useLoadingStatus } from "./loading.component"
+import { useApplicationStateContext } from "../providers/applicationState.provider"
 
 export type ButtonBarProps = {
   beforeNavigate?: () => boolean | Promise<boolean>
@@ -34,6 +35,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
   const nextPage = `/application/step/${step + 1}`
   const classes = useStyles()
   const setLoading = useLoadingStatus()
+  const { application } = useApplicationStateContext()
 
   const wrappedBeforeNavigate = useMemo(() => {
     if (!beforeNavigate) return null
@@ -59,16 +61,20 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
     [wrappedBeforeNavigate, history, nextPage]
   )
 
+  const showBothButtons = application?.editingState === "FULL" || step > 5
+
   return (
     <Grid container spacing={2}>
-      <Grid xs={12} sm={6} item>
-        <Link className="no-underline" to={previousPage}>
-          <Button variant="contained" className={classes.buttonWarning} fullWidth>
-            {step === 6 ? "กลับไปแก้ไขหน้าที่แล้ว" : "ย้อนกลับ"}
-          </Button>
-        </Link>
-      </Grid>
-      <Grid xs={12} sm={6} item>
+      {showBothButtons ? (
+        <Grid xs={12} sm={6} item>
+          <Link className="no-underline" to={previousPage}>
+            <Button variant="contained" className={classes.buttonWarning} fullWidth>
+              {step === 6 ? "กลับไปแก้ไขหน้าที่แล้ว" : "ย้อนกลับ"}
+            </Button>
+          </Link>
+        </Grid>
+      ) : null}
+      <Grid xs={12} sm={showBothButtons ? 6 : 12} item>
         <Button variant="contained" className={classes.buttonSuccess} fullWidth type="submit" onClick={handleNext}>
           {step === 6 ? "ยืนยันการสมัคร" : "ไปขั้นตอนถัดไป"}
         </Button>
