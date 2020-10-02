@@ -76,7 +76,6 @@ const ApplicationStepFiveModule: React.FC = () => {
                     serverFile={application[content.name]}
                     {...content}
                     order={index + 1}
-                    clearDisplayFile={documentStateDetails[content.name].pass === false}
                     disabled={!!documentStateDetails[content.name].pass}
                   />
                   <input ref={methods.register} name={`${content.name}URL`} type="hidden" />
