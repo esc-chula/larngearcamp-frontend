@@ -29,7 +29,7 @@ export function useApplicationForm<TFieldValues extends FieldValues = FieldValue
   return useForm({ ...options, defaultValues })
 }
 
-export const ApplicationStateProvider: React.FC<{ children: (render: boolean) => React.ReactElement }> = ({ children }) => {
+export const ApplicationStateProvider: React.FC<{ children: (render: boolean, is404: boolean) => React.ReactElement }> = ({ children }) => {
   const { userId } = useAuthContext()
   const { data: application, mutate: mutateApplication, error } = useSWR(
     userId ? `application (${userId})` : null,
@@ -55,7 +55,7 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean) =>
 
   return (
     <ApplicationStateContext.Provider value={{ application: application as any, updateApplication, finalizeApplication, mutateApplication }}>
-      {children(!!application || is404)}
+      {children(!!application, is404)}
     </ApplicationStateContext.Provider>
   )
 }
