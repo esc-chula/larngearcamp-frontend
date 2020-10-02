@@ -14,7 +14,6 @@ import PlaylistPlayIcon from "@material-ui/icons/PlaylistPlay"
 import { RedWaveComponent } from "../core/components/redWave.component"
 import BackgroundComponent from "../core/components/background.component"
 import { useApplicationStateContext } from "../core/providers/applicationState.provider"
-import { useGlobalContext } from "../core/providers/global.provider"
 
 const useStyles = makeStyles(theme => ({
   button: {
