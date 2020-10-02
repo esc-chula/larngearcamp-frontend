@@ -37,7 +37,7 @@ export const convertProfileSchemaToProfileDTO = (props: ProfileModel): ProfileDT
       province: props.contact.province,
       zip: props.contact.zip,
       phoneNumber: props.contact.phoneNumber,
-      homeNumber: props.contact.homeNumber,
+      homeNumber: props.contact.homeNumber!,
       facebookName: props.contact.facebookName,
       lineId: props.contact.lineId,
       parentName: props.contact.parentName,

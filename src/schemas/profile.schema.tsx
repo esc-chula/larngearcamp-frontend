@@ -31,8 +31,8 @@ const ProfileSchema = object()
         .matches(/^((((\+66|66|0)\d{2})-?\d{3}-?\d{4})|(-))$/, "เบอร์โทรศัพท์ไม่ถูกต้อง"),
       homeNumber: string()
         .trim()
-        .required("กรุณาระบุเบอร์บ้าน")
-        .matches(/^(\d{9})|(-)$/, "เบอร์โทรศัพท์บ้านไม่ถูกต้อง"),
+        //.required("กรุณาระบุเบอร์บ้าน")
+        .matches(/^(\d{9})|(-)|\s{0}$/, "เบอร์โทรศัพท์บ้านไม่ถูกต้อง"),
       facebookName: string().trim().required("กรุณาระบุชื่อเฟสบุ๊ค"),
       lineId: string().trim().required("กรุณาระบุไลน์ไอดี"),
       parentName: string().trim().required("กรุณาระบุชื่อผู้ปกครอง"),
