@@ -139,17 +139,25 @@ export const adminSplitingApplicationAnswerPart = (props: ApplicationDTO): Array
   const secondPart = props.answer.secondPart
   return [
     { name: "ส่วนที่ 1", header: true },
-    { name: "คำถามข้อ 1", value: firstPart.answer1, xs: 12, sm: 12, md: 12, multiline: true },
+    { name: "คำถามข้อ 1 : ให้น้อง ๆ แนะนำตัวในแบบของน้องให้พี่รู้จัก", value: firstPart.answer1, xs: 12, sm: 12, md: 12, multiline: true },
     {
-      name: "คำถามข้อ 2",
+      name:
+        "คำถามข้อ 2 :  ให้น้องเรียงจุดมุ่งหมายในการเข้าร่วมกิจกรรมค่ายลานเกียร์ครั้งที่ 20 (เรียงลำดับจากมากไปน้อย โดยระบุเลข 1 - 4 เมื่อ “1” คือ มากที่สุด และ “4” คือ น้อยที่สุด) ",
       value: `${firstPart.answer2.first}, ${firstPart.answer2.second}, ${firstPart.answer2.third}, ${firstPart.answer2.fourth}`,
       xs: 12,
       sm: 12,
       md: 12
     },
-    { name: "คำถามข้อ 3", value: firstPart.answer3, xs: 12, sm: 12, md: 12, multiline: true },
     {
-      name: "คำถามข้อ 4",
+      name: "คำถามข้อ 3 : ทำไมน้องถึงอยากมาค่ายลานเกียร์ และน้องคาดหวังว่าจะได้อะไรกลับไปจากค่ายนี้",
+      value: firstPart.answer3,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    },
+    {
+      name: "คำถามข้อ 4 : น้องทราบข่าวค่ายลานเกียร์ครั้งที่ 20 จากที่ใด/ผู้ใด (เลือกได้มากกว่า 1 ข้อ)",
       value: `first = ${firstPart.answer4.first},
 second = ${firstPart.answer4.second},
 third = ${firstPart.answer4.third},
@@ -161,17 +169,74 @@ sixth = ${firstPart.answer4.sixth}`,
       md: 12,
       multiline: true
     },
-    { name: "คำถามข้อ 5", value: firstPart.answer5, xs: 12, sm: 12, md: 12, multiline: true },
-    { name: "คำถามข้อ 6", value: `${firstPart.answer6}`, xs: 12, sm: 12, md: 12, multiline: true },
-    { name: "คำถามข้อ 7", value: firstPart.answer7, xs: 12, sm: 12, md: 12, multiline: true },
+    {
+      name: "คำถามข้อ 5 : น้องเคยเข้าค่ายวิชาการอะไรมาบ้าง ให้ระบุชื่อค่ายและหน่วยงานที่จัด",
+      value: firstPart.answer5,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    },
+    {
+      name: "คำถามข้อ 6 : น้องมีความต้องการที่จะเข้าศึกษาต่อในคณะวิศวกรรมศาสตร์เพียงใด",
+      value: `${firstPart.answer6}`,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    },
+    { name: "คำถามข้อ 7 : อยากบอกอะไรกับพี่ๆ ค่ายลานเกียร์ไหม", value: firstPart.answer7, xs: 12, sm: 12, md: 12, multiline: true },
 
     { name: "ส่วนที่ 2", header: true },
-    { name: "คำถามข้อ 1", value: secondPart.answer1, xs: 12, sm: 12, md: 12, multiline: true },
-    { name: "คำถามข้อ 2", value: secondPart.answer2, xs: 12, sm: 12, md: 12, multiline: true },
-    { name: "คำถามข้อ 3", value: secondPart.answer3, xs: 12, sm: 12, md: 12, multiline: true },
-    { name: "คำถามข้อ 4", value: secondPart.answer4, xs: 12, sm: 12, md: 12, multiline: true },
-    { name: "คำถามข้อ 5", value: secondPart.answer5, xs: 12, sm: 12, md: 12, multiline: true },
-    { name: "คำถามข้อ 6", value: secondPart.answer6, xs: 12, sm: 12, md: 12, multiline: true }
+    {
+      name:
+        "คำถามข้อ 1  : ให้น้องเล่าเรื่องที่ทำให้น้องมีความสุขมากที่สุดมา 1 เรื่องทำไมถึงเป็นเช่นนั้นและความสุขนั้นส่งผลดีต่อชีวิตน้องในทางใดบ้าง อย่างไร (150 - 250 คำ)",
+      value: secondPart.answer1,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    },
+    {
+      name: "คำถามข้อ 2 : จากรูปที่กำหนดให้ น้องเห็นรูปแล้วนึกถึงอะไร เพราะอะไร",
+      value: secondPart.answer2,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    },
+    {
+      name: "คำถามข้อ 3 : ให้น้องเลือกสีที่บรรยายตัวของน้องได้ดีที่สุด เพราะอะไรถึงเป็นสีนั้น",
+      value: secondPart.answer3,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    },
+    {
+      name: "คำถามข้อ 4 :  ให้น้องเล่าเรื่องที่มีคนทำให้น้องไม่พอใจและให้น้องอธิบายเหตุผลของคู่กรณี ว่าทำไมเขาถึงทำอย่างนั้น (100- 200 คำ)",
+      value: secondPart.answer4,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    },
+    {
+      name: "คำถามข้อ 5 : หากไฟไหม้บ้าน แล้วน้องสามารถหยิบของออกมาได้เพียงชิ้นเดียวน้องจะเลือกหยิบอะไร เพราะอะไร",
+      value: secondPart.answer5,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    },
+    {
+      name: "คำถามข้อ 6 : ถ้าเพื่อนทะเลาะกันจนทำให้งานหรือกิจกรรมดำเนินต่อไปไม่ได้น้องจะทำอย่างไร เพราะอะไรถึงทำแบบนั้น",
+      value: secondPart.answer6,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
+    }
   ]
 }
 
