@@ -40,8 +40,12 @@ export const AdminProvider: React.FC = ({ ...other }) => {
 
   const setSelectedUser = useCallback(async (user: TableData) => {
     setUser(user)
-    const result = await ApplicationServiceAPI.getApplicationAPI()
-    setApplication(result)
+    try {
+      const result = await ApplicationServiceAPI.getApplicationAPI()
+      setApplication(result)
+    } catch (error) {
+      console.error(error)
+    }
   }, [])
 
   const applicationProfilePart = useMemo(() => {

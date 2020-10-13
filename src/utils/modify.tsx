@@ -139,37 +139,47 @@ export const adminSplitingApplicationAnswerPart = (props: ApplicationDTO): Array
   const secondPart = props.answer.secondPart
   return [
     { name: "ส่วนที่ 1", header: true },
-    { name: "คำถามข้อ 1", value: firstPart.answer1 },
-    { name: "คำถามข้อ 2", value: `${firstPart.answer2.first} ${firstPart.answer2.second} ${firstPart.answer2.third} ${firstPart.answer2.fourth}` },
-    { name: "คำถามข้อ 3", value: firstPart.answer3 },
+    { name: "คำถามข้อ 1", value: firstPart.answer1, xs: 12, sm: 12, md: 12, multiline: true },
+    {
+      name: "คำถามข้อ 2",
+      value: `${firstPart.answer2.first}, ${firstPart.answer2.second}, ${firstPart.answer2.third}, ${firstPart.answer2.fourth}`,
+      xs: 12,
+      sm: 12,
+      md: 12
+    },
+    { name: "คำถามข้อ 3", value: firstPart.answer3, xs: 12, sm: 12, md: 12, multiline: true },
     {
       name: "คำถามข้อ 4",
-      value: `${firstPart.answer4.first} <br/> 
-      ${firstPart.answer4.second} <br/> 
-      ${firstPart.answer4.third} <br/> 
-      ${firstPart.answer4.fourth}<br/> 
-      ${firstPart.answer4.fifth}<br/> 
-      ${firstPart.answer4.sixth}`
+      value: `first = ${firstPart.answer4.first},
+second = ${firstPart.answer4.second},
+third = ${firstPart.answer4.third},
+fourth = ${firstPart.answer4.fourth},
+fifth = ${firstPart.answer4.fifth},
+sixth = ${firstPart.answer4.sixth}`,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      multiline: true
     },
-    { name: "คำถามข้อ 5", value: firstPart.answer5 },
-    { name: "คำถามข้อ 6", value: `${firstPart.answer6}` },
-    { name: "คำถามข้อ 7", value: firstPart.answer7 },
+    { name: "คำถามข้อ 5", value: firstPart.answer5, xs: 12, sm: 12, md: 12, multiline: true },
+    { name: "คำถามข้อ 6", value: `${firstPart.answer6}`, xs: 12, sm: 12, md: 12, multiline: true },
+    { name: "คำถามข้อ 7", value: firstPart.answer7, xs: 12, sm: 12, md: 12, multiline: true },
 
     { name: "ส่วนที่ 2", header: true },
-    { name: "คำถามข้อ 1", value: secondPart.answer1 },
-    { name: "คำถามข้อ 2", value: secondPart.answer2 },
-    { name: "คำถามข้อ 3", value: secondPart.answer3 },
-    { name: "คำถามข้อ 4", value: secondPart.answer4 },
-    { name: "คำถามข้อ 5", value: secondPart.answer5 },
-    { name: "คำถามข้อ 6", value: secondPart.answer6 }
+    { name: "คำถามข้อ 1", value: secondPart.answer1, xs: 12, sm: 12, md: 12, multiline: true },
+    { name: "คำถามข้อ 2", value: secondPart.answer2, xs: 12, sm: 12, md: 12, multiline: true },
+    { name: "คำถามข้อ 3", value: secondPart.answer3, xs: 12, sm: 12, md: 12, multiline: true },
+    { name: "คำถามข้อ 4", value: secondPart.answer4, xs: 12, sm: 12, md: 12, multiline: true },
+    { name: "คำถามข้อ 5", value: secondPart.answer5, xs: 12, sm: 12, md: 12, multiline: true },
+    { name: "คำถามข้อ 6", value: secondPart.answer6, xs: 12, sm: 12, md: 12, multiline: true }
   ]
 }
 
 export const adminSplitingApplicationDocumentPart = (props: ApplicationDTO): Array<UserDataProps> => {
   return [
     { name: "เอกสารประกอบการรับสมัคร", header: true },
-    { name: "รูปถ่ายผู้สมัคร", value: props.picture.url },
-    { name: "หนังสือรับรองจากผู้ปกครอง", value: props.letterOfConsent.url },
-    { name: "ใบ ปพ. 1 หรือ ปพ.7 หรือ เอกสารยืนยันตัวตนอื่นๆ", value: props.transcript.url }
+    { name: "รูปถ่ายผู้สมัคร", value: props.picture.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name },
+    { name: "หนังสือรับรองจากผู้ปกครอง", value: props.letterOfConsent.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name },
+    { name: "ใบ ปพ. 1 หรือ ปพ.7 หรือ เอกสารยืนยันตัวตนอื่นๆ", value: props.transcript.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name }
   ]
 }

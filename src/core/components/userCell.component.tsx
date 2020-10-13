@@ -55,6 +55,7 @@ const UserCellComponent: React.FC<UserCellProps> = ({ content }) => {
               onClick={() => setSelectedUser(content)}
               spy
               smooth
+              offset={-100}
               duration={500}
               activeClass="active">
               {content.name}

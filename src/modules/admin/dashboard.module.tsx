@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(4)
+  },
+  mt: {
+    marginTop: theme.spacing(2)
   }
 }))
 
@@ -54,23 +57,23 @@ const AdminDashboardModule = () => {
       <div id="userdata">
         {!!selectedUser && (
           <>
-            <Paper className={classes.paper}>
+            <Paper className={`${classes.paper} ${classes.mt}`}>
               <Grid container spacing={2}>
                 {applicationProfilePart?.map((props, index) => (
                   <UserDataComponent {...props} key={index} />
                 ))}
               </Grid>
             </Paper>
-            <Paper className={classes.paper}>
+            <Paper className={`${classes.paper} ${classes.mt}`}>
               <Grid container spacing={2}>
                 {applicationAnswerPart?.map((props, index) => (
                   <UserDataComponent {...props} key={index} />
                 ))}
               </Grid>
             </Paper>
-            <Paper className={classes.paper}>
+            <Paper className={`${classes.paper} ${classes.mt}`}>
               <Grid container spacing={2}>
-                {applicationAnswerPart?.map((props, index) => (
+                {applicationDocumentPart?.map((props, index) => (
                   <UserDataComponent {...props} key={index} />
                 ))}
               </Grid>
