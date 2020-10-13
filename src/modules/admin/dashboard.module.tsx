@@ -3,7 +3,7 @@ import { Container, Grid, Paper, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { SearchComponent } from "../../core/components/search.component"
 import { UserTableComponent } from "../../core/components/userTable.component"
-
+import { useAdminContext } from "../../core/providers/admin.provider"
 const useStyles = makeStyles(theme => ({
   title: {
     fontSize: "3rem",
@@ -21,6 +21,8 @@ const useStyles = makeStyles(theme => ({
 
 const AdminDashboardModule = () => {
   const classes = useStyles()
+  const { selectedUser, modifiedUsersData } = useAdminContext()
+
   return (
     <Container maxWidth="lg">
       <Typography variant="h2" align="center" className={classes.title}>
@@ -32,7 +34,7 @@ const AdminDashboardModule = () => {
             <Typography variant="body1" color="primary">
               จำนวนผู้สมัครทั้งหมด
             </Typography>
-            <Typography variant="h4">104 คน</Typography>
+            <Typography variant="h4">{!!modifiedUsersData ? `${modifiedUsersData?.length} คน` : "0 คน"}</Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
@@ -46,7 +48,14 @@ const AdminDashboardModule = () => {
       </Grid>
 
       <SearchComponent />
-      <UserTableComponent />
+      <UserTableComponent usersData={modifiedUsersData} />
+      <div id="userdata">
+        {!!selectedUser && (
+          <>
+            {selectedUser.id} {selectedUser.name}
+          </>
+        )}
+      </div>
     </Container>
   )
 }

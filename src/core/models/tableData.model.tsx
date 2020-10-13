@@ -1,5 +1,6 @@
 interface TableData {
-  name: string | number
+  id: string
+  name: string
   documentStatus: string
   applicantStatus: string
 }

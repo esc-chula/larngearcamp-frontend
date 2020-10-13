@@ -17,6 +17,7 @@ import { ResetPasswordModule } from "./resetpassword.module"
 import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
 import { ShowLoadingComponent } from "../core/components/loading.component"
 import { DocModule } from "./doc.module"
+import { AdminProvider } from "../core/providers/admin.provider"
 
 const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
@@ -59,9 +60,10 @@ const RouteModule: React.FC = () => {
 
         {/* Admin Guard */}
         <AdminGuardedRoute exact path="/admin/dashboard">
-          <AdminDashboardModule />
+          <AdminProvider>
+            <AdminDashboardModule />
+          </AdminProvider>
         </AdminGuardedRoute>
-        <AdminGuardedRoute exact path="/admin/dashboard/:id"></AdminGuardedRoute>
 
         {/* NotFound Route */}
         <Route>
