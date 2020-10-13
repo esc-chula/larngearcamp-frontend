@@ -50,18 +50,12 @@ const RouteModule: React.FC = () => {
         </GuestGuardedRoute>
 
         {/* User Guard */}
-        <ApplicationStateProvider>
-          {(render, is404) => (
-            <>
-              <UserGuardedRoute exact path="/profile">
-                {render || is404 ? <ProfileModule /> : <ShowLoadingComponent />}
-              </UserGuardedRoute>
-              <UserGuardedRoute path="/application">
-                <ApplicationModule render={render} />
-              </UserGuardedRoute>
-            </>
-          )}
-        </ApplicationStateProvider>
+        <UserGuardedRoute exact path="/profile">
+          <ApplicationStateProvider>{(render, is404) => (render || is404 ? <ProfileModule /> : <ShowLoadingComponent />)}</ApplicationStateProvider>
+        </UserGuardedRoute>
+        <UserGuardedRoute path="/application">
+          <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
+        </UserGuardedRoute>
 
         {/* Admin Guard */}
         <AdminGuardedRoute exact path="/admin/dashboard">
