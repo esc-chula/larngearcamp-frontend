@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import { SearchComponent } from "../../core/components/search.component"
 import { UserTableComponent } from "../../core/components/userTable.component"
 import { useAdminContext } from "../../core/providers/admin.provider"
+import UserDataComponent from "../../core/components/userData.component"
+
 const useStyles = makeStyles(theme => ({
   title: {
     fontSize: "3rem",
@@ -21,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 const AdminDashboardModule = () => {
   const classes = useStyles()
-  const { selectedUser, modifiedUsersData } = useAdminContext()
+  const { selectedUser, modifiedUsersData, applicationProfilePart, applicationAnswerPart, applicationDocumentPart } = useAdminContext()
 
   return (
     <Container maxWidth="lg">
@@ -52,7 +54,27 @@ const AdminDashboardModule = () => {
       <div id="userdata">
         {!!selectedUser && (
           <>
-            {selectedUser.id} {selectedUser.name}
+            <Paper className={classes.paper}>
+              <Grid container spacing={2}>
+                {applicationProfilePart?.map((props, index) => (
+                  <UserDataComponent {...props} key={index} />
+                ))}
+              </Grid>
+            </Paper>
+            <Paper className={classes.paper}>
+              <Grid container spacing={2}>
+                {applicationAnswerPart?.map((props, index) => (
+                  <UserDataComponent {...props} key={index} />
+                ))}
+              </Grid>
+            </Paper>
+            <Paper className={classes.paper}>
+              <Grid container spacing={2}>
+                {applicationAnswerPart?.map((props, index) => (
+                  <UserDataComponent {...props} key={index} />
+                ))}
+              </Grid>
+            </Paper>
           </>
         )}
       </div>

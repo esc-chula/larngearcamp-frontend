@@ -1,12 +1,19 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from "react"
-import { useLoadingStatus } from "../components/loading.component"
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
+import { ShowLoadingComponent } from "../components/loading.component"
+import { ApplicationDTO } from "../models/dto/application.dto"
 import TableData from "../models/tableData.model"
 import UserServiceAPI from "../services/users.service"
+import ApplicationServiceAPI from "../services/application.service"
+import { adminSplitingApplicationProfilePart, adminSplitingApplicationAnswerPart, adminSplitingApplicationDocumentPart } from "../../utils/modify"
+import { UserDataProps } from "../components/userData.component"
 
 interface AdminConstruct {
   selectedUser: TableData | undefined
-  setSelectedUser: React.Dispatch<React.SetStateAction<TableData | undefined>>
+  setSelectedUser: (user: TableData) => Promise<void>
   modifiedUsersData: Array<TableData> | undefined
+  applicationProfilePart: UserDataProps[] | undefined
+  applicationAnswerPart: UserDataProps[] | undefined
+  applicationDocumentPart: UserDataProps[] | undefined
 }
 
 export const ApplicationContext = createContext({} as AdminConstruct)
@@ -14,12 +21,11 @@ export const ApplicationContext = createContext({} as AdminConstruct)
 export const useAdminContext = () => useContext(ApplicationContext)
 
 export const AdminProvider: React.FC = ({ ...other }) => {
-  const setLoading = useLoadingStatus()
-  const [selectedUser, setSelectedUser] = useState<TableData>()
+  const [application, setApplication] = useState<ApplicationDTO>()
+  const [selectedUser, setUser] = useState<TableData>()
   const [modifiedUsersData, setModifiedUsersData] = useState<Array<TableData>>()
 
   const getAllUsers = useCallback(async () => {
-    setLoading(true)
     try {
       const result = await UserServiceAPI.getUsersAPI()
       const modifiedResult: Array<TableData> = result.map(({ id, name }) => {
@@ -30,13 +36,45 @@ export const AdminProvider: React.FC = ({ ...other }) => {
     } catch (error) {
       console.log(error)
     }
-    setLoading(false)
-  }, [setLoading])
+  }, [])
+
+  const setSelectedUser = useCallback(async (user: TableData) => {
+    setUser(user)
+    const result = await ApplicationServiceAPI.getApplicationAPI()
+    setApplication(result)
+  }, [])
+
+  const applicationProfilePart = useMemo(() => {
+    if (application) {
+      return adminSplitingApplicationProfilePart(application)
+    }
+  }, [application])
+
+  const applicationAnswerPart = useMemo(() => {
+    if (application) {
+      return adminSplitingApplicationAnswerPart(application)
+    }
+  }, [application])
+
+  const applicationDocumentPart = useMemo(() => {
+    if (application) {
+      return adminSplitingApplicationDocumentPart(application)
+    }
+  }, [application])
 
   useEffect(() => {
     getAllUsers()
   }, [getAllUsers])
 
-  const value = { selectedUser, setSelectedUser, modifiedUsersData }
+  const value = {
+    selectedUser,
+    setSelectedUser,
+    modifiedUsersData,
+    applicationProfilePart,
+    applicationAnswerPart,
+    applicationDocumentPart
+  }
+
+  if (!modifiedUsersData) return <ShowLoadingComponent />
   return <ApplicationContext.Provider value={value} {...other} />
 }

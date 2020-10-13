@@ -4,6 +4,8 @@ import { Answer1Model } from "../schemas/answer1.schema"
 import Answer1DTO from "../core/models/dto/answer1.dto"
 import { Answer2Model } from "../schemas/answer2.schema"
 import Answer2DTO from "../core/models/dto/answer2.dto"
+import { ApplicationDTO } from "../core/models/dto/application.dto"
+import { UserDataProps } from "../core/components/userData.component"
 
 export const resolve = (path: string, obj: any) => {
   return path.split(".").reduce((prev, curr) => {
@@ -88,4 +90,86 @@ export const convertAnswer2SchemaToAnswer2DTO = (props: Answer2Model): Answer2DT
       }
     }
   }
+}
+
+export const adminSplitingApplicationProfilePart = (props: ApplicationDTO): Array<UserDataProps> => {
+  return [
+    { name: "ข้อมูลส่วนตัว", header: true, xs: 12, sm: 12, md: 4 },
+    { name: "คำนำหน้า", value: props.title, xs: 12, sm: 6, md: 4 },
+    { name: "ชื่อจริง", value: props.name, xs: 12, sm: 6, md: 4 },
+    { name: "นามสกุล", value: props.surname, xs: 12, sm: 6, md: 4 },
+    { name: "ชื่อเล่น", value: props.nickname, xs: 12, sm: 12, md: 4 },
+    { name: "ศาสนา", value: props.religion, xs: 12, sm: 6, md: 3 },
+    { name: "วันเกิด", value: props.birthDate, xs: 12, sm: 12, md: 5 },
+
+    { name: "ข้อมูลการศึกษา", header: true },
+    { name: "ระดับชั้นที่กำลังศึกษา", value: props.education, xs: 12, sm: 6, md: 3 },
+    { name: "จังหวัด", value: props.province, xs: 12, sm: 6, md: 4 },
+    { name: "โรงเรียน", value: props.school, xs: 12, sm: 12, md: 5 },
+
+    { name: "ข้อมูลสุขภาพ", header: true },
+    { name: "หมู่เลือด", value: props.title, xs: 12, sm: 6, md: 3 },
+    { name: "โรคประจำตัว", value: props.health.congenitalDisease, xs: 12, sm: 6, md: 4 },
+    { name: "อาหารที่แพ้", value: props.health.allergicFood, xs: 12, sm: 12, md: 5 },
+    { name: "ยาที่แพ้", value: props.health.allergicDrug, xs: 12, sm: 12, md: 6 },
+    { name: "ยาประจำตัว", value: props.health.drug, xs: 12, sm: 12, md: 6 },
+
+    { name: "ที่อยู่ที่สามารถติดต่อได้สะดวกและข้อมูลการติดต่อ", header: true },
+    { name: "ชื่อ-นามสกุลผู้รับส่ง", value: props.contact.recipient, xs: 12, sm: 12, md: 6 },
+    { name: "บ้านเลขที่ หมู่ที่ และถนน", value: props.contact.address, xs: 12, sm: 12, md: 6 },
+    { name: "ตำบล/แขวง", value: props.contact.subDistrict, xs: 12, sm: 6, md: 3 },
+    { name: "อำเภอ/เขต", value: props.contact.district, xs: 12, sm: 6, md: 3 },
+    { name: "จังหวัด", value: props.contact.province, xs: 12, sm: 6, md: 3 },
+    { name: "รหัสไปรษณีย์", value: props.contact.zip, xs: 12, sm: 6, md: 3 },
+    { name: "โทรศัพท์บ้าน", value: props.contact.homeNumber, xs: 12, sm: 6, md: 3 },
+    { name: "โทรศัพท์มือถือ", value: props.contact.phoneNumber, xs: 12, sm: 6, md: 3 },
+    { name: "อีเมล", value: props.userEmail, xs: 12, sm: 12, md: 6 },
+    { name: "Facebook", value: props.contact.facebookName, xs: 12, sm: 6, md: 6 },
+    { name: "Line ID", value: props.contact.lineId, xs: 12, sm: 6, md: 6 },
+
+    { name: "ข้อมูลการติดต่อผู้ปกครอง", header: true },
+    { name: "ชื่อ-นามสกุลผู้ปกครอง", value: props.contact.parentName, xs: 12, sm: 6, md: 5 },
+    { name: "หมายเลขโทรศัพท์", value: props.contact.parentNumber, xs: 12, sm: 6, md: 4 },
+    { name: "ความสัมพันธ์", value: props.contact.parentRelationship, xs: 12, sm: 6, md: 3 }
+  ]
+}
+
+export const adminSplitingApplicationAnswerPart = (props: ApplicationDTO): Array<UserDataProps> => {
+  const firstPart = props.answer.firstPart
+  const secondPart = props.answer.secondPart
+  return [
+    { name: "ส่วนที่ 1", header: true },
+    { name: "คำถามข้อ 1", value: firstPart.answer1 },
+    { name: "คำถามข้อ 2", value: `${firstPart.answer2.first} ${firstPart.answer2.second} ${firstPart.answer2.third} ${firstPart.answer2.fourth}` },
+    { name: "คำถามข้อ 3", value: firstPart.answer3 },
+    {
+      name: "คำถามข้อ 4",
+      value: `${firstPart.answer4.first} <br/> 
+      ${firstPart.answer4.second} <br/> 
+      ${firstPart.answer4.third} <br/> 
+      ${firstPart.answer4.fourth}<br/> 
+      ${firstPart.answer4.fifth}<br/> 
+      ${firstPart.answer4.sixth}`
+    },
+    { name: "คำถามข้อ 5", value: firstPart.answer5 },
+    { name: "คำถามข้อ 6", value: `${firstPart.answer6}` },
+    { name: "คำถามข้อ 7", value: firstPart.answer7 },
+
+    { name: "ส่วนที่ 2", header: true },
+    { name: "คำถามข้อ 1", value: secondPart.answer1 },
+    { name: "คำถามข้อ 2", value: secondPart.answer2 },
+    { name: "คำถามข้อ 3", value: secondPart.answer3 },
+    { name: "คำถามข้อ 4", value: secondPart.answer4 },
+    { name: "คำถามข้อ 5", value: secondPart.answer5 },
+    { name: "คำถามข้อ 6", value: secondPart.answer6 }
+  ]
+}
+
+export const adminSplitingApplicationDocumentPart = (props: ApplicationDTO): Array<UserDataProps> => {
+  return [
+    { name: "เอกสารประกอบการรับสมัคร", header: true },
+    { name: "รูปถ่ายผู้สมัคร", value: props.picture.url },
+    { name: "หนังสือรับรองจากผู้ปกครอง", value: props.letterOfConsent.url },
+    { name: "ใบ ปพ. 1 หรือ ปพ.7 หรือ เอกสารยืนยันตัวตนอื่นๆ", value: props.transcript.url }
+  ]
 }
