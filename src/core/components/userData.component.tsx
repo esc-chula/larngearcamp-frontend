@@ -42,6 +42,10 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1, 0, 0, 0),
     width: "fit-content",
     height: "fit-content"
+  },
+  highlight: {
+    fontWeight: 500,
+    color: theme.palette.success.main
   }
 }))
 
@@ -67,9 +71,18 @@ const UserDataComponent: React.FC<UserDataProps> = ({ name, value, header, linkL
           </a>
         </Typography>
       ) : multiline ? (
-        <TextField value={value} variant="outlined" size="small" multiline className={classes.multiline} fullWidth disabled />
+        <TextField
+          value={value}
+          variant="outlined"
+          size="small"
+          multiline
+          className={classes.multiline}
+          inputProps={{ className: classes.highlight }}
+          fullWidth
+          disabled
+        />
       ) : (
-        <TextField value={value} fullWidth disabled variant="outlined" size="small" />
+        <TextField value={value} fullWidth disabled variant="outlined" size="small" inputProps={{ className: classes.highlight }} />
       )}
     </Grid>
   )
