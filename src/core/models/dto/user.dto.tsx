@@ -1,3 +1,5 @@
+import { ApplicationState, DocumentState, EditingState } from "./application.dto"
+
 interface UserDTO {
   createdAt: string
   email: string
@@ -6,6 +8,13 @@ interface UserDTO {
     display: string | null
     first: string
     last: string
+  }
+  application?: {
+    code: string
+    picture: string
+    applicationState: ApplicationState
+    documentState: DocumentState
+    editingState: EditingState
   }
   role: "admin" | "user"
   updatedAt: string

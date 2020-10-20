@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { SearchComponent } from "../../core/components/search.component"
 import { UserTableComponent } from "../../core/components/userTable.component"
 import { useAdminContext } from "../../core/providers/admin.provider"
-import UserDataComponent from "../../core/components/userData.component"
+import UserDisplayDataComponent from "../../core/components/userDisplayData.component"
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -60,21 +60,21 @@ const AdminDashboardModule = () => {
             <Paper className={`${classes.paper} ${classes.mt}`}>
               <Grid container spacing={2}>
                 {applicationProfilePart?.map((props, index) => (
-                  <UserDataComponent {...props} key={index} />
+                  <UserDisplayDataComponent {...props} key={index} />
                 ))}
               </Grid>
             </Paper>
             <Paper className={`${classes.paper} ${classes.mt}`}>
               <Grid container spacing={2}>
                 {applicationAnswerPart?.map((props, index) => (
-                  <UserDataComponent {...props} key={index} />
+                  <UserDisplayDataComponent {...props} key={index} />
                 ))}
               </Grid>
             </Paper>
             <Paper className={`${classes.paper} ${classes.mt}`}>
               <Grid container spacing={2}>
                 {applicationDocumentPart?.map((props, index) => (
-                  <UserDataComponent {...props} key={index} />
+                  <UserDisplayDataComponent {...props} key={index} />
                 ))}
               </Grid>
             </Paper>
