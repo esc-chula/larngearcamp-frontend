@@ -7,73 +7,9 @@ import TableData from "../models/tableData.model"
 import Order from "../models/order.model"
 import { getComparator, stableSort } from "../../utils/table"
 
-const mockData: TableData[] = [
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด1",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด2",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด3",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด3",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด4",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด5",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด6",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด7",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด8",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด9",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด10",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด11",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  },
-  {
-    name: "นายลานเกียร์ สุดลึกล้ำเหลือกำหนด12",
-    documentStatus: "เอกสารไม่ผ่าน 2 ฉบับ",
-    applicantStatus: "ได้รับเลือกไปสัมภาษณ์"
-  }
-]
+export interface UserTableComponentProps {
+  usersData: Array<TableData> | undefined
+}
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -88,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const UserTableComponent = () => {
+const UserTableComponent: React.FC<UserTableComponentProps> = ({ usersData }) => {
   const classes = useStyles()
   const [order, setOrder] = useState<Order>("asc")
   const [orderBy, setOrderBy] = useState<keyof TableData>("name")
@@ -114,8 +50,8 @@ const UserTableComponent = () => {
   }, [])
 
   const emptyRows = useMemo(() => {
-    return rowsPerPage - Math.min(rowsPerPage, mockData.length - page * rowsPerPage)
-  }, [rowsPerPage, page])
+    return rowsPerPage - Math.min(rowsPerPage, !!usersData ? usersData.length - page * rowsPerPage : 0)
+  }, [rowsPerPage, page, usersData])
 
   return (
     <>
@@ -123,27 +59,33 @@ const UserTableComponent = () => {
         <Table aria-label="users table" stickyHeader>
           <EnhancedTableHead classes={classes} order={order} orderBy={orderBy} onRequestSort={handleRequestSort} />
           <TableBody>
-            {stableSort(mockData, getComparator(order, orderBy))
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row, index) => (
-                <UserCellComponent content={row} key={index} />
-              ))}
-            {emptyRows > 0 && (
-              <TableRow style={{ height: 54 * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
+            {!!usersData && (
+              <>
+                {stableSort(usersData, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                  .map((row, index) => (
+                    <UserCellComponent content={row} key={index} />
+                  ))}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 54 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </>
             )}
           </TableBody>
         </Table>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25, 30, 35, 50]}
-          component="div"
-          count={mockData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        {!!usersData && (
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25, 30, 35, 50]}
+            component="div"
+            count={usersData.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        )}
       </TableContainer>
     </>
   )

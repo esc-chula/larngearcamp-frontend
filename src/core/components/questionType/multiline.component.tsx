@@ -9,7 +9,7 @@ interface MultiLineTypeProps {
 }
 
 const useStyles = makeStyles(theme => ({
-  mutiline: {
+  multiline: {
     "&>*:not(p)": {
       minHeight: 80,
       display: "flex",
@@ -29,7 +29,7 @@ const MultilineTypeComponent: React.FC<StandardTextFieldProps & MultiLineTypePro
       size="small"
       multiline
       inputRef={register}
-      className={classes.mutiline}
+      className={classes.multiline}
       name={name}
       error={!!selfError}
       helperText={selfError?.message}

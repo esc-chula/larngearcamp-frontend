@@ -1,5 +1,6 @@
 interface ProfileDTO {
   title: string
+  userEmail?: string
   name: string
   surname: string
   nickname: string
