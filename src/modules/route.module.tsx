@@ -1,5 +1,5 @@
 import React, { Suspense } from "react"
-import { Switch, Route } from "react-router-dom"
+import { Switch, Route, Redirect } from "react-router-dom"
 
 // COMPONENTS
 import { HomeModule } from "./home.module"
@@ -18,10 +18,13 @@ import { ApplicationStateProvider } from "../core/providers/applicationState.pro
 import { ShowLoadingComponent } from "../core/components/loading.component"
 import { DocModule } from "./doc.module"
 import { AdminProvider } from "../core/providers/admin.provider"
+import { useShutdownContext } from "../core/providers/shutdown.provider"
 
 const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
 const RouteModule: React.FC = () => {
+  const { shutdownDate } = useShutdownContext()
+
   return (
     <Suspense fallback={<ShowLoadingComponent />}>
       <Switch>
@@ -55,7 +58,11 @@ const RouteModule: React.FC = () => {
           <ApplicationStateProvider>{(render, is404) => (render || is404 ? <ProfileModule /> : <ShowLoadingComponent />)}</ApplicationStateProvider>
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
-          <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
+          {new Date() > shutdownDate ? (
+            <Redirect to="/" />
+          ) : (
+            <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
+          )}
         </UserGuardedRoute>
 
         {/* Admin Guard */}
