@@ -28,7 +28,6 @@ export const AdminProvider: React.FC = ({ ...other }) => {
   const getAllUsers = useCallback(async () => {
     try {
       const result = await UserServiceAPI.getUsersAPI()
-      console.log(result.slice(100, 110))
       const modifiedResult: Array<TableData> = result.map(({ id, name, application }) => {
         let userName = !!name ? `${name.first} ${name.last}` : "NO NAME"
         let docStatus = `${application?.documentState}`
