@@ -5,7 +5,7 @@ import Answer1DTO from "../core/models/dto/answer1.dto"
 import { Answer2Model } from "../schemas/answer2.schema"
 import Answer2DTO from "../core/models/dto/answer2.dto"
 import { ApplicationDTO } from "../core/models/dto/application.dto"
-import { UserDataProps } from "../core/components/userData.component"
+import { UserDisplayDataProps } from "../core/components/userDisplayData.component"
 
 export const resolve = (path: string, obj: any) => {
   return path.split(".").reduce((prev, curr) => {
@@ -92,7 +92,7 @@ export const convertAnswer2SchemaToAnswer2DTO = (props: Answer2Model): Answer2DT
   }
 }
 
-export const adminSplitingApplicationProfilePart = (props: ApplicationDTO): Array<UserDataProps> => {
+export const adminSplitingApplicationProfilePart = (props: ApplicationDTO): Array<UserDisplayDataProps> => {
   return [
     { name: "ข้อมูลส่วนตัว", header: true, xs: 12, sm: 12, md: 4 },
     { name: "คำนำหน้า", value: props.title, xs: 12, sm: 6, md: 4 },
@@ -134,7 +134,7 @@ export const adminSplitingApplicationProfilePart = (props: ApplicationDTO): Arra
   ]
 }
 
-export const adminSplitingApplicationAnswerPart = (props: ApplicationDTO): Array<UserDataProps> => {
+export const adminSplitingApplicationAnswerPart = (props: ApplicationDTO): Array<UserDisplayDataProps> => {
   const firstPart = props.answer.firstPart
   const secondPart = props.answer.secondPart
   return [
@@ -240,11 +240,18 @@ sixth = ${firstPart.answer4.sixth}`,
   ]
 }
 
-export const adminSplitingApplicationDocumentPart = (props: ApplicationDTO): Array<UserDataProps> => {
+export const adminSplitingApplicationDocumentPart = (props: ApplicationDTO): Array<UserDisplayDataProps> => {
   return [
     { name: "เอกสารประกอบการรับสมัคร", header: true },
     { name: "รูปถ่ายผู้สมัคร", value: props.picture.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name },
     { name: "หนังสือรับรองจากผู้ปกครอง", value: props.letterOfConsent.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name },
-    { name: "ใบ ปพ. 1 หรือ ปพ.7 หรือ เอกสารยืนยันตัวตนอื่นๆ", value: props.transcript.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name }
+    {
+      name: "ใบ ปพ. 1 หรือ ปพ.7 หรือ เอกสารยืนยันตัวตนอื่นๆ",
+      value: props.transcript.url,
+      xs: 12,
+      sm: 12,
+      md: 12,
+      linkLabel: props.picture.name
+    }
   ]
 }
