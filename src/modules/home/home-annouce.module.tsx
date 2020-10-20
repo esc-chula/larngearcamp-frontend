@@ -29,6 +29,15 @@ const useStyle = makeStyles(theme => ({
 }))
 const HomeAnnouce: React.FC<BoxProps> = props => {
   const classes = useStyle()
+  const closed = new Date() >= new Date("2020-10-21T00:00:00+07:00")
+  let button = <Button variant="contained" color="secondary" className={classes.subscribeButton}>
+              {closed ? "ปิดสมัครแล้ว" : "สมัครค่ายลานเกียร์"}
+            </Button>
+  if(!closed){
+    button = <Link to="/application" className="no-underline">
+            {button}
+          </Link>
+  }
   return (
     <BackgroundOverlayComponent
       src={require("../../assets/images/background/landing-3.svg")}
@@ -40,11 +49,7 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
           <Typography className={classes.primaryAnnounce + " kanit"} variant="h6">
             รับสมัคร 25&nbsp;กันยายน - 20&nbsp;ตุลาคม 2563
           </Typography>
-          <Link to="/application" className="no-underline">
-            <Button variant="contained" color="secondary" className={classes.subscribeButton}>
-              สมัครค่ายลานเกียร์
-            </Button>
-          </Link>
+          {button}
         </SafeArea>
       </Box>
     </BackgroundOverlayComponent>

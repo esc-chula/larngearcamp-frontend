@@ -37,6 +37,15 @@ const useStyle = makeStyles(theme => ({
 
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
+  const closed = new Date() >= new Date("2020-10-21T00:00:00+07:00")
+  let button = <Button variant="contained" color="primary" className={classes.button}>
+              {closed ? "Closed" : "Apply Now"} 
+            </Button>
+  if(!closed) {
+    button = <Link to={closed ? "" : "/application"} className="no-underline" >
+            {button}
+          </Link>
+  }
   return (
     <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70} minHeightPx={800}>
       <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="80%">
@@ -47,11 +56,7 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
           <Typography variant="subtitle1" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกรด้วยมือของคุณเอง
           </Typography>
-          <Link to="/application" className="no-underline">
-            <Button variant="contained" color="primary" className={classes.button}>
-              Apply Now
-            </Button>
-          </Link>
+          {button}
         </Box>
       </Box>
     </BackgroundOverlay>
