@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import BackgroundOverlayComponent from "../../core/components/backgroundOverlay.component"
 import { SafeArea } from "../../core/components/safeArea.component"
+import { useShutdownContext } from "../../core/providers/shutdown.provider"
+import { grey } from "@material-ui/core/colors"
 
 const useStyle = makeStyles(theme => ({
   container: {
@@ -21,7 +23,11 @@ const useStyle = makeStyles(theme => ({
   subscribeButton: {
     padding: theme.spacing(1, 6),
     fontSize: "1.2rem",
-    fontWeight: 400
+    fontWeight: 400,
+    "&:disabled": {
+      backgroundColor: grey[500],
+      color: grey[200]
+    }
   },
   textCenter: {
     textAlign: "center"
@@ -29,6 +35,9 @@ const useStyle = makeStyles(theme => ({
 }))
 const HomeAnnouce: React.FC<BoxProps> = props => {
   const classes = useStyle()
+  const { shutdownDate } = useShutdownContext()
+  const shouldShutdown = new Date() > shutdownDate
+
   return (
     <BackgroundOverlayComponent
       src={require("../../assets/images/background/landing-3.svg")}
@@ -40,9 +49,9 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
           <Typography className={classes.primaryAnnounce + " kanit"} variant="h6">
             รับสมัคร 25&nbsp;กันยายน - 14&nbsp;ตุลาคม 2563
           </Typography>
-          <Link to="/application" className="no-underline">
-            <Button variant="contained" color="secondary" className={classes.subscribeButton}>
-              สมัครค่ายลานเกียร์
+          <Link to="/application" className="no-underline" style={{ pointerEvents: shouldShutdown ? "none" : "initial" }}>
+            <Button variant="contained" color="secondary" className={classes.subscribeButton} disabled={shouldShutdown}>
+              {shouldShutdown ? "หมดเขตรับสมัคร" : "สมัครค่ายลานเกียร์"}
             </Button>
           </Link>
         </SafeArea>

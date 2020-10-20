@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from "react"
 import { TableRow, TableCell, Collapse, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Link } from "react-router-dom"
 import TableData from "../models/tableData.model"
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
 import { CheckListComponent } from "./checkList.component"
+import { useAdminContext } from "../providers/admin.provider"
+import { Link as ScrollLink } from "react-scroll"
 
 interface UserCellProps {
   content: TableData
@@ -26,6 +27,7 @@ const useStyles = makeStyles(theme => ({
     margin: "auto"
   },
   nameTitle: {
+    minWidth: 180,
     maxWidth: 180
   },
   fitContent: {
@@ -36,6 +38,7 @@ const useStyles = makeStyles(theme => ({
 const UserCellComponent: React.FC<UserCellProps> = ({ content }) => {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
+  const { setSelectedUser } = useAdminContext()
 
   const handleClick = useCallback(() => {
     setOpen(!open)
@@ -46,9 +49,17 @@ const UserCellComponent: React.FC<UserCellProps> = ({ content }) => {
       <TableRow hover>
         <TableCell className={classes.nameTitle}>
           <div className={classes.fitContent}>
-            <Link to="/user/userid" className={classes.link} target="_blank">
+            <ScrollLink
+              to="userdata"
+              className={classes.link}
+              onClick={() => setSelectedUser(content)}
+              spy
+              smooth
+              offset={-100}
+              duration={500}
+              activeClass="active">
               {content.name}
-            </Link>
+            </ScrollLink>
           </div>
         </TableCell>
         <TableCell align="right">{content.documentStatus}</TableCell>
