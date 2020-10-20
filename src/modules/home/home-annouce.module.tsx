@@ -37,7 +37,6 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
   const classes = useStyle()
   const { shutdownDate } = useShutdownContext()
   const shouldShutdown = new Date() > shutdownDate
-
   return (
     <BackgroundOverlayComponent
       src={require("../../assets/images/background/landing-3.svg")}
@@ -47,7 +46,7 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
       <Box display="flex" height="100%" alignItems="center" justifyContent="center" className={classes.container + " " + props.className} {...props}>
         <SafeArea className={classes.textCenter}>
           <Typography className={classes.primaryAnnounce + " kanit"} variant="h6">
-            รับสมัคร 25&nbsp;กันยายน - 14&nbsp;ตุลาคม 2563
+            รับสมัคร 25&nbsp;กันยายน - 20&nbsp;ตุลาคม 2563
           </Typography>
           <Link to="/application" className="no-underline" style={{ pointerEvents: shouldShutdown ? "none" : "initial" }}>
             <Button variant="contained" color="secondary" className={classes.subscribeButton} disabled={shouldShutdown}>

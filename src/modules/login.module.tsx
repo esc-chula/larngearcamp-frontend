@@ -91,6 +91,7 @@ const LoginModule = () => {
       }
     }, [getValues, history, setError, login])
   )
+  const closed = new Date() >= new Date("2020-10-21T00:00:00+07:00")
 
   return (
     <>
@@ -134,7 +135,7 @@ const LoginModule = () => {
         </CardComponent>
       </FormProvider>
 
-      <Box mt={4}>
+      {closed ? "" : <Box mt={4}>
         <Container maxWidth="sm">
           <Paper elevation={0}>
             <Box display="flex" alignItems="center" py={2} px={5}>
@@ -145,7 +146,7 @@ const LoginModule = () => {
             </Box>
           </Paper>
         </Container>
-      </Box>
+      </Box>}
     </>
   )
 }

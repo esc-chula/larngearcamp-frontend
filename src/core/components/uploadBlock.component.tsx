@@ -58,21 +58,10 @@ const useStyles = makeStyles(theme => ({
 type UploadBlockComponentProps = UploadFileModel & {
   serverFile: DocumentItem
   order: number
-  clearDisplayFile?: boolean
   disabled?: boolean
 }
 
-const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({
-  serverFile,
-  order,
-  name,
-  size,
-  accept,
-  body1,
-  body2,
-  clearDisplayFile,
-  disabled
-}) => {
+const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile, order, name, size, accept, body1, body2, disabled }) => {
   const classes = useStyles()
   const { register, setError, errors, clearErrors, setValue } = useFormContext()
   const { uploadDocument } = useApplicationContext()
@@ -83,14 +72,14 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({
   const { activeSnackBar } = useGlobalContext()
 
   const displayFile = useMemo(() => {
-    if (clearDisplayFile || isDefaultUrl(serverFile.url)) {
+    if (isDefaultUrl(serverFile.url)) {
       return null
     }
     return {
       name: friendlyFileName(serverFile.name),
       url: serverFile.url
     }
-  }, [serverFile, clearDisplayFile])
+  }, [serverFile])
 
   const uploadFile = useLoadingCallback(
     useCallback(
