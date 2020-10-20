@@ -5,15 +5,15 @@ import TableData from "../models/tableData.model"
 import UserServiceAPI from "../services/users.service"
 import ApplicationServiceAPI from "../services/application.service"
 import { adminSplitingApplicationProfilePart, adminSplitingApplicationAnswerPart, adminSplitingApplicationDocumentPart } from "../../utils/modify"
-import { UserDataProps } from "../components/userData.component"
+import { UserDisplayDataProps } from "../components/userDisplayData.component"
 
 interface AdminConstruct {
   selectedUser: TableData | undefined
   setSelectedUser: (user: TableData) => Promise<void>
   modifiedUsersData: Array<TableData> | undefined
-  applicationProfilePart: UserDataProps[] | undefined
-  applicationAnswerPart: UserDataProps[] | undefined
-  applicationDocumentPart: UserDataProps[] | undefined
+  applicationProfilePart: UserDisplayDataProps[] | undefined
+  applicationAnswerPart: UserDisplayDataProps[] | undefined
+  applicationDocumentPart: UserDisplayDataProps[] | undefined
 }
 
 export const ApplicationContext = createContext({} as AdminConstruct)
@@ -28,9 +28,12 @@ export const AdminProvider: React.FC = ({ ...other }) => {
   const getAllUsers = useCallback(async () => {
     try {
       const result = await UserServiceAPI.getUsersAPI()
-      const modifiedResult: Array<TableData> = result.map(({ id, name }) => {
-        let userName = !!name ? `${name.first} ${name.last}` : " NO NAME"
-        return { id: id, name: userName, documentStatus: "", applicantStatus: "" }
+      console.log(result.slice(100, 110))
+      const modifiedResult: Array<TableData> = result.map(({ id, name, application }) => {
+        let userName = !!name ? `${name.first} ${name.last}` : "NO NAME"
+        let docStatus = `${application?.documentState}`
+        let appStatus = `${application?.applicationState}`
+        return { id: id, name: userName, documentStatus: docStatus, applicantStatus: appStatus }
       })
       setModifiedUsersData(modifiedResult)
     } catch (error) {

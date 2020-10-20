@@ -1,7 +1,7 @@
 import React from "react"
 import { Grid, GridProps, Typography, makeStyles, Divider, TextField } from "@material-ui/core"
 
-export interface UserDataProps extends GridProps {
+export interface UserDisplayDataProps extends GridProps {
   name: string
   linkLabel?: string
   value?: string
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const UserDataComponent: React.FC<UserDataProps> = ({ name, value, header, linkLabel, multiline, ...props }) => {
+const UserDataComponent: React.FC<UserDisplayDataProps> = ({ name, value, header, linkLabel, multiline, ...props }) => {
   const classes = useStyles()
   if (header) {
     return (
