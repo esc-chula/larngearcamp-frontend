@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import landing1 from "../../assets/images/background/landing-1.svg"
 import BackgroundOverlay from "../../core/components/backgroundOverlay.component"
 import { safeArea } from "../../core/components/safeArea.component"
-import { useShutdownContext } from "../../core/providers/shutdown.provider"
+import { useAnnounceContext } from "../../core/providers/announce.provider"
 import { grey } from "@material-ui/core/colors"
 
 const useStyle = makeStyles(theme => ({
@@ -43,8 +43,8 @@ const useStyle = makeStyles(theme => ({
 
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
-  const { shutdownDate } = useShutdownContext()
-  const shouldShutdown = new Date() > shutdownDate
+  const { announceDate } = useAnnounceContext()
+  const shouldAnnounce = new Date() > announceDate
   return (
     <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70} minHeightPx={800}>
       <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="80%">
@@ -55,9 +55,9 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
           <Typography variant="subtitle1" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกรด้วยมือของคุณเอง
           </Typography>
-          <Link to="/application" className="no-underline" style={{ pointerEvents: shouldShutdown ? "none" : "initial" }}>
-            <Button variant="contained" color="primary" className={classes.button} disabled={shouldShutdown}>
-              {shouldShutdown ? "หมดเขตรับสมัคร" : "Apply Now"}
+          <Link to="/profile" className="no-underline" style={{ pointerEvents: shouldAnnounce ? "initial" : "none" }}>
+            <Button variant="contained" color="primary" className={classes.button} disabled={!shouldAnnounce}>
+              {shouldAnnounce ? "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" : "หมดเขตรับสมัคร"}
             </Button>
           </Link>
         </Box>
