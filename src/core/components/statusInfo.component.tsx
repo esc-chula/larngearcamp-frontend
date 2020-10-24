@@ -80,7 +80,7 @@ const StatusInfo: React.FC<StatusInfoProps> = ({ profileStatus }) => {
   if (profileStatus === "passedInterview") {
     const code = application?.code!
     const interviewInfo =
-      code[0] === "A" || code[0] === "C"
+      code[3] === "A" || code[3] === "C"
         ? `จะจัดขึ้นในวันที่ <span class="${classes.bold}">31 ตุลาคม 2563</span> ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย แล้วเจอกันนะครับ :)`
         : `จะอยู่ในช่วงวันที่ <span class="${classes.bold}">2-8 พฤศจิกายน 2563</span> โดยพี่ ๆ ค่ายลานเกียร์จะโทรสัมภาษณ์ทางเบอร์โทรศัพท์มือถือที่น้องได้กรอกไว้ ขอให้น้องคอยรอรับสายจากพี่ ๆ ด้วยนะครับ :)`
     return (
