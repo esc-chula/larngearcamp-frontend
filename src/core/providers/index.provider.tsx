@@ -2,17 +2,17 @@ import React from "react"
 import { AuthProvider } from "./auth.provider"
 import { GlobalProvider } from "./global.provider"
 import { ApplicationProvider } from "./application.provider"
-import { ShutdownProvider } from "./shutdown.provider"
+import { AnnounceProvider } from "./announce.provider"
 
 const AppProvider: React.FC = ({ children }) => {
   return (
-    <ShutdownProvider>
+    <AnnounceProvider>
       <GlobalProvider>
         <AuthProvider>
           <ApplicationProvider>{children}</ApplicationProvider>
         </AuthProvider>
       </GlobalProvider>
-    </ShutdownProvider>
+    </AnnounceProvider>
   )
 }
 

@@ -18,12 +18,12 @@ import { ApplicationStateProvider } from "../core/providers/applicationState.pro
 import { ShowLoadingComponent } from "../core/components/loading.component"
 import { DocModule } from "./doc.module"
 import { AdminProvider } from "../core/providers/admin.provider"
-import { useShutdownContext } from "../core/providers/shutdown.provider"
+import { useAnnounceContext } from "../core/providers/announce.provider"
 
 const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
 const RouteModule: React.FC = () => {
-  const { shutdownDate } = useShutdownContext()
+  const { announceDate } = useAnnounceContext()
 
   return (
     <Suspense fallback={<ShowLoadingComponent />}>
@@ -58,8 +58,8 @@ const RouteModule: React.FC = () => {
           <ApplicationStateProvider>{(render, is404) => (render || is404 ? <ProfileModule /> : <ShowLoadingComponent />)}</ApplicationStateProvider>
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
-          {new Date() > shutdownDate ? (
-            <Redirect to="/" />
+          {new Date() > announceDate ? (
+            <Redirect to="/profile" />
           ) : (
             <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
           )}

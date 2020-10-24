@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import BackgroundOverlayComponent from "../../core/components/backgroundOverlay.component"
 import { SafeArea } from "../../core/components/safeArea.component"
-import { useShutdownContext } from "../../core/providers/shutdown.provider"
+import { useAnnounceContext } from "../../core/providers/announce.provider"
 import { grey } from "@material-ui/core/colors"
 
 const useStyle = makeStyles(theme => ({
@@ -35,8 +35,8 @@ const useStyle = makeStyles(theme => ({
 }))
 const HomeAnnouce: React.FC<BoxProps> = props => {
   const classes = useStyle()
-  const { shutdownDate } = useShutdownContext()
-  const shouldShutdown = new Date() > shutdownDate
+  const { announceDate } = useAnnounceContext()
+  const shouldAnnounce = new Date() > announceDate
   return (
     <BackgroundOverlayComponent
       src={require("../../assets/images/background/landing-3.svg")}
@@ -46,11 +46,11 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
       <Box display="flex" height="100%" alignItems="center" justifyContent="center" className={classes.container + " " + props.className} {...props}>
         <SafeArea className={classes.textCenter}>
           <Typography className={classes.primaryAnnounce + " kanit"} variant="h6">
-            รับสมัคร 25&nbsp;กันยายน - 20&nbsp;ตุลาคม 2563
+            สัมภาษณ์ 31&nbsp;ตุลาคม - 8&nbsp;พฤศจิกายน 2563
           </Typography>
-          <Link to="/application" className="no-underline" style={{ pointerEvents: shouldShutdown ? "none" : "initial" }}>
-            <Button variant="contained" color="secondary" className={classes.subscribeButton} disabled={shouldShutdown}>
-              {shouldShutdown ? "หมดเขตรับสมัคร" : "สมัครค่ายลานเกียร์"}
+          <Link to="/profile" className="no-underline" style={{ pointerEvents: shouldAnnounce ? "initial" : "none" }}>
+            <Button variant="contained" color="secondary" className={classes.subscribeButton} disabled={!shouldAnnounce}>
+              {shouldAnnounce ? "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" : "หมดเขตรับสมัคร"}
             </Button>
           </Link>
         </SafeArea>
