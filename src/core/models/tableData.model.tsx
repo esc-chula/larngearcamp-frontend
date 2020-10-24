@@ -1,8 +1,10 @@
+import { ApplicationState, DocumentState } from "./dto/application.dto"
+
 interface TableData {
   id: string
   name: string
-  documentStatus: string
-  applicantStatus: string
+  documentStatus: DocumentState
+  applicantStatus: ApplicationState
 }
 
 export default TableData

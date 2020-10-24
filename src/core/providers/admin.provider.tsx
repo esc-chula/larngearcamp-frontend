@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { ShowLoadingComponent } from "../components/loading.component"
-import { ApplicationDTO } from "../models/dto/application.dto"
+import { ApplicationDTO, DocumentState, ApplicationState } from "../models/dto/application.dto"
 import TableData from "../models/tableData.model"
 import UserServiceAPI from "../services/users.service"
 import ApplicationServiceAPI from "../services/application.service"
@@ -21,8 +21,8 @@ export const ApplicationContext = createContext({} as AdminConstruct)
 export const useAdminContext = () => useContext(ApplicationContext)
 
 export const AdminProvider: React.FC = ({ ...other }) => {
-  const [application, setApplication] = useState<ApplicationDTO>()
   const [selectedUser, setUser] = useState<TableData>()
+  const [application, setApplication] = useState<ApplicationDTO>()
   const [modifiedUsersData, setModifiedUsersData] = useState<Array<TableData>>()
 
   const getAllUsers = useCallback(async () => {
@@ -30,8 +30,8 @@ export const AdminProvider: React.FC = ({ ...other }) => {
       const result = await UserServiceAPI.getUsersAPI()
       const modifiedResult: Array<TableData> = result.map(({ id, name, application }) => {
         let userName = !!name ? `${name.first} ${name.last}` : "NO NAME"
-        let docStatus = `${application?.documentState}`
-        let appStatus = `${application?.applicationState}`
+        let docStatus = `${application?.documentState}` as DocumentState
+        let appStatus = `${application?.applicationState}` as ApplicationState
         return { id: id, name: userName, documentStatus: docStatus, applicantStatus: appStatus }
       })
       setModifiedUsersData(modifiedResult)
@@ -43,7 +43,7 @@ export const AdminProvider: React.FC = ({ ...other }) => {
   const setSelectedUser = useCallback(async (user: TableData) => {
     setUser(user)
     try {
-      const result = await ApplicationServiceAPI.getApplicationAPI()
+      const result = await ApplicationServiceAPI.getApplicationByIdAPI(user.id)
       setApplication(result)
     } catch (error) {
       console.error(error)

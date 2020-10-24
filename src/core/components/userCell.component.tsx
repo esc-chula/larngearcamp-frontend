@@ -1,10 +1,8 @@
 import React, { useState, useCallback } from "react"
-import { TableRow, TableCell, Collapse, IconButton } from "@material-ui/core"
+import { TableRow, TableCell, IconButton, Menu, MenuItem } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import TableData from "../models/tableData.model"
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown"
-import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp"
-import { CheckListComponent } from "./checkList.component"
+import MoreVertIcon from "@material-ui/icons/MoreVert"
 import { useAdminContext } from "../providers/admin.provider"
 import { Link as ScrollLink } from "react-scroll"
 
@@ -37,12 +35,16 @@ const useStyles = makeStyles(theme => ({
 
 const UserCellComponent: React.FC<UserCellProps> = ({ content }) => {
   const classes = useStyles()
-  const [open, setOpen] = useState(false)
   const { setSelectedUser } = useAdminContext()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
-  const handleClick = useCallback(() => {
-    setOpen(!open)
-  }, [open])
+  const handleMenu = useCallback((event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }, [])
+
+  const handleClose = useCallback(() => {
+    setAnchorEl(null)
+  }, [])
 
   return (
     <>
@@ -65,18 +67,14 @@ const UserCellComponent: React.FC<UserCellProps> = ({ content }) => {
         <TableCell align="right">{content.documentStatus}</TableCell>
         <TableCell align="right">{content.applicantStatus}</TableCell>
         <TableCell align="right">
-          <IconButton aria-label="expand row" size="small" onClick={handleClick}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          <IconButton aria-label="expand row" size="small" onClick={handleMenu}>
+            <MoreVertIcon />
           </IconButton>
         </TableCell>
       </TableRow>
-      <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <CheckListComponent />
-          </Collapse>
-        </TableCell>
-      </TableRow>
+      <Menu id="fade-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem onClick={handleClose /* Delete Account */}>Delete</MenuItem>
+      </Menu>
     </>
   )
 }

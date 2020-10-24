@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import { Container, Grid, Paper, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { SearchComponent } from "../../core/components/search.component"
@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
 const AdminDashboardModule = () => {
   const classes = useStyles()
   const { selectedUser, modifiedUsersData, applicationProfilePart, applicationAnswerPart, applicationDocumentPart } = useAdminContext()
+  const waitForReview = useMemo(() => modifiedUsersData?.filter(value => value.documentStatus === "REVIEW").length, [modifiedUsersData])
 
   return (
     <Container maxWidth="lg">
@@ -47,7 +48,7 @@ const AdminDashboardModule = () => {
             <Typography variant="body1" color="primary">
               จำนวนผู้สมัครที่รอตรวจเอกสาร
             </Typography>
-            <Typography variant="h4">14 คน</Typography>
+            <Typography variant="h4">{waitForReview}</Typography>
           </Paper>
         </Grid>
       </Grid>

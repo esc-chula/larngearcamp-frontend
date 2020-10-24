@@ -7,6 +7,7 @@ export interface ApplicationService {
   createApplicationAPI: () => Promise<void>
   uploadDocumentAPI: (data: FormData, type: DocumentType) => Promise<FileDTO>
   getApplicationAPI: () => Promise<ApplicationDTO>
+  getApplicationByIdAPI: (id: string) => Promise<ApplicationDTO>
   updateApplicationAPI: (application: UpdateApplicationDTO) => Promise<ApplicationDTO>
   finalizeApplicationAPI: () => Promise<{ message: string; application: ApplicationInfo }>
 }
@@ -23,6 +24,10 @@ const getApplicationAPI = async (): Promise<ApplicationDTO> => {
   return (await httpClient.get(`/application`)).data
 }
 
+const getApplicationByIdAPI = async (id: string): Promise<ApplicationDTO> => {
+  return (await httpClient.get(`/applications/${id}`)).data
+}
+
 const updateApplicationAPI = async (application: UpdateApplicationDTO): Promise<ApplicationDTO> => {
   return (await httpClient.patch(`/application`, application)).data
 }
@@ -35,6 +40,7 @@ const ApplicationServiceAPI: ApplicationService = {
   createApplicationAPI,
   uploadDocumentAPI,
   getApplicationAPI,
+  getApplicationByIdAPI,
   updateApplicationAPI,
   finalizeApplicationAPI
 }

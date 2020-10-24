@@ -10,6 +10,7 @@ interface UserDTO {
     last: string
   }
   application?: {
+    userId: string
     code: string
     picture: string
     applicationState: ApplicationState

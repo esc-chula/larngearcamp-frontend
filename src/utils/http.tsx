@@ -2,12 +2,12 @@ import axios from "axios"
 
 const httpClient = axios.create({
   baseURL: process.env.REACT_APP_API_SERVER,
-  timeout: 10000
+  timeout: 30000
 })
 
 const authHttpClient = axios.create({
   baseURL: process.env.REACT_APP_API_SERVER,
-  timeout: 10000
+  timeout: 30000
 })
 
 async function httpGet<T>(url: string, params?: any): Promise<T> {
