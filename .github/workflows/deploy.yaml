@@ -57,7 +57,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY}}
-          passphase: ${{ secrets.SSH_PASSPHASE }}
+          passphrase: ${{ secrets.SSH_PASSPRHASE }}
           script: |
             cd larngearcamp
             docker pull ${{ env.IMAGE_REPO }}:${{ steps.meta.outputs.version }}
