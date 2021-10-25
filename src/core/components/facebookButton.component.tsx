@@ -40,15 +40,18 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
   return <Button {...props} disabled={loading} onClick={handleClick} />
 }
 
-const FacebookButtonComponentWithStyles = withStyles({
+const FacebookButtonComponentWithStyles = withStyles(theme => ({
   root: {
     background: "#1877F2",
     borderRadius: "40px",
     color: "white",
+    paddingLeft: theme.spacing(5),
+    display: "flex",
+    justifyContent: "flex-start",
     "&:hover": {
       background: "#004cbe"
     }
   }
-})(FacebookButtonComponent)
+}))(FacebookButtonComponent)
 
 export { FacebookButtonComponentWithStyles as FacebookButtonComponent }

@@ -14,6 +14,9 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
+import facebookIcon from "../assets/images/icon/facebook-icon.svg"
+import googleIcon from "../assets/images/icon/google-icon.svg"
+import { GoogleButtonComponent } from "../core/components/googleButton.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -65,6 +68,16 @@ const useStyles = makeStyles(theme => ({
   },
   fb: {
     marginTop: theme.spacing(1)
+  },
+  fbIcon: {
+    marginRight: theme.spacing(4),
+    width: "10px"
+  },
+  registerPaper: {
+    borderRadius: "5px"
+  },
+  googleIcon: {
+    marginRight: theme.spacing(3.5)
   }
 }))
 
@@ -91,7 +104,7 @@ const LoginModule = () => {
       }
     }, [getValues, history, setError, login])
   )
-  const closed = new Date() >= new Date("2020-10-21T00:00:00+07:00")
+  const closed = new Date() >= new Date("2021-10-30T00:00:00+07:00")
 
   return (
     <>
@@ -130,23 +143,32 @@ const LoginModule = () => {
           </form>
           <div className={classes.divider}>OR</div>
           <FacebookButtonComponent variant="contained" color="primary" className={classes.fb}>
-            เข้าสู่ระบบด้วยบัญชี Facebook
+            <img src={facebookIcon} alt="" className={classes.fbIcon} />
+            <Typography variant="subtitle1">เข้าสู่ระบบด้วยบัญชี Facebook</Typography>
           </FacebookButtonComponent>
+          <GoogleButtonComponent>
+            <img src={googleIcon} alt="" className={classes.googleIcon} />
+            <Typography variant="subtitle1">เข้าสู่ระบบด้วยบัญชี Google</Typography>
+          </GoogleButtonComponent>
         </CardComponent>
       </FormProvider>
 
-      {closed ? "" : <Box mt={4}>
-        <Container maxWidth="sm">
-          <Paper elevation={0}>
-            <Box display="flex" alignItems="center" py={2} px={5}>
-              <div> ยังไม่มีบัญชีลานเกียร์?</div>
-              <Link className={classes.rightAlign} to="/register">
-                ลงทะเบียน
-              </Link>
-            </Box>
-          </Paper>
-        </Container>
-      </Box>}
+      {closed ? (
+        ""
+      ) : (
+        <Box mt={4}>
+          <Container maxWidth="sm">
+            <Paper elevation={0} className={classes.registerPaper}>
+              <Box display="flex" alignItems="center" py={2} px={5}>
+                <div>ยังไม่มีบัญชีลานเกียร์?</div>
+                <Link className={classes.rightAlign} to="/register">
+                  ลงทะเบียน
+                </Link>
+              </Box>
+            </Paper>
+          </Container>
+        </Box>
+      )}
     </>
   )
 }
