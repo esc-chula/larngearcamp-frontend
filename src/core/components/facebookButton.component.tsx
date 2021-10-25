@@ -1,14 +1,29 @@
 import React, { useCallback, useState } from "react"
 import { withStyles } from "@material-ui/core/styles"
-import { Button, ButtonProps } from "@material-ui/core"
+import { Button, ButtonProps, makeStyles, Typography } from "@material-ui/core"
 import { waitFbInit, fbLogin, fbLogout } from "../services/facebook.service"
 import { useAuthContext } from "../providers/auth.provider"
 import { useHistory } from "react-router-dom"
 import { useGlobalContext } from "../providers/global.provider"
+import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
+
+const useStyle = makeStyles(theme => ({
+  fb: {
+    marginTop: theme.spacing(1)
+  },
+  fbIcon: {
+    marginRight: theme.spacing(4),
+    width: "10px"
+  },
+  capitalText: {
+    textTransform: "capitalize"
+  }
+}))
 
 const FacebookButtonComponent: React.FC<ButtonProps> = props => {
   const [loading, setLoading] = useState(false)
   const { loginFb } = useAuthContext()
+  const classes = useStyle()
   const history = useHistory()
   const { activeSnackBar } = useGlobalContext()
 
@@ -18,6 +33,7 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
     }
 
     setLoading(true)
+
     const fbResponse = (await waitFbInit) || (await fbLogin())
     if (fbResponse) {
       const { signedRequest } = fbResponse.authResponse
@@ -37,7 +53,14 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
     setLoading(false)
   }, [loading, loginFb, activeSnackBar, history])
 
-  return <Button {...props} disabled={loading} onClick={handleClick} />
+  return (
+    <Button {...props} disabled={loading} onClick={handleClick} className={`${props.className} ${classes.fb}`}>
+      <img src={facebookIcon} alt="" className={classes.fbIcon} />
+      <Typography variant="button" className={classes.capitalText}>
+        เข้าสู่ระบบด้วยบัญชี Facebook
+      </Typography>
+    </Button>
+  )
 }
 
 const FacebookButtonComponentWithStyles = withStyles(theme => ({

@@ -14,8 +14,6 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
-import facebookIcon from "../assets/images/icon/facebook-icon.svg"
-import googleIcon from "../assets/images/icon/google-icon.svg"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
 
 const useStyles = makeStyles(theme => ({
@@ -66,18 +64,8 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.main
     }
   },
-  fb: {
-    marginTop: theme.spacing(1)
-  },
-  fbIcon: {
-    marginRight: theme.spacing(4),
-    width: "10px"
-  },
   registerPaper: {
     borderRadius: "5px"
-  },
-  googleIcon: {
-    marginRight: theme.spacing(3.5)
   }
 }))
 
@@ -142,14 +130,8 @@ const LoginModule = () => {
             )}
           </form>
           <div className={classes.divider}>OR</div>
-          <FacebookButtonComponent variant="contained" color="primary" className={classes.fb}>
-            <img src={facebookIcon} alt="" className={classes.fbIcon} />
-            <Typography variant="subtitle1">เข้าสู่ระบบด้วยบัญชี Facebook</Typography>
-          </FacebookButtonComponent>
-          <GoogleButtonComponent>
-            <img src={googleIcon} alt="" className={classes.googleIcon} />
-            <Typography variant="subtitle1">เข้าสู่ระบบด้วยบัญชี Google</Typography>
-          </GoogleButtonComponent>
+          <FacebookButtonComponent variant="contained" color="primary"></FacebookButtonComponent>
+          <GoogleButtonComponent variant="contained" color="primary"></GoogleButtonComponent>
         </CardComponent>
       </FormProvider>
 
