@@ -14,6 +14,7 @@ import qualificationsConstant from "../core/constants/qualifications.constant"
 import carouselConstant from "../core/constants/carousel.constant"
 import { SafeArea } from "../core/components/safeArea.component"
 import HomeGallery from "../core/components/gallery.components"
+import galleryConstant from "../core/constants/gallery.constant"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -43,7 +44,7 @@ const HomeModule: React.FC = () => {
       <HomeCarousel autoPlay={true} autoPlaySpeed={3000} swipeable gradientPercent={{ white: 3, fade: 15 }} images={carouselConstant} />
       <HomeQualification className={classes.qualification} qualifications={qualificationsConstant} />
       <HomeTimeline className={classes.timeline} label={timelineConstant} />
-      <HomeGallery />
+      <HomeGallery images={galleryConstant} />
       <HomeAnnouce />
       <HomeFooter contacts={contactConstant} />
     </>

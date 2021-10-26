@@ -1,7 +1,17 @@
 import React, { useState } from "react"
 import { Button, makeStyles, Typography } from "@material-ui/core"
-import carouselConstant from "../constants/carousel.constant"
 import { grey } from "@material-ui/core/colors"
+
+interface IImage {
+  src: string
+  topic: string
+  description: string
+  alt?: string
+}
+
+interface HomeGalleryProps {
+  images: IImage[]
+}
 
 const useStyle = makeStyles(theme => ({
   root: {
@@ -20,7 +30,7 @@ const useStyle = makeStyles(theme => ({
   },
   descriptionRoot: {
     display: "flex",
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(8),
     justifyContent: "space-between",
     flexDirection: "column",
     maxWidth: "450px"
@@ -30,7 +40,9 @@ const useStyle = makeStyles(theme => ({
     marginBottom: theme.spacing(2)
   },
   image: {
-    width: "598px",
+    width: "100%",
+    maxWidth: "450px",
+    height: "auto",
     borderRadius: "20px"
   },
   button: {
@@ -51,15 +63,18 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-const HomeGallery: React.FC<{}> = () => {
+const HomeGallery: React.FC<HomeGalleryProps> = props => {
+  const { images } = props
+
   const [index, setIndex] = useState(1)
   const classes = useStyle()
+
   return (
     <div className={classes.root}>
       <Typography variant="h4" className={classes.galleryHeader}>
         Gallery
       </Typography>
-      {carouselConstant.map(({ src }, key) => (
+      {images.map(({ src }, key) => (
         <div key={key} className={classes.contentDiv} style={{ display: key !== index ? "none" : "flex" }}>
           <img className={classes.image} src={(src as unknown) as string} alt="Hello" />
           <div className={classes.descriptionRoot}>
