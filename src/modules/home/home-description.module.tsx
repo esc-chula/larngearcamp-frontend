@@ -16,17 +16,36 @@ const useStyle = makeStyles((theme: ITheme) => ({
     alignItems: "center",
     backgroundColor: "white",
     [theme.breakpoints.down("lg")]: {
-      flexDirection: "column-reverse",
-      rowGap: `${theme.spacing(4)}px`
+      flexDirection: "column-reverse"
+    },
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(2)
     }
   },
-  description: { lineHeight: pxToRem(42), marginTop: theme.spacing(4) },
+  description: {
+    lineHeight: pxToRem(42),
+    marginTop: theme.spacing(4),
+    [theme.breakpoints.down("sm")]: {
+      lineHeight: pxToRem(35),
+      marginTop: theme.spacing(2)
+    }
+  },
+  title: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2rem"
+    }
+  },
   descriptionContainer: {
     maxWidth: "513px",
     flex: 1,
     [theme.breakpoints.down("lg")]: {
       maxWidth: "80%",
-      textAlign: "center"
+      textAlign: "center",
+      marginTop: theme.spacing(4)
+    },
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "90%",
+      marginTop: theme.spacing(2)
     }
   },
   imageContainer: {
@@ -40,12 +59,14 @@ const HomeLarngearDescription: React.FC<HomeContainerProps> = props => {
   return (
     <div className={classes.container}>
       <div className={classes.descriptionContainer}>
-        <Typography variant="h1">ค่ายลานเกียร์คืออะไร?</Typography>
+        <Typography variant="h1" className={classes.title}>
+          ค่ายลานเกียร์คืออะไร?
+        </Typography>
         <Typography variant="subtitle2" className={classes.description}>
           ค่ายลานเกียร์เป็นค่ายที่จัดขึ้นในเดือนมกราคมของทุกปีโดยเปิดโอกาสให้
           นักเรียนระดับชั้นมัธยมศึกษาตอนปลายทั่วประเทศที่สนใจศึกษาต่อในสาขาวิศวกรรมศาสตร์แต่ยังไม่มั่นใจหรือมีข้อมูลไม่เพียงพอ ได้เข้ามาสัมผัสการ
           เรียนการสอนในวิชาปฏิบัติการจริงรวมไปถึงการทำกิจกรรมต่าง ๆ ที่สอดแทรกเนื้อหาเกี่ยวกับงานทางวิศวกรรมเพื่อเป็นข้อมูลประกอบการ
-          ตัดสินใจในการเลือกศึกษาต่อในระดับอุดมศึกษา?
+          ตัดสินใจในการเลือกศึกษาต่อในระดับอุดมศึกษา
         </Typography>
       </div>
       <div className={classes.imageContainer}>
