@@ -8,8 +8,7 @@ const useStyle = makeStyles(theme => ({
   title: {
     marginBottom: "50px",
     fontWeight: 400,
-    fontSize: "4rem",
-    fontFamily: "Raleway"
+    fontSize: "3rem"
   },
   endCard: {
     backgroundColor: theme.palette.primary.main,
@@ -26,7 +25,7 @@ const HomeTimeline: React.FC<TimelineProps & React.HTMLAttributes<HTMLDivElement
   return (
     <SafeArea {...props}>
       <Typography variant="h2" align="center" className={classes.title}>
-        TIMELINE
+        กำหนดการ
       </Typography>
       <TimelineDisplay includeFinalLine={true} label={props.label} />
       <div className={classes.endCard}>

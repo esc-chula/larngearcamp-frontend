@@ -1,6 +1,7 @@
 import React from "react"
 import { Box, BoxProps, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { TimelineModel } from "../constants/timeline.constant"
 
 const useStyle = makeStyles(theme => ({
   container: {
@@ -30,7 +31,6 @@ const useStyle = makeStyles(theme => ({
     textAlign: "center"
   },
   hline: {
-    margin: "8px 0 8px 0",
     width: "0px",
     paddingLeft: "1px",
     paddingRight: "1px",
@@ -51,13 +51,8 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
-export interface TimelineLabel {
-  left: string
-  right: string
-}
-
 export interface TimelineProps extends BoxProps {
-  label: TimelineLabel[]
+  label: TimelineModel[]
   startNumber?: number
   includeFinalLine?: boolean
 }
@@ -69,18 +64,14 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
 
   return (
     <Box className={`${classes.container} ${rest.className}`} {...rest}>
-      {label.map(({ left, right }, i, arr) => (
+      {label.map(({ title, duration }, i, arr) => (
         <React.Fragment key={i}>
           <Typography variant="body2" className={classes.leftText}>
-            {left}
+            {duration}
           </Typography>
 
           <div className={classes.middleContainer}>
-            <div className={classes.numberCircle}>
-              <Typography variant="body2" className={classes.numberText}>
-                {(startNumber ?? 1) + i}
-              </Typography>
-            </div>
+            <div className={classes.numberCircle} />
             {(includeFinalLine || i < arr.length - 1) && (
               <Box>
                 <div className={classes.hline} />
@@ -89,7 +80,7 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
           </div>
 
           <Typography variant="h6" className={classes.rightText}>
-            {right}
+            {title}
           </Typography>
         </React.Fragment>
       ))}
