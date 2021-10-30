@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   registerPaper: {
-    borderRadius: "5px"
+    borderRadius: "10px"
   }
 }))
 
