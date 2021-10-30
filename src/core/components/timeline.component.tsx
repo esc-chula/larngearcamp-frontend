@@ -66,10 +66,6 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
     <Box className={`${classes.container} ${rest.className}`} {...rest}>
       {label.map(({ title, duration }, i, arr) => (
         <React.Fragment key={i}>
-          <Typography variant="body2" className={classes.leftText}>
-            {duration}
-          </Typography>
-
           <div className={classes.middleContainer}>
             <div className={classes.numberCircle} />
             {(includeFinalLine || i < arr.length - 1) && (
@@ -78,10 +74,12 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
               </Box>
             )}
           </div>
-
-          <Typography variant="h6" className={classes.rightText}>
-            {title}
-          </Typography>
+          <React.Fragment>
+            <Typography variant="h6" className={classes.rightText}>
+              {title}
+            </Typography>
+            <Typography variant="body2">{duration}</Typography>
+          </React.Fragment>
         </React.Fragment>
       ))}
       {/*
