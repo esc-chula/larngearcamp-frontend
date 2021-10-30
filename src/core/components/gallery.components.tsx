@@ -113,7 +113,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
       </Typography>
       <div className={classes.galleryRoot}>
         <Slider {...settings}>
-          {images.map(({ src }, key) => (
+          {images.map(({ src, topic, description }, key) => (
             <div>
               <div key={key} className={classes.contentDiv}>
                 <LazyLoad height={336} resize={true}>
@@ -122,11 +122,10 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                 <div className={classes.descriptionRoot}>
                   <div>
                     <div className={classes.imageTopic}>
-                      <Typography variant="h4">ค่ายที่ไม่เหมือนใคร และไม่มีใครเหมือน !</Typography>
+                      <Typography variant="h4">{topic}</Typography>
                     </div>
                     <Typography variant="h6" className={classes.description}>
-                      หากน้อง ๆ มีความฝันและอยากมาร่วมสัมผัสบรรยากาศของวิศวฯ จุฬาฯ โดยตรง ค่ายลานเกียร์ยินดีต้อนรับน้อง ๆ ทุกคนเข้าสู่บ้านของเรา
-                      อย่ารอช้า ! ประสบการณ์และความสนุกอันล้ำค่ากำลังรออยู่ :3
+                      {description}
                     </Typography>
                   </div>
                   <Button variant="contained" color="primary" className={classes.button}>
