@@ -61,16 +61,19 @@ const useStyle = makeStyles(theme => ({
   },
   image: {
     width: "100%",
-    maxWidth: "470px",
-    height: "auto",
-    borderRadius: "20px"
+    borderRadius: "20px",
+    [theme.breakpoints.up("sm")]: {
+      maxWidth: "550px",
+      objectFit: "cover",
+      height: "336px"
+    }
   },
   button: {
     marginTop: theme.spacing(3),
-    padding: theme.spacing(1, 6),
+    padding: theme.spacing(1, 3),
     width: "100%",
     "&>*": {
-      fontSize: "1.1rem"
+      fontSize: "1rem"
     },
     "&:disabled": {
       backgroundColor: grey[400],
@@ -121,10 +124,10 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                       หากน้อง ๆ มีความฝันและอยากมาร่วมสัมผัสบรรยากาศของวิศวฯ จุฬาฯ โดยตรง ค่ายลานเกียร์ยินดีต้อนรับน้อง ๆ ทุกคนเข้าสู่บ้านของเรา
                       อย่ารอช้า ! ประสบการณ์และความสนุกอันล้ำค่ากำลังรออยู่ :3
                     </Typography>
-                    <Button variant="contained" color="primary" className={classes.button}>
-                      สมัครเลย! วันนี้ - 18 ตุลา 2021
-                    </Button>
                   </div>
+                  <Button variant="contained" color="primary" className={classes.button}>
+                    สมัครเลย! วันนี้ - 18 ตุลา 2021
+                  </Button>
                 </div>
               </div>
             </div>
