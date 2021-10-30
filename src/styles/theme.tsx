@@ -65,83 +65,71 @@ const theme = createMuiTheme({
     ].join(","),
     fontSize: 14,
     h1: {
-      fontWeight: 300,
-      fontSize: "6rem",
-      lineHeight: 1.167,
-      letterSpacing: "-0.01562em"
+      fontWeight: 400,
+      fontSize: "3rem",
+      lineHeight: "3rem"
     },
     h2: {
-      fontWeight: 300,
-      fontSize: "3.75rem",
-      lineHeight: 1.2,
-      letterSpacing: "-0.00833em"
+      fontWeight: 400,
+      fontSize: "2.25rem",
+      lineHeight: "2.25rem"
     },
     h3: {
       fontWeight: 400,
-      fontSize: "3rem",
-      lineHeight: 1.167,
-      letterSpacing: "0em"
+      fontSize: "2rem",
+      lineHeight: "2rem"
     },
     h4: {
-      fontWeight: 400,
-      fontSize: "2.125rem",
-      lineHeight: 1.235,
-      letterSpacing: "0.00735em"
+      fontWeight: 500,
+      fontSize: "1.875rem",
+      lineHeight: "2.803rem"
     },
     h5: {
-      fontWeight: 400,
-      fontSize: "1.5rem",
-      lineHeight: 1.334,
-      letterSpacing: "0em"
+      fontWeight: 200,
+      fontSize: "1.75rem",
+      lineHeight: "2.616rem"
     },
     h6: {
-      fontWeight: 500,
-      fontSize: "1.25rem",
-      lineHeight: 1.6,
-      letterSpacing: "0.0075em"
+      fontWeight: 200,
+      fontSize: "1.5rem",
+      lineHeight: "2.243rem"
     },
     subtitle1: {
       fontWeight: 400,
-      fontSize: "1rem",
-      lineHeight: 1.75,
-      letterSpacing: "0.00938em"
+      fontSize: "1.25rem",
+      lineHeight: "1.875rem"
     },
     subtitle2: {
-      fontWeight: 500,
-      fontSize: "0.875rem",
-      lineHeight: 1.57,
-      letterSpacing: "0.00714em"
+      fontWeight: 300,
+      fontSize: "1.125rem",
+      lineHeight: "1.682rem"
     },
     body1: {
       fontWeight: 400,
       fontSize: "1rem",
-      lineHeight: 1.5,
-      letterSpacing: "0.00938em"
+      lineHeight: "1.495rem"
     },
     body2: {
       fontWeight: 400,
       fontSize: "0.875rem",
-      lineHeight: 1.43,
-      letterSpacing: "0.01071em"
+      lineHeight: "1.308rem"
     },
     button: {
-      fontWeight: 500,
-      fontSize: "1rem",
-      lineHeight: 1.75,
-      letterSpacing: "0.02857em",
+      fontWeight: 300,
+      fontSize: "1.125rem",
+      lineHeight: "1.682rem",
       textTransform: "uppercase"
     },
     caption: {
       fontWeight: 400,
-      fontSize: "0.75rem",
-      lineHeight: 1.66,
-      letterSpacing: "0.03333em"
+      fontSize: "0.656rem",
+      lineHeight: "1.121rem"
     },
     overline: {
       fontWeight: 400,
-      fontSize: "0.75rem",
-      lineHeight: 2.66,
-      letterSpacing: "0.08333em",
+      fontSize: "0.656rem",
+      lineHeight: "1.121rem",
+      letterSpacing: "10%",
       textTransform: "uppercase"
     }
   },
