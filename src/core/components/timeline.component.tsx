@@ -63,6 +63,8 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
   const classes = useStyle()
 
   return (
+    <div>timeline</div>
+    /*
     <Box className={`${classes.container} ${rest.className}`} {...rest}>
       {label.map(({ title, duration }, i, arr) => (
         <React.Fragment key={i}>
@@ -82,7 +84,6 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
           </React.Fragment>
         </React.Fragment>
       ))}
-      {/*
       {props.label.map(({ left, right }, i, arr) => (
         <div key={i}>
           <div className={classes.line}>
@@ -101,7 +102,7 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
           {(props.includeFinalLine || i < arr.length - 1) && <div className={classes.hline} />}
         </div>
       ))}
-      */}
     </Box>
+      */
   )
 }
