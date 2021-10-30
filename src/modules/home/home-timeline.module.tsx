@@ -27,15 +27,7 @@ const HomeTimeline: React.FC<TimelineProps & React.HTMLAttributes<HTMLDivElement
       <Typography variant="h2" align="center" className={classes.title}>
         กำหนดการ
       </Typography>
-      <TimelineDisplay includeFinalLine={true} label={props.label} />
-      <div className={classes.endCard}>
-        <Typography variant="h6" className="kanit">
-          ค่ายลานเกียร์ครั้งที่ 20
-        </Typography>
-        <Typography variant="subtitle1" className="kanit">
-          8 - 11 มกราคม 2564
-        </Typography>
-      </div>
+      <TimelineDisplay label={props.label} />
     </SafeArea>
   )
 }
