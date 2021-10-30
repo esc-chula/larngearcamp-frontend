@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import { Button, makeStyles, Typography } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import Slider, { Settings } from "react-slick"
 
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import LazyLoad from "react-lazyload"
 
 interface IImage {
   src: string
@@ -47,7 +48,8 @@ const useStyle = makeStyles(theme => ({
     flexDirection: "column",
     maxWidth: "470px",
     [theme.breakpoints.down("md")]: {
-      marginTop: theme.spacing(3)
+      marginTop: theme.spacing(3),
+      marginLeft: theme.spacing(0)
     }
   },
   imageTopic: {
@@ -114,7 +116,9 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
           {images.map(({ src }, key) => (
             <div>
               <div key={key} className={classes.contentDiv}>
-                <img className={classes.image} src={(src as unknown) as string} alt="Hello" />
+                <LazyLoad resize={true}>
+                  <img className={classes.image} src={(src as unknown) as string} alt="Hello" />
+                </LazyLoad>
                 <div className={classes.descriptionRoot}>
                   <div>
                     <div className={classes.imageTopic}>
