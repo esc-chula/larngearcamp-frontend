@@ -116,7 +116,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
           {images.map(({ src }, key) => (
             <div>
               <div key={key} className={classes.contentDiv}>
-                <LazyLoad resize={true}>
+                <LazyLoad height={336} resize={true}>
                   <img className={classes.image} src={(src as unknown) as string} alt="Hello" />
                 </LazyLoad>
                 <div className={classes.descriptionRoot}>
