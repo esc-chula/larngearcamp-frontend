@@ -55,7 +55,7 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
 
   return (
     <Button {...props} disabled={loading} onClick={handleClick} className={`${props.className} ${classes.fb}`}>
-      <img src={facebookIcon} alt="" className={classes.fbIcon} />
+      <img src={facebookIcon} alt="facebookIcon" className={classes.fbIcon} />
       <Typography variant="button" className={classes.capitalText}>
         เข้าสู่ระบบด้วยบัญชี Facebook
       </Typography>

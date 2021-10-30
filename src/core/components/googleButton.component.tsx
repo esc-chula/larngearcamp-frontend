@@ -16,7 +16,7 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
   const classes = useStyle()
   return (
     <Button {...props}>
-      <img src={googleIcon} alt="" className={classes.googleIcon} />
+      <img src={googleIcon} alt="googleIcon" className={classes.googleIcon} />
       <Typography variant="button" className={classes.capitalText}>
         เข้าสู่ระบบด้วยบัญชี Google
       </Typography>
