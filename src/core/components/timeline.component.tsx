@@ -2,52 +2,20 @@ import React from "react"
 import { Box, BoxProps, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { TimelineModel } from "../constants/timeline.constant"
+import { theme } from "../../styles/theme"
+import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from "@material-ui/lab"
 
 const useStyle = makeStyles(theme => ({
-  container: {
-    padding: theme.spacing(0, 5),
-    display: "inline-grid",
-    gridTemplateColumns: "1fr min-content 1fr",
-    margin: "auto"
-  },
-  middleContainer: {
-    display: "inline-grid",
-    gridTemplateColumns: "min-content",
-    gridTemplateRows: "max-content 1fr",
-    marginLeft: "min(3.7vw, 37px)",
-    marginRight: "min(3.2vw, 32px)",
-    justifyItems: "center"
-  },
-  numberCircle: {
-    backgroundColor: theme.palette.primary.main,
-    width: "32px",
-    height: "32px",
-    borderRadius: "50%"
-  },
-  numberText: {
-    lineHeight: "32px",
-    width: "32px",
-    color: "white",
-    textAlign: "center"
-  },
-  hline: {
-    width: "0px",
-    paddingLeft: "1px",
-    paddingRight: "1px",
-    height: "48px",
-    backgroundColor: "#BDBDBD"
-  },
-  leftText: {
-    textAlign: "right",
-    color: "#828282",
-    lineHeight: "32px",
-    fontSize: `min(4.425vw, ${theme.typography.body2.fontSize})`,
-    fontWeight: "normal"
-  },
-  rightText: {
+  timelineContent: {
     textAlign: "left",
-    lineHeight: "32px",
-    fontSize: `min(5.9vw, ${theme.typography.h6.fontSize})`
+    paddingTop: "0"
+  },
+  timelineDot: {
+    margin: "0",
+    width: "32px",
+    aspectRatio: "1",
+    padding: "0",
+    backgroundColor: theme.palette.primary.main
   }
 }))
 
@@ -63,7 +31,19 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
   const classes = useStyle()
 
   return (
-    <div>timeline</div>
+    <Timeline>
+      {label.map(({ duration, title }, index) => {
+        return (
+          <TimelineItem>
+            <TimelineSeparator>
+              <TimelineDot className={classes.timelineDot} />
+              {index < label.length - 1 && <TimelineConnector />}
+            </TimelineSeparator>
+            <TimelineContent className={classes.timelineContent}>{title}</TimelineContent>
+          </TimelineItem>
+        )
+      })}
+    </Timeline>
     /*
     <Box className={`${classes.container} ${rest.className}`} {...rest}>
       {label.map(({ title, duration }, i, arr) => (
