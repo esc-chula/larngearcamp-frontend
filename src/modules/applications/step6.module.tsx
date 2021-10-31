@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { useGlobalContext } from "../../core/providers/global.provider"
 import { useAuthContext } from "../../core/providers/auth.provider"
+import { AxiosError } from "axios"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -38,7 +39,7 @@ const ApplicationStepSixModule: React.FC = () => {
       } catch (error) {
         activeSnackBar({
           type: "error",
-          message: error.response?.data.message
+          message: (error as AxiosError).response?.data.message
         })
       }
     },

@@ -14,6 +14,7 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
+import { AxiosError } from "axios"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -86,7 +87,7 @@ const LoginModule = () => {
       } catch (error) {
         setError("validate", {
           type: "validate",
-          message: error.response.data.message
+          message: (error as AxiosError).response?.data.message
         })
       }
     }, [getValues, history, setError, login])
@@ -135,18 +136,22 @@ const LoginModule = () => {
         </CardComponent>
       </FormProvider>
 
-      {closed ? "" : <Box mt={4}>
-        <Container maxWidth="sm">
-          <Paper elevation={0}>
-            <Box display="flex" alignItems="center" py={2} px={5}>
-              <div> ยังไม่มีบัญชีลานเกียร์?</div>
-              <Link className={classes.rightAlign} to="/register">
-                ลงทะเบียน
-              </Link>
-            </Box>
-          </Paper>
-        </Container>
-      </Box>}
+      {closed ? (
+        ""
+      ) : (
+        <Box mt={4}>
+          <Container maxWidth="sm">
+            <Paper elevation={0}>
+              <Box display="flex" alignItems="center" py={2} px={5}>
+                <div> ยังไม่มีบัญชีลานเกียร์?</div>
+                <Link className={classes.rightAlign} to="/register">
+                  ลงทะเบียน
+                </Link>
+              </Box>
+            </Paper>
+          </Container>
+        </Box>
+      )}
     </>
   )
 }
