@@ -40,6 +40,10 @@ const useStyle = makeStyles(theme => ({
     padding: "0",
     backgroundColor: theme.palette.primary.main
   },
+  dotCurrent: {
+    backgroundColor: "transparent",
+    border: `solid 4px ${theme.palette.primary.main}`
+  },
   timelineConnector: {
     width: "4px",
     height: "90px",
@@ -47,6 +51,9 @@ const useStyle = makeStyles(theme => ({
   },
   timelineOppositeContent: {
     display: "none"
+  },
+  inactive: {
+    backgroundColor: "#BFBFBF"
   }
 }))
 
@@ -57,7 +64,7 @@ export interface TimelineProps extends BoxProps {
 }
 
 export const TimelineDisplay: React.FC<TimelineProps> = props => {
-  const { label, startNumber, includeFinalLine, ...rest } = props
+  const { label } = props
 
   const classes = useStyle()
 
@@ -68,8 +75,8 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
           <TimelineItem>
             <TimelineOppositeContent className={classes.timelineOppositeContent} />
             <TimelineSeparator className={classes.timelineSeparator}>
-              <TimelineDot className={classes.timelineDot} />
-              {index < label.length - 1 && <TimelineConnector className={classes.timelineConnector} />}
+              <TimelineDot className={`${classes.timelineDot}`} />
+              {index < label.length - 1 && <TimelineConnector className={`${classes.timelineConnector}`} />}
             </TimelineSeparator>
             <TimelineContent className={classes.timelineContent}>
               <Typography className={classes.eventTitle}>{title}</Typography>
@@ -79,45 +86,5 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
         )
       })}
     </Timeline>
-    /*
-    <Box className={`${classes.container} ${rest.className}`} {...rest}>
-      {label.map(({ title, duration }, i, arr) => (
-        <React.Fragment key={i}>
-          <div className={classes.middleContainer}>
-            <div className={classes.numberCircle} />
-            {(includeFinalLine || i < arr.length - 1) && (
-              <Box>
-                <div className={classes.hline} />
-              </Box>
-            )}
-          </div>
-          <React.Fragment>
-            <Typography variant="h6" className={classes.rightText}>
-              {title}
-            </Typography>
-            <Typography variant="body2">{duration}</Typography>
-          </React.Fragment>
-        </React.Fragment>
-      ))}
-      {props.label.map(({ left, right }, i, arr) => (
-        <div key={i}>
-          <div className={classes.line}>
-            <Typography variant="body2" className={classes.NCLeftText + " kanit"}>
-              {left}
-            </Typography>
-            <div className={classes.numberCircle}></div>
-            <Typography variant="body2" className={classes.numberText + " kanit"}>
-              {(props.startNumber || 1) + i}
-            </Typography>
-            <Typography variant="h6" className={classes.NCRightText}>
-              {right}
-            </Typography>
-          </div>
-
-          {(props.includeFinalLine || i < arr.length - 1) && <div className={classes.hline} />}
-        </div>
-      ))}
-    </Box>
-      */
   )
 }
