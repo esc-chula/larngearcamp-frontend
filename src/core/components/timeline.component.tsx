@@ -5,7 +5,7 @@ import { TimelineModel } from "../constants/timeline.constant"
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator, TimelineOppositeContent } from "@material-ui/lab"
 import moment, { Moment } from "moment"
 import "moment/locale/th"
-import { ClassNameMap, CSSProperties } from "@material-ui/styles"
+import { CSSProperties } from "@material-ui/styles"
 
 const useStyle = makeStyles(theme => ({
   timeline: {
