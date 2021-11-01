@@ -3,6 +3,9 @@ import { BoxProps, Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { TimelineModel } from "../constants/timeline.constant"
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator, TimelineOppositeContent } from "@material-ui/lab"
+import moment, { Moment } from "moment"
+import "moment/locale/th"
+import { ClassNameMap, CSSProperties } from "@material-ui/styles"
 
 const useStyle = makeStyles(theme => ({
   timeline: {
@@ -40,7 +43,7 @@ const useStyle = makeStyles(theme => ({
     padding: "0",
     backgroundColor: theme.palette.primary.main
   },
-  dotCurrent: {
+  dotCurrentDate: {
     backgroundColor: "transparent",
     border: `solid 4px ${theme.palette.primary.main}`
   },
@@ -68,19 +71,42 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
 
   const classes = useStyle()
 
+  const currentDate = moment()
+
+  const isInactive = (endDate: Moment): CSSProperties | string => {
+    if (currentDate.isBefore(endDate)) return classes.inactive
+    return ""
+  }
+
+  const getDotStatus = (startDate: Moment, endDate: Moment): CSSProperties | string => {
+    if (currentDate.isBetween(startDate, endDate, undefined, "[]")) return classes.dotCurrentDate
+    return isInactive(endDate)
+  }
+
+  const toMoment = (date: string): Moment => {
+    return moment(date, "DD MMMM YYYY").subtract(543, "year")
+  }
+
   return (
     <Timeline className={classes.timeline}>
       {label.map(({ duration, title }, index) => {
+        const startDate = toMoment(duration.start)
+        const endDate = toMoment(duration.end)
+
         return (
           <TimelineItem>
             <TimelineOppositeContent className={classes.timelineOppositeContent} />
             <TimelineSeparator className={classes.timelineSeparator}>
-              <TimelineDot className={`${classes.timelineDot}`} />
-              {index < label.length - 1 && <TimelineConnector className={`${classes.timelineConnector}`} />}
+              <TimelineDot className={`${classes.timelineDot} ${getDotStatus(startDate, endDate)}`} />
+              {index < label.length - 1 && (
+                <TimelineConnector className={`${classes.timelineConnector} ${isInactive(toMoment(label[index + 1].duration.start))}`} />
+              )}
             </TimelineSeparator>
             <TimelineContent className={classes.timelineContent}>
               <Typography className={classes.eventTitle}>{title}</Typography>
-              <Typography className={classes.durationTitle}>{duration}</Typography>
+              <Typography className={classes.durationTitle}>
+                {startDate.isSame(endDate) ? duration.start : `${duration.start} - ${duration.end}`}
+              </Typography>
             </TimelineContent>
           </TimelineItem>
         )
