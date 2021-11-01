@@ -14,6 +14,7 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
+import { GoogleButtonComponent } from "../core/components/googleButton.component"
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -63,8 +64,8 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.primary.main
     }
   },
-  fb: {
-    marginTop: theme.spacing(1)
+  registerPaper: {
+    borderRadius: "10px"
   }
 }))
 
@@ -91,7 +92,7 @@ const LoginModule = () => {
       }
     }, [getValues, history, setError, login])
   )
-  const closed = new Date() >= new Date("2020-10-21T00:00:00+07:00")
+  const closed = new Date() >= new Date("2021-10-30T00:00:00+07:00")
 
   return (
     <>
@@ -129,24 +130,27 @@ const LoginModule = () => {
             )}
           </form>
           <div className={classes.divider}>OR</div>
-          <FacebookButtonComponent variant="contained" color="primary" className={classes.fb}>
-            เข้าสู่ระบบด้วยบัญชี Facebook
-          </FacebookButtonComponent>
+          <FacebookButtonComponent variant="contained" color="primary"></FacebookButtonComponent>
+          <GoogleButtonComponent variant="contained" color="primary"></GoogleButtonComponent>
         </CardComponent>
       </FormProvider>
 
-      {closed ? "" : <Box mt={4}>
-        <Container maxWidth="sm">
-          <Paper elevation={0}>
-            <Box display="flex" alignItems="center" py={2} px={5}>
-              <div> ยังไม่มีบัญชีลานเกียร์?</div>
-              <Link className={classes.rightAlign} to="/register">
-                ลงทะเบียน
-              </Link>
-            </Box>
-          </Paper>
-        </Container>
-      </Box>}
+      {closed ? (
+        ""
+      ) : (
+        <Box mt={4}>
+          <Container maxWidth="sm">
+            <Paper elevation={0} className={classes.registerPaper}>
+              <Box display="flex" alignItems="center" py={2} px={5}>
+                <div>ยังไม่มีบัญชีลานเกียร์?</div>
+                <Link className={classes.rightAlign} to="/register">
+                  ลงทะเบียน
+                </Link>
+              </Box>
+            </Paper>
+          </Container>
+        </Box>
+      )}
     </>
   )
 }
