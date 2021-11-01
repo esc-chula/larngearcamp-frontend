@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
+    borderRadius: "10px",
     "& > *:not(:last-child)": {
       marginBottom: theme.spacing(2)
     }
