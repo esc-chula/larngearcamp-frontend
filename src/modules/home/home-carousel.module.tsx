@@ -3,6 +3,7 @@ import Carousel, { CarouselProps, ResponsiveType, ArrowProps } from "react-multi
 import { makeStyles, Theme as DefaultTheme, useTheme } from "@material-ui/core/styles"
 import "@material-ui/core/"
 import { safeArea } from "../../core/components/safeArea.component"
+import LazyLoad from "react-lazyload"
 interface HomeCarouselProps extends Partial<CarouselProps> {
   gradientPercent: { white: number; fade: number }
   images: { src: string; alt?: string }[]
@@ -105,7 +106,9 @@ const HomeCarousel: React.FC<HomeCarouselProps> = props => {
         customRightArrow={<ArrowButton className={classes.rightArrow} direction="right" />}
         {...rest}>
         {props.images.map(({ src, alt }, index) => (
-          <img className={classes.img} src={src} alt={alt} key={index} />
+          <LazyLoad>
+            <img className={classes.img} src={src} alt={alt} key={index} />
+          </LazyLoad>
         ))}
       </Carousel>
     </div>

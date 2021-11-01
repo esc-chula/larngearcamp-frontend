@@ -1,9 +1,38 @@
-import { createMuiTheme } from "@material-ui/core/styles"
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme"
+import { IThemeOptions } from "./types"
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#941014"
+      light: "#C03A42",
+      main: "#941014",
+      dark: "#721C20"
+    },
+    gray: {
+      0: "#FFFFFF",
+      50: "#F2F2F2",
+      100: "#E4E4E4",
+      200: "#BFBFBF",
+      300: "#8C8C8C",
+      400: "#8C8C8C",
+      500: "#737373",
+      600: "#595959",
+      700: "#404040",
+      800: "#262626",
+      900: "#0D0D0D"
+    },
+    green: {
+      0: "#E9F3D5",
+      50: "#D0EBBA",
+      100: "#B1E19F",
+      200: "#8CD884",
+      300: "#6BCD74",
+      400: "#52C271",
+      500: "#39B774",
+      600: "#30A27E",
+      700: "#278D82",
+      800: "#206D77",
+      900: "#184960"
     },
     secondary: {
       main: "#333333"
@@ -36,83 +65,71 @@ const theme = createMuiTheme({
     ].join(","),
     fontSize: 14,
     h1: {
-      fontWeight: 300,
-      fontSize: "6rem",
-      lineHeight: 1.167,
-      letterSpacing: "-0.01562em"
+      fontWeight: 400,
+      fontSize: "3rem",
+      lineHeight: "3rem"
     },
     h2: {
-      fontWeight: 300,
-      fontSize: "3.75rem",
-      lineHeight: 1.2,
-      letterSpacing: "-0.00833em"
+      fontWeight: 400,
+      fontSize: "2.25rem",
+      lineHeight: "2.25rem"
     },
     h3: {
       fontWeight: 400,
-      fontSize: "3rem",
-      lineHeight: 1.167,
-      letterSpacing: "0em"
+      fontSize: "2rem",
+      lineHeight: "2rem"
     },
     h4: {
-      fontWeight: 400,
-      fontSize: "2.125rem",
-      lineHeight: 1.235,
-      letterSpacing: "0.00735em"
+      fontWeight: 500,
+      fontSize: "1.875rem",
+      lineHeight: "2.803rem"
     },
     h5: {
-      fontWeight: 400,
-      fontSize: "1.5rem",
-      lineHeight: 1.334,
-      letterSpacing: "0em"
+      fontWeight: 200,
+      fontSize: "1.75rem",
+      lineHeight: "2.616rem"
     },
     h6: {
-      fontWeight: 500,
-      fontSize: "1.25rem",
-      lineHeight: 1.6,
-      letterSpacing: "0.0075em"
+      fontWeight: 200,
+      fontSize: "1.5rem",
+      lineHeight: "2.243rem"
     },
     subtitle1: {
       fontWeight: 400,
-      fontSize: "1rem",
-      lineHeight: 1.75,
-      letterSpacing: "0.00938em"
+      fontSize: "1.25rem",
+      lineHeight: "1.875rem"
     },
     subtitle2: {
-      fontWeight: 500,
-      fontSize: "0.875rem",
-      lineHeight: 1.57,
-      letterSpacing: "0.00714em"
+      fontWeight: 300,
+      fontSize: "1.125rem",
+      lineHeight: "1.682rem"
     },
     body1: {
       fontWeight: 400,
       fontSize: "1rem",
-      lineHeight: 1.5,
-      letterSpacing: "0.00938em"
+      lineHeight: "1.495rem"
     },
     body2: {
       fontWeight: 400,
       fontSize: "0.875rem",
-      lineHeight: 1.43,
-      letterSpacing: "0.01071em"
+      lineHeight: "1.308rem"
     },
     button: {
-      fontWeight: 500,
-      fontSize: "1rem",
-      lineHeight: 1.75,
-      letterSpacing: "0.02857em",
+      fontWeight: 300,
+      fontSize: "1.125rem",
+      lineHeight: "1.682rem",
       textTransform: "uppercase"
     },
     caption: {
       fontWeight: 400,
-      fontSize: "0.75rem",
-      lineHeight: 1.66,
-      letterSpacing: "0.03333em"
+      fontSize: "0.656rem",
+      lineHeight: "1.121rem"
     },
     overline: {
       fontWeight: 400,
-      fontSize: "0.75rem",
-      lineHeight: 2.66,
-      letterSpacing: "0.08333em",
+      fontSize: "0.656rem",
+      lineHeight: "1.121rem",
+      letterSpacing: "10%",
       textTransform: "uppercase"
     }
   },
@@ -137,6 +154,6 @@ const theme = createMuiTheme({
       }
     }
   }
-})
+} as IThemeOptions)
 
 export { theme }
