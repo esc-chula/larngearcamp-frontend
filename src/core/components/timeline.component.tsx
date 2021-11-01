@@ -1,8 +1,7 @@
 import React from "react"
-import { Box, BoxProps, Typography } from "@material-ui/core"
+import { BoxProps } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { TimelineModel } from "../constants/timeline.constant"
-import { theme } from "../../styles/theme"
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from "@material-ui/lab"
 
 const useStyle = makeStyles(theme => ({
