@@ -1,51 +1,51 @@
 export interface TimelineModel {
   title: string
   duration: {
-    start: string
-    end: string
+    start: Date
+    end: Date
   }
 }
 
 const timelineConstant: Array<TimelineModel> = [
   {
     duration: {
-      start: "25 กันยายน 2563",
-      end: "20 ตุลาคม 2563"
+      start: new Date(2563, 9, 19),
+      end: new Date(2563, 10, 23)
     },
     title: "รับสมัคร"
   },
   {
     duration: {
-      start: "24 ตุลาคม 2563",
-      end: "24 ตุลาคม 2563"
+      start: new Date(2563, 10, 24),
+      end: new Date(2563, 10, 24)
     },
     title: "ประกาศผลผู้มีสิทธิ์สัมภาษณ์"
   },
   {
     duration: {
-      start: "31 ตุลาคม 2563",
-      end: "31 ตุลาคม 2563"
+      start: new Date(2563, 10, 31),
+      end: new Date(2563, 10, 31)
     },
     title: "สัมภาษณ์รอบกรุงเทพ"
   },
   {
     duration: {
-      start: "2 พฤศจิกายน 2563",
-      end: "8 พฤศจิกายน 2563"
+      start: new Date(2563, 11, 2),
+      end: new Date(2563, 11, 8)
     },
     title: "สัมภาษณ์รอบต่างจังหวัด"
   },
   {
     duration: {
-      start: "14 พฤศจิกายน 2563",
-      end: "14 พฤศจิกายน 2565"
+      start: new Date(2563, 11, 14),
+      end: new Date(2565, 11, 14)
     },
     title: "ประกาศรายชื่อผู้มีสิทธิ์เข้าร่วมค่าย"
   },
   {
     duration: {
-      start: "15 พฤศจิกายน 2565",
-      end: "19 ธันวาคม 2565"
+      start: new Date(2565, 12, 15),
+      end: new Date(2565, 12, 19)
     },
     title: "ยืนยันสิทธิ์การเข้าร่วมค่าย"
   }
