@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../utils/conversion"
 import { HomeContainerProps } from "./home-container.module"
 import { ITheme } from "../../styles/types"
-import tmp from "../../assets/images/description/tmp.png"
+import HomeDescriptionImage from "./home-description-image.module"
 
 const useStyle = makeStyles((theme: ITheme) => ({
   container: {
@@ -69,9 +69,7 @@ const HomeLarngearDescription: React.FC<HomeContainerProps> = props => {
           ตัดสินใจในการเลือกศึกษาต่อในระดับอุดมศึกษา
         </Typography>
       </div>
-      <div className={classes.imageContainer}>
-        <img src={tmp} alt="" />
-      </div>
+      <HomeDescriptionImage />
     </div>
   )
 }
