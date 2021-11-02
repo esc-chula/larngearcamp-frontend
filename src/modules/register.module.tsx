@@ -16,6 +16,8 @@ import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
 import { useGlobalContext } from "../core/providers/global.provider"
 import { AxiosError } from "axios"
+import { GoogleButtonComponent } from "../core/components/googleButton.component"
+
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -71,6 +73,9 @@ const useStyles = makeStyles(theme => ({
     "&:after": {
       background: theme.palette.primary.main
     }
+  },
+  registerPaper: {
+    borderRadius: "10px"
   }
 }))
 
@@ -114,6 +119,7 @@ const RegisterModule = () => {
           <FacebookButtonComponent variant="contained" color="primary">
             เข้าสู่ระบบด้วยบัญชี Facebook
           </FacebookButtonComponent>
+          <GoogleButtonComponent variant="contained" color="primary" />
 
           <div className={classes.divider}>OR</div>
 
@@ -134,7 +140,7 @@ const RegisterModule = () => {
 
       <Box mt={4}>
         <Container maxWidth="sm">
-          <Paper elevation={0}>
+          <Paper elevation={0} className={classes.registerPaper}>
             <Box display="flex" alignItems="center" py={2} px={5}>
               <div> สร้างบัญชีเรียบร้อยแล้ว?</div>
               <Link className={classes.rightAlign} to="/login">
