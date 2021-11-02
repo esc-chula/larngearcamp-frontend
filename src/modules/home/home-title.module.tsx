@@ -50,10 +50,13 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
       <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="80%">
         <Box textAlign="center" height="min-content">
           <Typography variant="h2" className={classes.title}>
-            <span className="big">L</span>ARNGEAR CAMP 20th
+            <span className="big">L</span>ARNGEAR CAMP 21th
           </Typography>
           <Typography variant="subtitle1" className={classes.subtitle}>
-            ค้นหาความเป็นวิศวกรด้วยมือของคุณเอง
+            ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
+          </Typography>
+          <Typography variant="body2" className={classes.subtitle}>
+            สมัครเลย ! วันนี้ - 8 ธันวาคม 2564
           </Typography>
           <Link to="/profile" className="no-underline" style={{ pointerEvents: shouldAnnounce ? "initial" : "none" }}>
             <Button variant="contained" color="primary" className={classes.button} disabled={!shouldAnnounce}>
