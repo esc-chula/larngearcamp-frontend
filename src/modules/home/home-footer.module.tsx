@@ -2,12 +2,17 @@ import React from "react"
 import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
+import instagramIcon from "../../assets/images/icon/instagram-icon.svg"
 import PhoneIcon from "@material-ui/icons/Phone"
 import { ContactModel } from "../../core/constants/contact.constant"
 import { SafeArea } from "../../core/components/safeArea.component"
 
 const FacebookIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
   return <img src={facebookIcon} alt="" {...props} />
+}
+
+const InstagramIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
+  return <img src={instagramIcon} alt="" {...props} />
 }
 
 const useStyles = makeStyles(theme => ({
@@ -89,6 +94,12 @@ const HomeFooter: React.FC<{ contacts: Array<ContactModel> }> = props => {
               <FacebookIcon className={classes.icon} />
               <a href="https://www.facebook.com/LARNGEARCAMP/" target="_blank" rel="noopener noreferrer" className={classes.link}>
                 LarnGear Camp
+              </a>
+            </div>
+            <div className={classes.inline}>
+              <InstagramIcon className={classes.icon} />
+              <a href="https://www.instagram.com/larngear_camp/" target="_blank" rel="noopener noreferrer" className={classes.link}>
+                larngear_camp
               </a>
             </div>
           </div>
