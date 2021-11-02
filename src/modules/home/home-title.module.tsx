@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 
 import landing1 from "../../assets/images/background/landing-1.png"
 import { safeArea } from "../../core/components/safeArea.component"
-// import { useAnnounceContext } from "../../core/providers/announce.provider"
 import { grey } from "@material-ui/core/colors"
 import { BsFacebook, BsInstagram } from "react-icons/bs"
 import { ITheme } from "../../styles/types"
@@ -76,8 +75,9 @@ const useStyle = makeStyles((theme: ITheme) => ({
 
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
-  // const { announceDate } = useAnnounceContext()
-  // const shouldAnnounce = new Date() > announceDate
+  const registerCloseDate = new Date("December 9, 2021 00:00:00 GMT+07:00")
+  const isRegisterClosed = new Date() > registerCloseDate
+
   return (
     <div className={classes.titleContainer}>
       <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="100%" minHeight="542px">
@@ -88,10 +88,9 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
           <Typography variant="h5" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
           </Typography>
-          <Link to="/profile" className="no-underline" /*style={{ pointerEvents: shouldAnnounce ? "initial" : "none" }}*/>
-            <Button variant="contained" color="primary" className={classes.button} /*disabled={!shouldAnnounce}*/>
-              {/* {shouldAnnounce ? "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" : "หมดเขตรับสมัคร"} */}
-              สมัครเลย! วันนี้ - 18 ตุลา 2021
+          <Link to="/profile" className="no-underline" style={{ pointerEvents: isRegisterClosed ? "none" : "initial" }}>
+            <Button variant="contained" color="primary" className={classes.button} disabled={isRegisterClosed}>
+              {isRegisterClosed ? "หมดเขตรับสมัคร" : "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"}
             </Button>
           </Link>
           <div className={classes.contactsContainer}>

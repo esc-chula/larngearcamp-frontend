@@ -26,11 +26,14 @@ const useStyle = makeStyles((theme: ITheme) => ({
     marginTop: theme.spacing(8),
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center",
-    gap: `${theme.spacing(4)}px`,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: theme.spacing(3),
+    justifyContent: "space-between",
+    maxWidth: "1020px",
+    gap: `${theme.spacing(6)}px`,
+    [theme.breakpoints.down("md")]: {
       gap: `${theme.spacing(2)}px`
+    },
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(3)
     }
   }
 }))
@@ -59,16 +62,19 @@ const useStyleItem = makeStyles(theme => ({
     backgroundColor: "white",
     boxShadow: "0px 100px 257px 0px #00000012",
     maxWidth: "486px",
-    width: "calc(50% - 48px)",
+    width: "calc(50% - 24px)",
     borderRadius: "10px",
     padding: theme.spacing(4),
     boxSizing: "border-box",
     alignItems: "center",
     [theme.breakpoints.down("md")]: {
-      width: "100%"
-    },
-    [theme.breakpoints.down("sm")]: {
+      maxWidth: "100%",
+      width: "100%",
       padding: theme.spacing(2)
+    },
+    "&:last-child": {
+      maxWidth: "1020px",
+      width: "100%"
     }
   },
   description: {
