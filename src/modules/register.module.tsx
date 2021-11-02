@@ -15,7 +15,9 @@ import UserServiceAPI from "../core/services/users.service"
 import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
 import { useGlobalContext } from "../core/providers/global.provider"
+import { AxiosError } from "axios"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
+
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -96,7 +98,7 @@ const RegisterModule = () => {
       } catch (error) {
         activeSnackBar({
           type: "error",
-          message: error.response?.data.errors.reduce((prev: any, curr: any) => prev + " " + curr.msg, "")
+          message: (error as AxiosError).response?.data.errors.reduce((prev: any, curr: any) => prev + " " + curr.msg, "")
         })
       }
     }, [getValues, history, login, activeSnackBar])

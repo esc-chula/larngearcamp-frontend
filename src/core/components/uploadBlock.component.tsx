@@ -10,6 +10,7 @@ import { useApplicationStateContext } from "../providers/applicationState.provid
 import { useLoadingCallback } from "./loading.component"
 import { useAuthContext } from "../providers/auth.provider"
 import { useGlobalContext } from "../providers/global.provider"
+import { AxiosError } from "axios"
 
 const useStyles = makeStyles(theme => ({
   withIcon: {
@@ -115,7 +116,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           } catch (error) {
             activeSnackBar({
               type: "error",
-              message: error.response?.data.message
+              message: (error as AxiosError).response?.data.message
             })
           }
         }

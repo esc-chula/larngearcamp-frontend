@@ -8,7 +8,7 @@ import { ShowLoadingComponent } from "../components/loading.component"
 import ResetPasswordModel from "../models/resetPassword.model"
 import MeDTO from "../models/dto/me.dto"
 import { httpClient } from "../../utils/http"
-import { AxiosRequestConfig } from "axios"
+import { AxiosError, AxiosRequestConfig } from "axios"
 import AuthServiceAPI from "../services/auth.service"
 
 interface AuthConstruct {
@@ -134,7 +134,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
         setAccessToken(newAccessToken)
         return newAccessToken
       } catch (error) {
-        if (error?.response?.status === 401) {
+        if ((error as AxiosError)?.response?.status === 401) {
           logout()
           return null
         }
@@ -176,7 +176,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     try {
       return (await AuthServiceAPI.meAPI(await getAccessToken())).data
     } catch (error) {
-      if (error?.response?.status === 401) {
+      if ((error as AxiosError)?.response?.status === 401) {
         // token not expired yet but invalid
         logout()
       }

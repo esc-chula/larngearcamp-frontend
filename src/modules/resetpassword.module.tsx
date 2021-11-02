@@ -14,6 +14,7 @@ import ResetPasswordSchema from "../schemas/resetpassword.schema"
 import { useQueryString } from "../utils/hooks"
 import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
+import { AxiosError } from "axios"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -63,7 +64,7 @@ const ResetPasswordModule: React.FC = () => {
         await resetPassword({ token, password })
         setFinished(true)
       } catch (error) {
-        switch (error.response?.status) {
+        switch ((error as AxiosError).response?.status) {
           case 400:
             setError("invalid", {
               type: "invalid"

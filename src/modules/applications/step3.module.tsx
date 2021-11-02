@@ -17,6 +17,7 @@ import { useApplicationStateContext, useApplicationForm } from "../../core/provi
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 import { useGlobalContext } from "../../core/providers/global.provider"
+import { AxiosError } from "axios"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -76,7 +77,7 @@ const ApplicationStepThreeModule: React.FC = () => {
       } catch (error) {
         activeSnackBar({
           type: "error",
-          message: error.response?.data.message
+          message: (error as AxiosError).response?.data.message
         })
         return false
       }

@@ -14,6 +14,7 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import { TextFieldComponent } from "../core/components/textField.component"
 import { useLoadingCallback } from "../core/components/loading.component"
 import BackgroundComponent from "../core/components/background.component"
+import { AxiosError } from "axios"
 import { GoogleButtonComponent } from "../core/components/googleButton.component"
 
 const useStyles = makeStyles(theme => ({
@@ -87,7 +88,7 @@ const LoginModule = () => {
       } catch (error) {
         setError("validate", {
           type: "validate",
-          message: error.response.data.message
+          message: (error as AxiosError).response?.data.message
         })
       }
     }, [getValues, history, setError, login])
