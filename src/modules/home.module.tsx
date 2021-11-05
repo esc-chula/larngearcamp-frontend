@@ -15,6 +15,7 @@ import carouselConstant from "../core/constants/carousel.constant"
 import { SafeArea } from "../core/components/safeArea.component"
 import HomeGallery from "../core/components/gallery.components"
 import galleryConstant from "../core/constants/gallery.constant"
+import HomeFacebookEmbed from "./home/home-fbembed.module"
 
 const useStyle = makeStyles(theme => ({
   title: {
@@ -45,6 +46,7 @@ const HomeModule: React.FC = () => {
       <HomeQualification className={classes.qualification} qualifications={qualificationsConstant} />
       <HomeTimeline className={classes.timeline} label={timelineConstant} />
       <HomeGallery images={galleryConstant} />
+      <HomeFacebookEmbed />
       <HomeAnnouce />
       <HomeFooter contacts={contactConstant} />
     </>
