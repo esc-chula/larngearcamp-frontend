@@ -14,7 +14,9 @@ const useStyle = makeStyles((theme: ITheme) => ({
     }
   },
   container: {
-    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     color: theme.palette.gray[700],
     padding: `${theme.spacing(9)}px min(${theme.spacing(9)}px, 5vw)`,
     [theme.breakpoints.down("sm")]: {

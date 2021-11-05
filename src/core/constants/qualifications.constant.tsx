@@ -23,7 +23,7 @@ const qualificationsConstant: Array<QualificationModel> = [
   {
     description:
       "จะต้องได้รับวัคซีนที่ทางราชการกำหนดอย่างน้อยสองเข็ม หรือวัคซีนชนิดอื่นที่สำนักงานคณะกรรมการอาหารและยารับรองตามจำนวนที่กำหนด แล้วแต่กรณี ก่อนวันที่ 19 พฤษภาคม 2565 (14 วัน ก่อนวันค่ายวันแรก)",
-    src: require("../../assets/images/icon/qualification-4.svg")
+    src: require("../../assets/images/icon/qualification-5.svg")
   }
 ]
 
