@@ -31,14 +31,17 @@ const HomeDescriptionImage = () => {
     }
   }, [changeImage])
 
-  useEffect(() => {
-    setDisplay(true)
-  }, [index])
-
   return (
-    <Fade in={display} timeout={{ enter: 500, exit: 500 }}>
+    <Fade in={display} timeout={500}>
       <div className={classes.imageContainer}>
-        <img src={descriptionConstant[index].src} alt="" className={classes.image} />
+        <img
+          src={descriptionConstant[index].src}
+          alt=""
+          className={classes.image}
+          onLoad={() => {
+            setDisplay(true)
+          }}
+        />
       </div>
     </Fade>
   )
