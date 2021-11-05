@@ -4,7 +4,7 @@ import { ReactComponent as LogoLongInverse } from "../../assets/images/logo/logo
 
 const useStyles = makeStyles(theme => ({
   logo: {
-    margin: theme.spacing(5, 0),
+    marginBottom: theme.spacing(3),
     marginRight: "auto",
     marginLeft: "auto",
     width: "fit-content",
