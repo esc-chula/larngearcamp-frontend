@@ -1,11 +1,11 @@
 import React, { useCallback } from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { ProfileComponent } from "../core/components/profile.component"
+import ProfileCard from "../core/components/profile/profilecard.component"
 import { Container, Button } from "@material-ui/core"
 import { Link } from "react-router-dom"
 import { useApplicationContext } from "../core/providers/application.provider"
 import { useLoadingCallback, useLoadingStatus } from "../core/components/loading.component"
-import { StatusInfo } from "../core/components/statusInfo.component"
+import StepCard from "../core/components/profile/stepCard.component"
 import { useAuthContext } from "../core/providers/auth.provider"
 import MeDTO from "../core/models/dto/me.dto"
 import { ProfileStatus } from "../core/models/statusInfo.model"
@@ -17,10 +17,10 @@ import RegisterCard from "../core/components/profile/registercard.component"
 //import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
-  button: {
-    color: "white",
-    marginTop: theme.spacing(4),
-    padding: theme.spacing(1, 4)
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    marginTop: theme.spacing(3)
   },
   warning: {
     background: theme.palette.warning.main,
@@ -33,9 +33,6 @@ const useStyles = makeStyles(theme => ({
     "&:hover": {
       background: theme.palette.success.dark
     }
-  },
-  icon: {
-    marginRight: theme.spacing(1)
   }
 }))
 
@@ -97,10 +94,11 @@ const ProfileV2Module = () => {
 
   return (
     <>
-      <Container maxWidth="lg">
-        <RegisterCard profileStatus="start" />
-        {/* <ProfileComponent />
-        <StatusInfo profileStatus={profileStatus} /> */}
+      <Container maxWidth="lg" className={classes.container}>
+        {/* <RegisterCard profileStatus="start" /> */}
+        <ProfileCard />
+        <StepCard profileStatus={profileStatus} />
+        <StepCard profileStatus={profileStatus} />
       </Container>
     </>
   )
