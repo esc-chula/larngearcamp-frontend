@@ -8,7 +8,7 @@ import { UserAvatar } from "./userAvatar.component"
 const useStyles = makeStyles(theme => ({
   card: {
     padding: theme.spacing(4),
-    boxShadow: "0px 0px 3px 1px rgba(0, 0, 0, 0.2)",
+    boxShadow: "0px 100px 257px rgba(0, 0, 0, 0.07), 0px 18.576px 34.4894px rgba(0, 0, 0, 0.0269069)",
     borderRadius: "10px"
   },
   profile: {
@@ -97,4 +97,4 @@ const ProfileComponent: React.FC = () => {
     </>
 */
 
-export { ProfileComponent }
+export default ProfileComponent
