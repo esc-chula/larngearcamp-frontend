@@ -52,6 +52,7 @@ const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
         </Link>
         <SideBarLink to="/docs">เอกสารการสมัคร</SideBarLink>
         <SideBarLink to="/qna">คำถามที่พบบ่อย</SideBarLink>
+        <SideBarLink to="/privacy">นโยบายความเป็นส่วนตัว</SideBarLink>
         {isAdminLoggedIn && <SideBarLink to="/admin/dashboard">dashboard</SideBarLink>}
         {!isLoggedIn && (
           <>
