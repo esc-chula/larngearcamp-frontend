@@ -1,7 +1,7 @@
 export const waitFbInit = new Promise(resolve => {
   window.fbAsyncInit = () => {
     window.FB.init({
-      appId: "2390099834619028",
+      appId: "280903317261367",
       cookie: true,
       xfbml: true,
       version: "v2.11"
