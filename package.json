@@ -22,6 +22,7 @@
     "@types/yup": "^0.29.6",
     "axios": "^0.20.0",
     "date-fns": "^2.25.0",
+    "http-proxy-middleware": "^2.0.1",
     "jwt-decode": "^3.0.0-beta.2",
     "query-string": "^6.13.2",
     "react": "^16.13.1",

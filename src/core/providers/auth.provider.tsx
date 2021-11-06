@@ -19,6 +19,7 @@ interface AuthConstruct {
   isAdminLoggedIn: boolean
   login: (params: LoginModel) => Promise<void>
   loginFb: (facebookAccessToken: string) => Promise<void>
+  loginGoogle: (googleAccessToken: string) => Promise<void>
   logout: () => Promise<void>
   me: responseInterface<MeDTO, Error>
   forgotPassword: (email: ForgotPasswordModel) => Promise<void>
@@ -98,6 +99,15 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   const loginFb = useCallback(
     async (signedRequest: string) => {
       const result = await AuthServiceAPI.loginFbAPI(signedRequest)
+      const accessToken = result.data.token
+      setAccessToken(accessToken)
+    },
+    [setAccessToken]
+  )
+
+  const loginGoogle = useCallback(
+    async (signedRequest: string) => {
+      const result = await AuthServiceAPI.loginGoogleAPI(signedRequest)
       const accessToken = result.data.token
       setAccessToken(accessToken)
     },
@@ -218,7 +228,8 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     logout,
     me,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    loginGoogle
   }
 
   if (isLoggedIn && !me.data) {
