@@ -19,6 +19,7 @@ import { ShowLoadingComponent } from "../core/components/loading.component"
 import { DocModule } from "./doc.module"
 import { AdminProvider } from "../core/providers/admin.provider"
 import { useAnnounceContext } from "../core/providers/announce.provider"
+import { PrivacyPoflicyModule } from "./privacy-policy.module"
 
 const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
@@ -38,6 +39,12 @@ const RouteModule: React.FC = () => {
         <Route exact path="/docs">
           <DocModule />
         </Route>
+        <Route exact path="/privacy">
+          <PrivacyPoflicyModule />
+        </Route>
+        {/* <Route exact path="/tos">
+          <TosModule />
+        </Route> */}
 
         {/* Guest Guard */}
         <GuestGuardedRoute exact path="/login">
