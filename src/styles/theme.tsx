@@ -1,51 +1,70 @@
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme"
-import { IThemeOptions } from "./types"
+import { createMuiTheme, Theme } from "@material-ui/core"
+import { PaletteOptions } from "@material-ui/core/styles/createPalette"
+
+import { IColorSet } from "./types"
+
+declare module "@material-ui/core/styles/createPalette" {
+  interface Palette {
+    gray: IColorSet
+    green: IColorSet
+  }
+  interface PaletteOptions {
+    gray: IColorSet
+    green: IColorSet
+  }
+}
+
+declare module "@material-ui/styles/defaultTheme" {
+  interface DefaultTheme extends Theme {}
+}
+
+const palette: PaletteOptions = {
+  primary: {
+    light: "#C03A42",
+    main: "#941014",
+    dark: "#721C20"
+  },
+  gray: {
+    0: "#FFFFFF",
+    50: "#F2F2F2",
+    100: "#E4E4E4",
+    200: "#BFBFBF",
+    300: "#8C8C8C",
+    400: "#8C8C8C",
+    500: "#737373",
+    600: "#595959",
+    700: "#404040",
+    800: "#262626",
+    900: "#0D0D0D"
+  },
+  green: {
+    0: "#E9F3D5",
+    50: "#D0EBBA",
+    100: "#B1E19F",
+    200: "#8CD884",
+    300: "#6BCD74",
+    400: "#52C271",
+    500: "#39B774",
+    600: "#30A27E",
+    700: "#278D82",
+    800: "#206D77",
+    900: "#184960"
+  },
+  secondary: {
+    main: "#333333"
+  },
+  warning: {
+    main: "#E4A527"
+  },
+  success: {
+    main: "#39B774"
+  },
+  contrastThreshold: 3,
+  tonalOffset: 0.2
+}
 
 const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#C03A42",
-      main: "#941014",
-      dark: "#721C20"
-    },
-    gray: {
-      0: "#FFFFFF",
-      50: "#F2F2F2",
-      100: "#E4E4E4",
-      200: "#BFBFBF",
-      300: "#8C8C8C",
-      400: "#8C8C8C",
-      500: "#737373",
-      600: "#595959",
-      700: "#404040",
-      800: "#262626",
-      900: "#0D0D0D"
-    },
-    green: {
-      0: "#E9F3D5",
-      50: "#D0EBBA",
-      100: "#B1E19F",
-      200: "#8CD884",
-      300: "#6BCD74",
-      400: "#52C271",
-      500: "#39B774",
-      600: "#30A27E",
-      700: "#278D82",
-      800: "#206D77",
-      900: "#184960"
-    },
-    secondary: {
-      main: "#333333"
-    },
-    warning: {
-      main: "#E4A527"
-    },
-    success: {
-      main: "#39B774"
-    },
-    contrastThreshold: 3,
-    tonalOffset: 0.2
-  },
+  palette,
   typography: {
     fontFamily: [
       "Kanit",
@@ -154,6 +173,6 @@ const theme = createMuiTheme({
       }
     }
   }
-} as IThemeOptions)
+})
 
 export { theme }
