@@ -5,7 +5,7 @@ export interface QualificationModel {
 
 const qualificationsConstant: Array<QualificationModel> = [
   {
-    description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5\nหรือ ปวช. ปีที่ 1-2",
+    description: "กำลังศึกษาอยู่ในชั้นมัธยมศึกษาปีที่ 4 - 5 ปวช. ปีที่ 1 - 2 หรือมีวุฒิเทียบเท่า",
     src: require("../../assets/images/icon/qualification-1.svg")
   },
   {
@@ -13,12 +13,17 @@ const qualificationsConstant: Array<QualificationModel> = [
     src: require("../../assets/images/icon/qualification-2.svg")
   },
   {
-    description: "สามารถค้างคืนได้ที่คณะวิศวกรรมศาสตร์\nจุฬาลงกรณ์มหาวิทยาลัย\tตลอดระยะเวลาจัดค่าย",
+    description: "สามารถเข้าร่วมกิจกรรม ณ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัยได้ตลอดระยะเวลาจัดค่าย",
     src: require("../../assets/images/icon/qualification-3.svg")
   },
   {
-    description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน",
+    description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน (ยกเว้น น้อง ๆ ที่ผ่านการคัดเลือกเข้าค่ายลานเกียร์ครั้งที่ 20 สามารถสมัครได้อยู่)",
     src: require("../../assets/images/icon/qualification-4.svg")
+  },
+  {
+    description:
+      "จะต้องได้รับวัคซีนที่ทางราชการกำหนดอย่างน้อยสองเข็ม หรือวัคซีนชนิดอื่นที่สำนักงานคณะกรรมการอาหารและยารับรองตามจำนวนที่กำหนด แล้วแต่กรณี ก่อนวันที่ 19 พฤษภาคม 2565 (14 วัน ก่อนวันค่ายวันแรก)",
+    src: require("../../assets/images/icon/qualification-5.svg")
   }
 ]
 
