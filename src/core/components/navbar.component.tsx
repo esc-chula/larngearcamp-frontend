@@ -71,7 +71,7 @@ const NavBarComponent = () => {
   )
 
   const closeDrawer = useCallback(() => setOpen(false), [])
-  
+
   const closed = new Date() >= new Date("2020-10-21T00:00:00+07:00")
 
   return (
@@ -98,6 +98,9 @@ const NavBarComponent = () => {
               <Link className={classes.underlineWhite} to="/qna">
                 คำถามที่พบบ่อย
               </Link>
+              <Link className={classes.underlineWhite} to="/privacy">
+                นโยบายความเป็นส่วนตัว
+              </Link>
             </Box>
             <Box display="flex" alignItems="center" className={classes.itemsRight}>
               {isLoggedIn ? (
@@ -107,11 +110,15 @@ const NavBarComponent = () => {
                   <Link className={classes.underlineWhite} to="/login">
                     เข้าสู่ระบบ
                   </Link>
-                  {!closed ? <Link to="/register">
-                    <Button color="primary" variant="contained">
-                      ลงทะเบียน
-                    </Button>
-                  </Link> : ''}
+                  {!closed ? (
+                    <Link to="/register">
+                      <Button color="primary" variant="contained">
+                        ลงทะเบียน
+                      </Button>
+                    </Link>
+                  ) : (
+                    ""
+                  )}
                 </>
               )}
             </Box>
