@@ -1,5 +1,7 @@
 import { createMuiTheme, Theme } from "@material-ui/core"
-import { PaletteOptions } from "@material-ui/core/styles/createPalette"
+import createBreakpoints from "@material-ui/core/styles/createBreakpoints"
+import createPalette from "@material-ui/core/styles/createPalette"
+import createTypography from "@material-ui/core/styles/createTypography"
 
 import { IColorSet } from "./types"
 
@@ -18,7 +20,7 @@ declare module "@material-ui/styles/defaultTheme" {
   interface DefaultTheme extends Theme {}
 }
 
-const palette: PaletteOptions = {
+const palette = createPalette({
   primary: {
     light: "#C03A42",
     main: "#941014",
@@ -61,106 +63,140 @@ const palette: PaletteOptions = {
   },
   contrastThreshold: 3,
   tonalOffset: 0.2
-}
+})
+
+const breakpoints = createBreakpoints({
+  values: {
+    xs: 0,
+    sm: 480,
+    md: 640,
+    lg: 840,
+    xl: 1280
+  }
+})
+
+const typography = createTypography(palette, {
+  fontFamily: [
+    "Kanit",
+    "Raleway",
+    "Sarabun",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    "sans-serif"
+  ].join(","),
+  fontSize: 14,
+  h1: {
+    fontWeight: 400,
+    fontSize: "3rem",
+    lineHeight: "3rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "2.25rem"
+    }
+  },
+  h2: {
+    fontWeight: 400,
+    fontSize: "2.25rem",
+    lineHeight: "2.25rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "2rem"
+    }
+  },
+  h3: {
+    fontWeight: 400,
+    fontSize: "2rem",
+    lineHeight: "2rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "1.875rem"
+    }
+  },
+  h4: {
+    fontWeight: 500,
+    fontSize: "1.875rem",
+    lineHeight: "2.803rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "1.75rem"
+    }
+  },
+  h5: {
+    fontWeight: 200,
+    fontSize: "1.75rem",
+    lineHeight: "2.616rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "1.5rem"
+    }
+  },
+  h6: {
+    fontWeight: 200,
+    fontSize: "1.5rem",
+    lineHeight: "2.243rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "1.25rem"
+    }
+  },
+  subtitle1: {
+    fontWeight: 400,
+    fontSize: "1.25rem",
+    lineHeight: "1.875rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "1rem"
+    }
+  },
+  subtitle2: {
+    fontWeight: 300,
+    fontSize: "1.125rem",
+    lineHeight: "1.682rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "1rem"
+    }
+  },
+  body1: {
+    fontWeight: 400,
+    fontSize: "1rem",
+    lineHeight: "1.495rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "0.875rem"
+    }
+  },
+  body2: {
+    fontWeight: 400,
+    fontSize: "0.875rem",
+    lineHeight: "1.308rem",
+    [breakpoints.down("sm")]: {
+      fontSize: "0.75rem"
+    }
+  },
+  button: {
+    fontWeight: 300,
+    fontSize: "1.125rem",
+    lineHeight: "1.682rem",
+    textTransform: "uppercase"
+  },
+  caption: {
+    fontWeight: 400,
+    fontSize: "0.656rem",
+    lineHeight: "1.121rem"
+  },
+  overline: {
+    fontWeight: 400,
+    fontSize: "0.656rem",
+    lineHeight: "1.121rem",
+    letterSpacing: "10%",
+    textTransform: "uppercase"
+  }
+})
 
 const theme = createMuiTheme({
   palette,
-  typography: {
-    fontFamily: [
-      "Kanit",
-      "Raleway",
-      "Sarabun",
-      "-apple-system",
-      "BlinkMacSystemFont",
-      "Segoe UI",
-      "Roboto",
-      "Oxygen",
-      "Ubuntu",
-      "Cantarell",
-      "Fira Sans",
-      "Droid Sans",
-      "Helvetica Neue",
-      "sans-serif"
-    ].join(","),
-    fontSize: 14,
-    h1: {
-      fontWeight: 400,
-      fontSize: "3rem",
-      lineHeight: "3rem"
-    },
-    h2: {
-      fontWeight: 400,
-      fontSize: "2.25rem",
-      lineHeight: "2.25rem"
-    },
-    h3: {
-      fontWeight: 400,
-      fontSize: "2rem",
-      lineHeight: "2rem"
-    },
-    h4: {
-      fontWeight: 500,
-      fontSize: "1.875rem",
-      lineHeight: "2.803rem"
-    },
-    h5: {
-      fontWeight: 200,
-      fontSize: "1.75rem",
-      lineHeight: "2.616rem"
-    },
-    h6: {
-      fontWeight: 200,
-      fontSize: "1.5rem",
-      lineHeight: "2.243rem"
-    },
-    subtitle1: {
-      fontWeight: 400,
-      fontSize: "1.25rem",
-      lineHeight: "1.875rem"
-    },
-    subtitle2: {
-      fontWeight: 300,
-      fontSize: "1.125rem",
-      lineHeight: "1.682rem"
-    },
-    body1: {
-      fontWeight: 400,
-      fontSize: "1rem",
-      lineHeight: "1.495rem"
-    },
-    body2: {
-      fontWeight: 400,
-      fontSize: "0.875rem",
-      lineHeight: "1.308rem"
-    },
-    button: {
-      fontWeight: 300,
-      fontSize: "1.125rem",
-      lineHeight: "1.682rem",
-      textTransform: "uppercase"
-    },
-    caption: {
-      fontWeight: 400,
-      fontSize: "0.656rem",
-      lineHeight: "1.121rem"
-    },
-    overline: {
-      fontWeight: 400,
-      fontSize: "0.656rem",
-      lineHeight: "1.121rem",
-      letterSpacing: "10%",
-      textTransform: "uppercase"
-    }
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 480,
-      md: 640,
-      lg: 840,
-      xl: 1280
-    }
-  },
+  typography,
+  breakpoints,
   overrides: {
     MuiPaper: {
       rounded: {
