@@ -1,7 +1,6 @@
 import React from "react"
 import { Card, Container, Typography, Button, makeStyles } from "@material-ui/core"
 import { ProfileStatus } from "../../models/statusInfo.model"
-import { FullscreenExitTwoTone } from "@material-ui/icons"
 import Gear from "../../../assets/images/icon/gear-icon.svg"
 
 const useStyles = makeStyles(theme => ({
@@ -51,7 +50,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   outlined: {
-    color: theme.palette.primary.main
+    color: theme.palette.primary.main,
+    borderColor: theme.palette.primary.main
   },
   gear1: {
     width: "25%",
@@ -94,12 +94,12 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
           ดูเหมือนว่าคุณจะยังไม่ได้ส่งใบสมัครเข้าค่ายลานเกียร์ครั้งที่ 21 นะ คลิกสมัครเข้าค่าย
           เพื่อมาเป็นส่วนหนึ่งในความสนุกที่ไม่สามารถหาจากที่อื่นได้อีก!
         </Typography>
-        {props.profileStatus == "start" && (
+        {props.profileStatus === "start" && (
           <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`}>
             สมัครเข้าค่าย
           </Button>
         )}
-        {props.profileStatus == "continue" && (
+        {props.profileStatus === "draft" && (
           <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`}>
             สมัครต่อจากครั้งที่แล้ว
           </Button>
