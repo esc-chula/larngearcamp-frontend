@@ -17,6 +17,16 @@ import RegisterCard from "../core/components/profile/registercard.component"
 //import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
+  bg: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: -2,
+    backgroundColor: "#FFFFFF" //theme.palette.gray[0]
+  },
   container: {
     display: "flex",
     flexDirection: "column",
@@ -94,6 +104,7 @@ const ProfileV2Module = () => {
 
   return (
     <>
+      <div className={classes.bg} />
       <Container maxWidth="lg" className={classes.container}>
         {/* <RegisterCard profileStatus="start" /> */}
         <ProfileCard />
