@@ -1,5 +1,6 @@
 import { Fade } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
+import { Skeleton } from "@material-ui/lab"
 import React, { useState, useCallback, useEffect } from "react"
 import descriptionConstant from "../../core/constants/description.constant"
 
@@ -9,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     width: "min(497px, calc(100vw - 16px))",
     height: "332px",
     [theme.breakpoints.down("sm")]: {
-      height: `min( 332px, calc(${332 / 497} * (100vw - 16px)))`
+      height: `min( 332px, calc(332 / 497 * (100vw - 16px)))`
     }
   },
   imageContainer: {
@@ -20,6 +21,9 @@ const useStyles = makeStyles(theme => ({
 
 const HomeDescriptionImage = () => {
   const classes = useStyles()
+
+  const [isLoading, setLoading] = useState(true)
+
   const [index, setIndex] = useState(0)
   const changeImage = useCallback(() => {
     setIndex(index => (index + 1) % descriptionConstant.length)
@@ -45,8 +49,20 @@ const HomeDescriptionImage = () => {
   return (
     <Fade in={display} timeout={500}>
       <div>
+        {isLoading && <Skeleton variant="rect" className={classes.image} />}
         {descriptionConstant.map(({ src }, idx) => {
-          return <img src={src} key={idx} alt="descriptionImage" style={{ display: index === idx ? "block" : "none" }} className={classes.image} />
+          return (
+            <img
+              src={src}
+              key={idx}
+              alt="descriptionImage"
+              onLoad={() => {
+                if (idx === 0) setLoading(false)
+              }}
+              style={{ display: index === idx && !isLoading ? "block" : "none" }}
+              className={classes.image}
+            />
+          )
         })}
       </div>
     </Fade>
