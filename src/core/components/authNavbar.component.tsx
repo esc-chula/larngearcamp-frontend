@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 const AuthNavbarComponent: React.FC = () => {
   const history = useHistory()
   const classes = useStyles()
-  const { isAdminLoggedIn, logout } = useAuthContext()
+  const { isLoggedIn, logout } = useAuthContext()
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClick = useCallback(event => {
@@ -78,17 +78,6 @@ const AuthNavbarComponent: React.FC = () => {
             <ListItemText primary="สถานะการสมัคร" />
           </MenuItem>
         </Link>
-
-        {isAdminLoggedIn && (
-          <Link onClick={clearAnchorEl} className="no-underline" to="/admin/dashboard">
-            <MenuItem>
-              <ListItemIcon>
-                <SupervisorAccountIcon fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="แอดมิน" />
-            </MenuItem>
-          </Link>
-        )}
 
         <MenuItem onClick={logoutClicked}>
           <ListItemIcon>

@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios"
 import { httpClient } from "../../utils/http"
 import DocumentType from "../models/documentType.constant"
 import { ApplicationDTO, UpdateApplicationDTO, ApplicationInfo } from "../models/dto/application.dto"
@@ -21,6 +22,10 @@ const uploadDocumentAPI = async (data: FormData, type: DocumentType): Promise<Fi
 
 const getApplicationAPI = async (): Promise<ApplicationDTO> => {
   return (await httpClient.get(`/application`)).data
+}
+
+const getFormState = async (): Promise<AxiosResponse> => {
+  return (await httpClient.get(`/application/state`)).data
 }
 
 const updateApplicationAPI = async (application: UpdateApplicationDTO): Promise<ApplicationDTO> => {
