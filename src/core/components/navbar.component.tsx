@@ -95,7 +95,7 @@ const NavBarComponent = () => {
               <Link className={classes.underlineWhite} to="/docs">
                 เอกสารการสมัคร
               </Link>
-              <Link className={classes.underlineWhite} to="/qna">
+              <Link className={classes.underlineWhite} to="/faq">
                 คำถามที่พบบ่อย
               </Link>
               <Link className={classes.underlineWhite} to="/privacy">

@@ -16,7 +16,17 @@ const wrapper = styled("div")(({ theme }) => ({
   }
 }))
 
-const H1: React.FC = props => <Typography variant="h2" component="h1" style={{ textAlign: "center" }} {...props} />
+const A = styled("a")(({ theme }) => ({
+  color: theme.palette.primary.light,
+  display: "inline-block",
+  textDecoration: "none",
+  "&:hover": {
+    color: theme.palette.primary.dark,
+    textDecoration: "none"
+  }
+}))
+
+const H1: React.FC = props => <Typography variant="h2" component="h1" color="primary" style={{ textAlign: "center" }} {...props} />
 
 const H2: React.FC = props => <Typography variant="subtitle1" component="h2" {...props} />
 
@@ -24,7 +34,8 @@ export const MDXLayout: React.FC<Omit<MDXProviderProps, "components">> = props =
   const components: MDXProviderComponents = {
     wrapper: wrapper,
     h1: H1,
-    h2: H2
+    h2: H2,
+    a: props => <A className="no-underline" {...props} />
   }
   return <MDXProvider {...props} components={components} />
 }

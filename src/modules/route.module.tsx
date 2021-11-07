@@ -11,7 +11,7 @@ import { ProfileModule } from "./profile.module"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
 import { AdminDashboardModule } from "./admin/dashboard.module"
-import { QandAModule } from "./qna.module"
+import { FAQModule } from "./faq.module"
 import { ForgotPasswordModule } from "./forgotpassword.module"
 import { ResetPasswordModule } from "./resetpassword.module"
 import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
@@ -33,8 +33,8 @@ const RouteModule: React.FC = () => {
         <Route exact path="/">
           <HomeModule />
         </Route>
-        <Route exact path="/qna">
-          <QandAModule />
+        <Route exact path="/faq">
+          <FAQModule />
         </Route>
         <Route exact path="/docs">
           <DocModule />
