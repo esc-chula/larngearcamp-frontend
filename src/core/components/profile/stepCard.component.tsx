@@ -1,10 +1,8 @@
 import { Button, makeStyles, Card, Typography, Box } from "@material-ui/core"
 import React from "react"
 import { Link } from "react-router-dom"
-import statusInfoConstant from "../../constants/statusInfo.constant"
+import stepCardConstant from "../../constants/stepCard.constant"
 
-//TODO: rename
-import { ProfileStatus } from "../../models/statusInfo.model"
 import { useApplicationStateContext } from "../../providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
@@ -15,8 +13,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2.25)
   },
   stepNo: {
-    background: theme.palette.primary.main,
-    color: "#FFFFFF", //theme.palette.gray[0]
     borderRadius: "100%",
     display: "flex",
     alignItems: "center",
@@ -26,10 +22,23 @@ const useStyles = makeStyles(theme => ({
     height: 56,
     margin: theme.spacing(1)
   },
+  redCircle: {
+    background: theme.palette.primary.main,
+    color: "#FFFFFF" //theme.palette.gray[0]
+  },
+  outlinedRedCircle: {
+    border: `3px solid ${theme.palette.primary.main}`,
+    color: theme.palette.primary.main //theme.palette.gray[0]
+  },
+  outlinedGrayCircle: {
+    border: "3px solid #BFBFBF", //theme.palette.gray[200]
+    color: "#BFBFBF" //theme.palette.gray[200]
+  },
   stepIndicator: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    width: "150px",
     marginRight: theme.spacing(5),
     [theme.breakpoints.down("sm")]: {
       marginRight: theme.spacing(0),
@@ -42,15 +51,20 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontWeight: 500,
-    color: "#262626", //theme.palette.gray[800]
+    textTransform: "uppercase",
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       marginBottom: theme.spacing(2)
     }
   },
-  red: {
-    fontWeight: 500,
+  blackText: {
+    color: "#262626" //theme.palette.gray[800]
+  },
+  redText: {
     color: theme.palette.primary.main
+  },
+  grayText: {
+    color: "#BFBFBF" //theme.palette.gray[200]
   },
   content: {
     color: "#8C8C8C" //theme.palette.gray[300]
@@ -96,118 +110,74 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-interface StepCardProps {
-  profileStatus: ProfileStatus
+export interface StepCardProps {
+  step: 1 | 2 | 3 | 4 | 5 | 6
+  status: "complete" | "inProgress" | "incomplete"
+  pass: "pass" | "fail"
 }
 
-const StepCard: React.FC<StepCardProps> = ({ profileStatus }) => {
+const StepCard: React.FC<StepCardProps> = ({ step, status, pass }) => {
   const classes = useStyles()
+
+  const setStepIndicatorStyles = (status: String) => {
+    switch (status) {
+      case "complete":
+        return [classes.redCircle, classes.blackText]
+      case "inProgress":
+        return [classes.outlinedRedCircle, classes.redText]
+      case "incomplete":
+        return [classes.outlinedGrayCircle, classes.grayText]
+      default:
+        return []
+    }
+  }
+
+  const text = stepCardConstant[step][status][pass]!
+  const buttons = status === "inProgress" ? stepCardConstant[step][status][pass]!.buttons! : []
+
+  function handleClick(button: number) {
+    if (status === "inProgress") {
+      if (step === 5 && !button) {
+        /*open payment dialog*/
+      } else window.location.href = `${buttons[button][1]}`
+    }
+  }
 
   return (
     <Card className={`${classes.card} ${classes.flexRow}`}>
       <div className={classes.stepIndicator}>
-        <Box className={classes.stepNo}>
-          <Typography variant="h3">1</Typography>
+        <Box className={`${classes.stepNo} ${setStepIndicatorStyles(status)[0]}`}>
+          <Typography variant="h3">{step}</Typography>
         </Box>
-        <Typography variant="h6" className={classes.title}>
-          COMPLETE
+        <Typography variant="subtitle1" className={`${classes.title} ${setStepIndicatorStyles(status)[1]}`}>
+          {status == "inProgress" ? "in progress" : status}
         </Typography>
       </div>
 
       <div className={classes.flexCol}>
-        <Typography variant="h4" className={`${classes.text} ${classes.title}`}>
-          ลงทะเบียนเสร็จเรียบร้อย
+        <Typography variant="h4" className={`${classes.text} ${classes.title} ${classes.blackText}`}>
+          {text.title}
         </Typography>
         <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
-          พวกเราได้รับเอกสารการสมัครของคุณแล้ว ขอบคุณที่ให้ความสนใจในค่ายของเรา เราจะรีบดำเนินการตรวจเอกสารให้เร็วที่สุด!
+          {text.contents}
         </Typography>
-        <div className={classes.buttonContainer}>
-          <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`}>
-            ตรวจสอบคิวสัมภาษณ์ทั้งหมด
-          </Button>
-          <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`}>
-            ตรวจสอบคิวสัมภาษณ์ทั้งหมด
-          </Button>
-        </div>
+        {status === "inProgress" && (
+          <div className={classes.buttonContainer}>
+            {buttons.length >= 1 && (
+              <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`} onClick={() => handleClick(0)}>
+                {buttons[0][0]}
+              </Button>
+            )}
+            {buttons.length >= 2 && (
+              <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`} onClick={() => handleClick(1)}>
+                {buttons![1][0]}
+              </Button>
+            )}
+          </div>
+        )}
       </div>
     </Card>
   )
 }
 
 export default StepCard
-
-// const { application } = useApplicationStateContext()
-
-//   const showFB = profileStatus === "failedInterview" || profileStatus === "passedFinal" || profileStatus === "failedFinal"
-
-//   if (profileStatus !== "docNotOk" && profileStatus !== "passedInterview") {
-//     return (
-//       <Paper elevation={1} className={classes.paper}>
-//         <Typography variant="h5" className={classes.title} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].title }} />
-//         {statusInfoConstant[profileStatus].contents.map((content, index) => (
-//           <Typography key={index} variant="body1" className={classes.content} dangerouslySetInnerHTML={{ __html: content }} />
-//         ))}
-//         {showFB && (
-//           <div className={classes.flex}>
-//             <FacebookButtonComponent variant="contained" className={classes.button}>
-//               LARNGEAR CAMP
-//             </FacebookButtonComponent>
-//           </div>
-//         )}
-//       </Paper>
-//     )
-//   }
-//   if (profileStatus === "passedInterview") {
-//     const code = application?.code!
-//     const interviewInfo =
-//       code[3] === "A" || code[3] === "C"
-//         ? `จะจัดขึ้นในวันที่ <span class="${classes.bold}">31 ตุลาคม 2563</span> ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย แล้วเจอกันนะครับ :)`
-//         : `จะอยู่ในช่วงวันที่ <span class="${classes.bold}">2-8 พฤศจิกายน 2563</span> โดยพี่ ๆ ค่ายลานเกียร์จะโทรสัมภาษณ์ทางเบอร์โทรศัพท์มือถือที่น้องได้กรอกไว้ ขอให้น้องคอยรอรับสายจากพี่ ๆ ด้วยนะครับ :)`
-//     return (
-//       <Paper elevation={1} className={classes.paper}>
-//         <Typography variant="h5" className={classes.title} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].title }} />
-//         <Typography
-//           variant="body1"
-//           className={classes.content}
-//           dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].contents[0] + interviewInfo }}
-//         />
-//       </Paper>
-//     )
-//   }
-//   // profileStatus is "docNotOk"
-//   const { picture, letterOfConsent, transcript } = application?.documentStateDetails
-//   const failedDocuments = [
-//     { id: 1, ...picture },
-//     { id: 2, ...letterOfConsent },
-//     { id: 3, ...transcript }
-//   ].filter(detail => !detail.pass)
-//   return (
-//     <Paper elevation={1} className={classes.paper}>
-//       <Typography variant="h5" className={classes.title} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].title }} />
-//       <Typography variant="body1" className={classes.content} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].contents[0] }} />
-//       {failedDocuments.map((detail, index) => (
-//         <>
-//           <Typography
-//             key={index}
-//             variant="body1"
-//             className={`${classes.content} ${classes.marginLeft}`}
-//             dangerouslySetInnerHTML={{ __html: `${index + 1}. ${statusInfoConstant[profileStatus].contents[detail.id]}` }}
-//           />
-//           <Typography
-//             key={index}
-//             variant="body2"
-//             color="primary"
-//             className={`${classes.content} ${classes.marginLeft}`}
-//             dangerouslySetInnerHTML={{ __html: detail.message }}
-//           />
-//         </>
-//       ))}
-//       <Typography variant="body1" className={classes.content} dangerouslySetInnerHTML={{ __html: statusInfoConstant[profileStatus].contents[4] }} />
-//       <Link className="no-underline" to="/application/step/5">
-//         <Button variant="contained" className={classes.editButton} fullWidth>
-//           <ChevronLeftIcon className={classes.icon} />
-//           กลับไปแก้ไขเอกสาร
-//         </Button>
-//       </Link>
-//     </Paper>
-// )
