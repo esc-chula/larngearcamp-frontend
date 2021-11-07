@@ -1,0 +1,11 @@
+.git
+.github
+.vscode
+build
+.prettierrc
+.eslintrc
+.eslintignore
+.gitignore
+.npmignore
+
+node_modules
