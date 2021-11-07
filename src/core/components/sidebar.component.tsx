@@ -42,7 +42,7 @@ const SideBarLink: React.FC<React.PropsWithChildren<{ to: string }>> = ({ to, ch
 
 const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
   const classes = useStyles()
-  const { isAdminLoggedIn, isLoggedIn } = useAuthContext()
+  const { isLoggedIn } = useAuthContext()
 
   return (
     <Drawer anchor="left" open={open} onClose={onClose}>
@@ -53,7 +53,6 @@ const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
         <SideBarLink to="/docs">เอกสารการสมัคร</SideBarLink>
         <SideBarLink to="/faq">คำถามที่พบบ่อย</SideBarLink>
         <SideBarLink to="/privacy">นโยบายความเป็นส่วนตัว</SideBarLink>
-        {isAdminLoggedIn && <SideBarLink to="/admin/dashboard">dashboard</SideBarLink>}
         {!isLoggedIn && (
           <>
             <SideBarLink to="/login">เข้าสู่ระบบ</SideBarLink>

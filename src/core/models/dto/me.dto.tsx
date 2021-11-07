@@ -16,8 +16,6 @@ interface MeDTO {
     documentState: DocumentState
     editingState: EditingState
   }
-  createdAt: Date
-  updatedAt: Date
 }
 
 export default MeDTO
