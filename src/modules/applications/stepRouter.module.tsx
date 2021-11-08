@@ -57,23 +57,23 @@ const steps: Record<string, Step> = {
 const StepRouter: React.FC = () => {
   const { params } = useRouteMatch<{ step: string }>()
   const { step } = params
-  const {
-    application: { editingState }
-  } = useApplicationStateContext()
+  // const {
+  //   application: { editingState }
+  // } = useApplicationStateContext()
 
   if (!steps[step]) {
     return <NotFoundModule />
   }
 
   const { Component, allowedStates } = steps[step]
-  if (!allowedStates.includes(editingState)) {
-    switch (editingState) {
-      case "DOCUMENT_ONLY":
-        return <Redirect to="/application/step/5" />
-      case "LOCKED":
-        return <Redirect to="/application/finish" />
-    }
-  }
+  // if (!allowedStates.includes(editingState)) {
+  //   switch (editingState) {
+  //     case "DOCUMENT_ONLY":
+  //       return <Redirect to="/application/step/5" />
+  //     case "LOCKED":
+  //       return <Redirect to="/application/finish" />
+  //   }
+  // }
 
   return (
     <>

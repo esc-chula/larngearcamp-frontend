@@ -8,22 +8,19 @@ export type ApplicationState = "REVIEW" | "PASSED_INTERVIEW" | "NOT_PASSED_INTER
 export type DocumentState = "REVIEW" | "PASSED" | "NOT_PASSED"
 
 export interface DocumentStateDetail {
-  pass: boolean | null
-  message: string
+  comment: string
+  status: string
 }
 export interface AllDocumentStateDetail {
   picture: DocumentStateDetail
-  letterOfConsent: DocumentStateDetail
+  parentalConsent: DocumentStateDetail
   transcript: DocumentStateDetail
 }
 
 export interface ApplicationInfo {
   id: string
-  userId: string
   code?: string
-  editingState: EditingState
   applicationState: ApplicationState
-  documentState: DocumentState
   documentStateDetails: AllDocumentStateDetail
 }
 

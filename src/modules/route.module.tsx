@@ -65,11 +65,11 @@ const RouteModule: React.FC = () => {
           <ApplicationStateProvider>{(render, is404) => (render || is404 ? <ProfileModule /> : <ShowLoadingComponent />)}</ApplicationStateProvider>
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
-          {new Date() > announceDate ? (
+          {/* {new Date() > announceDate ? (
             <Redirect to="/profile" />
-          ) : (
-            <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
-          )}
+          ) : ( */}
+          <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
+          {/* )} */}
         </UserGuardedRoute>
 
         {/* Admin Guard */}

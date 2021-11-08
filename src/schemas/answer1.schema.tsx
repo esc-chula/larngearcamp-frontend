@@ -1,4 +1,4 @@
-import { string, object, boolean } from "yup"
+import { string, object, boolean, number } from "yup"
 import yup from "yup"
 
 const Answer1Schema = object()
@@ -9,21 +9,24 @@ const Answer1Schema = object()
         answer2: object({
           first: string()
             .required()
-            .matches(/^[1-4]$/, "กรอกได้เฉพาะเลข 1-4"),
+            .matches(/^[1-5]$/, "กรอกได้เฉพาะเลข 1-5"),
           second: string()
             .required()
-            .matches(/^[1-4]$/, "กรอกได้เฉพาะเลข 1-4"),
+            .matches(/^[1-5]$/, "กรอกได้เฉพาะเลข 1-5"),
           third: string()
             .required()
-            .matches(/^[1-4]$/, "กรอกได้เฉพาะเลข 1-4"),
+            .matches(/^[1-5]$/, "กรอกได้เฉพาะเลข 1-5"),
           fourth: string()
             .required()
-            .matches(/^[1-4]$/, "กรอกได้เฉพาะเลข 1-4")
+            .matches(/^[1-5]$/, "กรอกได้เฉพาะเลข 1-5"),
+          fifth: string()
+            .required()
+            .matches(/^[1-5]$/, "กรอกได้เฉพาะเลข 1-5")
         })
           .required()
-          .test("invalid", "กรุณากรอกให้ครบทุกช่อง ใส่ได้เฉพาะเลข 1-4 และไม่ซ้ำกัน", value => {
-            let arr = ["1", "2", "3", "4"]
-            let result = [value?.first, value?.second, value?.third, value?.fourth].sort().reduce((prev, curr, index) => {
+          .test("invalid", "กรุณากรอกให้ครบทุกช่อง ใส่ได้เฉพาะเลข 1-5 และไม่ซ้ำกัน", value => {
+            let arr = ["1", "2", "3", "4", "5"]
+            let result = [value?.first, value?.second, value?.third, value?.fourth, value?.fifth].sort().reduce((prev, curr, index) => {
               return prev && curr === arr[index]
             }, true)
             return result

@@ -32,8 +32,8 @@ const useStyles = makeStyles(theme => ({
 
 function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
   const {
-    answer2: { first: answer2first, second: answer2second, third: answer2thrid, fourth: answer2fourth },
-    answer4: { fifth: answer4fifth, sixth: answer4sixth, ...answer4Rest },
+    answer2: { first: answer2first, second: answer2second, third: answer2thrid, fourth: answer2fourth, fifth: answer2fifth },
+    answer5: { third: answer3fifth, sixth: answer5sixth, ...answer5Rest },
     ...firstPartRest
   } = application.answer?.firstPart || { answer2: {}, answer4: {} }
   return {
@@ -43,17 +43,18 @@ function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
         first: answer2first ? `${answer2first}` : "",
         second: answer2second ? `${answer2second}` : "",
         third: answer2thrid ? `${answer2thrid}` : "",
-        fourth: answer2fourth ? `${answer2fourth}` : ""
+        fourth: answer2fourth ? `${answer2fourth}` : "",
+        fifth: answer2fifth ? `${answer2fifth}` : ""
       },
-      answer4: {
-        ...answer4Rest,
+      answer5: {
+        ...answer5Rest,
         fifth: {
-          text: answer4fifth ? answer4fifth : "",
-          checked: !!answer4fifth
+          text: answer5fifth ? answer5fifth : "",
+          checked: !!answer5fifth
         },
         sixth: {
-          text: answer4sixth ? answer4sixth : "",
-          checked: !!answer4sixth
+          text: answer5sixth ? answer5sixth : "",
+          checked: !!answer5sixth
         }
       },
       answer6: firstPartRest.answer6 ? `${firstPartRest.answer6}` : ""
