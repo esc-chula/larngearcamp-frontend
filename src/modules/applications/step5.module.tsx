@@ -13,6 +13,7 @@ import { useApplicationForm, useApplicationStateContext } from "../../core/provi
 import { AllDocumentStateDetail, ApplicationDTO } from "../../core/models/dto/application.dto"
 import { DocumentItem, isDefaultUrl } from "../../core/models/dto/document.dto"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
+import { ApplicationModels } from "../../core/models/application.models"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -41,24 +42,7 @@ function getUrl(document: DocumentItem): string {
   }
 }
 
-function mapApplicationToDocument(application: ApplicationDTO): DocumentModel {
-  application = ({
-    picture: {
-      comment: "",
-      status: "PASSED",
-      url: ""
-    },
-    transcript: {
-      comment: "",
-      status: "PASSED",
-      url: ""
-    },
-    parentalConsent: {
-      comment: "",
-      status: "PASSED",
-      url: ""
-    }
-  } as unknown) as ApplicationDTO
+function mapApplicationToDocument(application: ApplicationModels): DocumentModel {
   return ({
     pictureURL: getUrl(application.photo),
     transcriptURL: getUrl(application.transcript),
@@ -71,12 +55,11 @@ const ApplicationStepFiveModule: React.FC = () => {
   const methods = useApplicationForm<DocumentModel>(mapApplicationToDocument, {
     resolver: yupResolver(DocumentSchema)
   })
-  // const { application } = useApplicationStateContext()
+  const { application } = useApplicationStateContext()
   const onSubmit = useCallback(async () => true, [])
   const handleSubmit = useHandleSubmit(methods, onSubmit)
-  // const { documentStateDetails } = application
   const documentStateDetails = ({
-    picture: {
+    photo: {
       url: ""
     },
     parentalConsent: {
@@ -86,18 +69,6 @@ const ApplicationStepFiveModule: React.FC = () => {
       url: ""
     }
   } as unknown) as AllDocumentStateDetail
-
-  const application = ({
-    picture: {
-      url: ""
-    },
-    parentalConsent: {
-      url: ""
-    },
-    transcript: {
-      url: ""
-    }
-  } as unknown) as ApplicationDTO
 
   return (
     <ApplicationStepModule beforeNavigate={handleSubmit}>

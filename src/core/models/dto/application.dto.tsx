@@ -17,27 +17,23 @@ export type ApplicationState =
 export type FileStatus = "CHANGE_REQUIRED" | "EMPTY" | "PASSED" | "UPLOADED"
 
 export interface DocumentStateDetail {
+  id: string
   comment: string
   status: FileStatus
   url: string
+  name: string
 }
+
 export interface AllDocumentStateDetail {
   photo: DocumentStateDetail
   parentalConsent: DocumentStateDetail
   transcript: DocumentStateDetail
 }
 
-export interface ApplicationInfo {
-  id: string
-  code?: string
-  applicationState: ApplicationState
-  documentStateDetails: AllDocumentStateDetail
-}
-
-export interface StateDTO {
+export interface ApplicationStateDTO {
   lgNumber: string
   state: ApplicationState
 }
 
-export declare type ApplicationDTO = ApplicationInfo & ProfileDTO & Answer1DTO & Answer2DTO & DocumentDTO
-export declare type UpdateApplicationDTO = ProfileDTO | Answer1DTO | Answer2DTO | DocumentDTO
+export declare type ApplicationDTO = ProfileDTO & Answer1DTO & Answer2DTO
+export declare type UpdateApplicationDTO = ProfileDTO | Answer1DTO | Answer2DTO

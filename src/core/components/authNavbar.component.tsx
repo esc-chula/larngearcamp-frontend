@@ -43,8 +43,8 @@ const AuthNavbarComponent: React.FC = () => {
   )
 
   const { me } = useAuthContext()
-  const name = me.data && `${me.data.name.first} ${me.data.name.last}`
-  const imageUrl = me.data?.application?.picture
+  const name = me.data && `${me.data.firstname} ${me.data.lastname}`
+  const imageUrl = me.data?.picture
 
   return (
     <>

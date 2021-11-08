@@ -1,16 +1,16 @@
-import React, { createContext, useEffect, useContext, useState, useCallback, useRef } from "react"
+import React, { createContext, useEffect, useContext, useState, useCallback } from "react"
 import { ShowLoadingComponent } from "../components/loading.component"
 import AuthServiceAPI from "../services/auth.service"
 import useSWR, { responseInterface } from "swr"
 import { AxiosError } from "axios"
 import ApplicationServiceAPI from "../services/application.service"
-import MeDTO from "../models/dto/me.dto"
+import MyProfileModel from "../models/myprofile.models"
 
 interface AuthConstruct {
   userId: string | null
   isLoggedIn: boolean
   isReady: boolean
-  me: responseInterface<MeDTO, Error>
+  me: responseInterface<MyProfileModel, Error>
   loginFb: (facebookAccessToken: string) => Promise<void>
   loginGoogle: (googleAccessToken: string) => Promise<void>
   logout: () => Promise<void>
@@ -51,20 +51,12 @@ export const AuthProvider: React.FC = ({ ...other }) => {
       const res = await ApplicationServiceAPI.getApplicationAPI()
       const stateRes = await ApplicationServiceAPI.getApplicationStateAPI()
       const attachRes = await ApplicationServiceAPI.getAttachmentAPI()
-      const meData: MeDTO = {
-        id: stateRes.lgNumber,
-        email: "",
-        role: "user",
-        name: {
-          first: res.firstname,
-          last: res.lastname,
-          display: res.nickname
-        },
-        application: {
-          code: res.code || "",
-          picture: attachRes.photo ? attachRes.photo.url : "",
-          applicationState: stateRes.state
-        }
+      const meData: MyProfileModel = {
+        applicationState: stateRes.state || "",
+        firstname: res.firstName || "",
+        lastname: res.lastName || "",
+        lgCode: stateRes.lgNumber || "",
+        picture: attachRes.photo.url || ""
       }
 
       return meData
@@ -96,6 +88,10 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     if (!userId) fetchUser()
   }, [me, userId])
 
+  if (!!userId && !me.data) {
+    return <ShowLoadingComponent />
+  }
+
   const value: AuthConstruct = {
     isReady,
     userId,
@@ -104,10 +100,6 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     loginFb,
     logout,
     loginGoogle
-  }
-
-  if (!!userId && !me.data) {
-    return <ShowLoadingComponent />
   }
 
   return <AuthContext.Provider value={value} {...other} />
