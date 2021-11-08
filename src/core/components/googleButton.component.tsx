@@ -16,7 +16,9 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
       try {
         await loginGoogle(res.credential)
         history.push("/profile")
-      } catch (err) {}
+      } catch (err) {
+        console.log(err)
+      }
     },
     [history, loginGoogle]
   )
