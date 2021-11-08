@@ -41,16 +41,42 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function mapApplicationToProfile(application: ApplicationDTO): ProfileModel {
-  const birthDateDate = new Date()
+  application = ({} as unknown) as ApplicationDTO
+  const birthDateDate = new Date(application.birthDate || "2021-11-08")
   const formattedBirthDate = format(birthDateDate, "yyyy-MM-dd")
-  const contact = application.contact
-  if (contact) {
-    contact.zip = `${contact.zip}`
-  }
+
   return {
-    ...application,
+    title: application.title,
+    name: application.firstname,
+    surname: application.lastname,
+    nickname: application.nickname,
     birthDate: formattedBirthDate,
-    contact
+    contact: {
+      address: application.mailAddress,
+      subDistrict: application.mailTumbol,
+      district: application.mailAmphoe,
+      province: application.mailProvince,
+      facebookName: application.contactFacebook,
+      lineId: application.contactLineApp,
+      parentName: application.parentName,
+      parentNumber: application.parentTelephone,
+      parentRelationship: application.parentRelationship,
+      phoneNumber: application.mobileTelephone,
+      recipient: application.mailRecipientName,
+      zip: application.mailPostalCode,
+      homeNumber: application.parentTelephone
+    },
+    education: application.educationLevel,
+    school: application.educationalInstitution,
+    province: application.educationalInstitutionProvince,
+    religion: application.religion,
+    health: {
+      allergicDrug: application.allergicDrug,
+      allergicFood: application.allergicFood,
+      bloodType: application.bloodGroup,
+      congenitalDisease: application.illness,
+      drug: application.illnessdrug
+    }
   }
 }
 
