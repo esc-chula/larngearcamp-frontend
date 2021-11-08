@@ -14,8 +14,6 @@ interface MeDTO {
     picture: string
     applicationState: ApplicationState
   }
-  createdAt: Date
-  updatedAt: Date
 }
 
 export default MeDTO

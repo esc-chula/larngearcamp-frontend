@@ -1,7 +1,6 @@
 import { ApplicationState } from "./application.dto"
 
 interface UserDTO {
-  createdAt: string
   email: string
   id: string
   name: {
@@ -15,7 +14,6 @@ interface UserDTO {
     applicationState: ApplicationState
   }
   role: "admin" | "user"
-  updatedAt: string
 }
 
 export default UserDTO
