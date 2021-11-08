@@ -102,14 +102,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
             mutateApplication(application => ({ ...application, [name]: result.file }), false)
             if (name === "photo") {
               mutateMe(me => {
-                if (me.application) {
-                  return {
-                    ...me,
-                    application: { ...me.application, picture: result.file.url }
-                  }
-                } else {
-                  return me
-                }
+                return me
               }, false)
             }
             setValue(`${name}URL`, result.file.url)

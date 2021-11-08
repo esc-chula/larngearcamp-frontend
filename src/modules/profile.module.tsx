@@ -10,6 +10,10 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import MeDTO from "../core/models/dto/me.dto"
 import { ProfileStatus } from "../core/models/statusInfo.model"
 import RegisterCard from "../core/components/profile/registercard.component"
+import { ApplicationModels } from "../core/models/application.models"
+import MyProfileModel from "../core/models/myprofile.models"
+import { useApplicationStateContext } from "../core/providers/applicationState.provider"
+import { ApplicationState } from "../core/models/dto/application.dto"
 //import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
@@ -30,12 +34,12 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const resolveStatus = (state: String /*application: MeDTO["application"]*/): ProfileStatus => {
-  // if (!application) {
-  //   return "start"
-  // }
+const resolveStatus = (lgNumber: string, state: ApplicationState): ProfileStatus => {
+  if (!state) {
+    return "start"
+  }
 
-  //const { lgNumber, state } = application //new API
+  // const { lgNumber, state } = application //new API
 
   switch (state) {
     case "DRAFT":
@@ -64,15 +68,15 @@ const resolveStatus = (state: String /*application: MeDTO["application"]*/): Pro
 const ProfileModule = () => {
   const classes = useStyles()
   const setLoading = useLoadingStatus()
-  //   const { createApplication } = useApplicationContext()
-  //   const { mutateApplication } = useApplicationStateContext()
-  //   const { me } = useAuthContext()
-  //   const { mutate: mutateMe } = me
-  //   const { application } = me.data as MeDTO
+  const { createApplication } = useApplicationContext()
+  const { mutateApplication } = useApplicationStateContext()
+  const { me } = useAuthContext()
+  const { mutate: mutateMe } = me
+  const { lgCode, applicationState } = me.data as MyProfileModel
 
-  //   const profileStatus = resolveStatus(application)
+  const profileStatus = resolveStatus(lgCode, applicationState)
 
-  const profileStatus: ProfileStatus = resolveStatus("start")
+  // const profileStatus: ProfileStatus = resolveStatus("start")
 
   const resolveStepProps = (status: ProfileStatus) => {
     let props = Array<StepCardProps>(7)

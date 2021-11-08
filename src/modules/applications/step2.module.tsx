@@ -18,6 +18,7 @@ import { format } from "date-fns"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 import { useGlobalContext } from "../../core/providers/global.provider"
 import { AxiosError } from "axios"
+import { ApplicationModels } from "../../core/models/application.models"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -40,16 +41,17 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function mapApplicationToProfile(application: ApplicationDTO): ProfileModel {
-  application = ({} as unknown) as ApplicationDTO
-  const birthDateDate = new Date(application.birthDate || "2021-11-08")
+function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
+  const birthDateDate = new Date(application.birthDate)
   const formattedBirthDate = format(birthDateDate, "yyyy-MM-dd")
+
+  console.log(application)
 
   return {
     title: application.title,
-    name: application.firstname,
-    surname: application.lastname,
-    nickname: application.nickname,
+    name: application.firstName,
+    surname: application.lastName,
+    nickname: application.nickName,
     birthDate: formattedBirthDate,
     contact: {
       address: application.mailAddress,
@@ -72,10 +74,10 @@ function mapApplicationToProfile(application: ApplicationDTO): ProfileModel {
     religion: application.religion,
     health: {
       allergicDrug: application.allergicDrug,
-      allergicFood: application.allergicFood,
+      allergicFood: application.foodRestriction,
       bloodType: application.bloodGroup,
       congenitalDisease: application.illness,
-      drug: application.illnessdrug
+      drug: application.illnessDrug
     }
   }
 }

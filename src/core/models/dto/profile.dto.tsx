@@ -1,8 +1,8 @@
 interface ProfileDTO {
   title: string
-  firstname: string
-  lastname: string
-  nickname: string
+  firstName: string
+  lastName: string
+  nickName: string
   birthDate: string
   religion: string
   educationLevel: string
@@ -10,9 +10,9 @@ interface ProfileDTO {
   educationalInstitutionProvince: string
   bloodGroup: string
   illness: string
-  allergicFood: string
+  foodRestriction: string
   allergicDrug: string
-  illnessdrug: string
+  illnessDrug: string
   mailRecipientName: string
   mailAddress: string
   mailTumbol: string
