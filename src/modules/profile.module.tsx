@@ -72,7 +72,7 @@ const ProfileModule = () => {
 
   //   const profileStatus = resolveStatus(application)
 
-  const profileStatus: ProfileStatus = resolveStatus("REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE")
+  const profileStatus: ProfileStatus = resolveStatus("start")
 
   const resolveStepProps = (status: ProfileStatus) => {
     let props = Array<StepCardProps>(7)
