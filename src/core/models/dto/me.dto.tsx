@@ -1,4 +1,4 @@
-import { ApplicationState, DocumentState, EditingState } from "./application.dto"
+import { ApplicationState } from "./application.dto"
 
 interface MeDTO {
   id: string
@@ -13,8 +13,6 @@ interface MeDTO {
     code: string
     picture: string
     applicationState: ApplicationState
-    documentState: DocumentState
-    editingState: EditingState
   }
 }
 

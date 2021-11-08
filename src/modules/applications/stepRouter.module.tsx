@@ -10,7 +10,7 @@ import { NotFoundModule } from "../notfound.module"
 import { NavigatorComponent } from "../../core/components/navigator.component"
 import { Container } from "@material-ui/core"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
-import { EditingState } from "../../core/models/dto/application.dto"
+import { ApplicationState } from "../../core/models/dto/application.dto"
 import BackgroundComponent from "../../core/components/background.component"
 
 export function useNextStep() {
@@ -24,33 +24,33 @@ export function useNextStep() {
 
 interface Step {
   Component: React.ComponentType
-  allowedStates: EditingState[]
+  allowedStates: ApplicationState[]
 }
 
 const steps: Record<string, Step> = {
   "1": {
     Component: ApplicationStepOneModule,
-    allowedStates: ["FULL"]
+    allowedStates: ["DRAFT"]
   },
   "2": {
     Component: ApplicationStepTwoModule,
-    allowedStates: ["FULL"]
+    allowedStates: ["DRAFT"]
   },
   "3": {
     Component: ApplicationStepThreeModule,
-    allowedStates: ["FULL"]
+    allowedStates: ["DRAFT"]
   },
   "4": {
     Component: ApplicationStepFourModule,
-    allowedStates: ["FULL"]
+    allowedStates: ["DRAFT"]
   },
   "5": {
     Component: ApplicationStepFiveModule,
-    allowedStates: ["FULL", "DOCUMENT_ONLY"]
+    allowedStates: ["DRAFT", "REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE"]
   },
   "6": {
     Component: ApplicationStepSixModule,
-    allowedStates: ["FULL", "DOCUMENT_ONLY"]
+    allowedStates: ["DRAFT", "REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE"]
   }
 }
 
