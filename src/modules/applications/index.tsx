@@ -10,9 +10,9 @@ interface ApplicationModuleProps {
 }
 
 const ApplicationModule: React.FC<ApplicationModuleProps> = ({ render }) => {
-  if (!render) {
-    return <ShowLoadingComponent />
-  }
+  // if (!render) {
+  //   return <ShowLoadingComponent />
+  // }
   return (
     <Switch>
       <UserGuardedRoute exact path="/application">

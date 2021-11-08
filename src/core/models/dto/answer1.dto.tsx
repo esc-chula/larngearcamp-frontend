@@ -1,27 +1,22 @@
 interface Answer1DTO {
-  answer: {
-    firstPart: {
-      answer1: string
-      answer2: {
-        first: number
-        second: number
-        third: number
-        fourth: number
-      }
-      answer3: string
-      answer4: {
-        first: boolean
-        second: boolean
-        third: boolean
-        fourth: boolean
-        fifth: string
-        sixth: string
-      }
-      answer5: string
-      answer6: number
-      answer7: string
-    }
-  }
+  answerA1: string
+  answerA2_1: number
+  answerA2_2: number
+  answerA2_3: number
+  answerA2_4: number
+  answerA2_5: number
+  answerA3: string
+  answerA4: string
+  answerA5_1: boolean
+  answerA5_2: boolean
+  answerA5_3: string
+  answerA5_4: boolean
+  answerA5_5: boolean
+  answerA5_6: boolean
+  answerA5_7: boolean
+  answerA5_8: string
+  answer6: string
+  answer7: string
 }
 
 export default Answer1DTO
