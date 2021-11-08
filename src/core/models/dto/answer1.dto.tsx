@@ -15,8 +15,8 @@ interface Answer1DTO {
   answerA5_6: boolean
   answerA5_7: boolean
   answerA5_8: string
-  answer6: string
-  answer7: string
+  answerA6: string
+  answerA7: string
 }
 
 export default Answer1DTO
