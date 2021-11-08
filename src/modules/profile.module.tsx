@@ -164,7 +164,7 @@ const ProfileModule = () => {
       <div>
         <ProfileCard lgNumber="LG5232" fullName="นายลานเกียร์ สุดลึกล้ำเหลือกำหนด" />
         {resolveStepProps(profileStatus).map(step => {
-          return <StepCard key={step.step} step={step.step} status={step.status} pass={step.pass} />
+          return <StepCard key={`step-card-${step.step}`} step={step.step} status={step.status} pass={step.pass} />
         })}
       </div>
     )
