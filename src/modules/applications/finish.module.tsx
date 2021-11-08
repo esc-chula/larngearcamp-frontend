@@ -55,9 +55,9 @@ const ApplicationFinishModule = () => {
   const classes = useStyles()
   const { application } = useApplicationStateContext()
 
-  // if (application.editingState !== "LOCKED") {
-  //   return <Redirect to="/application/step/1" />
-  // }
+  if (application.state !== "SUBMITTED") {
+    return <Redirect to="/application/step/1" />
+  }
 
   return (
     <>
