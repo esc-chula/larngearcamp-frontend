@@ -2,14 +2,15 @@ import FAQModel from "./faq.model"
 
 export type ProfileStatus =
   | "start"
-  | "continue"
-  | "pending"
-  | "docOk"
-  | "docNotOk"
+  | "draft"
+  | "submitted"
+  | "fileChecked"
+  | "fileRejected"
+  | "invitedToInterview"
+  | "notInvitedToInterview"
   | "passedInterview"
   | "failedInterview"
-  | "passedFinal"
-  | "failedFinal"
+  | "paymentAccepted"
 
 interface StatusInfoModel {
   start: FAQModel
