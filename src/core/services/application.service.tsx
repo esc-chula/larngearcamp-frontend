@@ -1,7 +1,6 @@
-import { AxiosResponse } from "axios"
 import { httpClient } from "../../utils/http"
 import DocumentType from "../models/documentType.constant"
-import { ApplicationDTO, UpdateApplicationDTO, ApplicationInfo } from "../models/dto/application.dto"
+import { ApplicationDTO, UpdateApplicationDTO, ApplicationInfo, StateDTO, AllDocumentStateDetail } from "../models/dto/application.dto"
 import FileDTO from "../models/dto/file.dto"
 
 export interface ApplicationService {
@@ -10,6 +9,8 @@ export interface ApplicationService {
   getApplicationAPI: () => Promise<ApplicationDTO>
   updateApplicationAPI: (application: UpdateApplicationDTO) => Promise<ApplicationDTO>
   finalizeApplicationAPI: () => Promise<{ message: string; application: ApplicationInfo }>
+  getApplicationStateAPI: () => Promise<StateDTO>
+  getAttachmentAPI: () => Promise<AllDocumentStateDetail>
 }
 
 const createApplicationAPI = async (): Promise<void> => {
@@ -24,7 +25,11 @@ const getApplicationAPI = async (): Promise<ApplicationDTO> => {
   return (await httpClient.get(`/application`)).data
 }
 
-const getFormState = async (): Promise<AxiosResponse> => {
+const getAttachmentAPI = async (): Promise<AllDocumentStateDetail> => {
+  return (await httpClient.get(`/application/attachment`)).data
+}
+
+const getApplicationStateAPI = async (): Promise<StateDTO> => {
   return (await httpClient.get(`/application/state`)).data
 }
 
@@ -41,7 +46,9 @@ const ApplicationServiceAPI: ApplicationService = {
   uploadDocumentAPI,
   getApplicationAPI,
   updateApplicationAPI,
-  finalizeApplicationAPI
+  finalizeApplicationAPI,
+  getApplicationStateAPI,
+  getAttachmentAPI
 }
 
 export default ApplicationServiceAPI

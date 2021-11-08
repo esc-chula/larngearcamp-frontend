@@ -2,7 +2,7 @@ import UploadFileModel from "../models/uploadFile.model"
 
 const uploadFileConstant: Array<UploadFileModel> = [
   {
-    name: "picture",
+    name: "photo",
     body1: "รูปถ่ายผู้สมัคร (รูปถ่ายหน้าตรง เห็นหน้าชัดเจน เช่น รูปติดบัตร เป็นต้น)",
     body2: "ไฟล์รูปภาพประเภท .jpg / .png ขนาดไม่เกิน 2 MB",
     accept: "image/jpeg, image/png",

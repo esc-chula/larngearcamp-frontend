@@ -49,29 +49,27 @@ export const AuthProvider: React.FC = ({ ...other }) => {
   const meFetcher = useCallback(async () => {
     try {
       const res = await ApplicationServiceAPI.getApplicationAPI()
-      console.log(res)
+      const stateRes = await ApplicationServiceAPI.getApplicationStateAPI()
+      const attachRes = await ApplicationServiceAPI.getAttachmentAPI()
       const meData: MeDTO = {
-        id: res.id,
-        email: res.userEmail || "",
+        id: stateRes.lgNumber,
+        email: "",
         role: "user",
         name: {
-          first: res.name,
-          last: res.surname,
+          first: res.firstname,
+          last: res.lastname,
           display: res.nickname
         },
         application: {
           code: res.code || "",
-          picture: res.picture ? res.picture.url : "",
-          applicationState: res.applicationState,
-          documentState: res.documentState,
-          editingState: res.editingState
+          picture: attachRes.photo ? attachRes.photo.url : "",
+          applicationState: stateRes.state
         }
       }
 
-      console.log(meData)
-
       return meData
     } catch (error) {
+      console.log(error)
       if ((error as AxiosError)?.response?.status === 401) {
         // token not expired yet but invalid
         logout()
@@ -95,7 +93,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
         setReady(true)
       }
     }
-    if (userId) fetchUser()
+    if (!userId) fetchUser()
   }, [me, userId])
 
   const value: AuthConstruct = {

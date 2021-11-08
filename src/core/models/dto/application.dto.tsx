@@ -22,7 +22,7 @@ export interface DocumentStateDetail {
   url: string
 }
 export interface AllDocumentStateDetail {
-  picture: DocumentStateDetail
+  photo: DocumentStateDetail
   parentalConsent: DocumentStateDetail
   transcript: DocumentStateDetail
 }
@@ -32,6 +32,11 @@ export interface ApplicationInfo {
   code?: string
   applicationState: ApplicationState
   documentStateDetails: AllDocumentStateDetail
+}
+
+export interface StateDTO {
+  lgNumber: string
+  state: ApplicationState
 }
 
 export declare type ApplicationDTO = ApplicationInfo & ProfileDTO & Answer1DTO & Answer2DTO & DocumentDTO

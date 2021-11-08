@@ -60,7 +60,7 @@ function mapApplicationToDocument(application: ApplicationDTO): DocumentModel {
     }
   } as unknown) as ApplicationDTO
   return ({
-    pictureURL: getUrl(application.picture),
+    pictureURL: getUrl(application.photo),
     transcriptURL: getUrl(application.transcript),
     parentalConsentURL: getUrl(application.parentalConsent)
   } as Partial<DocumentModel>) as any

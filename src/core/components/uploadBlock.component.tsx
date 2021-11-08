@@ -100,7 +100,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           try {
             const result = await uploadDocument(formData, name)
             mutateApplication(application => ({ ...application, [name]: result.file }), false)
-            if (name === "picture") {
+            if (name === "photo") {
               mutateMe(me => {
                 if (me.application) {
                   return {
