@@ -10,14 +10,12 @@ import { AdminGuardedRoute } from "../core/guards/admin.guard"
 import { ProfileModule } from "./profile.module"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
-import { AdminDashboardModule } from "./admin/dashboard.module"
 import { FAQModule } from "./faq.module"
 import { ForgotPasswordModule } from "./forgotpassword.module"
 import { ResetPasswordModule } from "./resetpassword.module"
 import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
 import { ShowLoadingComponent } from "../core/components/loading.component"
 import { DocModule } from "./doc.module"
-import { AdminProvider } from "../core/providers/admin.provider"
 import { useAnnounceContext } from "../core/providers/announce.provider"
 import { PrivacyPoflicyModule } from "./privacy-policy.module"
 
@@ -73,11 +71,7 @@ const RouteModule: React.FC = () => {
         </UserGuardedRoute>
 
         {/* Admin Guard */}
-        <AdminGuardedRoute exact path="/admin/dashboard">
-          <AdminProvider>
-            <AdminDashboardModule />
-          </AdminProvider>
-        </AdminGuardedRoute>
+        <AdminGuardedRoute exact path="/admin/dashboard"></AdminGuardedRoute>
 
         {/* NotFound Route */}
         <Route>

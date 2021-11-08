@@ -11,6 +11,7 @@ export type FileStatus = "CHANGE_REQUIRED" | "EMPTY" | "PASSED" | "UPLOADED"
 export interface DocumentStateDetail {
   comment: string
   status: FileStatus
+  url: string
 }
 export interface AllDocumentStateDetail {
   picture: DocumentStateDetail

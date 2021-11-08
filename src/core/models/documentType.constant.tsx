@@ -1,2 +1,2 @@
-type DocumentType = "picture" | "transcript" | "letterOfConsent"
+type DocumentType = "picture" | "transcript" | "parentalConsent"
 export default DocumentType

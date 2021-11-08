@@ -228,18 +228,18 @@ export const convertAnswer2SchemaToAnswer2DTO = (props: Answer2Model): Answer2DT
 //   ]
 // }
 
-export const adminSplitingApplicationDocumentPart = (props: ApplicationDTO): Array<UserDisplayDataProps> => {
-  return [
-    { name: "เอกสารประกอบการรับสมัคร", header: true },
-    { name: "รูปถ่ายผู้สมัคร", value: props.picture.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name },
-    { name: "หนังสือรับรองจากผู้ปกครอง", value: props.letterOfConsent.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name },
-    {
-      name: "ใบ ปพ. 1 หรือ ปพ.7 หรือ เอกสารยืนยันตัวตนอื่นๆ",
-      value: props.transcript.url,
-      xs: 12,
-      sm: 12,
-      md: 12,
-      linkLabel: props.picture.name
-    }
-  ]
-}
+// export const adminSplitingApplicationDocumentPart = (props: ApplicationDTO): Array<UserDisplayDataProps> => {
+//   return [
+//     { name: "เอกสารประกอบการรับสมัคร", header: true },
+//     { name: "รูปถ่ายผู้สมัคร", value: props.picture.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name },
+//     { name: "หนังสือรับรองจากผู้ปกครอง", value: props.letterOfConsent.url, xs: 12, sm: 12, md: 12, linkLabel: props.picture.name },
+//     {
+//       name: "ใบ ปพ. 1 หรือ ปพ.7 หรือ เอกสารยืนยันตัวตนอื่นๆ",
+//       value: props.transcript.url,
+//       xs: 12,
+//       sm: 12,
+//       md: 12,
+//       linkLabel: props.picture.name
+//     }
+//   ]
+// }

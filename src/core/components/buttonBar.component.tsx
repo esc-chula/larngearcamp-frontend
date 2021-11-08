@@ -61,7 +61,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
     [wrappedBeforeNavigate, history, nextPage]
   )
 
-  const showBothButtons = application?.editingState === "FULL" || step > 5
+  const showBothButtons = application || step > 5
 
   return (
     <Grid container spacing={2}>
