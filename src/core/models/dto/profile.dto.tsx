@@ -20,8 +20,8 @@ interface ProfileDTO {
   mailProvince: string
   mailPostalCode: string
   mobileTelephone: string
-  landlineTelephone: string
-  contactEmail: string
+  landlineTelephone: string | null
+  contactEmail: null
   contactFacebook: string
   contactLineApp: string
   parentName: string
