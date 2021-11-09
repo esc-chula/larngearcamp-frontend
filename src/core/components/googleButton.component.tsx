@@ -16,7 +16,7 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
         await loginGoogle(res.credential)
         history.push("/profile")
       } catch (err) {
-        console.log(err)
+        activeSnackBar({ type: "error", message: "เข้าสู่ระบบด้วย Facebook ไม่สำเร็จ" })
       }
     }
 
@@ -31,7 +31,7 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
         size: "large",
         shape: "pill",
         logo_alignment: "left",
-        type: "default"
+        type: "standard"
       })
     }
     initGoogleButton()
