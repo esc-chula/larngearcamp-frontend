@@ -61,11 +61,9 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean, is
   })
 
   const is404 = error?.response?.status === 404
-  // console.log("application", application)
 
   const updateApplication = useCallback(
     async (application: UpdateApplicationDTO) => {
-      //console.log("application inner ", application)
       await ApplicationServiceAPI.updateApplicationAPI(application)
       await mutateApplication(fetchApplication, true)
     },
