@@ -9,6 +9,9 @@ type DocumentDTO = {
   [index in DocumentType]: DocumentItem
 }
 
+/**
+ * @deprecated
+ */
 export function friendlyFileName(name: string | undefined): string {
   if (!name) {
     return ""

@@ -44,7 +44,7 @@ function getUrl(document: DocumentStateDetail): string {
 
 function mapApplicationToDocument(application: ApplicationModels): DocumentModel {
   return ({
-    pictureURL: getUrl(application.photo),
+    photoURL: getUrl(application.photo),
     transcriptURL: getUrl(application.transcript),
     parentalConsentURL: getUrl(application.parentalConsent)
   } as Partial<DocumentModel>) as any

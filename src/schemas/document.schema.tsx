@@ -10,7 +10,7 @@ const urlTest = string()
 
 const DocumentSchema = object()
   .shape({
-    pictureURL: urlTest,
+    photoURL: urlTest,
     transcriptURL: urlTest,
     parentalConsentURL: urlTest
   })
