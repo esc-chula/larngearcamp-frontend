@@ -37,7 +37,7 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
     initGoogleButton()
   }, [history, loginGoogle])
 
-  return <div id="google_signin" />
+  return <div id="google_signin" style={{ width: "100%" }} />
 }
 
 const GoogleButtonComponentWithStyles = withStyles(theme => ({
