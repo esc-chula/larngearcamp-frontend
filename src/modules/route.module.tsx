@@ -1,11 +1,10 @@
 import React, { Suspense } from "react"
-import { Switch, Route, Redirect } from "react-router-dom"
+import { Switch, Route } from "react-router-dom"
 
 // COMPONENTS
 import { HomeModule } from "./home.module"
 import { LoginModule } from "./login.module"
 import { UserGuardedRoute } from "../core/guards/user.guard"
-import { AdminGuardedRoute } from "../core/guards/admin.guard"
 import { ProfileModule } from "./profile.module"
 import { GuestGuardedRoute } from "../core/guards/guest.guard"
 import { NotFoundModule } from "./notfound.module"
@@ -57,9 +56,6 @@ const RouteModule: React.FC = () => {
           <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
           {/* )} */}
         </UserGuardedRoute>
-
-        {/* Admin Guard */}
-        <AdminGuardedRoute exact path="/admin/dashboard"></AdminGuardedRoute>
 
         {/* NotFound Route */}
         <Route>
