@@ -41,7 +41,18 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean, is
     return {
       ...resApp,
       ...resState,
-      ...resAttach
+      photo: {
+        ...resAttach.photo,
+        url: resAttach.photo.url || ""
+      },
+      parentalConsent: {
+        ...resAttach.parentalConsent,
+        url: resAttach.parentalConsent.url || ""
+      },
+      transcript: {
+        ...resAttach.transcript,
+        url: resAttach.transcript.url || ""
+      }
     }
   }
 

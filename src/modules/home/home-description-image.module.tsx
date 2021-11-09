@@ -51,16 +51,15 @@ const HomeDescriptionImage = () => {
       <div>
         {isLoading && <Skeleton variant="rect" className={classes.image} />}
         {descriptionConstant.map(({ src }, idx) => (
-            <img
-              src={src}
-              key={`home-image-${idx}`}
-              alt="home-image-${idx}"
-              onLoad={() => idx===0 && setLoading(false)}
-              style={{ display: index === idx && !isLoading ? "block" : "none" }}
-              className={classes.image}
-            />
-          )
-        )}
+          <img
+            src={src}
+            key={`home-image-${idx}`}
+            alt="home-image-${idx}"
+            onLoad={() => idx === 0 && setLoading(false)}
+            style={{ display: index === idx && !isLoading ? "block" : "none" }}
+            className={classes.image}
+          />
+        ))}
       </div>
     </Fade>
   )

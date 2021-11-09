@@ -21,7 +21,7 @@ export interface DocumentStateDetail {
   comment: string
   status: FileStatus
   url: string
-  name: string
+  originalName: string
 }
 
 export interface AllDocumentStateDetail {
