@@ -5,7 +5,7 @@ import FileDTO from "../models/dto/file.dto"
 
 export interface ApplicationService {
   createApplicationAPI: () => Promise<void>
-  uploadDocumentAPI: (data: FormData, type: DocumentType) => Promise<FileDTO>
+  uploadDocumentAPI: (data: FormData) => Promise<FileDTO>
   getApplicationAPI: () => Promise<ApplicationDTO>
   updateApplicationAPI: (application: UpdateApplicationDTO) => Promise<ApplicationDTO>
   finalizeApplicationAPI: () => Promise<ApplicationDTO>
@@ -17,8 +17,8 @@ const createApplicationAPI = async (): Promise<void> => {
   return (await httpClient.post(`/application`)).data
 }
 
-const uploadDocumentAPI = async (data: FormData, type: DocumentType): Promise<FileDTO> => {
-  return (await httpClient.post(`/application/document/${type}`, data)).data
+const uploadDocumentAPI = async (data: FormData): Promise<FileDTO> => {
+  return (await httpClient.post(`/application/attachment`, data)).data
 }
 
 const getApplicationAPI = async (): Promise<ApplicationDTO> => {

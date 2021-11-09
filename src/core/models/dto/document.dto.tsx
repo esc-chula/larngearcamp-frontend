@@ -1,7 +1,7 @@
 import DocumentType from "../documentType.constant"
 
 export interface DocumentItem {
-  name?: string
+  originalName?: string
   url: string
 }
 

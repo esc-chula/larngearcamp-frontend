@@ -61,7 +61,6 @@ export const AuthProvider: React.FC = ({ ...other }) => {
 
       return meData
     } catch (error) {
-      console.log(error)
       if ((error as AxiosError)?.response?.status === 401) {
         // token not expired yet but invalid
         logout()
