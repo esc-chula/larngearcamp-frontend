@@ -69,7 +69,7 @@ const stepCardConstant: StepCardModel = {
             <span style={{ fontWeight: 500, color: "#941014" }}>ภายใน dd/mm/yyyy เวลา 23:59 น.</span>
           </>
         ),
-        buttons: [["แก้ไขเอกสาร", "/docs"]]
+        buttons: [["แก้ไขเอกสาร", "/application/step/5"]]
       }
     },
     complete: {
