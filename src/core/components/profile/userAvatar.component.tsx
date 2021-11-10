@@ -20,11 +20,6 @@ const UserAvatar: React.FC<BoxProps> = props => {
       <>
         <Box {...props}>
           <Avatar className={classes.avatar} alt="user">
-            ล
-          </Avatar>
-        </Box>
-        <Box {...props}>
-          <Avatar className={classes.avatar} alt="user">
             {firstname[0]}
           </Avatar>
         </Box>

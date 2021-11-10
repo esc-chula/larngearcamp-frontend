@@ -1,21 +1,13 @@
-import React, { useCallback } from "react"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import ProfileCard from "../core/components/profile/profilecard.component"
 import { Container } from "@material-ui/core"
-import { Link } from "react-router-dom"
-import { useApplicationContext } from "../core/providers/application.provider"
-import { useLoadingCallback, useLoadingStatus } from "../core/components/loading.component"
-import StepCard, { StepCardProps } from "../core/components/profile/stepCard.component"
 import { useAuthContext } from "../core/providers/auth.provider"
-import MeDTO from "../core/models/dto/me.dto"
 import { ProfileStatus } from "../core/models/profileStatus.model"
 import RegisterCard from "../core/components/profile/registercard.component"
 import StepCardList from "../core/components/profile/stepCardList.component"
-import { ApplicationModels } from "../core/models/application.models"
 import MyProfileModel from "../core/models/myprofile.models"
 import { useApplicationStateContext } from "../core/providers/applicationState.provider"
-import { ApplicationState, DocumentStateDetail, FileStatus } from "../core/models/dto/application.dto"
-//import { useApplicationStateContext } from "../core/providers/applicationState.provider"
+import { FileStatus } from "../core/models/dto/application.dto"
 
 const useStyles = makeStyles(theme => ({
   bg: {
