@@ -18,6 +18,7 @@ const useStyle = makeStyles((theme: ITheme) => ({
     flexDirection: "column",
     alignItems: "center",
     color: theme.palette.gray[700],
+    backgroundColor: theme.palette.gray[50],
     padding: `${theme.spacing(9)}px min(${theme.spacing(9)}px, 5vw)`,
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(2),

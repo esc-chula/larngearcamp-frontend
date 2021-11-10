@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import LazyLoad from "react-lazyload"
 import { Link } from "react-router-dom"
+import { ITheme } from "../../styles/types"
 
 interface IImage {
   src: string
@@ -19,10 +20,11 @@ interface HomeGalleryProps {
   images: IImage[]
 }
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles((theme: ITheme) => ({
   root: {
     width: "100%",
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.gray[50],
+    color: theme.palette.gray[700],
     margin: theme.spacing(4, 0),
     display: "flex",
     flexDirection: "column",
@@ -109,8 +111,8 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" className={classes.galleryHeader}>
-        Gallery
+      <Typography variant="h1" className={classes.galleryHeader}>
+        GALLERY
       </Typography>
       <div className={classes.galleryRoot}>
         <Slider {...settings}>
@@ -131,7 +133,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                   </div>
                   <Link to="/profile" className="no-underline">
                     <Button variant="contained" color="primary" className={classes.button}>
-                      สมัครเลย! วันนี้ - 18 ตุลา 2021
+                      สมัครเลย! วันนี้ - 8 ธันวาคม 2564
                     </Button>
                   </Link>
                 </div>
