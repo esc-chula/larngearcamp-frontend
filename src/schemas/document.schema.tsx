@@ -4,7 +4,6 @@ import yup from "yup"
 const urlTest = string()
   .required("ยังไม่ได้อัพโหลดไฟล์")
   .test("not default", "ยังไม่ได้อัพโหลดไฟล์", value => {
-    console.log(value)
     return !!value && value !== ""
   })
 

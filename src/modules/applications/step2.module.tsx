@@ -44,8 +44,6 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
   const birthDateDate = new Date(application.birthDate)
   const formattedBirthDate = format(birthDateDate, "yyyy-MM-dd")
 
-  console.log(application)
-
   return {
     title: application.title,
     name: application.firstName,
