@@ -2,6 +2,7 @@ import React from "react"
 import { Card, Container, Typography, Button, makeStyles } from "@material-ui/core"
 import { ProfileStatus } from "../../models/statusInfo.model"
 import Gear from "../../../assets/images/icon/gear-icon.svg"
+import { Link } from "react-router-dom"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -95,14 +96,18 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
           เพื่อมาเป็นส่วนหนึ่งในความสนุกที่ไม่สามารถหาจากที่อื่นได้อีก!
         </Typography>
         {props.profileStatus === "start" && (
-          <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`}>
-            สมัครเข้าค่าย
-          </Button>
+          <Link to="/application" className="no-underline">
+            <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`}>
+              สมัครเข้าค่าย
+            </Button>
+          </Link>
         )}
         {props.profileStatus === "draft" && (
-          <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`}>
-            สมัครต่อจากครั้งที่แล้ว
-          </Button>
+          <Link to="/application" className="no-underline">
+            <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`}>
+              สมัครต่อจากครั้งที่แล้ว
+            </Button>
+          </Link>
         )}
         <img src={Gear} className={classes.gear1} />
         <img src={Gear} className={classes.gear2} />

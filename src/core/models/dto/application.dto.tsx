@@ -3,6 +3,7 @@ import Answer1DTO from "./answer1.dto"
 import Answer2DTO from "./answer2.dto"
 
 export type ApplicationState =
+  | "NOT_FILLED"
   | "DRAFT"
   | "SUBMITTED"
   | "FILE_CHECKED"

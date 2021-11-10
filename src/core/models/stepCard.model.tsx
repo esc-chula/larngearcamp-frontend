@@ -1,36 +1,25 @@
+interface ButtonModel {
+  label: string
+  opensDialog: boolean
+  path?: string
+}
+
+interface StepInfoModel {
+  title: React.ReactNode
+  contents: React.ReactNode
+  primaryButton?: ButtonModel
+  secondaryButton?: ButtonModel
+}
+
+interface StepStateModel {
+  true: StepInfoModel
+  false?: StepInfoModel
+}
+
 interface StepModel {
-  incomplete: {
-    pass: {
-      title: React.ReactNode
-      contents: React.ReactNode
-    }
-    fail?: {
-      title: React.ReactNode
-      contents: React.ReactNode
-    }
-  }
-  inProgress: {
-    pass: {
-      title: React.ReactNode
-      contents: React.ReactNode
-      buttons?: Array<Array<string>>
-    }
-    fail?: {
-      title: React.ReactNode
-      contents: React.ReactNode
-      buttons?: Array<Array<string>>
-    }
-  }
-  complete: {
-    pass: {
-      title: React.ReactNode
-      contents: React.ReactNode
-    }
-    fail?: {
-      title: React.ReactNode
-      contents: React.ReactNode
-    }
-  }
+  incomplete: StepStateModel
+  inProgress: StepStateModel
+  complete: StepStateModel
 }
 
 interface StepCardModel {

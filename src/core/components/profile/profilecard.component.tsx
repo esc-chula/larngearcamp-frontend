@@ -60,11 +60,11 @@ const useStyles = makeStyles(theme => ({
 }))
 
 interface ProfileCardProps {
-  lgNumber: string
+  lgCode: string
   fullName: string
 }
 
-const ProfileComponent: React.FC<ProfileCardProps> = ({ lgNumber, fullName }) => {
+const ProfileComponent: React.FC<ProfileCardProps> = ({ lgCode, fullName }) => {
   const classes = useStyles()
   // const { me } = useAuthContext()
   // const {
@@ -80,7 +80,7 @@ const ProfileComponent: React.FC<ProfileCardProps> = ({ lgNumber, fullName }) =>
       </div>
       <div className={classes.flexCol}>
         <Typography variant="h4" className={`${classes.text} ${classes.appcode}`}>
-          {lgNumber}
+          {lgCode}
         </Typography>
         <Typography variant="h4" className={`${classes.text} ${classes.name}`}>
           {fullName}
