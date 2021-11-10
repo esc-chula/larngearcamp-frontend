@@ -53,9 +53,9 @@ const stepCardConstant: StepCardModel = {
         ),
         primaryButton: {
           label: "แก้ไขเอกสาร",
-          onClick: () => (window.location.href = "/application/step/5")
+          opensDialog: false,
+          path: "/application/step/5"
         }
-
       }
     },
     complete: {
@@ -121,11 +121,12 @@ const stepCardConstant: StepCardModel = {
           "ในขั้นตอนนี้ น้อง ๆ จะต้องไปพบกับพวกเราที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย เพื่อเข้าร่วมการสอบสัมภาษณ์ แต่ไม่ต้องกังวลไปเพราะที่นี่พี่ ๆ ใจดีมาก ไม่กัดแน่นอน!",
         primaryButton: {
           label: "ตรวจสอบคิวสัมภาษณ์ทั้งหมด",
-          onClick: () => (window.location.href = "/")
+          opensDialog: false,
+          path: "/"
         },
         secondaryButton: {
           label: "25/10/2564 เวลา 13:00",
-          onClick: () => (window.location.href = "/")
+          opensDialog: false
         }
       }
     },
@@ -165,11 +166,11 @@ const stepCardConstant: StepCardModel = {
           "ในขั้นตอนนี้ น้อง ๆ จะต้องไปพบกับพวกเราที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย เพื่อเข้าร่วมการสอบสัมภาษณ์ แต่ไม่ต้องกังวลไปเพราะที่นี่พี่ ๆ ใจดีมาก ไม่กัดแน่นอน!",
         primaryButton: {
           label: "ชำระค่าใช้จ่าย",
-          onClick: () => (window.location.href = "/")
+          opensDialog: true
         },
         secondaryButton: {
           label: "เลือกไซส์เสื้อ",
-          onClick: () => (window.location.href = "/")
+          opensDialog: true
         }
       }
     },
@@ -200,11 +201,13 @@ const stepCardConstant: StepCardModel = {
           "ในขั้นตอนนี้ น้อง ๆ จะต้องไปพบกับพวกเราที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย เพื่อเข้าร่วมการสอบสัมภาษณ์ แต่ไม่ต้องกังวลไปเพราะที่นี่พี่ ๆ ใจดีมาก ไม่กัดแน่นอน!",
         primaryButton: {
           label: "ตรวจสอบบ้านของตัวเอง",
-          onClick: () => (window.location.href = "/")
+          opensDialog: false,
+          path: "/"
         },
         secondaryButton: {
           label: "แผนที่การเดินทาง",
-          onClick: () => (window.location.href = "/")
+          opensDialog: false,
+          path: "/"
         }
       }
     },

@@ -2,12 +2,14 @@ interface StepInfoModel {
   title: React.ReactNode
   contents: React.ReactNode
   primaryButton?: {
-    onClick: () => void
     label: string
+    opensDialog: boolean
+    path?: string
   }
   secondaryButton?: {
-    onClick: () => void
     label: string
+    opensDialog: boolean
+    path?: string
   }
 }
 

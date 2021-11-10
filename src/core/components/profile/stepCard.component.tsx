@@ -75,6 +75,13 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "10px",
     flexGrow: 1
   },
+  linkButton: {
+    display: "flex",
+    flexGrow: 1,
+    "&::after": {
+      content: "none"
+    }
+  },
   solid: {
     color: "white",
     background: theme.palette.primary.main,
@@ -90,7 +97,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     columnGap: theme.spacing(2),
     flexWrap: "wrap",
-    maxWidth: "520px"
+    maxWidth: "520px",
+    flexGrow: 1
   },
   flexRow: {
     display: "flex",
@@ -134,6 +142,30 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
 
   const text = stepCardConstant[step][status][isApproved]!
 
+  const renderButton = (opensDialog: boolean, isPrimary: boolean) => {
+    if (opensDialog)
+      return (
+        // TODO : Handle Dialog - how to show different ones?
+        <Button
+          variant={`${isPrimary ? "contained" : "outlined"}`}
+          disableElevation
+          className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}>
+          {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
+        </Button>
+      )
+    else
+      return (
+        <Link to={`${isPrimary ? text.primaryButton!.path : text.secondaryButton!.path}`} className={`no-underline ${classes.linkButton}`}>
+          <Button
+            variant={`${isPrimary ? "contained" : "outlined"}`}
+            disableElevation
+            className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}>
+            {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
+          </Button>
+        </Link>
+      )
+  }
+
   return (
     <Card className={`${classes.card} ${classes.flexRow}`}>
       <div className={classes.stepIndicator}>
@@ -154,16 +186,8 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
         </Typography>
         {status === "inProgress" && (
           <div className={classes.buttonContainer}>
-            {text.primaryButton && (
-              <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`} onClick={text.primaryButton.onClick}>
-                {text.primaryButton.label}
-              </Button>
-            )}
-            {text.secondaryButton && (
-              <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`} onClick={text.secondaryButton.onClick}>
-                {text.secondaryButton.label}
-              </Button>
-            )}
+            {text.primaryButton && renderButton(text.primaryButton.opensDialog, true)}
+            {text.secondaryButton && renderButton(text.secondaryButton.opensDialog, false)}
           </div>
         )}
       </div>
