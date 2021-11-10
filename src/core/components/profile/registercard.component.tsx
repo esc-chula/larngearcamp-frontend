@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import { Card, Container, Typography, Button, makeStyles } from "@material-ui/core"
 import { ProfileStatus } from "../../models/statusInfo.model"
 import Gear from "../../../assets/images/icon/gear-icon.svg"
