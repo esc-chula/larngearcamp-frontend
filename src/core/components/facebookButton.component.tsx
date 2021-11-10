@@ -36,9 +36,9 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
 
     const fbResponse = (await waitFbInit) || (await fbLogin())
     if (fbResponse) {
-      const { signedRequest } = fbResponse.authResponse
+      const { accessToken } = fbResponse.authResponse
       try {
-        await loginFb(signedRequest)
+        await loginFb(accessToken)
         history.push("/profile")
       } catch (error) {
         if ((error as AxiosError).response?.data?.message === "Email already exists!") {
