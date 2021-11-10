@@ -1,16 +1,14 @@
+interface ButtonModel {
+  label: string
+  opensDialog: boolean
+  path?: string
+}
+
 interface StepInfoModel {
   title: React.ReactNode
   contents: React.ReactNode
-  primaryButton?: {
-    label: string
-    opensDialog: boolean
-    path?: string
-  }
-  secondaryButton?: {
-    label: string
-    opensDialog: boolean
-    path?: string
-  }
+  primaryButton?: ButtonModel
+  secondaryButton?: ButtonModel
 }
 
 interface StepStateModel {
