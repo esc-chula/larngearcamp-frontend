@@ -10,8 +10,7 @@ const UserGuardedRoute: React.FC<RouteProps> = ({ children, ...props }) => {
   }
   return (
     <Route {...props}>
-      <Route {...props}>{children}</Route>
-      {/* <Redirect to="/login" /> */}
+      <Redirect to="/login" />
     </Route>
   )
 }

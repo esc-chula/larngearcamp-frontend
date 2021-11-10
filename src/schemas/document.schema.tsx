@@ -1,31 +1,17 @@
-import { object, mixed, string } from "yup"
+import { object, string } from "yup"
 import yup from "yup"
 
 const urlTest = string()
   .required("ยังไม่ได้อัพโหลดไฟล์")
   .test("not default", "ยังไม่ได้อัพโหลดไฟล์", value => {
+    console.log(value)
     return !!value && value !== ""
   })
 
 const DocumentSchema = object()
   .shape({
-    picture: mixed()
-      .required()
-      .test("fileSize", "ขนาดไฟล์ใหญ่เกิน 2MB", value => {
-        return value.length ? value[0].size <= 2000000 : true
-      }),
-    pictureURL: urlTest,
-    transcript: mixed()
-      .required()
-      .test("fileSize", "ขนาดไฟล์ใหญ่เกิน 2MB", value => {
-        return value.length ? value[0].size <= 2000000 : true
-      }),
+    photoURL: urlTest,
     transcriptURL: urlTest,
-    parentalConsent: mixed()
-      .required()
-      .test("fileSize", "ขนาดไฟล์ใหญ่เกิน 2MB", value => {
-        return value.length ? value[0].size <= 2000000 : true
-      }),
     parentalConsentURL: urlTest
   })
   .defined()

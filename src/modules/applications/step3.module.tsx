@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
-  application = ({} as unknown) as ApplicationDTO
   return {
     firstPart: {
       answer1: application.answerA1 || "",
@@ -60,7 +59,7 @@ function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
           checked: !!application.answerA5_8
         }
       },
-      answer6: "",
+      answer6: application.answerA6,
       answer7: application.answerA7 || ""
     }
   }

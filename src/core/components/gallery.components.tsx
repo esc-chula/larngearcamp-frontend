@@ -6,6 +6,7 @@ import Slider, { Settings } from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import LazyLoad from "react-lazyload"
+import { Link } from "react-router-dom"
 
 interface IImage {
   src: string
@@ -128,9 +129,11 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                       {description}
                     </Typography>
                   </div>
-                  <Button variant="contained" color="primary" className={classes.button}>
-                    สมัครเลย! วันนี้ - 18 ตุลา 2021
-                  </Button>
+                  <Link to="/profile" className="no-underline">
+                    <Button variant="contained" color="primary" className={classes.button}>
+                      สมัครเลย! วันนี้ - 18 ตุลา 2021
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>

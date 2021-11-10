@@ -150,7 +150,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, pass }) => {
           <Typography variant="h3">{step}</Typography>
         </Box>
         <Typography variant="subtitle1" className={`${classes.title} ${setStepIndicatorStyles(status)[1]}`}>
-          {status == "inProgress" ? "in progress" : status}
+          {status === "inProgress" ? "in progress" : status}
         </Typography>
       </div>
 

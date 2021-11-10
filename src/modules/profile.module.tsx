@@ -34,12 +34,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const resolveStatus = (lgNumber: string, state: ApplicationState): ProfileStatus => {
+const resolveStatus = (state: ApplicationState): ProfileStatus => {
   if (!state) {
     return "start"
   }
-
-  // const { lgNumber, state } = application //new API
 
   switch (state) {
     case "DRAFT":
@@ -67,16 +65,11 @@ const resolveStatus = (lgNumber: string, state: ApplicationState): ProfileStatus
 
 const ProfileModule = () => {
   const classes = useStyles()
-  const setLoading = useLoadingStatus()
-  const { createApplication } = useApplicationContext()
-  const { mutateApplication } = useApplicationStateContext()
   const { me } = useAuthContext()
-  const { mutate: mutateMe } = me
-  const { lgCode, applicationState } = me.data as MyProfileModel
 
-  const profileStatus = resolveStatus(lgCode, applicationState)
+  const { lgCode, applicationState, firstname, lastname } = me.data as MyProfileModel
 
-  // const profileStatus: ProfileStatus = resolveStatus("start")
+  const profileStatus = resolveStatus(applicationState)
 
   const resolveStepProps = (status: ProfileStatus) => {
     let props = Array<StepCardProps>(7)
@@ -149,24 +142,12 @@ const ProfileModule = () => {
     return props
   }
 
-  //   const initApplication = useLoadingCallback(
-  //     useCallback(async () => {
-  //       try {
-  //         setLoading(true)
-  //         await createApplication()
-  //         await mutateMe()
-  //         await mutateApplication()
-  //         setLoading(true)
-  //       } catch (error) {}
-  //     }, [createApplication, mutateMe, mutateApplication, setLoading])
-  //   )
-
   let content
   if (profileStatus === "start" || profileStatus === "draft") content = <RegisterCard profileStatus={profileStatus} />
   else
     content = (
       <div>
-        <ProfileCard lgNumber="LG5232" fullName="นายลานเกียร์ สุดลึกล้ำเหลือกำหนด" />
+        <ProfileCard lgNumber={lgCode} fullName={`${firstname} ${lastname}`} />
         {resolveStepProps(profileStatus).map(step => {
           return <StepCard key={`step-card-${step.step}`} step={step.step} status={step.status} pass={step.pass} />
         })}
