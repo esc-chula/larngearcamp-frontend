@@ -26,15 +26,12 @@ const ApplicationStepSixModule: React.FC = () => {
   const history = useHistory()
   const { activeSnackBar } = useGlobalContext()
   const { finalizeApplication } = useApplicationStateContext()
-  const { me } = useAuthContext()
-  const { mutate } = me
 
   const onSubmit = useCallback(
     async event => {
       event.preventDefault()
       try {
         await finalizeApplication()
-        mutate()
         history.push(`/application/finish`)
       } catch (error) {
         activeSnackBar({
@@ -43,7 +40,7 @@ const ApplicationStepSixModule: React.FC = () => {
         })
       }
     },
-    [finalizeApplication, history, activeSnackBar, mutate]
+    [finalizeApplication, history, activeSnackBar]
   )
 
   return (
