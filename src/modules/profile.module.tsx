@@ -10,6 +10,7 @@ import { useAuthContext } from "../core/providers/auth.provider"
 import MeDTO from "../core/models/dto/me.dto"
 import { ProfileStatus } from "../core/models/statusInfo.model"
 import RegisterCard from "../core/components/profile/registercard.component"
+import StepCardList from "../core/components/profile/stepCardList.component"
 //import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
@@ -74,77 +75,6 @@ const ProfileModule = () => {
 
   const profileStatus: ProfileStatus = resolveStatus("REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE")
 
-  const resolveStepProps = (status: ProfileStatus) => {
-    let props = Array<StepCardProps>(7)
-    switch (status) {
-      case "submitted":
-        props[1] = { step: 1, status: "complete", pass: "pass" }
-        props[2] = { step: 2, status: "inProgress", pass: "pass" }
-        props[3] = { step: 3, status: "incomplete", pass: "pass" }
-        props[4] = { step: 4, status: "incomplete", pass: "pass" }
-        props[5] = { step: 5, status: "incomplete", pass: "pass" }
-        props[6] = { step: 6, status: "incomplete", pass: "pass" }
-        break
-      case "fileChecked":
-        props[1] = { step: 1, status: "complete", pass: "pass" }
-        props[2] = { step: 2, status: "complete", pass: "pass" }
-        props[3] = { step: 3, status: "inProgress", pass: "pass" }
-        props[4] = { step: 4, status: "incomplete", pass: "pass" }
-        props[5] = { step: 5, status: "incomplete", pass: "pass" }
-        props[6] = { step: 6, status: "incomplete", pass: "pass" }
-        break
-      case "fileRejected":
-        props[1] = { step: 1, status: "complete", pass: "pass" }
-        props[2] = { step: 2, status: "inProgress", pass: "fail" }
-        props[3] = { step: 3, status: "incomplete", pass: "pass" }
-        props[4] = { step: 4, status: "incomplete", pass: "pass" }
-        props[5] = { step: 5, status: "incomplete", pass: "pass" }
-        props[6] = { step: 6, status: "incomplete", pass: "pass" }
-        break
-      case "invitedToInterview":
-        props[1] = { step: 1, status: "complete", pass: "pass" }
-        props[2] = { step: 2, status: "complete", pass: "pass" }
-        props[3] = { step: 3, status: "complete", pass: "pass" }
-        props[4] = { step: 4, status: "inProgress", pass: "pass" }
-        props[5] = { step: 5, status: "incomplete", pass: "pass" }
-        props[6] = { step: 6, status: "incomplete", pass: "pass" }
-        break
-      case "notInvitedToInterview":
-        props[1] = { step: 1, status: "complete", pass: "pass" }
-        props[2] = { step: 2, status: "complete", pass: "pass" }
-        props[3] = { step: 3, status: "complete", pass: "fail" }
-        props[4] = { step: 4, status: "incomplete", pass: "pass" }
-        props[5] = { step: 5, status: "incomplete", pass: "pass" }
-        props[6] = { step: 6, status: "incomplete", pass: "pass" }
-        break
-      case "passedInterview":
-        props[1] = { step: 1, status: "complete", pass: "pass" }
-        props[2] = { step: 2, status: "complete", pass: "pass" }
-        props[3] = { step: 3, status: "complete", pass: "pass" }
-        props[4] = { step: 4, status: "complete", pass: "pass" }
-        props[5] = { step: 5, status: "inProgress", pass: "pass" }
-        props[6] = { step: 6, status: "incomplete", pass: "pass" }
-        break
-      case "failedInterview":
-        props[1] = { step: 1, status: "complete", pass: "pass" }
-        props[2] = { step: 2, status: "complete", pass: "pass" }
-        props[3] = { step: 3, status: "complete", pass: "pass" }
-        props[4] = { step: 4, status: "complete", pass: "fail" }
-        props[5] = { step: 5, status: "incomplete", pass: "pass" }
-        props[6] = { step: 6, status: "incomplete", pass: "pass" }
-        break
-      case "paymentAccepted":
-        props[1] = { step: 1, status: "complete", pass: "pass" }
-        props[2] = { step: 2, status: "complete", pass: "pass" }
-        props[3] = { step: 3, status: "complete", pass: "pass" }
-        props[4] = { step: 4, status: "complete", pass: "pass" }
-        props[5] = { step: 5, status: "complete", pass: "pass" }
-        props[6] = { step: 6, status: "inProgress", pass: "pass" }
-        break
-    }
-    return props
-  }
-
   //   const initApplication = useLoadingCallback(
   //     useCallback(async () => {
   //       try {
@@ -159,15 +89,7 @@ const ProfileModule = () => {
 
   let content
   if (profileStatus === "start" || profileStatus === "draft") content = <RegisterCard profileStatus={profileStatus} />
-  else
-    content = (
-      <div>
-        <ProfileCard lgNumber="LG5232" fullName="นายลานเกียร์ สุดลึกล้ำเหลือกำหนด" />
-        {resolveStepProps(profileStatus).map(step => {
-          return <StepCard key={`step-card-${step.step}`} step={step.step} status={step.status} pass={step.pass} />
-        })}
-      </div>
-    )
+  else content = <StepCardList status={profileStatus} lgCode="LG1234" firstname="สมชาย" lastname="อยากเข้าค่ายลานเกียร์" />
 
   return (
     <>
