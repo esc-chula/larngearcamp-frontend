@@ -14,7 +14,7 @@ export type ApplicationState =
   | "REJECTED_FAILED_THE_INTERVIEW"
   | "PAYMENT_ACCEPTED"
 
-export type FileStatus = "CHANGE_REQUIRED" | "EMPTY" | "PASSED" | "UPLOADED"
+export type FileStatus = "EMPTY" | "UPLOADED" | "CHANGE_REQUIRED" | "PASSED"
 
 export interface DocumentStateDetail {
   id: string

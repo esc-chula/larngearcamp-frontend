@@ -1,0 +1,11 @@
+export type ProfileStatus =
+  | "start"
+  | "draft"
+  | "submitted"
+  | "fileChecked"
+  | "fileRejected"
+  | "invitedToInterview"
+  | "notInvitedToInterview"
+  | "passedInterview"
+  | "failedInterview"
+  | "paymentAccepted"

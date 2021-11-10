@@ -1,7 +1,7 @@
 import React from "react"
 import StepCard, { StepCardProps } from "./stepCard.component"
 import ProfileCard from "./profilecard.component"
-import { ProfileStatus } from "../../models/statusInfo.model"
+import { ProfileStatus } from "../../models/profileStatus.model"
 
 interface StepCardListProps {
   status: ProfileStatus
