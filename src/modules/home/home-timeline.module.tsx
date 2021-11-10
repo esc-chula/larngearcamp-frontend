@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { TimelineDisplay, TimelineProps } from "../../core/components/timeline.component"
 import { SafeArea } from "../../core/components/safeArea.component"
 import { ITheme } from "../../styles/types"
+import { ReactComponent as GearIcon } from "../../assets/images/icon/gear-icon.svg"
 
 const useStyle = makeStyles((theme: ITheme) => ({
   root: {
@@ -14,6 +15,7 @@ const useStyle = makeStyles((theme: ITheme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    position: "relative",
     [theme.breakpoints.down("sm")]: {
       paddingTop: theme.spacing(5)
     }
@@ -24,13 +26,25 @@ const useStyle = makeStyles((theme: ITheme) => ({
       fontSize: "2rem",
       marginBottom: theme.spacing(3)
     }
-  }
+  },
+  gear: {
+    width: "403px",
+    height: "403px",
+    position: "absolute",
+    [theme.breakpoints.down("md")]: {
+      display: "none"
+    }
+  },
+  leftGear: { left: 0, transform: "translate(-50%, 0)" },
+  rightGear: { right: 0, top: "50%", transform: "translate(50%, 0)" }
 }))
 
 const HomeTimeline: React.FC<TimelineProps & React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
   return (
     <SafeArea {...props} className={`${classes.root} ${props.className}`}>
+      <GearIcon className={`${classes.gear} ${classes.leftGear}`} />
+      <GearIcon className={`${classes.gear} ${classes.rightGear}`} />
       <Typography variant="h2" align="center" className={classes.title}>
         กำหนดการ
       </Typography>
