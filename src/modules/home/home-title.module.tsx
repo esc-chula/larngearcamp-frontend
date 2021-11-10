@@ -65,6 +65,9 @@ const useStyle = makeStyles((theme: ITheme) => ({
     alignItems: "center",
     [theme.breakpoints.down("md")]: {
       marginTop: theme.spacing(1)
+    },
+    "&::after": {
+      content: "none"
     }
   },
   icon: {
@@ -94,14 +97,14 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
             </Button>
           </Link>
           <div className={classes.contactsContainer}>
-            <div className={classes.contactConatiner}>
+            <a href="https://www.facebook.com/LARNGEARCAMP" target="_blank" rel="noopener noreferrer" className={classes.contactConatiner}>
               <BsFacebook className={classes.icon} />
               <Typography variant="h6">LarnGear Camp</Typography>
-            </div>
-            <div className={classes.contactConatiner}>
+            </a>
+            <a href="https://www.instagram.com/larngear_camp/" target="_blank" rel="noopener noreferrer" className={classes.contactConatiner}>
               <BsInstagram className={classes.icon} />
               <Typography variant="h6">larngear_camp</Typography>
-            </div>
+            </a>
           </div>
         </Box>
       </Box>
