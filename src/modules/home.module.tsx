@@ -5,7 +5,6 @@ import HomeLarngearDescription from "./home/home-description.module"
 import HomeQualification from "./home/home-qualification.module"
 import HomeFooter from "./home/home-footer.module"
 import HomeTimeline from "./home/home-timeline.module"
-import HomeAnnouce from "./home/home-annouce.module"
 
 import contactConstant from "../core/constants/contact.constant"
 import timelineConstant from "../core/constants/timeline.constant"
@@ -23,10 +22,6 @@ const useStyle = makeStyles(theme => ({
   },
   qualification: {
     marginTop: theme.spacing(35)
-  },
-  timeline: {
-    textAlign: "center",
-    marginTop: theme.spacing(10)
   }
 }))
 
@@ -38,10 +33,9 @@ const HomeModule: React.FC = () => {
       <HomeTitle className={classes.title} />
       <HomeLarngearDescription />
       <HomeQualification className={classes.qualification} qualifications={qualificationsConstant} />
-      <HomeTimeline className={classes.timeline} label={timelineConstant} />
+      <HomeTimeline label={timelineConstant} />
       <HomeGallery images={galleryConstant} />
       <HomeFacebookEmbed />
-      <HomeAnnouce />
       <HomeFooter contacts={contactConstant} />
     </>
   )

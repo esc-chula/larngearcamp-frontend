@@ -25,7 +25,6 @@ const useStyle = makeStyles((theme: ITheme) => ({
     width: "100%",
     backgroundColor: theme.palette.gray[50],
     color: theme.palette.gray[700],
-    margin: theme.spacing(4, 0),
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
