@@ -17,6 +17,7 @@ import { useApplicationStateContext, useApplicationForm } from "../../core/provi
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 import { useGlobalContext } from "../../core/providers/global.provider"
+import { AxiosError } from "axios"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -30,32 +31,36 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
-  const {
-    answer2: { first: answer2first, second: answer2second, third: answer2thrid, fourth: answer2fourth },
-    answer4: { fifth: answer4fifth, sixth: answer4sixth, ...answer4Rest },
-    ...firstPartRest
-  } = application.answer?.firstPart || { answer2: {}, answer4: {} }
   return {
     firstPart: {
-      ...firstPartRest,
+      answer1: application.answerA1 || "",
       answer2: {
-        first: answer2first ? `${answer2first}` : "",
-        second: answer2second ? `${answer2second}` : "",
-        third: answer2thrid ? `${answer2thrid}` : "",
-        fourth: answer2fourth ? `${answer2fourth}` : ""
+        first: (application.answerA2_1 || "").toString(),
+        second: (application.answerA2_2 || "").toString(),
+        third: (application.answerA2_3 || "").toString(),
+        fourth: (application.answerA2_4 || "").toString(),
+        fifth: (application.answerA2_5 || "").toString()
       },
-      answer4: {
-        ...answer4Rest,
-        fifth: {
-          text: answer4fifth ? answer4fifth : "",
-          checked: !!answer4fifth
+      answer3: application.answerA3 || "",
+      answer4: application.answerA4 || "",
+      answer5: {
+        first: application.answerA5_1 || false,
+        second: application.answerA5_2 || false,
+        third: {
+          text: application.answerA5_3 || "",
+          checked: !!application.answerA5_3
         },
-        sixth: {
-          text: answer4sixth ? answer4sixth : "",
-          checked: !!answer4sixth
+        fourth: application.answerA5_4 || false,
+        fifth: application.answerA5_5 || false,
+        sixth: application.answerA5_6 || false,
+        seventh: application.answerA5_7 || false,
+        eightth: {
+          text: application.answerA5_8 || "",
+          checked: !!application.answerA5_8
         }
       },
-      answer6: firstPartRest.answer6 ? `${firstPartRest.answer6}` : ""
+      answer6: application.answerA6,
+      answer7: application.answerA7 || ""
     }
   }
 }
@@ -76,7 +81,7 @@ const ApplicationStepThreeModule: React.FC = () => {
       } catch (error) {
         activeSnackBar({
           type: "error",
-          message: error.response?.data.message
+          message: (error as AxiosError).response?.data.message
         })
         return false
       }

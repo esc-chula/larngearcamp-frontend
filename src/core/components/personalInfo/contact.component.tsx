@@ -57,20 +57,6 @@ const PersonalContactComponent = () => {
           <Grid item xs={12} sm={6} md={3}>
             <NumberTextFieldComponent name="contact.phoneNumber" label="โทรศัพท์มือถือ" type="tel" />
           </Grid>
-          <Grid item xs={12} sm={12} md={6}>
-            <TextFieldComponent
-              name="userEmail"
-              label="อีเมล"
-              value={me.data?.email || ""}
-              type="email"
-              disabled
-              className={classes.disabled}
-              inputProps={{ className: classes.inputDisabled }}
-              variant="outlined"
-              size="small"
-              fullWidth
-            />
-          </Grid>
           <Grid item xs={12} sm={6} md={6}>
             <TextFieldComponent name="contact.facebookName" label="Facebook" type="text" />
           </Grid>

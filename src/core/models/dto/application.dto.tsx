@@ -1,31 +1,38 @@
 import ProfileDTO from "./profile.dto"
 import Answer1DTO from "./answer1.dto"
 import Answer2DTO from "./answer2.dto"
-import DocumentDTO from "./document.dto"
 
-export type EditingState = "FULL" | "DOCUMENT_ONLY" | "LOCKED"
-export type ApplicationState = "REVIEW" | "PASSED_INTERVIEW" | "NOT_PASSED_INTERVIEW" | "PASSED_FINAL" | "NOT_PASSED_FINAL"
-export type DocumentState = "REVIEW" | "PASSED" | "NOT_PASSED"
+export type ApplicationState =
+  | "DRAFT"
+  | "SUBMITTED"
+  | "FILE_CHECKED"
+  | "REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE"
+  | "INVITED_TO_INTERVIEW"
+  | "REJECTED_NOT_INVITED_TO_INTERVIEW"
+  | "PASSED_INTERVIEW"
+  | "REJECTED_FAILED_THE_INTERVIEW"
+  | "PAYMENT_ACCEPTED"
+
+export type FileStatus = "CHANGE_REQUIRED" | "EMPTY" | "PASSED" | "UPLOADED"
 
 export interface DocumentStateDetail {
-  pass: boolean | null
-  message: string
+  id: string
+  comment: string
+  status: FileStatus
+  url: string
+  originalName: string
 }
+
 export interface AllDocumentStateDetail {
-  picture: DocumentStateDetail
-  letterOfConsent: DocumentStateDetail
+  photo: DocumentStateDetail
+  parentalConsent: DocumentStateDetail
   transcript: DocumentStateDetail
 }
 
-export interface ApplicationInfo {
-  id: string
-  userId: string
-  code?: string
-  editingState: EditingState
-  applicationState: ApplicationState
-  documentState: DocumentState
-  documentStateDetails: AllDocumentStateDetail
+export interface ApplicationStateDTO {
+  lgNumber: string
+  state: ApplicationState
 }
 
-export declare type ApplicationDTO = ApplicationInfo & ProfileDTO & Answer1DTO & Answer2DTO & DocumentDTO
-export declare type UpdateApplicationDTO = ProfileDTO | Answer1DTO | Answer2DTO | DocumentDTO
+export declare type ApplicationDTO = ProfileDTO & Answer1DTO & Answer2DTO
+export declare type UpdateApplicationDTO = ProfileDTO | Answer1DTO | Answer2DTO

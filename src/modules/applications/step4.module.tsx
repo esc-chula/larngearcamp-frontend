@@ -17,6 +17,7 @@ import { useApplicationForm, useApplicationStateContext } from "../../core/provi
 import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 import { useGlobalContext } from "../../core/providers/global.provider"
+import { AxiosError } from "axios"
 
 const useStyles = makeStyles(theme => ({
   question: {
@@ -31,7 +32,14 @@ const useStyles = makeStyles(theme => ({
 
 function mapApplicationToAnswer2(application: ApplicationDTO): Answer2Model {
   return {
-    secondPart: application.answer?.secondPart
+    secondPart: {
+      answer1: application.answerB1 || "",
+      answer2: application.answerB2 || "",
+      answer3: application.answerB3 || "",
+      answer4: application.answerB4 || "",
+      answer5: application.answerB5 || "",
+      answer6: application.answerB6 || ""
+    }
   }
 }
 
@@ -52,7 +60,7 @@ const ApplicationStepFourModule: React.FC = () => {
       } catch (error) {
         activeSnackBar({
           type: "error",
-          message: error.response?.data.message
+          message: (error as AxiosError).response?.data.message
         })
         return false
       }

@@ -5,18 +5,18 @@ import { waitFbInit, fbLogin, fbLogout } from "../services/facebook.service"
 import { useAuthContext } from "../providers/auth.provider"
 import { useHistory } from "react-router-dom"
 import { useGlobalContext } from "../providers/global.provider"
+import { AxiosError } from "axios"
 import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
 
 const useStyle = makeStyles(theme => ({
-  fb: {
-    marginTop: theme.spacing(1)
-  },
+  fb: {},
   fbIcon: {
-    marginRight: theme.spacing(4),
     width: "10px"
   },
   capitalText: {
-    textTransform: "capitalize"
+    textTransform: "capitalize",
+    fontSize: "1rem",
+    width: "100%"
   }
 }))
 
@@ -41,7 +41,7 @@ const FacebookButtonComponent: React.FC<ButtonProps> = props => {
         await loginFb(signedRequest)
         history.push("/profile")
       } catch (error) {
-        if (error.response?.data?.message === "Email already exists!") {
+        if ((error as AxiosError).response?.data?.message === "Email already exists!") {
           activeSnackBar({ type: "error", message: "Email นี้ถูกใช้ไปแล้ว โปรดเข้าสู่ระบบด้วยรหัสผ่าน" })
         } else {
           activeSnackBar({ type: "error", message: "เข้าสู่ระบบด้วย Facebook ไม่สำเร็จ" })
@@ -68,7 +68,7 @@ const FacebookButtonComponentWithStyles = withStyles(theme => ({
     background: "#1877F2",
     borderRadius: "40px",
     color: "white",
-    paddingLeft: theme.spacing(5),
+    paddingLeft: theme.spacing(2.5),
     display: "flex",
     justifyContent: "flex-start",
     "&:hover": {

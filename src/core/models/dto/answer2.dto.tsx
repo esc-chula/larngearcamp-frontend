@@ -1,14 +1,10 @@
 interface Answer2DTO {
-  answer: {
-    secondPart: {
-      answer1: string
-      answer2: string
-      answer3: string
-      answer4: string
-      answer5: string
-      answer6: string
-    }
-  }
+  answerB1: string
+  answerB2: string
+  answerB3: string
+  answerB4: string
+  answerB5: string
+  answerB6: string
 }
 
 export default Answer2DTO

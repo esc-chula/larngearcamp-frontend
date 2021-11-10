@@ -33,10 +33,10 @@ const PersonalProfileComponent = () => {
             <SelectComponent control={control} data={titlesConstant} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <TextFieldComponent name="name" label="ชื่อจริง" type="text" defaultValue={me.data?.name?.first} />
+            <TextFieldComponent name="name" label="ชื่อจริง" type="text" defaultValue={me.data?.firstname} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <TextFieldComponent name="surname" label="นามสกุล" type="text" defaultValue={me.data?.name?.last} />
+            <TextFieldComponent name="surname" label="นามสกุล" type="text" defaultValue={me.data?.lastname} />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <TextFieldComponent name="nickname" label="ชื่อเล่น" type="text" />
@@ -45,14 +45,7 @@ const PersonalProfileComponent = () => {
             <SelectComponent data={religionsConstant} control={control} />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            <TextFieldComponent
-              name="birthDate"
-              label="วันเกิด"
-              type="date"
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
+            <TextFieldComponent name="birthDate" label="วันเกิด" type="date" InputLabelProps={{ shrink: true }} />
           </Grid>
         </Grid>
       </Box>

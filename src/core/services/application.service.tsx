@@ -1,34 +1,43 @@
 import { httpClient } from "../../utils/http"
-import DocumentType from "../models/documentType.constant"
-import { ApplicationDTO, UpdateApplicationDTO, ApplicationInfo } from "../models/dto/application.dto"
+import { ApplicationDTO, UpdateApplicationDTO, ApplicationStateDTO, AllDocumentStateDetail, DocumentStateDetail } from "../models/dto/application.dto"
 import FileDTO from "../models/dto/file.dto"
 
 export interface ApplicationService {
   createApplicationAPI: () => Promise<void>
-  uploadDocumentAPI: (data: FormData, type: DocumentType) => Promise<FileDTO>
+  uploadDocumentAPI: (data: FormData) => Promise<DocumentStateDetail>
   getApplicationAPI: () => Promise<ApplicationDTO>
   updateApplicationAPI: (application: UpdateApplicationDTO) => Promise<ApplicationDTO>
-  finalizeApplicationAPI: () => Promise<{ message: string; application: ApplicationInfo }>
+  finalizeApplicationAPI: () => Promise<ApplicationDTO>
+  getApplicationStateAPI: () => Promise<ApplicationStateDTO>
+  getAttachmentAPI: () => Promise<AllDocumentStateDetail>
 }
 
 const createApplicationAPI = async (): Promise<void> => {
   return (await httpClient.post(`/application`)).data
 }
 
-const uploadDocumentAPI = async (data: FormData, type: DocumentType): Promise<FileDTO> => {
-  return (await httpClient.post(`/application/document/${type}`, data)).data
+const uploadDocumentAPI = async (data: FormData): Promise<DocumentStateDetail> => {
+  return (await httpClient.post(`/application/attachment`, data)).data
 }
 
 const getApplicationAPI = async (): Promise<ApplicationDTO> => {
   return (await httpClient.get(`/application`)).data
 }
 
+const getAttachmentAPI = async (): Promise<AllDocumentStateDetail> => {
+  return (await httpClient.get(`/application/attachment`)).data
+}
+
+const getApplicationStateAPI = async (): Promise<ApplicationStateDTO> => {
+  return (await httpClient.get(`/application/state`)).data
+}
+
 const updateApplicationAPI = async (application: UpdateApplicationDTO): Promise<ApplicationDTO> => {
   return (await httpClient.patch(`/application`, application)).data
 }
 
-const finalizeApplicationAPI = async (): Promise<{ message: string; application: ApplicationInfo }> => {
-  return (await httpClient.post(`/application/final`)).data
+const finalizeApplicationAPI = async (): Promise<ApplicationDTO> => {
+  return (await httpClient.post(`/application`)).data
 }
 
 const ApplicationServiceAPI: ApplicationService = {
@@ -36,7 +45,9 @@ const ApplicationServiceAPI: ApplicationService = {
   uploadDocumentAPI,
   getApplicationAPI,
   updateApplicationAPI,
-  finalizeApplicationAPI
+  finalizeApplicationAPI,
+  getApplicationStateAPI,
+  getAttachmentAPI
 }
 
 export default ApplicationServiceAPI

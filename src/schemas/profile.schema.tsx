@@ -24,7 +24,7 @@ const ProfileSchema = object()
       subDistrict: string().trim().required("กรุณาระบุตำบล/แขวง"),
       district: string().trim().required("กรุณาระบุอำเภอ/เขต"),
       province: string().trim().required("กรุณาระบุจังหวัด"),
-      zip: string().trim().required("กรุณาระบุรหัสไปรษณี"),
+      zip: string().trim().required("กรุณาระบุรหัสไปรษณีย์"),
       phoneNumber: string()
         .trim()
         .required("กรุณาระบุเบอร์โทร")

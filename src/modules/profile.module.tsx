@@ -11,6 +11,10 @@ import MeDTO from "../core/models/dto/me.dto"
 import { ProfileStatus } from "../core/models/statusInfo.model"
 import RegisterCard from "../core/components/profile/registercard.component"
 import StepCardList from "../core/components/profile/stepCardList.component"
+import { ApplicationModels } from "../core/models/application.models"
+import MyProfileModel from "../core/models/myprofile.models"
+import { useApplicationStateContext } from "../core/providers/applicationState.provider"
+import { ApplicationState } from "../core/models/dto/application.dto"
 //import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 
 const useStyles = makeStyles(theme => ({
@@ -31,12 +35,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const resolveStatus = (state: String /*application: MeDTO["application"]*/): ProfileStatus => {
-  // if (!application) {
-  //   return "start"
-  // }
-
-  //const { lgNumber, state } = application //new API
+const resolveStatus = (state: ApplicationState): ProfileStatus => {
+  if (!state) {
+    return "start"
+  }
 
   switch (state) {
     case "DRAFT":
@@ -64,16 +66,11 @@ const resolveStatus = (state: String /*application: MeDTO["application"]*/): Pro
 
 const ProfileModule = () => {
   const classes = useStyles()
-  const setLoading = useLoadingStatus()
-  //   const { createApplication } = useApplicationContext()
-  //   const { mutateApplication } = useApplicationStateContext()
-  //   const { me } = useAuthContext()
-  //   const { mutate: mutateMe } = me
-  //   const { application } = me.data as MeDTO
+  const { me } = useAuthContext()
 
-  //   const profileStatus = resolveStatus(application)
+  const { lgCode, applicationState, firstname, lastname } = me.data as MyProfileModel
 
-  const profileStatus: ProfileStatus = resolveStatus("REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE")
+  const profileStatus = resolveStatus(applicationState)
 
   //   const initApplication = useLoadingCallback(
   //     useCallback(async () => {
@@ -89,7 +86,7 @@ const ProfileModule = () => {
 
   let content
   if (profileStatus === "start" || profileStatus === "draft") content = <RegisterCard profileStatus={profileStatus} />
-  else content = <StepCardList status={profileStatus} lgCode="LG1234" firstname="สมชาย" lastname="อยากเข้าค่ายลานเกียร์" />
+  else content = <StepCardList status={profileStatus} lgCode={lgCode} firstname={firstname} lastname={lastname}/>
 
   return (
     <>

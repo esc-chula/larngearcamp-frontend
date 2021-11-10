@@ -1,4 +1,4 @@
-import QandAModel from "./qna.model"
+import FAQModel from "./faq.model"
 
 export type ProfileStatus =
   | "start"
@@ -13,15 +13,15 @@ export type ProfileStatus =
   | "paymentAccepted"
 
 interface StatusInfoModel {
-  start: QandAModel
-  continue: QandAModel
-  pending: QandAModel
-  docOk: QandAModel
-  docNotOk: QandAModel
-  passedInterview: QandAModel
-  failedInterview: QandAModel
-  passedFinal: QandAModel
-  failedFinal: QandAModel
+  start: FAQModel
+  continue: FAQModel
+  pending: FAQModel
+  docOk: FAQModel
+  docNotOk: FAQModel
+  passedInterview: FAQModel
+  failedInterview: FAQModel
+  passedFinal: FAQModel
+  failedFinal: FAQModel
 }
 
 export default StatusInfoModel

@@ -3,20 +3,29 @@ import { Typography, Button, Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 
-import landing1 from "../../assets/images/background/landing-1.svg"
-import BackgroundOverlay from "../../core/components/backgroundOverlay.component"
+import landing1 from "../../assets/images/background/landing-1.png"
 import { safeArea } from "../../core/components/safeArea.component"
-import { useAnnounceContext } from "../../core/providers/announce.provider"
 import { grey } from "@material-ui/core/colors"
+import { BsFacebook, BsInstagram } from "react-icons/bs"
+import { ITheme } from "../../styles/types"
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles((theme: ITheme) => ({
+  titleContainer: {
+    minHeight: "542px",
+    backgroundImage: `url(${landing1})`,
+
+    color: "white",
+    backgroundSize: "cover"
+  },
   title: {
-    padding: theme.spacing(0, 6),
     margin: "auto",
+    fontSize: "3rem",
     fontFamily: "Raleway",
+    lineHeight: "3.1rem",
     fontWeight: 300,
+    marginBottom: theme.spacing(4),
     "&>.big": {
-      fontSize: "1.4em"
+      fontSize: "3.75rem"
     },
     [theme.breakpoints.down("md")]: {
       fontSize: "3rem"
@@ -25,11 +34,12 @@ const useStyle = makeStyles(theme => ({
   subtitle: {
     fontSize: "1.5rem",
     fontWeight: 200,
-    padding: theme.spacing(0, 6),
-    margin: theme.spacing(1, "auto", 3, "auto")
+    padding: theme.spacing(0, 6)
   },
   button: {
-    padding: theme.spacing(1, 6),
+    marginTop: theme.spacing(7),
+    height: "50px",
+    width: "min(353px, 90vw)",
     "&>*": {
       fontSize: "1.1rem"
     },
@@ -38,31 +48,64 @@ const useStyle = makeStyles(theme => ({
       color: grey[200]
     }
   },
-  safeArea
+  safeArea,
+  contactsContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+    [theme.breakpoints.down("md")]: {
+      marginTop: theme.spacing(2),
+      flexDirection: "column"
+    }
+  },
+  contactConatiner: {
+    color: theme.palette.gray[400],
+    marginTop: theme.spacing(4),
+    display: "flex",
+    alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      marginTop: theme.spacing(1)
+    }
+  },
+  icon: {
+    fontSize: "28px",
+    paddingRight: theme.spacing(2)
+  }
 }))
 
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
-  const { announceDate } = useAnnounceContext()
-  const shouldAnnounce = new Date() > announceDate
+  const registerCloseDate = new Date("December 9, 2021 00:00:00 GMT+07:00")
+  const isRegisterClosed = new Date() > registerCloseDate
+
   return (
-    <BackgroundOverlay src={landing1} aspectRatio={1519 / 832} contentPercentage={70} minHeightPx={800}>
-      <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="80%">
-        <Box textAlign="center" height="min-content">
-          <Typography variant="h2" className={classes.title}>
-            <span className="big">L</span>ARNGEAR CAMP 20th
+    <div className={classes.titleContainer}>
+      <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="100%" minHeight="542px">
+        <Box textAlign="center" display="flex" flexDirection="column">
+          <Typography className={classes.title}>
+            <span className="big">L</span>ARNGEAR CAMP 21st
           </Typography>
-          <Typography variant="subtitle1" className={classes.subtitle}>
-            ค้นหาความเป็นวิศวกรด้วยมือของคุณเอง
+          <Typography variant="h5" className={classes.subtitle}>
+            ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
           </Typography>
-          <Link to="/profile" className="no-underline" style={{ pointerEvents: shouldAnnounce ? "initial" : "none" }}>
-            <Button variant="contained" color="primary" className={classes.button} disabled={!shouldAnnounce}>
-              {shouldAnnounce ? "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" : "หมดเขตรับสมัคร"}
+          <Link to="/profile" className="no-underline" style={{ pointerEvents: isRegisterClosed ? "none" : "initial" }}>
+            <Button variant="contained" color="primary" className={classes.button} disabled={isRegisterClosed}>
+              {isRegisterClosed ? "หมดเขตรับสมัคร" : "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"}
             </Button>
           </Link>
+          <div className={classes.contactsContainer}>
+            <div className={classes.contactConatiner}>
+              <BsFacebook className={classes.icon} />
+              <Typography variant="h6">LarnGear Camp</Typography>
+            </div>
+            <div className={classes.contactConatiner}>
+              <BsInstagram className={classes.icon} />
+              <Typography variant="h6">larngear_camp</Typography>
+            </div>
+          </div>
         </Box>
       </Box>
-    </BackgroundOverlay>
+    </div>
   )
 }
 
