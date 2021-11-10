@@ -30,11 +30,11 @@ interface Step {
 const steps: Record<string, Step> = {
   "1": {
     Component: ApplicationStepOneModule,
-    allowedStates: ["DRAFT"]
+    allowedStates: ["NOT_FILLED", "DRAFT"]
   },
   "2": {
     Component: ApplicationStepTwoModule,
-    allowedStates: ["DRAFT"]
+    allowedStates: ["NOT_FILLED", "DRAFT"]
   },
   "3": {
     Component: ApplicationStepThreeModule,
