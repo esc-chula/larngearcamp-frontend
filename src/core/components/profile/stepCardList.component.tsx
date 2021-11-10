@@ -84,7 +84,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
 
   return (
     <>
-      <ProfileCard lgNumber={lgCode} fullName={`${firstname} ${lastname}`} />
+      <ProfileCard lgCode={lgCode} fullName={`${firstname} ${lastname}`} />
       {resolveStepProps(status).map(step => {
         return <StepCard key={`step-card-${step.step}`} step={step.step} status={step.status} isApproved={step.isApproved} />
       })}
