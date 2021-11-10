@@ -67,9 +67,14 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean, is
     async (_application: UpdateApplicationDTO) => {
       //console.log("application inner ", application)
       const res = await ApplicationServiceAPI.updateApplicationAPI(_application)
-      await mutateApplication(oldapplication => ({ ...oldapplication, ...res }), false)
+      if (me.data?.applicationState === "NOT_FILLED") {
+        await mutateApplication(oldapplication => ({ ...oldapplication, ...res, state: "DRAFT" }), false)
+        await mutateMe(_me => ({ ..._me, applicationState: "DRAFT" }), false)
+      } else {
+        await mutateApplication(oldapplication => ({ ...oldapplication, ...res }), false)
+      }
     },
-    [mutateApplication]
+    [me.data, mutateApplication, mutateMe]
   )
   const finalizeApplication = useCallback(async () => {
     const resApp = await ApplicationServiceAPI.finalizeApplicationAPI()
