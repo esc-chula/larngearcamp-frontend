@@ -54,10 +54,16 @@ const useStyle = makeStyles((theme: ITheme) => ({
       marginLeft: theme.spacing(0)
     }
   },
-  imageTopic: {
+  imageTopicContainer: {
     display: "flex",
     marginBottom: theme.spacing(2),
     margin: "auto"
+  },
+  imageTopic: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5rem",
+      lineHeight: "30px"
+    }
   },
   galleryRoot: {
     maxWidth: "100vw",
@@ -85,10 +91,17 @@ const useStyle = makeStyles((theme: ITheme) => ({
     }
   },
   galleryHeader: {
-    marginBottom: theme.spacing(5)
+    marginBottom: theme.spacing(5),
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2rem"
+    }
   },
   description: {
-    fontWeight: 300
+    fontWeight: 300,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem"
+    }
   }
 }))
 
@@ -123,8 +136,10 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                 </LazyLoad>
                 <div className={classes.descriptionRoot}>
                   <div>
-                    <div className={classes.imageTopic}>
-                      <Typography variant="h4">{topic}</Typography>
+                    <div className={classes.imageTopicContainer}>
+                      <Typography variant="h4" className={classes.imageTopic}>
+                        {topic}
+                      </Typography>
                     </div>
                     <Typography variant="h6" className={classes.description}>
                       {description}

@@ -13,12 +13,17 @@ const useStyle = makeStyles((theme: ITheme) => ({
     color: theme.palette.gray[700],
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+      paddingTop: theme.spacing(5)
+    }
   },
   title: {
-    marginBottom: "50px",
-    fontWeight: 400,
-    fontSize: "3rem"
+    marginBottom: theme.spacing(5),
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2rem",
+      marginBottom: theme.spacing(3)
+    }
   }
 }))
 

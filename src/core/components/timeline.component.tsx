@@ -18,12 +18,18 @@ const useStyle = makeStyles((theme: ITheme) => ({
     paddingTop: "0"
   },
   eventTitle: {
-    fontWeight: 500,
     color: theme.palette.gray[700],
-    lineHeight: "35px"
+    lineHeight: "30px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5rem",
+      lineHeight: "25px"
+    }
   },
   durationTitle: {
-    color: theme.palette.gray[400]
+    color: theme.palette.gray[400],
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem"
+    }
   },
   timelineSeparator: {
     marginRight: "60px",
