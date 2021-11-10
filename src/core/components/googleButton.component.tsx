@@ -35,7 +35,7 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
       })
     }
     initGoogleButton()
-  }, [history, loginGoogle])
+  }, [activeSnackBar, history, loginGoogle])
 
   return <div id="google_signin" style={{ width: "100%" }} />
 }
