@@ -87,7 +87,7 @@ export const AuthProvider: React.FC = ({ ...other }) => {
     if (!userId) fetchUser()
   }, [me, userId])
 
-  if (!!userId && !me.data) {
+  if (!isReady || (!!userId && !me.data)) {
     return <ShowLoadingComponent />
   }
 

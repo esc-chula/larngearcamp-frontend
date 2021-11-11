@@ -1,4 +1,4 @@
-import { object, mixed, string } from "yup"
+import { object, string } from "yup"
 import yup from "yup"
 
 const urlTest = string()
@@ -9,23 +9,8 @@ const urlTest = string()
 
 const DocumentSchema = object()
   .shape({
-    picture: mixed()
-      .required()
-      .test("fileSize", "ขนาดไฟล์ใหญ่เกิน 2MB", value => {
-        return value.length ? value[0].size <= 2000000 : true
-      }),
-    pictureURL: urlTest,
-    transcript: mixed()
-      .required()
-      .test("fileSize", "ขนาดไฟล์ใหญ่เกิน 2MB", value => {
-        return value.length ? value[0].size <= 2000000 : true
-      }),
+    photoURL: urlTest,
     transcriptURL: urlTest,
-    parentalConsent: mixed()
-      .required()
-      .test("fileSize", "ขนาดไฟล์ใหญ่เกิน 2MB", value => {
-        return value.length ? value[0].size <= 2000000 : true
-      }),
     parentalConsentURL: urlTest
   })
   .defined()

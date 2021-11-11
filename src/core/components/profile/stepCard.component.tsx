@@ -3,8 +3,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 import stepCardConstant from "../../constants/stepCard.constant"
 
-import { useApplicationStateContext } from "../../providers/applicationState.provider"
-
 const useStyles = makeStyles(theme => ({
   card: {
     padding: theme.spacing(4),
@@ -75,6 +73,13 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "10px",
     flexGrow: 1
   },
+  linkButton: {
+    display: "flex",
+    flexGrow: 1,
+    "&::after": {
+      content: "none"
+    }
+  },
   solid: {
     color: "white",
     background: theme.palette.primary.main,
@@ -90,7 +95,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     columnGap: theme.spacing(2),
     flexWrap: "wrap",
-    maxWidth: "520px"
+    maxWidth: "520px",
+    flexGrow: 1
   },
   flexRow: {
     display: "flex",
@@ -113,10 +119,10 @@ const useStyles = makeStyles(theme => ({
 export interface StepCardProps {
   step: 1 | 2 | 3 | 4 | 5 | 6
   status: "complete" | "inProgress" | "incomplete"
-  pass: "pass" | "fail"
+  isApproved: "true" | "false"
 }
 
-const StepCard: React.FC<StepCardProps> = ({ step, status, pass }) => {
+const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const classes = useStyles()
 
   const setStepIndicatorStyles = (status: String) => {
@@ -132,15 +138,30 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, pass }) => {
     }
   }
 
-  const text = stepCardConstant[step][status][pass]!
-  const buttons = status === "inProgress" ? stepCardConstant[step][status][pass]!.buttons! : []
+  const text = stepCardConstant[step][status][isApproved]!
 
-  function handleClick(button: number) {
-    if (status === "inProgress") {
-      if (step === 5 && !button) {
-        /*open payment dialog*/
-      } else window.location.href = `${buttons[button][1]}`
-    }
+  const renderButton = (opensDialog: boolean, isPrimary: boolean) => {
+    if (opensDialog)
+      return (
+        // TODO : Handle Dialog - how to show different ones?
+        <Button
+          variant={`${isPrimary ? "contained" : "outlined"}`}
+          disableElevation
+          className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}>
+          {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
+        </Button>
+      )
+    else
+      return (
+        <Link to={`${isPrimary ? text.primaryButton!.path : text.secondaryButton!.path}`} className={`no-underline ${classes.linkButton}`}>
+          <Button
+            variant={`${isPrimary ? "contained" : "outlined"}`}
+            disableElevation
+            className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}>
+            {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
+          </Button>
+        </Link>
+      )
   }
 
   return (
@@ -150,7 +171,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, pass }) => {
           <Typography variant="h3">{step}</Typography>
         </Box>
         <Typography variant="subtitle1" className={`${classes.title} ${setStepIndicatorStyles(status)[1]}`}>
-          {status == "inProgress" ? "in progress" : status}
+          {status === "inProgress" ? "in progress" : status}
         </Typography>
       </div>
 
@@ -163,16 +184,8 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, pass }) => {
         </Typography>
         {status === "inProgress" && (
           <div className={classes.buttonContainer}>
-            {buttons.length >= 1 && (
-              <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`} onClick={() => handleClick(0)}>
-                {buttons[0][0]}
-              </Button>
-            )}
-            {buttons.length >= 2 && (
-              <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`} onClick={() => handleClick(1)}>
-                {buttons![1][0]}
-              </Button>
-            )}
+            {text.primaryButton && renderButton(text.primaryButton.opensDialog, true)}
+            {text.secondaryButton && renderButton(text.secondaryButton.opensDialog, false)}
           </div>
         )}
       </div>

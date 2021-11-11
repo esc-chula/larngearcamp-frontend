@@ -31,7 +31,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function mapApplicationToAnswer2(application: ApplicationDTO): Answer2Model {
-  application = ({} as unknown) as ApplicationDTO
   return {
     secondPart: {
       answer1: application.answerB1 || "",

@@ -1,9 +1,8 @@
-import React, { useEffect, useCallback } from "react"
+import React, { useEffect } from "react"
 import { ButtonProps, withStyles } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import { useAuthContext } from "../providers/auth.provider"
 import { useHistory } from "react-router"
-import { AxiosError } from "axios"
 import { useGlobalContext } from "../providers/global.provider"
 
 const GoogleButtonComponent: React.FC<ButtonProps> = props => {
@@ -11,19 +10,16 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
   const history = useHistory()
   const { activeSnackBar } = useGlobalContext()
 
-  const handleCallback = useCallback(
-    async res => {
+  useEffect(() => {
+    const handleCallback = async (res: any) => {
       try {
         await loginGoogle(res.credential)
         history.push("/profile")
       } catch (err) {
-        console.log(err)
+        activeSnackBar({ type: "error", message: "เข้าสู่ระบบด้วย Facebook ไม่สำเร็จ" })
       }
-    },
-    [history, loginGoogle]
-  )
+    }
 
-  useEffect(() => {
     const initGoogleButton = async () => {
       const _window = window as typeof window & { google: any }
       _window.google.accounts.id.initialize({
@@ -35,12 +31,13 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
         size: "large",
         shape: "pill",
         logo_alignment: "left",
-        type: "default"
+        type: "standard"
       })
     }
     initGoogleButton()
-  })
-  return <div id="google_signin" />
+  }, [activeSnackBar, history, loginGoogle])
+
+  return <div id="google_signin" style={{ width: "100%" }} />
 }
 
 const GoogleButtonComponentWithStyles = withStyles(theme => ({

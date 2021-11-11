@@ -1,11 +1,10 @@
 import { httpClient } from "../../utils/http"
-import DocumentType from "../models/documentType.constant"
-import { ApplicationDTO, UpdateApplicationDTO, ApplicationStateDTO, AllDocumentStateDetail } from "../models/dto/application.dto"
+import { ApplicationDTO, UpdateApplicationDTO, ApplicationStateDTO, AllDocumentStateDetail, DocumentStateDetail } from "../models/dto/application.dto"
 import FileDTO from "../models/dto/file.dto"
 
 export interface ApplicationService {
   createApplicationAPI: () => Promise<void>
-  uploadDocumentAPI: (data: FormData) => Promise<FileDTO>
+  uploadDocumentAPI: (data: FormData) => Promise<DocumentStateDetail>
   getApplicationAPI: () => Promise<ApplicationDTO>
   updateApplicationAPI: (application: UpdateApplicationDTO) => Promise<ApplicationDTO>
   finalizeApplicationAPI: () => Promise<ApplicationDTO>
@@ -17,7 +16,7 @@ const createApplicationAPI = async (): Promise<void> => {
   return (await httpClient.post(`/application`)).data
 }
 
-const uploadDocumentAPI = async (data: FormData): Promise<FileDTO> => {
+const uploadDocumentAPI = async (data: FormData): Promise<DocumentStateDetail> => {
   return (await httpClient.post(`/application/attachment`, data)).data
 }
 
@@ -38,7 +37,7 @@ const updateApplicationAPI = async (application: UpdateApplicationDTO): Promise<
 }
 
 const finalizeApplicationAPI = async (): Promise<ApplicationDTO> => {
-  return (await httpClient.post(`/application/final`)).data
+  return (await httpClient.post(`/application`)).data
 }
 
 const ApplicationServiceAPI: ApplicationService = {

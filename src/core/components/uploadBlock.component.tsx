@@ -79,7 +79,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
       return null
     }
     return {
-      originalName: friendlyFileName(serverFile.originalName),
+      originalName: serverFile.originalName,
       url: serverFile.url
     }
   }, [serverFile])
@@ -106,15 +106,14 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           }
           try {
             const result = await uploadDocument(formData)
-            mutateApplication(application => ({ ...application }), false)
+            mutateApplication(application => ({ ...application, [name]: result }), false)
             if (name === "photo") {
               mutateMe(me => {
-                return me
+                return { ...me, picture: result.url }
               }, false)
             }
-            setValue(`${name}URL`, result.file.url)
+            setValue(`${name}URL`, result.url)
           } catch (error) {
-            console.log(error)
             activeSnackBar({
               type: "error",
               message: (error as AxiosError).response?.data.message

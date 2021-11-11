@@ -1,7 +1,5 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { useAuthContext } from "../../providers/auth.provider"
-import MeDTO from "../../models/dto/me.dto"
 import { Typography, Card } from "@material-ui/core"
 import { UserAvatar } from "./userAvatar.component"
 
@@ -60,19 +58,13 @@ const useStyles = makeStyles(theme => ({
 }))
 
 interface ProfileCardProps {
-  lgNumber: string
+  lgCode: string
   fullName: string
 }
 
-const ProfileComponent: React.FC<ProfileCardProps> = ({ lgNumber, fullName }) => {
+const ProfileComponent: React.FC<ProfileCardProps> = ({ lgCode, fullName }) => {
   const classes = useStyles()
-  // const { me } = useAuthContext()
-  // const {
-  //   name: { first, last },
-  //   application
-  // } = me.data as MeDTO
 
-  // const fullName = `${first} ${last}`
   return (
     <Card className={`${classes.card} ${classes.flexRow}`}>
       <div className={classes.container}>
@@ -80,7 +72,7 @@ const ProfileComponent: React.FC<ProfileCardProps> = ({ lgNumber, fullName }) =>
       </div>
       <div className={classes.flexCol}>
         <Typography variant="h4" className={`${classes.text} ${classes.appcode}`}>
-          {lgNumber}
+          {lgCode}
         </Typography>
         <Typography variant="h4" className={`${classes.text} ${classes.name}`}>
           {fullName}

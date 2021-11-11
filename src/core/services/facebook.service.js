@@ -31,16 +31,13 @@ export const waitFbInit = new Promise(resolve => {
 
 export const fbLogin = () => {
   return new Promise(resolve => {
-    window.FB.login(
-      fbStatus => {
-        if (fbStatus.status === "connected") {
-          resolve(fbStatus)
-        } else {
-          resolve(null)
-        }
-      },
-      { scope: "email,public_profile" }
-    )
+    window.FB.login(fbStatus => {
+      if (fbStatus.status === "connected") {
+        resolve(fbStatus)
+      } else {
+        resolve(null)
+      }
+    })
   })
 }
 

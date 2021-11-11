@@ -10,8 +10,8 @@ import { yupResolver } from "@hookform/resolvers"
 import DocumentSchema from "../../schemas/document.schema"
 import { DocumentModel } from "../../schemas/document.schema"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
-import { AllDocumentStateDetail, ApplicationDTO, DocumentStateDetail } from "../../core/models/dto/application.dto"
-import { DocumentItem, isDefaultUrl } from "../../core/models/dto/document.dto"
+import { AllDocumentStateDetail, DocumentStateDetail } from "../../core/models/dto/application.dto"
+import { isDefaultUrl } from "../../core/models/dto/document.dto"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 import { ApplicationModels } from "../../core/models/application.models"
 
@@ -44,7 +44,7 @@ function getUrl(document: DocumentStateDetail): string {
 
 function mapApplicationToDocument(application: ApplicationModels): DocumentModel {
   return ({
-    pictureURL: getUrl(application.photo),
+    photoURL: getUrl(application.photo),
     transcriptURL: getUrl(application.transcript),
     parentalConsentURL: getUrl(application.parentalConsent)
   } as Partial<DocumentModel>) as any

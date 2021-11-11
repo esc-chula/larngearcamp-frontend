@@ -27,7 +27,7 @@ const DocComponent: React.FC = () => {
   return (
     <>
       <Typography variant="h5" align="center" className={classes.bold}>
-        รายละเอียดของการสมัครค่ายลานเกียร์ครั้งที่ 20
+        รายละเอียดของการสมัครค่ายลานเกียร์ครั้งที่ 21
       </Typography>
       <Divider className={classes.divider} />
       {ruleConstant.map((data, index) => (

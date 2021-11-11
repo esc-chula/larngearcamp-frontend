@@ -31,7 +31,8 @@ export function useApplicationForm<TFieldValues extends FieldValues = FieldValue
 }
 
 export const ApplicationStateProvider: React.FC<{ children: (render: boolean, is404: boolean) => React.ReactElement }> = ({ children }) => {
-  const { userId } = useAuthContext()
+  const { userId, me } = useAuthContext()
+  const { mutate: mutateMe } = me
 
   const fetchApplication = async (): Promise<ApplicationModels> => {
     const resApp = await ApplicationServiceAPI.getApplicationAPI()
@@ -61,21 +62,30 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean, is
   })
 
   const is404 = error?.response?.status === 404
-  // console.log("application", application)
 
   const updateApplication = useCallback(
-    async (application: UpdateApplicationDTO) => {
+    async (_application: UpdateApplicationDTO) => {
       //console.log("application inner ", application)
-      await ApplicationServiceAPI.updateApplicationAPI(application)
-      await mutateApplication(fetchApplication, true)
+      const res = await ApplicationServiceAPI.updateApplicationAPI(_application)
+      if (me.data?.applicationState === "NOT_FILLED") {
+        await mutateApplication(oldapplication => ({ ...oldapplication, ...res, state: "DRAFT" }), false)
+        await mutateMe(_me => ({ ..._me, applicationState: "DRAFT" }), false)
+      } else {
+        await mutateApplication(oldapplication => ({ ...oldapplication, ...res }), false)
+      }
     },
-    [mutateApplication]
+    [me.data, mutateApplication, mutateMe]
   )
   const finalizeApplication = useCallback(async () => {
-    await ApplicationServiceAPI.finalizeApplicationAPI()
+    const resApp = await ApplicationServiceAPI.finalizeApplicationAPI()
+    const resState = await ApplicationServiceAPI.getApplicationStateAPI()
 
-    await mutateApplication(fetchApplication, true)
-  }, [mutateApplication])
+    await mutateApplication(_application => ({ ..._application, ...resState }), false)
+    await mutateMe(
+      _me => ({ ..._me, firstname: resApp.firstName, lastname: resApp.lastName, applicationState: resState.state, lgCode: resState.lgNumber }),
+      false
+    )
+  }, [mutateApplication, mutateMe])
 
   return (
     <ApplicationStateContext.Provider value={{ application: application as any, updateApplication, finalizeApplication, mutateApplication }}>

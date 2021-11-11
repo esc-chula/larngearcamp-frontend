@@ -45,14 +45,7 @@ const PersonalProfileComponent = () => {
             <SelectComponent data={religionsConstant} control={control} />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            <TextFieldComponent
-              name="birthDate"
-              label="วันเกิด"
-              type="date"
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
+            <TextFieldComponent name="birthDate" label="วันเกิด" type="date" InputLabelProps={{ shrink: true }} />
           </Grid>
         </Grid>
       </Box>
