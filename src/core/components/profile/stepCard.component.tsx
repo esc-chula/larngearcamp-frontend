@@ -3,8 +3,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 import stepCardConstant from "../../constants/stepCard.constant"
 
-import { useApplicationStateContext } from "../../providers/applicationState.provider"
-
 const useStyles = makeStyles(theme => ({
   card: {
     padding: theme.spacing(4),

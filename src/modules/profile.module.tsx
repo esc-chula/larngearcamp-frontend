@@ -1,21 +1,13 @@
-import React, { useCallback } from "react"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import ProfileCard from "../core/components/profile/profilecard.component"
 import { Container } from "@material-ui/core"
-import { Link } from "react-router-dom"
-import { useApplicationContext } from "../core/providers/application.provider"
-import { useLoadingCallback, useLoadingStatus } from "../core/components/loading.component"
-import StepCard, { StepCardProps } from "../core/components/profile/stepCard.component"
 import { useAuthContext } from "../core/providers/auth.provider"
-import MeDTO from "../core/models/dto/me.dto"
-import { ProfileStatus } from "../core/models/statusInfo.model"
+import { ProfileStatus } from "../core/models/profileStatus.model"
 import RegisterCard from "../core/components/profile/registercard.component"
 import StepCardList from "../core/components/profile/stepCardList.component"
-import { ApplicationModels } from "../core/models/application.models"
 import MyProfileModel from "../core/models/myprofile.models"
 import { useApplicationStateContext } from "../core/providers/applicationState.provider"
-import { ApplicationState } from "../core/models/dto/application.dto"
-//import { useApplicationStateContext } from "../core/providers/applicationState.provider"
+import { FileStatus } from "../core/models/dto/application.dto"
 
 const useStyles = makeStyles(theme => ({
   bg: {
@@ -35,58 +27,46 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const resolveStatus = (state: ApplicationState): ProfileStatus => {
-  if (!state) {
-    return "start"
-  }
-
-  switch (state) {
-    case "DRAFT":
-      return "draft"
-    case "SUBMITTED":
-      return "submitted"
-    case "FILE_CHECKED":
-      return "fileChecked"
-    case "REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE":
-      return "fileRejected"
-    case "INVITED_TO_INTERVIEW":
-      return "invitedToInterview"
-    case "REJECTED_NOT_INVITED_TO_INTERVIEW":
-      return "notInvitedToInterview"
-    case "PASSED_INTERVIEW":
-      return "passedInterview"
-    case "REJECTED_FAILED_THE_INTERVIEW":
-      return "failedInterview"
-    case "PAYMENT_ACCEPTED":
-      return "paymentAccepted"
-    default:
-      return "start"
-  }
-}
-
 const ProfileModule = () => {
   const classes = useStyles()
   const { me } = useAuthContext()
+  const { application } = useApplicationStateContext()
 
   const { lgCode, applicationState, firstname, lastname } = me.data as MyProfileModel
 
-  const profileStatus = resolveStatus(applicationState)
+  function resolveFileStatus(file1Status: FileStatus, file2Status: FileStatus, file3Status: FileStatus) {
+    const files = [file1Status, file2Status, file3Status]
+    if (files.includes("EMPTY")) return "EMPTY"
+    if (files.includes("CHANGE_REQUIRED")) return "CHANGE_REQUIRED"
+    if (files.includes("UPLOADED")) return "UPLOADED"
+    return "PASSED"
+  }
 
-  //   const initApplication = useLoadingCallback(
-  //     useCallback(async () => {
-  //       try {
-  //         setLoading(true)
-  //         await createApplication()
-  //         await mutateMe()
-  //         await mutateApplication()
-  //         setLoading(true)
-  //       } catch (error) {}
-  //     }, [createApplication, mutateMe, mutateApplication, setLoading])
-  //   )
+  const fileStatus: FileStatus = resolveFileStatus(application.photo.status, application.parentalConsent.status, application.transcript.status)
+
+  const profileStatusMap = {
+    NOT_FILLED: ProfileStatus.start,
+    DRAFT: ProfileStatus.draft,
+    SUBMITTED: {
+      EMPTY: ProfileStatus.draft,
+      UPLOADED: ProfileStatus.submitted,
+      CHANGE_REQUIRED: ProfileStatus.fileRejected,
+      PASSED: ProfileStatus.fileChecked
+    },
+    FILE_CHECKED: ProfileStatus.fileChecked,
+    REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE: ProfileStatus.fileRejected,
+    INVITED_TO_INTERVIEW: ProfileStatus.invitedToInterview,
+    REJECTED_NOT_INVITED_TO_INTERVIEW: ProfileStatus.notInvitedToInterview,
+    PASSED_INTERVIEW: ProfileStatus.passedInterview,
+    REJECTED_FAILED_THE_INTERVIEW: ProfileStatus.failedInterview,
+    PAYMENT_ACCEPTED: ProfileStatus.paymentAccepted
+  }
+
+  const profileStatus = applicationState === "SUBMITTED" ? profileStatusMap[applicationState][fileStatus] : profileStatusMap[applicationState]
 
   let content
-  if (profileStatus === "start" || profileStatus === "draft") content = <RegisterCard profileStatus={profileStatus} />
-  else content = <StepCardList status={profileStatus} lgCode={lgCode} firstname={firstname} lastname={lastname}/>
+  if (profileStatus === ProfileStatus.start || profileStatus === ProfileStatus.draft) content = <RegisterCard profileStatus={profileStatus} />
+  else content = <StepCardList status={profileStatus} lgCode={lgCode} firstname={firstname} lastname={lastname} />
 
   return (
     <>
