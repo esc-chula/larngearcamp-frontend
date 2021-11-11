@@ -11,6 +11,7 @@ import { useLoadingCallback } from "./loading.component"
 import { useAuthContext } from "../providers/auth.provider"
 import { useGlobalContext } from "../providers/global.provider"
 import { AxiosError } from "axios"
+import { FileStatus } from "../models/dto/application.dto"
 
 const useStyles = makeStyles(theme => ({
   withIcon: {
@@ -60,9 +61,10 @@ type UploadBlockComponentProps = UploadFileModel & {
   serverFile: DocumentItem
   order: number
   disabled?: boolean
+  status: FileStatus
 }
 
-const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile, order, name, size, accept, body1, body2, disabled }) => {
+const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile, order, name, status, size, accept, body1, body2, disabled }) => {
   const classes = useStyles()
   const { register, setError, errors, clearErrors, setValue } = useFormContext()
   const { uploadDocument } = useApplicationContext()
@@ -77,7 +79,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
       return null
     }
     return {
-      name: friendlyFileName(serverFile.name),
+      originalName: friendlyFileName(serverFile.originalName),
       url: serverFile.url
     }
   }, [serverFile])
@@ -97,23 +99,22 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           clearErrors(`${name}URL`)
           const formData = new FormData()
           formData.append("file", file)
+          if (name === "parentalConsent") {
+            formData.append("kind", "PARENTAL_CONSENT")
+          } else {
+            formData.append("kind", name.toUpperCase())
+          }
           try {
-            const result = await uploadDocument(formData, name)
-            mutateApplication(application => ({ ...application, [name]: result.file }), false)
-            if (name === "picture") {
+            const result = await uploadDocument(formData)
+            mutateApplication(application => ({ ...application }), false)
+            if (name === "photo") {
               mutateMe(me => {
-                if (me.application) {
-                  return {
-                    ...me,
-                    application: { ...me.application, picture: result.file.url }
-                  }
-                } else {
-                  return me
-                }
+                return me
               }, false)
             }
             setValue(`${name}URL`, result.file.url)
           } catch (error) {
+            console.log(error)
             activeSnackBar({
               type: "error",
               message: (error as AxiosError).response?.data.message
@@ -124,6 +125,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
       [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication, mutateMe, activeSnackBar]
     )
   )
+
   const fileError = errors[name]
   const urlError = errors[`${name}URL`]
   const currentError = fileError || urlError
@@ -141,19 +143,19 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           disabled={disabled}
           className={`${classes.upload} ${!!displayFile && classes.warningButton}`}>
           <div className={classes.withIcon}>
-            <Typography variant="button">{!!displayFile ? "อัพโหลดอีกครั้ง" : "อัพโหลด"}</Typography>
-            {!!displayFile ? <ReplayIcon fontSize="small" /> : <AddToPhotosOutlinedIcon fontSize="small" />}
+            <Typography variant="button">{status !== "EMPTY" ? "อัพโหลดอีกครั้ง" : "อัพโหลด"}</Typography>
+            {status !== "EMPTY" ? <ReplayIcon fontSize="small" /> : <AddToPhotosOutlinedIcon fontSize="small" />}
           </div>
           <input type="file" name={name} style={{ display: "none" }} accept={accept} ref={register} onChange={uploadFile} />
         </Button>
-        {!!displayFile && !currentError && (
+        {!!displayFile && status !== "EMPTY" && !currentError && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <Typography variant="caption" className={classes.caption} component="div">
               ไฟล์ที่อัพโหลดในขณะนี้ :
             </Typography>
             <Typography className={classes.fit} component="div" variant="caption">
               <a href={displayFile.url} className={classes.fileName} target="_blank" rel="noopener noreferrer">
-                {displayFile.name}
+                {displayFile.originalName}
               </a>
             </Typography>
           </div>

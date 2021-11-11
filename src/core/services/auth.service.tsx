@@ -1,60 +1,28 @@
-import LoginModel from "../models/login.model"
 import { AxiosResponse } from "axios"
-import { httpClient, authHttpClient } from "../../utils/http"
-import ForgotPasswordModel from "../models/forgotPassword.model"
-import ResetPasswordModel from "../models/resetPassword.model"
-import MeDTO from "../models/dto/me.dto"
-
+import { authHttpClient } from "../../utils/http"
 export interface AuthService {
-  loginAPI: (params: LoginModel) => Promise<AxiosResponse>
-  loginFbAPI: (signedRequest: string) => Promise<AxiosResponse>
-  logoutAPI: (accessToken: string) => Promise<AxiosResponse>
-  meAPI: (accessToken: string | null) => Promise<AxiosResponse<MeDTO>>
-  refreshAPI: (accessToken: string) => Promise<AxiosResponse>
-  forgotPasswordAPI: (params: ForgotPasswordModel) => Promise<AxiosResponse>
-  resetPasswordAPI: (params: ResetPasswordModel) => Promise<AxiosResponse>
+  loginFbAPI: (token: string) => Promise<AxiosResponse>
+  logoutAPI: () => Promise<AxiosResponse>
+  loginGoogleAPI: (token: string) => Promise<AxiosResponse>
+  getCurrentUserAPI: () => Promise<AxiosResponse>
 }
 
-function getAuthorizationHeader(accessToken: string | null) {
-  return {
-    Authorization: `Bearer ${accessToken}`
-  }
+const loginFbAPI = async (token: string): Promise<AxiosResponse> => {
+  return await authHttpClient.post(`/auth/login/facebook`, { token })
 }
 
-const loginAPI = async (params: LoginModel): Promise<AxiosResponse> => {
-  return await authHttpClient.post(`/auth/login`, params)
+const loginGoogleAPI = async (token: string): Promise<AxiosResponse> => {
+  return await authHttpClient.post(`/auth/login/google`, { token })
 }
 
-const loginFbAPI = async (signedRequest: string): Promise<AxiosResponse> => {
-  return await authHttpClient.post(`/auth/loginFb`, { signedRequest })
+const logoutAPI = async (): Promise<AxiosResponse> => {
+  return await authHttpClient.post(`/auth/logout`, undefined)
 }
 
-const logoutAPI = async (accessToken: string): Promise<AxiosResponse> => {
-  return await authHttpClient.post(`/auth/logout`, undefined, { headers: getAuthorizationHeader(accessToken) })
+const getCurrentUserAPI = async (): Promise<AxiosResponse> => {
+  return await authHttpClient.get("/auth/currentUser")
 }
 
-const meAPI = async (accessToken: string | null): Promise<AxiosResponse<MeDTO>> => {
-  if (accessToken !== undefined) {
-    return await authHttpClient.get(`/auth/me`, { headers: getAuthorizationHeader(accessToken) })
-  } else {
-    return await httpClient.get(`/auth/me`)
-  }
-}
-
-const refreshAPI = async (accessToken: string): Promise<AxiosResponse> => {
-  return await authHttpClient.post(`/auth/refresh`, undefined, {
-    headers: getAuthorizationHeader(accessToken)
-  })
-}
-
-const forgotPasswordAPI = async (params: ForgotPasswordModel): Promise<AxiosResponse> => {
-  return await authHttpClient.post(`/auth/forget-password`, params)
-}
-
-const resetPasswordAPI = async (params: ResetPasswordModel): Promise<AxiosResponse> => {
-  return await authHttpClient.patch(`/auth/reset-password`, params)
-}
-
-const AuthServiceAPI: AuthService = { loginAPI, loginFbAPI, logoutAPI, meAPI, refreshAPI, forgotPasswordAPI, resetPasswordAPI }
+const AuthServiceAPI: AuthService = { loginGoogleAPI, loginFbAPI, logoutAPI, getCurrentUserAPI }
 
 export default AuthServiceAPI

@@ -1,11 +1,10 @@
 import React, { createContext, useContext } from "react"
-import DocumentType from "../models/documentType.constant"
 import ApplicationServiceAPI from "../services/application.service"
 import FileDTO from "../models/dto/file.dto"
 
 interface ApplicationConstruct {
   createApplication: () => Promise<void>
-  uploadDocument: (data: FormData, type: DocumentType) => Promise<FileDTO>
+  uploadDocument: (data: FormData) => Promise<FileDTO>
 }
 
 export const ApplicationContext = createContext({} as ApplicationConstruct)

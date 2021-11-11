@@ -9,15 +9,14 @@ import { AxiosError } from "axios"
 import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
 
 const useStyle = makeStyles(theme => ({
-  fb: {
-    marginTop: theme.spacing(1)
-  },
+  fb: {},
   fbIcon: {
-    marginRight: theme.spacing(4),
     width: "10px"
   },
   capitalText: {
-    textTransform: "capitalize"
+    textTransform: "capitalize",
+    fontSize: "1rem",
+    width: "100%"
   }
 }))
 
@@ -69,7 +68,7 @@ const FacebookButtonComponentWithStyles = withStyles(theme => ({
     background: "#1877F2",
     borderRadius: "40px",
     color: "white",
-    paddingLeft: theme.spacing(5),
+    paddingLeft: theme.spacing(2.5),
     display: "flex",
     justifyContent: "flex-start",
     "&:hover": {

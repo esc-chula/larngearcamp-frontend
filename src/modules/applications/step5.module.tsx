@@ -10,9 +10,10 @@ import { yupResolver } from "@hookform/resolvers"
 import DocumentSchema from "../../schemas/document.schema"
 import { DocumentModel } from "../../schemas/document.schema"
 import { useApplicationForm, useApplicationStateContext } from "../../core/providers/applicationState.provider"
-import { ApplicationDTO } from "../../core/models/dto/application.dto"
+import { AllDocumentStateDetail, ApplicationDTO, DocumentStateDetail } from "../../core/models/dto/application.dto"
 import { DocumentItem, isDefaultUrl } from "../../core/models/dto/document.dto"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
+import { ApplicationModels } from "../../core/models/application.models"
 
 const useStyles = makeStyles(theme => ({
   divider: {
@@ -33,19 +34,19 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function getUrl(document: DocumentItem): string {
-  if (isDefaultUrl(document.url)) {
+function getUrl(document: DocumentStateDetail): string {
+  if (document.url && isDefaultUrl(document.url)) {
     return ""
   } else {
     return document.url
   }
 }
 
-function mapApplicationToDocument(application: ApplicationDTO): DocumentModel {
+function mapApplicationToDocument(application: ApplicationModels): DocumentModel {
   return ({
-    pictureURL: getUrl(application.picture),
+    pictureURL: getUrl(application.photo),
     transcriptURL: getUrl(application.transcript),
-    letterOfConsentURL: getUrl(application.letterOfConsent)
+    parentalConsentURL: getUrl(application.parentalConsent)
   } as Partial<DocumentModel>) as any
 }
 
@@ -57,7 +58,17 @@ const ApplicationStepFiveModule: React.FC = () => {
   const { application } = useApplicationStateContext()
   const onSubmit = useCallback(async () => true, [])
   const handleSubmit = useHandleSubmit(methods, onSubmit)
-  const { documentStateDetails } = application
+  const documentStateDetails = ({
+    photo: {
+      ...application.photo
+    },
+    parentalConsent: {
+      ...application.parentalConsent
+    },
+    transcript: {
+      ...application.transcript
+    }
+  } as unknown) as AllDocumentStateDetail
 
   return (
     <ApplicationStepModule beforeNavigate={handleSubmit}>
@@ -74,9 +85,10 @@ const ApplicationStepFiveModule: React.FC = () => {
                   <Divider className={classes.divider} />
                   <UploadBlockComponent
                     serverFile={application[content.name]}
+                    status={documentStateDetails[content.name].status}
                     {...content}
                     order={index + 1}
-                    disabled={!!documentStateDetails[content.name].pass}
+                    disabled={documentStateDetails[content.name].status === "PASSED"}
                   />
                   <input ref={methods.register} name={`${content.name}URL`} type="hidden" />
                 </React.Fragment>

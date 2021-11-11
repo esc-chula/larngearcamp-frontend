@@ -21,12 +21,12 @@ const DocumentSchema = object()
         return value.length ? value[0].size <= 2000000 : true
       }),
     transcriptURL: urlTest,
-    letterOfConsent: mixed()
+    parentalConsent: mixed()
       .required()
       .test("fileSize", "ขนาดไฟล์ใหญ่เกิน 2MB", value => {
         return value.length ? value[0].size <= 2000000 : true
       }),
-    letterOfConsentURL: urlTest
+    parentalConsentURL: urlTest
   })
   .defined()
 
