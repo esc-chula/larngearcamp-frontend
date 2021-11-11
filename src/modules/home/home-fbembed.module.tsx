@@ -19,7 +19,7 @@ const HomeFacebookEmbed: React.FC = props => {
         FOLLOW US
       </Typography>
       <Iframe
-        url="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FThailandIncubator%2F&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+        url="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FLARNGEARCAMP%2F&tabs=timeline&width=500&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
         width="500px"
         height="600px"
         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
