@@ -8,12 +8,6 @@ import { th } from "date-fns/esm/locale"
 import { CSSProperties } from "@material-ui/styles"
 
 const useStyle = makeStyles(theme => ({
-  timeline: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-  },
   timelineContent: {
     display: "flex",
     flexDirection: "column",
@@ -23,18 +17,24 @@ const useStyle = makeStyles(theme => ({
     paddingTop: "0"
   },
   eventTitle: {
-    fontSize: "30px",
-    width: "500px",
-    fontWeight: 500,
-    color: theme.palette.secondary.dark
+    color: theme.palette.gray[700],
+    lineHeight: "30px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5rem",
+      lineHeight: "25px"
+    }
   },
   durationTitle: {
-    ...theme.typography.subtitle1,
-    fontWeight: 300,
-    color: theme.palette.secondary.light
+    color: theme.palette.gray[400],
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem"
+    }
   },
   timelineSeparator: {
-    marginRight: "60px"
+    marginRight: "60px",
+    [theme.breakpoints.down("sm")]: {
+      marginRight: "20px"
+    }
   },
   timelineDot: {
     margin: "0",
@@ -51,9 +51,6 @@ const useStyle = makeStyles(theme => ({
     width: "4px",
     height: "90px",
     backgroundColor: theme.palette.primary.main
-  },
-  timelineOppositeContent: {
-    display: "none"
   },
   inactive: {
     backgroundColor: "#BFBFBF"
@@ -92,11 +89,11 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
   }
 
   return (
-    <Timeline className={classes.timeline}>
+    <Timeline>
       {label.map(({ duration, title }, index) => {
         return (
           <TimelineItem>
-            <TimelineOppositeContent className={classes.timelineOppositeContent} />
+            <TimelineOppositeContent style={{ display: "none" }} />
             <TimelineSeparator className={classes.timelineSeparator}>
               <TimelineDot className={`${classes.timelineDot} ${getDotStatus(duration.start, duration.end)}`} />
               {index < label.length - 1 && (
@@ -104,8 +101,10 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
               )}
             </TimelineSeparator>
             <TimelineContent className={classes.timelineContent}>
-              <Typography className={classes.eventTitle}>{title}</Typography>
-              <Typography className={classes.durationTitle}>
+              <Typography className={classes.eventTitle} variant="h4">
+                {title}
+              </Typography>
+              <Typography className={classes.durationTitle} variant="subtitle2">
                 {isEqual(duration.start, duration.end)
                   ? formatDateTime(duration.start)
                   : `${formatDateTime(duration.start)} - ${formatDateTime(duration.end)}`}

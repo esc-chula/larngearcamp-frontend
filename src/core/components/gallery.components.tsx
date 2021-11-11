@@ -22,8 +22,8 @@ interface HomeGalleryProps {
 const useStyle = makeStyles(theme => ({
   root: {
     width: "100%",
-    backgroundColor: theme.palette.background.paper,
-    margin: theme.spacing(4, 0),
+    backgroundColor: theme.palette.gray[50],
+    color: theme.palette.gray[700],
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -53,10 +53,16 @@ const useStyle = makeStyles(theme => ({
       marginLeft: theme.spacing(0)
     }
   },
-  imageTopic: {
+  imageTopicContainer: {
     display: "flex",
     marginBottom: theme.spacing(2),
     margin: "auto"
+  },
+  imageTopic: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.5rem",
+      lineHeight: "30px"
+    }
   },
   galleryRoot: {
     maxWidth: "100vw",
@@ -84,10 +90,17 @@ const useStyle = makeStyles(theme => ({
     }
   },
   galleryHeader: {
-    marginBottom: theme.spacing(5)
+    marginBottom: theme.spacing(5),
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2rem"
+    }
   },
   description: {
-    fontWeight: 300
+    fontWeight: 300,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1rem"
+    }
   }
 }))
 
@@ -109,8 +122,8 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h4" className={classes.galleryHeader}>
-        Gallery
+      <Typography variant="h1" className={classes.galleryHeader}>
+        GALLERY
       </Typography>
       <div className={classes.galleryRoot}>
         <Slider {...settings}>
@@ -122,8 +135,10 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                 </LazyLoad>
                 <div className={classes.descriptionRoot}>
                   <div>
-                    <div className={classes.imageTopic}>
-                      <Typography variant="h4">{topic}</Typography>
+                    <div className={classes.imageTopicContainer}>
+                      <Typography variant="h4" className={classes.imageTopic}>
+                        {topic}
+                      </Typography>
                     </div>
                     <Typography variant="h6" className={classes.description}>
                       {description}
@@ -131,7 +146,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                   </div>
                   <Link to="/profile" className="no-underline">
                     <Button variant="contained" color="primary" className={classes.button}>
-                      สมัครเลย! วันนี้ - 18 ตุลา 2021
+                      สมัครเลย! วันนี้ - 8 ธันวาคม 2564
                     </Button>
                   </Link>
                 </div>

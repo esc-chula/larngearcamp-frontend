@@ -5,9 +5,8 @@ import { pxToRem } from "../../utils/conversion"
 import { HomeContainerProps } from "./home-container.module"
 
 import { QualificationModel } from "../../core/constants/qualifications.constant"
-import { ITheme } from "../../styles/types"
 
-const useStyle = makeStyles((theme: ITheme) => ({
+const useStyle = makeStyles(theme => ({
   title: {
     [theme.breakpoints.down("sm")]: {
       fontSize: "2rem"
@@ -18,6 +17,7 @@ const useStyle = makeStyles((theme: ITheme) => ({
     flexDirection: "column",
     alignItems: "center",
     color: theme.palette.gray[700],
+    backgroundColor: theme.palette.gray[50],
     padding: `${theme.spacing(9)}px min(${theme.spacing(9)}px, 5vw)`,
     [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(2),
