@@ -1,7 +1,6 @@
 import React from "react"
 import { Typography, Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { useAuthContext } from "../../providers/auth.provider"
 import { grey } from "@material-ui/core/colors"
 import { TextFieldComponent } from "../textField.component"
 import AddressFieldComponent from "./addressField.component"
@@ -24,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 
 const PersonalContactComponent = () => {
   const classes = useStyles()
-  const { me } = useAuthContext()
 
   return (
     <>
@@ -34,7 +32,7 @@ const PersonalContactComponent = () => {
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6}>
-            <TextFieldComponent name="contact.recipient" label="ชื่อ-นามสกุลผู้รับส่ง" type="text" />
+            <TextFieldComponent name="contact.recipient" label="ชื่อ-นามสกุลผู้รับพัสดุ" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <TextFieldComponent name="contact.address" label="บ้านเลขที่ หมู่ที่ และถนน" type="text" />
