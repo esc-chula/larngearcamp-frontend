@@ -18,13 +18,13 @@ const useStyle = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     position: "relative",
-    top: "-10px",
+    top: "-5px",
     textAlign: "left",
     paddingTop: "0"
   },
   eventTitle: {
     fontSize: "30px",
-    width: "450px",
+    width: "500px",
     fontWeight: 500,
     color: theme.palette.secondary.dark
   },
