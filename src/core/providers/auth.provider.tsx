@@ -56,7 +56,12 @@ export const AuthProvider: React.FC = ({ ...other }) => {
         firstname: res.firstName || "",
         lastname: res.lastName || "",
         lgCode: stateRes.lgNumber || "",
-        picture: attachRes.photo.url || ""
+        picture: attachRes.photo.url || "",
+        documentState: {
+          photo: attachRes.photo.status,
+          parentalConsent: attachRes.parentalConsent.status,
+          transcript: attachRes.transcript.status
+        }
       }
 
       return meData

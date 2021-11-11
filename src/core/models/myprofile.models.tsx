@@ -1,4 +1,9 @@
-import { ApplicationState } from "./dto/application.dto"
+import { ApplicationState, FileStatus } from "./dto/application.dto"
+import DocumentType from "./documentType.constant"
+
+type DocumentState = {
+  [index in DocumentType]: FileStatus
+}
 
 interface MyProfileModel {
   firstname: string
@@ -6,6 +11,7 @@ interface MyProfileModel {
   lgCode: string
   picture: string
   applicationState: ApplicationState
+  documentState: DocumentState
 }
 
 export default MyProfileModel

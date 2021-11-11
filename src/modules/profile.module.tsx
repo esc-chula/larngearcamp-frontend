@@ -6,7 +6,6 @@ import { ProfileStatus } from "../core/models/profileStatus.model"
 import RegisterCard from "../core/components/profile/registercard.component"
 import StepCardList from "../core/components/profile/stepCardList.component"
 import MyProfileModel from "../core/models/myprofile.models"
-import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 import { FileStatus } from "../core/models/dto/application.dto"
 
 const useStyles = makeStyles(theme => ({
@@ -30,9 +29,8 @@ const useStyles = makeStyles(theme => ({
 const ProfileModule = () => {
   const classes = useStyles()
   const { me } = useAuthContext()
-  const { application } = useApplicationStateContext()
 
-  const { lgCode, applicationState, firstname, lastname } = me.data as MyProfileModel
+  const { lgCode, applicationState, firstname, lastname, documentState } = me.data as MyProfileModel
 
   function resolveFileStatus(file1Status: FileStatus, file2Status: FileStatus, file3Status: FileStatus) {
     const files = [file1Status, file2Status, file3Status]
@@ -42,7 +40,7 @@ const ProfileModule = () => {
     return "PASSED"
   }
 
-  const fileStatus: FileStatus = resolveFileStatus(application.photo.status, application.parentalConsent.status, application.transcript.status)
+  const fileStatus: FileStatus = resolveFileStatus(documentState.photo, documentState.parentalConsent, documentState.transcript)
 
   const profileStatusMap = {
     NOT_FILLED: ProfileStatus.start,
