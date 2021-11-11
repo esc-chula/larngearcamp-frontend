@@ -95,14 +95,14 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
           ดูเหมือนว่าคุณจะยังไม่ได้ส่งใบสมัครเข้าค่ายลานเกียร์ครั้งที่ 21 นะ คลิกสมัครเข้าค่าย
           เพื่อมาเป็นส่วนหนึ่งในความสนุกที่ไม่สามารถหาจากที่อื่นได้อีก!
         </Typography>
-        {props.profileStatus === "start" && (
+        {props.profileStatus === ProfileStatus.start && (
           <Link to="/application" className="no-underline">
             <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`}>
               สมัครเข้าค่าย
             </Button>
           </Link>
         )}
-        {props.profileStatus === "draft" && (
+        {props.profileStatus === ProfileStatus.draft && (
           <Link to="/application" className="no-underline">
             <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`}>
               สมัครต่อจากครั้งที่แล้ว

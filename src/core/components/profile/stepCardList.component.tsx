@@ -14,7 +14,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
   const resolveStepProps = (status: ProfileStatus) => {
     let props = Array<StepCardProps>(7)
     switch (status) {
-      case "submitted":
+      case ProfileStatus.submitted:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "inProgress", isApproved: "true" }
         props[3] = { step: 3, status: "incomplete", isApproved: "true" }
@@ -22,7 +22,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
         props[5] = { step: 5, status: "incomplete", isApproved: "true" }
         props[6] = { step: 6, status: "incomplete", isApproved: "true" }
         break
-      case "fileChecked":
+      case ProfileStatus.fileChecked:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "complete", isApproved: "true" }
         props[3] = { step: 3, status: "inProgress", isApproved: "true" }
@@ -30,7 +30,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
         props[5] = { step: 5, status: "incomplete", isApproved: "true" }
         props[6] = { step: 6, status: "incomplete", isApproved: "true" }
         break
-      case "fileRejected":
+      case ProfileStatus.fileRejected:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "inProgress", isApproved: "false" }
         props[3] = { step: 3, status: "incomplete", isApproved: "true" }
@@ -38,7 +38,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
         props[5] = { step: 5, status: "incomplete", isApproved: "true" }
         props[6] = { step: 6, status: "incomplete", isApproved: "true" }
         break
-      case "invitedToInterview":
+      case ProfileStatus.invitedToInterview:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "complete", isApproved: "true" }
         props[3] = { step: 3, status: "complete", isApproved: "true" }
@@ -46,7 +46,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
         props[5] = { step: 5, status: "incomplete", isApproved: "true" }
         props[6] = { step: 6, status: "incomplete", isApproved: "true" }
         break
-      case "notInvitedToInterview":
+      case ProfileStatus.notInvitedToInterview:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "complete", isApproved: "true" }
         props[3] = { step: 3, status: "complete", isApproved: "false" }
@@ -54,7 +54,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
         props[5] = { step: 5, status: "incomplete", isApproved: "true" }
         props[6] = { step: 6, status: "incomplete", isApproved: "true" }
         break
-      case "passedInterview":
+      case ProfileStatus.passedInterview:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "complete", isApproved: "true" }
         props[3] = { step: 3, status: "complete", isApproved: "true" }
@@ -62,7 +62,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
         props[5] = { step: 5, status: "inProgress", isApproved: "true" }
         props[6] = { step: 6, status: "incomplete", isApproved: "true" }
         break
-      case "failedInterview":
+      case ProfileStatus.failedInterview:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "complete", isApproved: "true" }
         props[3] = { step: 3, status: "complete", isApproved: "true" }
@@ -70,7 +70,7 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
         props[5] = { step: 5, status: "incomplete", isApproved: "true" }
         props[6] = { step: 6, status: "incomplete", isApproved: "true" }
         break
-      case "paymentAccepted":
+      case ProfileStatus.paymentAccepted:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "complete", isApproved: "true" }
         props[3] = { step: 3, status: "complete", isApproved: "true" }

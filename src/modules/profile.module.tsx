@@ -44,29 +44,46 @@ const ProfileModule = () => {
 
   const fileStatus: FileStatus = resolveFileStatus(application.photo.status, application.parentalConsent.status, application.transcript.status)
 
-  const resolveProfileStatus = {
-    NOT_FILLED: "start" as ProfileStatus,
-    DRAFT: "draft" as ProfileStatus,
+  // const resolveProfileStatus = {
+  //   NOT_FILLED: "start" ,
+  //   DRAFT: "draft" ,
+  //   SUBMITTED: {
+  //     EMPTY: "draft" , // This state will not happen
+  //     UPLOADED: "submitted" ,
+  //     CHANGE_REQUIRED: "fileRejected" ,
+  //     PASSED: "fileChecked"  // This state will not happen
+  //   },
+  //   FILE_CHECKED: "fileChecked" ,
+  //   REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE: "fileRejected" ,
+  //   INVITED_TO_INTERVIEW: "invitedToInterview" ,
+  //   REJECTED_NOT_INVITED_TO_INTERVIEW: "notInvitedToInterview" ,
+  //   PASSED_INTERVIEW: "passedInterview" ,
+  //   REJECTED_FAILED_THE_INTERVIEW: "failedInterview" ,
+  //   PAYMENT_ACCEPTED: "paymentAccepted"
+  // }
+
+  const profileStatusMap = {
+    NOT_FILLED: ProfileStatus.start,
+    DRAFT: ProfileStatus.draft,
     SUBMITTED: {
-      EMPTY: "draft" as ProfileStatus, // This state will not happen
-      UPLOADED: "submitted" as ProfileStatus,
-      CHANGE_REQUIRED: "fileRejected" as ProfileStatus,
-      PASSED: "fileChecked" as ProfileStatus // This state will not happen
+      EMPTY: ProfileStatus.draft,
+      UPLOADED: ProfileStatus.submitted,
+      CHANGE_REQUIRED: ProfileStatus.fileRejected,
+      PASSED: ProfileStatus.fileChecked
     },
-    FILE_CHECKED: "fileChecked" as ProfileStatus,
-    REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE: "fileRejected" as ProfileStatus,
-    INVITED_TO_INTERVIEW: "invitedToInterview" as ProfileStatus,
-    REJECTED_NOT_INVITED_TO_INTERVIEW: "notInvitedToInterview" as ProfileStatus,
-    PASSED_INTERVIEW: "passedInterview" as ProfileStatus,
-    REJECTED_FAILED_THE_INTERVIEW: "failedInterview" as ProfileStatus,
-    PAYMENT_ACCEPTED: "paymentAccepted" as ProfileStatus
+    FILE_CHECKED: ProfileStatus.fileChecked,
+    REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE: ProfileStatus.fileRejected,
+    INVITED_TO_INTERVIEW: ProfileStatus.invitedToInterview,
+    REJECTED_NOT_INVITED_TO_INTERVIEW: ProfileStatus.notInvitedToInterview,
+    PASSED_INTERVIEW: ProfileStatus.passedInterview,
+    REJECTED_FAILED_THE_INTERVIEW: ProfileStatus.failedInterview,
+    PAYMENT_ACCEPTED: ProfileStatus.paymentAccepted
   }
 
-  const profileStatus: ProfileStatus =
-    applicationState === "SUBMITTED" ? resolveProfileStatus[applicationState][fileStatus] : resolveProfileStatus[applicationState]
+  const profileStatus = applicationState === "SUBMITTED" ? profileStatusMap[applicationState][fileStatus] : profileStatusMap[applicationState]
 
   let content
-  if (profileStatus === "start" || profileStatus === "draft") content = <RegisterCard profileStatus={profileStatus} />
+  if (profileStatus === ProfileStatus.start || profileStatus === ProfileStatus.draft) content = <RegisterCard profileStatus={profileStatus} />
   else content = <StepCardList status={profileStatus} lgCode={lgCode} firstname={firstname} lastname={lastname} />
 
   return (
