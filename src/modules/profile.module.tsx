@@ -44,24 +44,6 @@ const ProfileModule = () => {
 
   const fileStatus: FileStatus = resolveFileStatus(application.photo.status, application.parentalConsent.status, application.transcript.status)
 
-  // const resolveProfileStatus = {
-  //   NOT_FILLED: "start" ,
-  //   DRAFT: "draft" ,
-  //   SUBMITTED: {
-  //     EMPTY: "draft" , // This state will not happen
-  //     UPLOADED: "submitted" ,
-  //     CHANGE_REQUIRED: "fileRejected" ,
-  //     PASSED: "fileChecked"  // This state will not happen
-  //   },
-  //   FILE_CHECKED: "fileChecked" ,
-  //   REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE: "fileRejected" ,
-  //   INVITED_TO_INTERVIEW: "invitedToInterview" ,
-  //   REJECTED_NOT_INVITED_TO_INTERVIEW: "notInvitedToInterview" ,
-  //   PASSED_INTERVIEW: "passedInterview" ,
-  //   REJECTED_FAILED_THE_INTERVIEW: "failedInterview" ,
-  //   PAYMENT_ACCEPTED: "paymentAccepted"
-  // }
-
   const profileStatusMap = {
     NOT_FILLED: ProfileStatus.start,
     DRAFT: ProfileStatus.draft,
