@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import LazyLoad from "react-lazyload"
 import { Link } from "react-router-dom"
-import { ITheme } from "../../styles/types"
 
 interface IImage {
   src: string
@@ -20,7 +19,7 @@ interface HomeGalleryProps {
   images: IImage[]
 }
 
-const useStyle = makeStyles((theme: ITheme) => ({
+const useStyle = makeStyles(theme => ({
   root: {
     width: "100%",
     backgroundColor: theme.palette.gray[50],

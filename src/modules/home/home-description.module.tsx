@@ -3,10 +3,9 @@ import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { pxToRem } from "../../utils/conversion"
 import { HomeContainerProps } from "./home-container.module"
-import { ITheme } from "../../styles/types"
 import HomeDescriptionImage from "./home-description-image.module"
 
-const useStyle = makeStyles((theme: ITheme) => ({
+const useStyle = makeStyles(theme => ({
   container: {
     display: "flex",
     color: theme.palette.gray[700],

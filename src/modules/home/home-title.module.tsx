@@ -7,9 +7,8 @@ import landing1 from "../../assets/images/background/landing-1.png"
 import { safeArea } from "../../core/components/safeArea.component"
 import { grey } from "@material-ui/core/colors"
 import { BsFacebook, BsInstagram } from "react-icons/bs"
-import { ITheme } from "../../styles/types"
 
-const useStyle = makeStyles((theme: ITheme) => ({
+const useStyle = makeStyles(theme => ({
   titleContainer: {
     minHeight: "542px",
     backgroundImage: `url(${landing1})`,

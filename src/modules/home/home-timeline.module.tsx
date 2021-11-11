@@ -3,10 +3,9 @@ import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { TimelineDisplay, TimelineProps } from "../../core/components/timeline.component"
 import { SafeArea } from "../../core/components/safeArea.component"
-import { ITheme } from "../../styles/types"
 import { ReactComponent as GearIcon } from "../../assets/images/icon/gear-icon.svg"
 
-const useStyle = makeStyles((theme: ITheme) => ({
+const useStyle = makeStyles(theme => ({
   root: {
     backgroundColor: "white",
     paddingTop: theme.spacing(10),

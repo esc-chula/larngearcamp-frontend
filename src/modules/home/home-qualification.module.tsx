@@ -5,9 +5,8 @@ import { pxToRem } from "../../utils/conversion"
 import { HomeContainerProps } from "./home-container.module"
 
 import { QualificationModel } from "../../core/constants/qualifications.constant"
-import { ITheme } from "../../styles/types"
 
-const useStyle = makeStyles((theme: ITheme) => ({
+const useStyle = makeStyles(theme => ({
   title: {
     [theme.breakpoints.down("sm")]: {
       fontSize: "2rem"

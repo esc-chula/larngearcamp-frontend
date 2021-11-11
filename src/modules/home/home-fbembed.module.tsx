@@ -2,9 +2,8 @@ import React from "react"
 import Iframe from "react-iframe"
 import { makeStyles, useTheme } from "@material-ui/styles"
 import { Typography, useMediaQuery } from "@material-ui/core"
-import { ITheme } from "../../styles/types"
 
-const useStyle = makeStyles((theme: ITheme) => ({
+const useStyle = makeStyles(theme => ({
   container: {
     backgroundColor: "white",
     paddingBottom: theme.spacing(6)

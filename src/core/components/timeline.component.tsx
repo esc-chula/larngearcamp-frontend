@@ -6,9 +6,8 @@ import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem
 import { format, isWithinInterval, isFuture, isEqual, addYears } from "date-fns"
 import { th } from "date-fns/esm/locale"
 import { CSSProperties } from "@material-ui/styles"
-import { ITheme } from "../../styles/types"
 
-const useStyle = makeStyles((theme: ITheme) => ({
+const useStyle = makeStyles(theme => ({
   timelineContent: {
     display: "flex",
     flexDirection: "column",

@@ -1,6 +1,3 @@
-import { Theme, ThemeOptions } from "@material-ui/core/styles/createMuiTheme"
-import { Palette } from "@material-ui/core/styles/createPalette"
-
 export interface IColorSet {
   0: string
   50: string
@@ -13,16 +10,4 @@ export interface IColorSet {
   700: string
   800: string
   900: string
-}
-interface IPalette extends Palette {
-  gray: IColorSet
-  green: IColorSet
-}
-
-export interface ITheme extends Theme {
-  palette: IPalette
-}
-
-export interface IThemeOptions extends ThemeOptions {
-  palette: IPalette
 }
