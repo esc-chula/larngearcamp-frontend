@@ -50,6 +50,7 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
     surname: application.lastName,
     nickname: application.nickName,
     birthDate: formattedBirthDate,
+    phoneNumber: application.phoneNumber,
     contact: {
       address: application.mailAddress,
       subDistrict: application.mailTumbol,
@@ -66,6 +67,7 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
       homeNumber: application.parentTelephone
     },
     education: application.educationLevel,
+    studyProgram: application.educationProgram,
     school: application.educationalInstitution,
     province: application.educationalInstitutionProvince,
     religion: application.religion,

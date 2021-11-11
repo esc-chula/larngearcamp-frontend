@@ -4,8 +4,10 @@ interface ProfileDTO {
   lastName: string
   nickName: string
   birthDate: string
+  phoneNumber: string
   religion: string
   educationLevel: string
+  educationProgram: string
   educationalInstitution: string
   educationalInstitutionProvince: string
   bloodGroup: string
