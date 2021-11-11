@@ -39,10 +39,13 @@ const PersonalEducationComponent = () => {
           ข้อมูลการศึกษา
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={6} md={3}>
+          <Grid item xs={12} sm={6} md={6}>
             <SelectComponent control={control} data={gradesConstant} />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={6}>
+            <TextFieldComponent name="studyProgram" label="สายการเรียน" type="text" />
+          </Grid>
+          <Grid item xs={12} sm={6} md={6}>
             <Autocomplete
               options={options}
               disableClearable
@@ -53,7 +56,7 @@ const PersonalEducationComponent = () => {
               renderInput={params => <TextFieldComponent {...params} name="province" label="จังหวัด" />}
             />
           </Grid>
-          <Grid item xs={12} sm={12} md={5}>
+          <Grid item xs={12} sm={12} md={6}>
             <TextFieldComponent name="school" label="โรงเรียน" type="text" />
           </Grid>
         </Grid>
