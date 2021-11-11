@@ -16,6 +16,7 @@ const useStyle = makeStyles((theme: ITheme) => ({
     flexDirection: "column",
     alignItems: "center",
     position: "relative",
+    overflowX: "hidden",
     [theme.breakpoints.down("sm")]: {
       paddingTop: theme.spacing(5)
     }
