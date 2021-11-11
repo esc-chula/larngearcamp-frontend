@@ -38,14 +38,17 @@ const PersonalProfileComponent = () => {
           <Grid item xs={12} sm={6} md={4}>
             <TextFieldComponent name="surname" label="นามสกุล" type="text" defaultValue={me.data?.lastname} />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextFieldComponent name="nickname" label="ชื่อเล่น" type="text" />
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <SelectComponent data={religionsConstant} control={control} />
           </Grid>
-          <Grid item xs={12} sm={12} md={5}>
+          <Grid item xs={12} sm={6} md={3}>
             <TextFieldComponent name="birthDate" label="วันเกิด" type="date" InputLabelProps={{ shrink: true }} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <TextFieldComponent name="phoneNumber" label="โทรศัพท์มือถือ" type="tel" />
           </Grid>
         </Grid>
       </Box>
