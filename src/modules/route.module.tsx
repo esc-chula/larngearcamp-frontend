@@ -1,5 +1,5 @@
 import React, { Suspense } from "react"
-import { Switch, Route } from "react-router-dom"
+import { Switch, Route, Redirect } from "react-router-dom"
 
 // COMPONENTS
 import { HomeModule } from "./home.module"
@@ -18,7 +18,7 @@ import { PrivacyPoflicyModule } from "./privacy-policy.module"
 const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
 const RouteModule: React.FC = () => {
-  const { announceDate } = useAnnounceContext()
+  const { announceDate, applicationStartDate } = useAnnounceContext()
 
   return (
     <Suspense fallback={<ShowLoadingComponent />}>
@@ -50,11 +50,11 @@ const RouteModule: React.FC = () => {
           <ApplicationStateProvider>{(render, is404) => (render || is404 ? <ProfileModule /> : <ShowLoadingComponent />)}</ApplicationStateProvider>
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
-          {/* {new Date() > announceDate ? (
+          {new Date() > announceDate || new Date() < applicationStartDate ? (
             <Redirect to="/profile" />
-          ) : ( */}
-          <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
-          {/* )} */}
+          ) : (
+            <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>
+          )}
         </UserGuardedRoute>
 
         {/* NotFound Route */}
