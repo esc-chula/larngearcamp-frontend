@@ -91,7 +91,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
         if (size && file.size > size) {
           setError(name, {
             type: "fileSize",
-            message: "ขนาดไฟล์ใหญ่เกิน 2MB"
+            message: "ขนาดไฟล์ใหญ่เกิน 4MB"
           })
           setValue(`${name}URL`, undefined)
         } else {
