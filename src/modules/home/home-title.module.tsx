@@ -7,6 +7,7 @@ import landing1 from "../../assets/images/background/landing-1.png"
 import { safeArea } from "../../core/components/safeArea.component"
 import { grey } from "@material-ui/core/colors"
 import { BsFacebook, BsInstagram } from "react-icons/bs"
+import { useAnnounceContext } from "../../core/providers/announce.provider"
 
 const useStyle = makeStyles(theme => ({
   titleContainer: {
@@ -77,8 +78,7 @@ const useStyle = makeStyles(theme => ({
 
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
-  const registerCloseDate = new Date("December 9, 2021 00:00:00 GMT+07:00")
-  const isRegisterClosed = new Date() > registerCloseDate
+  const { isLate, isEarly, isApplicable } = useAnnounceContext()
 
   return (
     <div className={classes.titleContainer}>
@@ -90,9 +90,11 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
           <Typography variant="h5" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
           </Typography>
-          <Link to="/profile" className="no-underline" style={{ pointerEvents: isRegisterClosed ? "none" : "initial" }}>
-            <Button variant="contained" color="primary" className={classes.button} disabled={isRegisterClosed}>
-              {isRegisterClosed ? "หมดเขตรับสมัคร" : "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"}
+          <Link to="/profile" className="no-underline" style={{ pointerEvents: isLate || isEarly ? "none" : "initial" }}>
+            <Button variant="contained" color="primary" className={classes.button} disabled={isLate || isEarly}>
+              {isLate && "หมดเขตรับสมัคร"}
+              {isEarly && "ยังไม่เปิดรับสมัคร"}
+              {isApplicable && "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"}
             </Button>
           </Link>
           <div className={classes.contactsContainer}>

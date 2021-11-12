@@ -35,8 +35,8 @@ const useStyle = makeStyles(theme => ({
 }))
 const HomeAnnouce: React.FC<BoxProps> = props => {
   const classes = useStyle()
-  const { announceDate } = useAnnounceContext()
-  const shouldAnnounce = new Date() > announceDate
+  const { isLate } = useAnnounceContext()
+  const shouldAnnounce = isLate
   return (
     <BackgroundOverlayComponent
       src={require("../../assets/images/background/landing-3.svg")}
@@ -48,9 +48,9 @@ const HomeAnnouce: React.FC<BoxProps> = props => {
           <Typography className={classes.primaryAnnounce + " kanit"} variant="h6">
             สัมภาษณ์ 31&nbsp;ตุลาคม - 8&nbsp;พฤศจิกายน 2563
           </Typography>
-          <Link to="/profile" className="no-underline" style={{ pointerEvents: shouldAnnounce ? "initial" : "none" }}>
+          <Link to="/profile" className="no-underline" style={{ pointerEvents: isLate ? "initial" : "none" }}>
             <Button variant="contained" color="secondary" className={classes.subscribeButton} disabled={!shouldAnnounce}>
-              {shouldAnnounce ? "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" : "หมดเขตรับสมัคร"}
+              {isLate ? "ประกาศผลผู้มีสิทธิ์สัมภาษณ์" : "หมดเขตรับสมัคร"}
             </Button>
           </Link>
         </SafeArea>
