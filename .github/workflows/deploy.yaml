@@ -35,6 +35,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
+      - name: Switch to production environment
+        run: mv .env.prod .env
+
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
