@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import LazyLoad from "react-lazyload"
 import { Link } from "react-router-dom"
+import { useAnnounceContext } from "../providers/announce.provider"
 
 interface IImage {
   src: string
@@ -105,6 +106,7 @@ const useStyle = makeStyles(theme => ({
 }))
 
 const HomeGallery: React.FC<HomeGalleryProps> = props => {
+  const { isLate, isEarly, isApplicable } = useAnnounceContext()
   const { images } = props
   const settings: Settings = {
     dots: true,
@@ -144,9 +146,11 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                       {description}
                     </Typography>
                   </div>
-                  <Link to="/profile" className="no-underline">
-                    <Button variant="contained" color="primary" className={classes.button}>
-                      สมัครเลย! วันนี้ - 8 ธันวาคม 2564
+                  <Link to="/profile" className="no-underline" style={{ pointerEvents: isLate || isEarly ? "none" : "initial" }}>
+                    <Button variant="contained" color="primary" className={classes.button} disabled={isLate || isEarly}>
+                      {isLate && "หมดเขตรับสมัคร"}
+                      {isEarly && "ยังไม่เปิดรับสมัคร"}
+                      {isApplicable && "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"}
                     </Button>
                   </Link>
                 </div>
