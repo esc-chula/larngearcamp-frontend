@@ -49,17 +49,19 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
     }
   }, [beforeNavigate, setLoading])
 
-  const handleNext = useCallback(
-    async (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (wrappedBeforeNavigate) {
-        event.preventDefault()
-        if (await wrappedBeforeNavigate()) {
-          history.push(nextPage)
-        }
+  const handleNext = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    const whiteList = ["/application/step/1", "/application"]
+    let confirmation
+    if (whiteList.indexOf(history.location.pathname) >= 0) confirmation = true
+    else confirmation = window.confirm("คุณต้องการออกจากหน้านี้ใช่หรือไม่")
+
+    if (confirmation && wrappedBeforeNavigate) {
+      event.preventDefault()
+      if (await wrappedBeforeNavigate()) {
+        history.push(nextPage)
       }
-    },
-    [wrappedBeforeNavigate, history, nextPage]
-  )
+    }
+  }
 
   const showBothButtons = application || step > 5
 

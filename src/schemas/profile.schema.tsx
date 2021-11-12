@@ -7,8 +7,10 @@ const ProfileSchema = object()
     surname: string().trim().required("กรุณาระบุนามสกุล"),
     nickname: string().trim().required("กรุณาระบุชื่อเล่น"),
     birthDate: string().trim().required("กรุณาระบุวันเกิด"),
+    phoneNumber: string().trim().required("กรุณาระบุเบอร์โทรศัพท์"),
     religion: string().trim().required("กรุณาระบุศาสนา"),
     education: string().trim().required("กรุณาระบุชั้นปี"),
+    studyProgram: string().trim().required("กรุณาระบุสายการเรียน"),
     school: string().trim().required("กรุณาระบุโรงเรียน"),
     province: string().trim().required("กรุณาระบุจังหวัดโรงเรียน"),
     health: object({
@@ -31,7 +33,6 @@ const ProfileSchema = object()
         .matches(/^((((\+66|66|0)\d{2})-?\d{3}-?\d{4})|(-))$/, "เบอร์โทรศัพท์ไม่ถูกต้อง"),
       homeNumber: string()
         .trim()
-        //.required("กรุณาระบุเบอร์บ้าน")
         .matches(/^(\d{9})|(-)|\s{0}$/, "เบอร์โทรศัพท์บ้านไม่ถูกต้อง"),
       facebookName: string().trim().required("กรุณาระบุชื่อเฟสบุ๊ค"),
       lineId: string().trim().required("กรุณาระบุไลน์ไอดี"),
