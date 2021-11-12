@@ -85,7 +85,7 @@ interface RegisterCardProps {
 
 const RegisterCard: React.FC<RegisterCardProps> = props => {
   const classes = useStyles()
-  const { isApplicable } = useAnnounceContext()
+  const { isApplicable, isLate, isEarly } = useAnnounceContext()
 
   return (
     <Container className={classes.root}>
@@ -110,6 +110,16 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
               สมัครต่อจากครั้งที่แล้ว
             </Button>
           </Link>
+        )}
+        {isLate && (
+          <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
+            หมดเขตรับสมัคร
+          </Button>
+        )}
+        {isEarly && (
+          <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
+            ยังไม่เปิดรับสมัคร
+          </Button>
         )}
         <img src={Gear} className={classes.gear1} />
         <img src={Gear} className={classes.gear2} />
