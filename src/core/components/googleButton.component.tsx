@@ -16,7 +16,7 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
         await loginGoogle(res.credential)
         history.push("/profile")
       } catch (err) {
-        activeSnackBar({ type: "error", message: "เข้าสู่ระบบด้วย Facebook ไม่สำเร็จ" })
+        activeSnackBar({ type: "error", message: "เข้าสู่ระบบด้วย Google ไม่สำเร็จ" })
       }
     }
 
