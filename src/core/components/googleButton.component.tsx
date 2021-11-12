@@ -1,13 +1,25 @@
 import React, { useEffect } from "react"
-import { ButtonProps, withStyles } from "@material-ui/core"
+import { Button, ButtonProps, makeStyles, Typography, withStyles } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import { useAuthContext } from "../providers/auth.provider"
 import { useHistory } from "react-router"
 import { useGlobalContext } from "../providers/global.provider"
 
+import googleIcon from "../../assets/images/icon/google-icon.svg"
+
+const useStyle = makeStyles(theme => ({
+  googleIcon: {
+    marginRight: theme.spacing(3.5)
+  },
+  capitalText: {
+    textTransform: "capitalize"
+  }
+}))
+
 const GoogleButtonComponent: React.FC<ButtonProps> = props => {
   const { loginGoogle } = useAuthContext()
   const history = useHistory()
+  const classes = useStyle()
   const { activeSnackBar } = useGlobalContext()
 
   useEffect(() => {
@@ -31,13 +43,30 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
         size: "large",
         shape: "pill",
         logo_alignment: "left",
-        type: "standard"
+        type: "icon"
       })
     }
     initGoogleButton()
   }, [activeSnackBar, history, loginGoogle])
 
-  return <div id="google_signin" style={{ width: "100%" }} />
+  return (
+    <>
+      <div id="google_signin" style={{ width: "100%", display: "none" }} />
+      <Button
+        onClick={e => {
+          e.stopPropagation()
+
+          const el = document.querySelectorAll('[role="button"]')[0] as HTMLElement
+          el.click()
+        }}
+        {...props}>
+        <img src={googleIcon} alt="googleIcon" className={classes.googleIcon} />
+        <Typography variant="button" className={classes.capitalText}>
+          เข้าสู่ระบบด้วยบัญชี Google
+        </Typography>
+      </Button>
+    </>
+  )
 }
 
 const GoogleButtonComponentWithStyles = withStyles(theme => ({
