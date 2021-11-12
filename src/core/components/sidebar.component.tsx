@@ -56,11 +56,6 @@ const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
         {!isLoggedIn && (
           <>
             <SideBarLink to="/login">เข้าสู่ระบบ</SideBarLink>
-            <SideBarLink to="/register">
-              <Button color="primary" variant="contained" fullWidth>
-                ลงทะเบียน
-              </Button>
-            </SideBarLink>
           </>
         )}
       </Box>

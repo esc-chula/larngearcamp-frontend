@@ -72,8 +72,6 @@ const NavBarComponent = () => {
 
   const closeDrawer = useCallback(() => setOpen(false), [])
 
-  const closed = new Date() >= new Date("2020-10-21T00:00:00+07:00")
-
   return (
     <NavBarContext.Provider value={{ closeDrawer }}>
       <AppBar position="sticky" color="secondary" className={classes.appbar}>
@@ -110,15 +108,6 @@ const NavBarComponent = () => {
                   <Link className={classes.underlineWhite} to="/login">
                     เข้าสู่ระบบ
                   </Link>
-                  {!closed ? (
-                    <Link to="/register">
-                      <Button color="primary" variant="contained">
-                        ลงทะเบียน
-                      </Button>
-                    </Link>
-                  ) : (
-                    ""
-                  )}
                 </>
               )}
             </Box>
