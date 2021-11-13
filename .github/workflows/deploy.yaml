@@ -35,7 +35,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
+      - name: Switch to development environment
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: mv .env.dev .env
+
       - name: Switch to production environment
+        if: ${{ github.ref == 'refs/heads/dev' }}
         run: mv .env.prod .env
 
       - name: Extract metadata (tags, labels) for Docker
