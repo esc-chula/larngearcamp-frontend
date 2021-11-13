@@ -35,11 +35,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
 
-      - name: Switch to development environment
+      - name: Switch to production environment
         if: ${{ github.ref == 'refs/heads/master' }}
         run: mv .env.prod .env
 
-      - name: Switch to production environment
+      - name: Switch to development environment
         if: ${{ github.ref == 'refs/heads/dev' }}
         run: mv .env.dev .env
 
