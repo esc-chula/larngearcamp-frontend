@@ -149,7 +149,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                   <Link to="/profile" className="no-underline" style={{ pointerEvents: isLate || isEarly ? "none" : "initial" }}>
                     <Button variant="contained" color="primary" className={classes.button} disabled={isLate || isEarly}>
                       {isLate && "หมดเขตรับสมัคร"}
-                      {isEarly && "ยังไม่เปิดรับสมัคร"}
+                      {isEarly && "เปิดรับสมัครวันที่ 15 พฤศจิกายน"}
                       {isApplicable && "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"}
                     </Button>
                   </Link>

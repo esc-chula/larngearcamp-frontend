@@ -46,11 +46,11 @@ const steps: Record<string, Step> = {
   },
   "5": {
     Component: ApplicationStepFiveModule,
-    allowedStates: ["DRAFT", "REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE"]
+    allowedStates: ["DRAFT", "SUBMITTED"]
   },
   "6": {
     Component: ApplicationStepSixModule,
-    allowedStates: ["DRAFT", "REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE"]
+    allowedStates: ["DRAFT"]
   }
 }
 

@@ -118,7 +118,7 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
         )}
         {isEarly && (
           <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
-            ยังไม่เปิดรับสมัคร
+            เปิดรับสมัครวันที่ 15 พฤศจิกายน
           </Button>
         )}
         <img src={Gear} className={classes.gear1} />
