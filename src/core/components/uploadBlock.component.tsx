@@ -88,6 +88,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
     useCallback(
       async event => {
         const file: File = event.target.files[0]
+        if (!file) return
         if (size && file.size > size) {
           setError(name, {
             type: "fileSize",
