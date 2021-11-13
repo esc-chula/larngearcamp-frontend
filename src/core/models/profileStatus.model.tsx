@@ -8,5 +8,6 @@ export enum ProfileStatus {
   notInvitedToInterview = "notInvitedToInterview",
   passedInterview = "passedInterview",
   failedInterview = "failedInterview",
-  paymentAccepted = "paymentAccepted"
+  paymentAccepted = "paymentAccepted",
+  paymentFailed = "paymentFailed"
 }
