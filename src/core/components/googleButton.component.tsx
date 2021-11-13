@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useCallback } from "react"
 import { Button, ButtonProps, makeStyles, Typography, withStyles } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import { useAuthContext } from "../providers/auth.provider"
@@ -8,11 +8,15 @@ import { useGlobalContext } from "../providers/global.provider"
 import googleIcon from "../../assets/images/icon/google-icon.svg"
 
 const useStyle = makeStyles(theme => ({
-  googleIcon: {
-    marginRight: theme.spacing(3.5)
+  button: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "flex-start"
   },
   capitalText: {
-    textTransform: "capitalize"
+    textTransform: "capitalize",
+    fontSize: "1rem",
+    width: "100%"
   }
 }))
 
@@ -49,18 +53,18 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
     initGoogleButton()
   }, [activeSnackBar, history, loginGoogle])
 
+  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation()
+
+    const el = document.querySelectorAll('[role="button"]')[0] as HTMLElement
+    el.click()
+  }, [])
+
   return (
     <>
       <div id="google_signin" style={{ width: "100%", display: "none" }} />
-      <Button
-        onClick={e => {
-          e.stopPropagation()
-
-          const el = document.querySelectorAll('[role="button"]')[0] as HTMLElement
-          el.click()
-        }}
-        {...props}>
-        <img src={googleIcon} alt="googleIcon" className={classes.googleIcon} />
+      <Button onClick={handleClick} className={`${classes.button} ${props.className}`} {...props}>
+        <img src={googleIcon} alt="googleIcon" />
         <Typography variant="button" className={classes.capitalText}>
           เข้าสู่ระบบด้วยบัญชี Google
         </Typography>
@@ -74,9 +78,7 @@ const GoogleButtonComponentWithStyles = withStyles(theme => ({
     background: "#ffffff",
     border: "1px solid #333333",
     borderRadius: "40px",
-    display: "flex",
-    justifyContent: "flex-start",
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(1.5),
     color: grey[700],
     "&:hover": {
       background: "#dddddd"
