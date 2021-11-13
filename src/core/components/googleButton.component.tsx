@@ -57,7 +57,7 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
 
-    const el = document.querySelectorAll('[role="button"]')[0] as HTMLElement
+    const el = document.getElementById("google_signin")?.querySelectorAll('[role="button"]')[0] as HTMLElement
     if (el) {
       el.click()
     }
