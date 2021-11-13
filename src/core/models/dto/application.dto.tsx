@@ -13,6 +13,7 @@ export type ApplicationState =
   | "PASSED_INTERVIEW"
   | "REJECTED_FAILED_THE_INTERVIEW"
   | "PAYMENT_ACCEPTED"
+  | "REJECTED_FAIL_TO_PAY"
 
 export type FileStatus = "EMPTY" | "UPLOADED" | "CHANGE_REQUIRED" | "PASSED"
 
