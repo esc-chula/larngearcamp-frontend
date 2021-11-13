@@ -1,13 +1,29 @@
-import React, { useEffect } from "react"
-import { ButtonProps, withStyles } from "@material-ui/core"
+import React, { useEffect, useCallback } from "react"
+import { Button, ButtonProps, makeStyles, Typography, withStyles } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import { useAuthContext } from "../providers/auth.provider"
 import { useHistory } from "react-router"
 import { useGlobalContext } from "../providers/global.provider"
 
+import googleIcon from "../../assets/images/icon/google-icon.svg"
+
+const useStyle = makeStyles(theme => ({
+  button: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "flex-start"
+  },
+  capitalText: {
+    textTransform: "capitalize",
+    fontSize: "1rem",
+    width: "100%"
+  }
+}))
+
 const GoogleButtonComponent: React.FC<ButtonProps> = props => {
   const { loginGoogle } = useAuthContext()
   const history = useHistory()
+  const classes = useStyle()
   const { activeSnackBar } = useGlobalContext()
 
   useEffect(() => {
@@ -31,13 +47,33 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
         size: "large",
         shape: "pill",
         logo_alignment: "left",
-        type: "standard"
+        type: "icon"
       })
+      document.getElementById("google_signin")?.getElementsByTagName("iframe")[0].remove()
     }
     initGoogleButton()
   }, [activeSnackBar, history, loginGoogle])
 
-  return <div id="google_signin" style={{ width: "100%" }} />
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation()
+
+    const el = document.getElementById("google_signin")?.querySelectorAll('[role="button"]')[0] as HTMLElement
+    if (el) {
+      el.click()
+    }
+  }
+
+  return (
+    <>
+      <div id="google_signin" style={{ width: "100%", display: "none" }} />
+      <Button onClick={handleClick} className={`${classes.button} ${props.className}`} {...props}>
+        <img src={googleIcon} alt="googleIcon" />
+        <Typography variant="button" className={classes.capitalText}>
+          เข้าสู่ระบบด้วยบัญชี Google
+        </Typography>
+      </Button>
+    </>
+  )
 }
 
 const GoogleButtonComponentWithStyles = withStyles(theme => ({
@@ -45,9 +81,7 @@ const GoogleButtonComponentWithStyles = withStyles(theme => ({
     background: "#ffffff",
     border: "1px solid #333333",
     borderRadius: "40px",
-    display: "flex",
-    justifyContent: "flex-start",
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(1.5),
     color: grey[700],
     "&:hover": {
       background: "#dddddd"
