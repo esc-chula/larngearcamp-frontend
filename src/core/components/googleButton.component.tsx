@@ -49,16 +49,19 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
         logo_alignment: "left",
         type: "icon"
       })
+      document.getElementById("google_signin")?.getElementsByTagName("iframe")[0].remove()
     }
     initGoogleButton()
   }, [activeSnackBar, history, loginGoogle])
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
 
     const el = document.querySelectorAll('[role="button"]')[0] as HTMLElement
-    el.click()
-  }, [])
+    if (el) {
+      el.click()
+    }
+  }
 
   return (
     <>
