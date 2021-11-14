@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react"
+import React, { useMemo } from "react"
 import { useRouteMatch, Link, useHistory } from "react-router-dom"
 import { Grid, Button } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
@@ -63,7 +63,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
     }
   }
 
-  const showBothButtons = application || step > 5
+  const showBothButtons = application.state !== "SUBMITTED" || step > 5
 
   return (
     <Grid container spacing={2}>
@@ -78,7 +78,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
       ) : null}
       <Grid xs={12} sm={showBothButtons ? 6 : 12} item>
         <Button variant="contained" className={classes.buttonSuccess} fullWidth type="submit" onClick={handleNext}>
-          {step === 6 ? "ยืนยันการสมัคร" : "ไปขั้นตอนถัดไป"}
+          {application.state === "SUBMITTED" ? "ยืนยันการแก้ไข" : step === 6 ? "ยืนยันการสมัคร" : "ไปขั้นตอนถัดไป"}
         </Button>
       </Grid>
     </Grid>
