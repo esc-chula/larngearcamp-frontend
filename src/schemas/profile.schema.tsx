@@ -7,7 +7,10 @@ const ProfileSchema = object()
     surname: string().trim().required("กรุณาระบุนามสกุล"),
     nickname: string().trim().required("กรุณาระบุชื่อเล่น"),
     birthDate: string().trim().required("กรุณาระบุวันเกิด"),
-    phoneNumber: string().trim().required("กรุณาระบุเบอร์โทรศัพท์"),
+    phoneNumber: string()
+      .trim()
+      .required("กรุณาระบุเบอร์โทร")
+      .matches(/^((((\+66|66|0)\d{2})-?\d{3}-?\d{4})|(-))$/, "เบอร์โทรศัพท์ไม่ถูกต้อง"),
     religion: string().trim().required("กรุณาระบุศาสนา"),
     education: string().trim().required("กรุณาระบุชั้นปี"),
     studyProgram: string().trim().required("กรุณาระบุสายการเรียน"),
