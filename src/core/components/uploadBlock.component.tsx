@@ -61,10 +61,22 @@ type UploadBlockComponentProps = UploadFileModel & {
   serverFile: DocumentItem
   order: number
   disabled?: boolean
+  comment?: string
   status: FileStatus
 }
 
-const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile, order, name, status, size, accept, body1, body2, disabled }) => {
+const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({
+  serverFile,
+  order,
+  name,
+  status,
+  size,
+  accept,
+  body1,
+  body2,
+  disabled,
+  comment
+}) => {
   const classes = useStyles()
   const { register, setError, errors, clearErrors, setValue } = useFormContext()
   const { uploadDocument } = useApplicationContext()
@@ -88,7 +100,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
     useCallback(
       async event => {
         const file: File = event.target.files[0]
-        if (!file) return
+        if (!file || disabled) return
         if (size && file.size > size) {
           setError(name, {
             type: "fileSize",
@@ -126,7 +138,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
           }
         }
       },
-      [uploadDocument, name, setError, clearErrors, size, setValue, mutateApplication, mutateMe, activeSnackBar]
+      [disabled, size, setError, name, setValue, clearErrors, uploadDocument, mutateApplication, mutateMe, activeSnackBar]
     )
   )
 
@@ -167,6 +179,11 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({ serverFile,
         {currentError && (
           <Typography variant="caption" color="error" className={classes.caption} component="div">
             {currentError.message}
+          </Typography>
+        )}
+        {status === "CHANGE_REQUIRED" && (
+          <Typography variant="body2" color="error" className={classes.caption} component="div">
+            {`จากทีมงาน: ${comment || "รบกวนแก้ไขเอกสารให้ถูกต้องด้วยนะครับ"}`}
           </Typography>
         )}
       </div>
