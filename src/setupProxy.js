@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://larngear.in.th/",
+      target: process.env.REACT_APP_ENVIRONMENT !== "production" ? "https://larngear.saenyakorn.dev" : "https://larngear.in.th/",
       changeOrigin: true
     })
   )
