@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     "/api",
     createProxyMiddleware({
-      target: "https://larngear.in.th/",
+      target: "https://larngear.saenyakorn.dev",
       changeOrigin: true
     })
   )
