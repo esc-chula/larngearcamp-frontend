@@ -183,7 +183,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({
         )}
         {status === "CHANGE_REQUIRED" && (
           <Typography variant="body2" color="error" className={classes.caption} component="div">
-            {`จากทีมงาน: ${comment || "ช่วยแก้ไขเอกสารให้ถูกต้องด้วยครับ"}`}
+            {`จากทีมงาน: ${comment || "รบกวนแก้ไขเอกสารให้ถูกต้องด้วยนะครับ"}`}
           </Typography>
         )}
       </div>
