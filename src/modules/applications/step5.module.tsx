@@ -88,6 +88,7 @@ const ApplicationStepFiveModule: React.FC = () => {
                     status={documentStateDetails[content.name].status}
                     {...content}
                     order={index + 1}
+                    comment={documentStateDetails[content.name].comment}
                     disabled={documentStateDetails[content.name].status === "PASSED"}
                   />
                   <input ref={methods.register} name={`${content.name}URL`} type="hidden" />
