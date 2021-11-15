@@ -12,7 +12,6 @@ interface QuestionCard {
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    padding: theme.spacing(5),
     display: "flex",
     justifyContent: "center",
     flexDirection: "column"

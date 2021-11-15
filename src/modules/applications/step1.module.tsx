@@ -17,13 +17,6 @@ const useStyles = makeStyles(theme => ({
   },
   nextLink: {
     marginTop: theme.spacing(2)
-  },
-  button: {
-    color: "white",
-    background: theme.palette.success.main,
-    "&:hover": {
-      background: theme.palette.success.dark
-    }
   }
 }))
 
@@ -42,7 +35,7 @@ const ApplicationStepOneModule = () => {
         </Typography>
       </Box> */}
       <Link className={`no-underline ${classes.nextLink}`} to="/application/step/2">
-        <Button variant="contained" className={classes.button} fullWidth>
+        <Button variant="contained" color="primary" fullWidth>
           ไปขั้นตอนถัดไป
         </Button>
       </Link>
