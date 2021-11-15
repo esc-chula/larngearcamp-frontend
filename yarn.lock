@@ -2771,6 +2771,13 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
+"@types/react-beforeunload@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/react-beforeunload/-/react-beforeunload-2.1.1.tgz#ee77c0843a588c13df4a5a4eebe48b23b361e1d5"
+  integrity sha512-KER+M11lrXhp++tHDm9P7YWaKKBWwNyZkwnHSV3QQXGU2ZcP9x+O0Y7ZDZqGQD1OlGF4P8fmcpll3ol3a8KXsQ==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-dom@*", "@types/react-dom@^16.9.8":
   version "16.9.8"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"
@@ -11023,6 +11030,14 @@ react-app-rewired@^2.1.6:
   dependencies:
     semver "^5.6.0"
 
+react-beforeunload@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/react-beforeunload/-/react-beforeunload-2.5.2.tgz#7e80dbb16e7b49d8364e03bad650985d577ac87f"
+  integrity sha512-lVRVUTdcQ07ea/S+5nql6ui/SyR0N9tudGQHdHvAa9WOrGgNMoxR6DOmgRNVRj6DmG1ruIAdSeem0tmM5zfy3w==
+  dependencies:
+    prop-types "^15.7.2"
+    tiny-invariant "^1.1.0"
+
 react-dev-utils@^10.2.1:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.2.1.tgz#f6de325ae25fa4d546d09df4bb1befdc6dd19c19"
@@ -12821,6 +12836,11 @@ tiny-invariant@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.1.0.tgz#634c5f8efdc27714b7f386c35e6760991d230875"
   integrity sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw==
+
+tiny-invariant@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/tiny-invariant/-/tiny-invariant-1.2.0.tgz#a1141f86b672a9148c72e978a19a73b9b94a15a9"
+  integrity sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==
 
 tiny-warning@^1.0.0, tiny-warning@^1.0.2, tiny-warning@^1.0.3:
   version "1.0.3"

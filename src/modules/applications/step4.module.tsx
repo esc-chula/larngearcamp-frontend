@@ -18,11 +18,15 @@ import { ApplicationDTO } from "../../core/models/dto/application.dto"
 import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.component"
 import { useGlobalContext } from "../../core/providers/global.provider"
 import { AxiosError } from "axios"
+import { Box } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   question: {
-    "&>*": {
-      marginBottom: theme.spacing(2)
+    background: theme.palette.gray[0],
+    padding: theme.spacing(4),
+    borderRadius: theme.shape.borderRadius,
+    "&>:not(:last-child)": {
+      marginBottom: theme.spacing(6)
     }
   },
   input: {
@@ -89,7 +93,7 @@ const ApplicationStepFourModule: React.FC = () => {
                   {question.type === "ranking" && <RankingTypeComponent name={`secondPart.answer${index + 1}`} contents={question.contents} />}
                 </QuestionCardComponent>
               ))}
-              {buttonBar}
+              <Box mt={6}>{buttonBar}</Box>
             </form>
           </FormProvider>
         </>

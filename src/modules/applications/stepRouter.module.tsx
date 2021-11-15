@@ -12,6 +12,7 @@ import { Container } from "@material-ui/core"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { ApplicationState } from "../../core/models/dto/application.dto"
 import BackgroundComponent from "../../core/components/background.component"
+import { useBeforeunload } from "react-beforeunload"
 
 export function useNextStep() {
   const { params } = useRouteMatch<{ step: string }>()
@@ -60,6 +61,11 @@ const StepRouter: React.FC = () => {
   const {
     application: { state }
   } = useApplicationStateContext()
+
+  useBeforeunload(event => {
+    event.preventDefault()
+    return "ต้องการออกจาหน้านี้หรือไม่"
+  })
 
   if (!steps[step]) {
     return <NotFoundModule />
