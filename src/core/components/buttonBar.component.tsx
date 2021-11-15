@@ -29,7 +29,7 @@ const ButtonBar: React.FC<ButtonBarProps> = ({ beforeNavigate }) => {
   }, [beforeNavigate, setLoading])
 
   const getConfirmation = () => {
-    return window.confirm("ระบบยังไม่บันทึกข้อมูล คุณต้องการออกจากหน้านี้ใช่หรือไม่")
+    return true
   }
 
   const handlePrevious = () => {
