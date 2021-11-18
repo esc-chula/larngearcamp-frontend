@@ -1,4 +1,5 @@
 import yup, { object, string } from "yup"
+import { provincesConstant } from "../core/constants/provinces.constant"
 
 const ProfileSchema = object()
   .shape({
@@ -15,7 +16,12 @@ const ProfileSchema = object()
     education: string().trim().required("กรุณาระบุชั้นปี"),
     studyProgram: string().trim().required("กรุณาระบุสายการเรียน"),
     school: string().trim().required("กรุณาระบุโรงเรียน"),
-    province: string().trim().required("กรุณาระบุจังหวัดโรงเรียน"),
+    province: string()
+      .trim()
+      .required("กรุณาระบุจังหวัดโรงเรียน")
+      .test("invalid", "กรุณาระบุจังหวัดโรงเรียนให้ถูกต้อง", value => {
+        return !!value && provincesConstant.includes(value)
+      }),
     health: object({
       bloodType: string().trim().required("กรุณาระบุหมู่เลือด"),
       congenitalDisease: string().trim().required("กรุณากรอก -"),
