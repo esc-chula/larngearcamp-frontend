@@ -24,10 +24,10 @@ const ProfileSchema = object()
       }),
     health: object({
       bloodType: string().trim().required("กรุณาระบุหมู่เลือด"),
-      congenitalDisease: string().trim().required("กรุณากรอก -"),
-      allergicFood: string().trim().required("กรุณากรอก -"),
-      allergicDrug: string().trim().required("กรุณากรอก -"),
-      drug: string().trim().required("กรุณากรอก -")
+      congenitalDisease: string().trim().required("หากไม่มี กรุณากรอก -"),
+      allergicFood: string().trim().required("หากไม่มี กรุณากรอก -"),
+      allergicDrug: string().trim().required("หากไม่มี กรุณากรอก -"),
+      drug: string().trim().required("หากไม่มี กรุณากรอก -")
     }).required(),
     contact: object({
       recipient: string().trim().required("กรุณากรอกชื่อ-นามสกุล"),

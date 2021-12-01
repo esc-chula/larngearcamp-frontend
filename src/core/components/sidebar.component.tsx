@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { Drawer, Box, Button } from "@material-ui/core"
+import { Drawer, Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useAuthContext } from "../providers/auth.provider"
 import { useNavBarContext } from "./navbar.component"
@@ -48,7 +48,7 @@ const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box minWidth={200} height="100%" display="flex" flexDirection="column" alignItems="center" py={6} px={5} className={classes.content}>
         <Link className={classes.homeLink + " no-underline"} to="/">
-          <LogoLong />
+          <LogoLong style={{ width: 80, height: 80 }} />
         </Link>
         <SideBarLink to="/docs">เอกสารการสมัคร</SideBarLink>
         <SideBarLink to="/faq">คำถามที่พบบ่อย</SideBarLink>
