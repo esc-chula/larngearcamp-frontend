@@ -6,7 +6,6 @@ import ApplicationStepModule from "./stepLayout.module"
 import { useHistory } from "react-router-dom"
 import { useApplicationStateContext } from "../../core/providers/applicationState.provider"
 import { useGlobalContext } from "../../core/providers/global.provider"
-import { useAuthContext } from "../../core/providers/auth.provider"
 import { AxiosError } from "axios"
 
 const useStyles = makeStyles(theme => ({
