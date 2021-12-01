@@ -5,7 +5,6 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle"
 import { useHistory, Link } from "react-router-dom"
 import { useAuthContext } from "../providers/auth.provider"
 import { makeStyles } from "@material-ui/core/styles"
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount"
 import { useLoadingCallback } from "./loading.component"
 
 const useStyles = makeStyles(theme => ({
@@ -17,7 +16,7 @@ const useStyles = makeStyles(theme => ({
 const AuthNavbarComponent: React.FC = () => {
   const history = useHistory()
   const classes = useStyles()
-  const { isLoggedIn, logout } = useAuthContext()
+  const { logout } = useAuthContext()
   const [anchorEl, setAnchorEl] = useState(null)
 
   const handleClick = useCallback(event => {
