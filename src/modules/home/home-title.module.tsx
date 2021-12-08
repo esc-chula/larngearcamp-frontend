@@ -8,6 +8,7 @@ import { safeArea } from "../../core/components/safeArea.component"
 import { grey } from "@material-ui/core/colors"
 import { BsFacebook, BsInstagram } from "react-icons/bs"
 import { useAnnounceContext } from "../../core/providers/announce.provider"
+import { useAuthContext } from "../../core/providers/auth.provider"
 
 const useStyle = makeStyles(theme => ({
   titleContainer: {
@@ -78,7 +79,20 @@ const useStyle = makeStyles(theme => ({
 
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
+  const { isLoggedIn, me } = useAuthContext()
   const { isLate, isEarly, isApplicable } = useAnnounceContext()
+
+  const getButtonLabel = () => {
+    if (isLoggedIn) {
+      if (me.data?.applicationState === "NOT_FILLED" || me.data?.applicationState === "DRAFT") {
+        return "สมัครต่อจากครั้งที่แล้ว"
+      }
+      return "ตรวจสอบเอกสาร"
+    }
+    if (isLate) return "หมดเขตรับสมัคร"
+    if (isEarly) return "เปิดรับสมัครวันที่ 15 พฤศจิกายน"
+    if (!isApplicable) return "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"
+  }
 
   return (
     <div className={classes.titleContainer}>
@@ -92,9 +106,7 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
           </Typography>
           <Link to="/profile" className="no-underline" style={{ pointerEvents: isLate || isEarly ? "none" : "initial" }}>
             <Button variant="contained" color="primary" className={classes.button} disabled={isLate || isEarly}>
-              {isLate && "หมดเขตรับสมัคร"}
-              {isEarly && "เปิดรับสมัครวันที่ 15 พฤศจิกายน"}
-              {isApplicable && "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"}
+              {getButtonLabel()}
             </Button>
           </Link>
           <div className={classes.contactsContainer}>
