@@ -80,7 +80,7 @@ const useStyle = makeStyles(theme => ({
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
   const { isLoggedIn, me } = useAuthContext()
-  const { isLate, isEarly, isApplicable } = useAnnounceContext()
+  const { isLate, isEarly } = useAnnounceContext()
 
   const getButtonLabel = () => {
     if (isLoggedIn) {
@@ -91,7 +91,7 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
     }
     if (isLate) return "หมดเขตรับสมัคร"
     if (isEarly) return "เปิดรับสมัครวันที่ 15 พฤศจิกายน"
-    if (!isApplicable) return "สมัครเลย! วันนี้ - 15 ธันวาคม 2564"
+    return "สมัครเลย! วันนี้ - 15 ธันวาคม 2564"
   }
 
   return (
