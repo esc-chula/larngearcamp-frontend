@@ -91,7 +91,7 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
     }
     if (isLate) return "หมดเขตรับสมัคร"
     if (isEarly) return "เปิดรับสมัครวันที่ 15 พฤศจิกายน"
-    return "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"
+    return "สมัครเลย! วันนี้ - 15 ธันวาคม 2564"
   }
 
   return (

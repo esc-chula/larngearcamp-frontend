@@ -10,7 +10,7 @@ const timelineConstant: Array<TimelineModel> = [
   {
     duration: {
       start: new Date(2564, 10, 15),
-      end: new Date(2564, 11, 8)
+      end: new Date(2564, 11, 15)
     },
     title: "รับสมัคร"
   },
