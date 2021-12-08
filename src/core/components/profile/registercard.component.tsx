@@ -111,11 +111,12 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
             </Button>
           </Link>
         )}
-        {state === ApplicationStatus.LATE && (
-          <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
-            หมดเขตรับสมัคร
-          </Button>
-        )}
+        {state === ApplicationStatus.LATE ||
+          (state === ApplicationStatus.DOCUMENT_EDIT && (
+            <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
+              หมดเขตรับสมัคร
+            </Button>
+          ))}
         {state === ApplicationStatus.EARLY && (
           <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
             เปิดรับสมัครวันที่ 15 พฤศจิกายน

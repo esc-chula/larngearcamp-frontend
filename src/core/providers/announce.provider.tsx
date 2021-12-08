@@ -6,6 +6,7 @@ export enum ApplicationStatus {
   DOCUMENT_EDIT,
   LATE
 }
+
 interface AnnounceConstruct {
   state: ApplicationStatus
 }
