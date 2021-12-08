@@ -7,7 +7,7 @@ import landing1 from "../../assets/images/background/landing-1.png"
 import { safeArea } from "../../core/components/safeArea.component"
 import { grey } from "@material-ui/core/colors"
 import { BsFacebook, BsInstagram } from "react-icons/bs"
-import { useAnnounceContext } from "../../core/providers/announce.provider"
+import { ApplicationStatus, useAnnounceContext } from "../../core/providers/announce.provider"
 import { useAuthContext } from "../../core/providers/auth.provider"
 
 const useStyle = makeStyles(theme => ({
@@ -80,7 +80,7 @@ const useStyle = makeStyles(theme => ({
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
   const { isLoggedIn, me } = useAuthContext()
-  const { isLate, isEarly } = useAnnounceContext()
+  const { state } = useAnnounceContext()
 
   const getButtonLabel = () => {
     if (isLoggedIn) {
@@ -89,10 +89,12 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
       }
       return "ตรวจสอบเอกสาร"
     }
-    if (isLate) return "หมดเขตรับสมัคร"
-    if (isEarly) return "เปิดรับสมัครวันที่ 15 พฤศจิกายน"
+    if (state === ApplicationStatus.LATE) return "หมดเขตรับสมัคร"
+    if (state === ApplicationStatus.EARLY) return "เปิดรับสมัครวันที่ 15 พฤศจิกายน"
     return "สมัครเลย! วันนี้ - 15 ธันวาคม 2564"
   }
+
+  const notAllow = state === ApplicationStatus.LATE || state === ApplicationStatus.EARLY
 
   return (
     <div className={classes.titleContainer}>
@@ -104,8 +106,8 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
           <Typography variant="h5" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
           </Typography>
-          <Link to="/profile" className="no-underline" style={{ pointerEvents: isLate || isEarly ? "none" : "initial" }}>
-            <Button variant="contained" color="primary" className={classes.button} disabled={isLate || isEarly}>
+          <Link to="/profile" className="no-underline" style={{ pointerEvents: notAllow ? "none" : "initial" }}>
+            <Button variant="contained" color="primary" className={classes.button} disabled={notAllow}>
               {getButtonLabel()}
             </Button>
           </Link>

@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import BackgroundOverlayComponent from "../../core/components/backgroundOverlay.component"
 import { SafeArea } from "../../core/components/safeArea.component"
-import { useAnnounceContext } from "../../core/providers/announce.provider"
+import { ApplicationStatus, useAnnounceContext } from "../../core/providers/announce.provider"
 import { grey } from "@material-ui/core/colors"
 
 const useStyle = makeStyles(theme => ({
@@ -35,7 +35,8 @@ const useStyle = makeStyles(theme => ({
 }))
 const HomeAnnouce: React.FC<BoxProps> = props => {
   const classes = useStyle()
-  const { isLate } = useAnnounceContext()
+  const { state } = useAnnounceContext()
+  const isLate = state === ApplicationStatus.LATE
   const shouldAnnounce = isLate
   return (
     <BackgroundOverlayComponent
