@@ -24,12 +24,12 @@ const SCHEDULE = [
   },
   {
     state: ApplicationStatus.DOCUMENT_EDIT,
-    start: new Date("November 16, 2021 00:30:00 GMT+07:00"),
+    start: new Date("December 16, 2021 00:30:01 GMT+07:00"),
     end: new Date("December 25, 2021 00:30:00 GMT+07:00")
   },
   {
     state: ApplicationStatus.LATE,
-    start: new Date("December 25, 2021 00:30:00 GMT+07:00"),
+    start: new Date("December 25, 2021 00:30:01 GMT+07:00"),
     end: null
   }
 ]
