@@ -13,6 +13,8 @@ import { useApplicationStateContext } from "../../core/providers/applicationStat
 import { ApplicationState } from "../../core/models/dto/application.dto"
 import BackgroundComponent from "../../core/components/background.component"
 import { useBeforeunload } from "react-beforeunload"
+import { useApplicationContext } from "../../core/providers/application.provider"
+import { ApplicationStatus, useAnnounceContext } from "../../core/providers/announce.provider"
 
 export function useNextStep() {
   const { params } = useRouteMatch<{ step: string }>()
@@ -62,6 +64,8 @@ const StepRouter: React.FC = () => {
     application: { state }
   } = useApplicationStateContext()
 
+  const { state: appState } = useAnnounceContext()
+
   useBeforeunload(event => {
     event.preventDefault()
     return "ต้องการออกจาหน้านี้หรือไม่"
@@ -74,6 +78,10 @@ const StepRouter: React.FC = () => {
   const { Component, allowedStates } = steps[step]
   if (!allowedStates.includes(state)) {
     return <Redirect to="/application/finish" />
+  }
+
+  if (appState === ApplicationStatus.DOCUMENT_EDIT) {
+    if (step !== "5") return <Redirect to="/profile" />
   }
 
   return (

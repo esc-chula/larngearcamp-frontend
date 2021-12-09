@@ -12,13 +12,13 @@ import { FAQModule } from "./faq.module"
 import { ApplicationStateProvider } from "../core/providers/applicationState.provider"
 import { ShowLoadingComponent } from "../core/components/loading.component"
 import { DocModule } from "./doc.module"
-import { useAnnounceContext } from "../core/providers/announce.provider"
+import { ApplicationStatus, useAnnounceContext } from "../core/providers/announce.provider"
 import { PrivacyPoflicyModule } from "./privacy-policy.module"
 
 const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
 const RouteModule: React.FC = () => {
-  const { isApplicable } = useAnnounceContext()
+  const { state } = useAnnounceContext()
 
   return (
     <Suspense fallback={<ShowLoadingComponent />}>
@@ -50,7 +50,7 @@ const RouteModule: React.FC = () => {
           <ApplicationStateProvider>{(render, is404) => (render || is404 ? <ProfileModule /> : <ShowLoadingComponent />)}</ApplicationStateProvider>
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
-          {!isApplicable ? (
+          {state === ApplicationStatus.EARLY || state === ApplicationStatus.LATE ? (
             <Redirect to="/profile" />
           ) : (
             <ApplicationStateProvider>{render => <ApplicationModule render={render} />}</ApplicationStateProvider>

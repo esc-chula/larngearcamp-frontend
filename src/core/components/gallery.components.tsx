@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import LazyLoad from "react-lazyload"
 import { Link } from "react-router-dom"
-import { useAnnounceContext } from "../providers/announce.provider"
+import { ApplicationStatus, useAnnounceContext } from "../providers/announce.provider"
 
 interface IImage {
   src: string
@@ -106,7 +106,7 @@ const useStyle = makeStyles(theme => ({
 }))
 
 const HomeGallery: React.FC<HomeGalleryProps> = props => {
-  const { isLate, isEarly, isApplicable } = useAnnounceContext()
+  const { state } = useAnnounceContext()
   const { images } = props
   const settings: Settings = {
     dots: true,
@@ -121,6 +121,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
   }
 
   const classes = useStyle()
+  const disableLink = state === ApplicationStatus.LATE || state === ApplicationStatus.EARLY
 
   return (
     <div className={classes.root}>
@@ -146,11 +147,11 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                       {description}
                     </Typography>
                   </div>
-                  <Link to="/profile" className="no-underline" style={{ pointerEvents: isLate || isEarly ? "none" : "initial" }}>
-                    <Button variant="contained" color="primary" className={classes.button} disabled={isLate || isEarly}>
-                      {isLate && "หมดเขตรับสมัคร"}
-                      {isEarly && "เปิดรับสมัครวันที่ 15 พฤศจิกายน"}
-                      {isApplicable && "สมัครเลย! วันนี้ - 8 ธันวาคม 2564"}
+                  <Link to="/profile" className="no-underline" style={{ pointerEvents: disableLink ? "none" : "initial" }}>
+                    <Button variant="contained" color="primary" className={classes.button} disabled={disableLink}>
+                      {state === ApplicationStatus.LATE && "หมดเขตรับสมัคร"}
+                      {state === ApplicationStatus.EARLY && "เปิดรับสมัครวันที่ 15 พฤศจิกายน"}
+                      {state === ApplicationStatus.APPLICABLE && "สมัครเลย! วันนี้ - 15 ธันวาคม 2564"}
                     </Button>
                   </Link>
                 </div>

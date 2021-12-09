@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { Card, Container, Typography, Button, makeStyles } from "@material-ui/core"
 import { ProfileStatus } from "../../models/profileStatus.model"
 import Gear from "../../../assets/images/icon/gear-icon.svg"
-import { useAnnounceContext } from "../../providers/announce.provider"
+import { ApplicationStatus, useAnnounceContext } from "../../providers/announce.provider"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -85,7 +85,7 @@ interface RegisterCardProps {
 
 const RegisterCard: React.FC<RegisterCardProps> = props => {
   const classes = useStyles()
-  const { isApplicable, isLate, isEarly } = useAnnounceContext()
+  const { state } = useAnnounceContext()
 
   return (
     <Container className={classes.root}>
@@ -97,26 +97,27 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
           ดูเหมือนว่าคุณจะยังไม่ได้ส่งใบสมัครเข้าค่ายลานเกียร์ครั้งที่ 21 นะ คลิกสมัครเข้าค่าย
           เพื่อมาเป็นส่วนหนึ่งในความสนุกที่ไม่สามารถหาจากที่อื่นได้อีก!
         </Typography>
-        {props.profileStatus === ProfileStatus.start && isApplicable && (
+        {props.profileStatus === ProfileStatus.start && state === ApplicationStatus.APPLICABLE && (
           <Link to="/application" className="no-underline">
             <Button variant="contained" disableElevation className={`${classes.button} ${classes.solid}`}>
               สมัครเข้าค่าย
             </Button>
           </Link>
         )}
-        {props.profileStatus === ProfileStatus.draft && isApplicable && (
+        {props.profileStatus === ProfileStatus.draft && state === ApplicationStatus.APPLICABLE && (
           <Link to="/application" className="no-underline">
             <Button variant="outlined" disableElevation className={`${classes.button} ${classes.outlined}`}>
               สมัครต่อจากครั้งที่แล้ว
             </Button>
           </Link>
         )}
-        {isLate && (
-          <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
-            หมดเขตรับสมัคร
-          </Button>
-        )}
-        {isEarly && (
+        {state === ApplicationStatus.LATE ||
+          (state === ApplicationStatus.DOCUMENT_EDIT && (
+            <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
+              หมดเขตรับสมัคร
+            </Button>
+          ))}
+        {state === ApplicationStatus.EARLY && (
           <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
             เปิดรับสมัครวันที่ 15 พฤศจิกายน
           </Button>
