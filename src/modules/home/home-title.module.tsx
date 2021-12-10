@@ -1,14 +1,12 @@
 import React from "react"
-import { Typography, Button, Box } from "@material-ui/core"
+import { Typography, Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Link } from "react-router-dom"
 
 import landing1 from "../../assets/images/background/landing-1.png"
 import { safeArea } from "../../core/components/safeArea.component"
 import { grey } from "@material-ui/core/colors"
 import { BsFacebook, BsInstagram } from "react-icons/bs"
-import { ApplicationStatus, useAnnounceContext } from "../../core/providers/announce.provider"
-import { useAuthContext } from "../../core/providers/auth.provider"
+import { HomeProfileButton } from "./home-profile-button.module"
 
 const useStyle = makeStyles(theme => ({
   titleContainer: {
@@ -79,22 +77,6 @@ const useStyle = makeStyles(theme => ({
 
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
-  const { isLoggedIn, me } = useAuthContext()
-  const { state } = useAnnounceContext()
-
-  const getButtonLabel = () => {
-    if (isLoggedIn) {
-      if (me.data?.applicationState === "NOT_FILLED" || me.data?.applicationState === "DRAFT") {
-        return "สมัครต่อจากครั้งที่แล้ว"
-      }
-      return "ตรวจสอบเอกสาร"
-    }
-    if (state === ApplicationStatus.LATE) return "หมดเขตรับสมัคร"
-    if (state === ApplicationStatus.EARLY) return "เปิดรับสมัครวันที่ 15 พฤศจิกายน"
-    return "สมัครเลย! วันนี้ - 15 ธันวาคม 2564"
-  }
-
-  const notAllow = state === ApplicationStatus.LATE || state === ApplicationStatus.EARLY
 
   return (
     <div className={classes.titleContainer}>
@@ -106,11 +88,7 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
           <Typography variant="h5" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
           </Typography>
-          <Link to="/profile" className="no-underline" style={{ pointerEvents: notAllow ? "none" : "initial" }}>
-            <Button variant="contained" color="primary" className={classes.button} disabled={notAllow}>
-              {getButtonLabel()}
-            </Button>
-          </Link>
+          <HomeProfileButton className={classes.button} />
           <div className={classes.contactsContainer}>
             <a href="https://www.facebook.com/LARNGEARCAMP" target="_blank" rel="noopener noreferrer" className={classes.contactConatiner}>
               <BsFacebook className={classes.icon} />
