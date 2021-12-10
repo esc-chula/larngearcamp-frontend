@@ -121,7 +121,6 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
   }
 
   const classes = useStyle()
-  const disableLink = state === ApplicationStatus.LATE || state === ApplicationStatus.EARLY
 
   return (
     <div className={classes.root}>
@@ -147,7 +146,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                       {description}
                     </Typography>
                   </div>
-                  <HomeProfileButton />
+                  <HomeProfileButton className={classes.button} />
                 </div>
               </div>
             </div>
