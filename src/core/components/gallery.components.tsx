@@ -1,13 +1,13 @@
 import React from "react"
-import { Button, makeStyles, Typography } from "@material-ui/core"
+import { makeStyles, Typography } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import Slider, { Settings } from "react-slick"
 
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import LazyLoad from "react-lazyload"
-import { Link } from "react-router-dom"
 import { ApplicationStatus, useAnnounceContext } from "../providers/announce.provider"
+import { HomeProfileButton } from "../../modules/home/home-profile-button.module"
 
 interface IImage {
   src: string
@@ -147,13 +147,7 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
                       {description}
                     </Typography>
                   </div>
-                  <Link to="/profile" className="no-underline" style={{ pointerEvents: disableLink ? "none" : "initial" }}>
-                    <Button variant="contained" color="primary" className={classes.button} disabled={disableLink}>
-                      {state === ApplicationStatus.LATE && "หมดเขตรับสมัคร"}
-                      {state === ApplicationStatus.EARLY && "เปิดรับสมัครวันที่ 15 พฤศจิกายน"}
-                      {state === ApplicationStatus.APPLICABLE && "สมัครเลย! วันนี้ - 15 ธันวาคม 2564"}
-                    </Button>
-                  </Link>
+                  <HomeProfileButton />
                 </div>
               </div>
             </div>
