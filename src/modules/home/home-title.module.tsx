@@ -1,14 +1,11 @@
 import React from "react"
-import { Typography, Button, Box } from "@material-ui/core"
+import { Typography, Box } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import { Link } from "react-router-dom"
 
 import landing1 from "../../assets/images/background/landing-1.png"
 import { safeArea } from "../../core/components/safeArea.component"
 import { grey } from "@material-ui/core/colors"
 import { BsFacebook, BsInstagram } from "react-icons/bs"
-import { ApplicationStatus, useAnnounceContext } from "../../core/providers/announce.provider"
-import { useAuthContext } from "../../core/providers/auth.provider"
 import { HomeProfileButton } from "./home-profile-button.module"
 
 const useStyle = makeStyles(theme => ({

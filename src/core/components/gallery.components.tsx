@@ -6,7 +6,6 @@ import Slider, { Settings } from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import LazyLoad from "react-lazyload"
-import { ApplicationStatus, useAnnounceContext } from "../providers/announce.provider"
 import { HomeProfileButton } from "../../modules/home/home-profile-button.module"
 
 interface IImage {
@@ -106,7 +105,6 @@ const useStyle = makeStyles(theme => ({
 }))
 
 const HomeGallery: React.FC<HomeGalleryProps> = props => {
-  const { state } = useAnnounceContext()
   const { images } = props
   const settings: Settings = {
     dots: true,
