@@ -1,4 +1,4 @@
-import { Button, makeStyles } from "@material-ui/core"
+import { Button, ButtonProps, makeStyles } from "@material-ui/core"
 import { grey } from "@material-ui/core/colors"
 import { ApplicationStatus, useAnnounceContext } from "../../core/providers/announce.provider"
 import { useAuthContext } from "../../core/providers/auth.provider"
@@ -6,23 +6,7 @@ import { useAuthContext } from "../../core/providers/auth.provider"
 import React from "react"
 import { Link } from "react-router-dom"
 
-const useStyles = makeStyles(theme => ({
-  button: {
-    marginTop: theme.spacing(7),
-    height: "50px",
-    width: "min(353px, 90vw)",
-    "&>*": {
-      fontSize: "1.1rem"
-    },
-    "&:disabled": {
-      backgroundColor: grey[400],
-      color: grey[200]
-    }
-  }
-}))
-
-export const HomeProfileButton: React.FC = () => {
-  const classes = useStyles()
+export const HomeProfileButton: React.FC<ButtonProps> = props => {
   const { isLoggedIn, me } = useAuthContext()
   const { state } = useAnnounceContext()
 
@@ -42,7 +26,7 @@ export const HomeProfileButton: React.FC = () => {
 
   return (
     <Link to="/profile" className="no-underline" style={{ pointerEvents: notAllow ? "none" : "initial" }}>
-      <Button variant="contained" color="primary" className={classes.button} disabled={notAllow}>
+      <Button variant="contained" color="primary" disabled={notAllow} {...props}>
         {getButtonLabel()}
       </Button>
     </Link>

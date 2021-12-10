@@ -91,7 +91,7 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
           <Typography variant="h5" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
           </Typography>
-          <HomeProfileButton />
+          <HomeProfileButton className={classes.button} />
           <div className={classes.contactsContainer}>
             <a href="https://www.facebook.com/LARNGEARCAMP" target="_blank" rel="noopener noreferrer" className={classes.contactConatiner}>
               <BsFacebook className={classes.icon} />
