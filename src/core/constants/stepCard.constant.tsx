@@ -1,5 +1,5 @@
-import StepCardModel from "../models/stepCard.model"
 import React from "react"
+import StepCardModel from "../models/stepCard.model"
 
 const stepCardConstant: StepCardModel = {
   1: {
@@ -118,11 +118,6 @@ const stepCardConstant: StepCardModel = {
           label: "ตรวจสอบคิวสัมภาษณ์ทั้งหมด",
           opensDialog: false,
           path: "/"
-        },
-        secondaryButton: {
-          label: "29/1/2565 เวลา 13:00",
-          opensDialog: false,
-          path: "/profile"
         }
       }
     },
@@ -162,10 +157,6 @@ const stepCardConstant: StepCardModel = {
           "ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์เข้าร่วมค่ายลานเกียร์ ครั้งที่ 21 แต่ใด ๆ ก็ตาม อย่าลืมชำระค่าสนับสนุนกิจกรรมเป็นจำนวน 500 บาท ก่อนวันที่ 15 มีนาคม 2565 และกรอกฟอร์มยืนยันการฉีดวัคซีนก่อนวันที่ 19 พฤษภาคม 2565 เพื่อยืนยันสิทธิ์การเข้าร่วมค่ายด้วยล่ะ !! (หมายเหตุ หากน้องมีความประสงค์จะขอสละสิทธิ์ สามารถขอสละสิทธิ์ได้ โดยทำการแจ้งชื่อ นามสกุลและรหัส LG ผ่านทางเฟสบุ๊คเพจ LarnGear Camp)",
         primaryButton: {
           label: "ชำระค่าใช้จ่าย",
-          opensDialog: true
-        },
-        secondaryButton: {
-          label: "เลือกไซส์เสื้อ",
           opensDialog: true
         }
       }
