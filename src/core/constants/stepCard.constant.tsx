@@ -117,7 +117,7 @@ const stepCardConstant: StepCardModel = {
         primaryButton: {
           label: "ตรวจสอบคิวสัมภาษณ์ทั้งหมด",
           opensDialog: false,
-          path: "/"
+          path: "https://www.facebook.com/LARNGEARCAMP/posts/10160028116987425"
         }
       }
     },
