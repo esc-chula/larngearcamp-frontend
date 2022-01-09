@@ -140,26 +140,36 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
 
   const text = stepCardConstant[step][status][isApproved]!
 
-  const renderButton = (opensDialog: boolean, isPrimary: boolean) => {
+  const styleButton = (isPrimary: boolean) => {
+    return (
+      <Button
+        variant={`${isPrimary ? "contained" : "outlined"}`}
+        disableElevation
+        className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}>
+        {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
+      </Button>
+    )
+  }
+
+  const renderButton = (opensDialog: boolean, isPrimary: boolean, isExternalPath: boolean) => {
     if (opensDialog)
       return (
-        // TODO : Handle Dialog - how to show different ones?
-        <Button
-          variant={`${isPrimary ? "contained" : "outlined"}`}
-          disableElevation
-          className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}>
-          {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
-        </Button>
+        // TODO : Handle Dialog
+        styleButton(isPrimary)
+      )
+    if (isExternalPath)
+      return (
+        <a
+          href={`${isPrimary ? text.primaryButton!.path : text.secondaryButton!.path}`}
+          target="_blank"
+          className={`no-underline ${classes.linkButton}`}>
+          {styleButton(isPrimary)}
+        </a>
       )
     else
       return (
         <Link to={`${isPrimary ? text.primaryButton!.path : text.secondaryButton!.path}`} className={`no-underline ${classes.linkButton}`}>
-          <Button
-            variant={`${isPrimary ? "contained" : "outlined"}`}
-            disableElevation
-            className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}>
-            {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
-          </Button>
+          {styleButton(isPrimary)}
         </Link>
       )
   }
@@ -182,10 +192,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
         <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
           {text.contents}
         </Typography>
-        {status === "inProgress" && (
+        {text.primaryButton && (
           <div className={classes.buttonContainer}>
-            {text.primaryButton && renderButton(text.primaryButton.opensDialog, true)}
-            {text.secondaryButton && renderButton(text.secondaryButton.opensDialog, false)}
+            {text.primaryButton && renderButton(text.primaryButton.opensDialog, true, text.primaryButton.isExternalPath!)}
+            {text.secondaryButton && renderButton(text.secondaryButton.opensDialog, false, text.secondaryButton.isExternalPath!)}
           </div>
         )}
       </div>
