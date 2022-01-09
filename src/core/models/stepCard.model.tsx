@@ -2,6 +2,7 @@ interface ButtonModel {
   label: string
   opensDialog: boolean
   path?: string
+  isExternalPath?: boolean
 }
 
 interface StepInfoModel {
