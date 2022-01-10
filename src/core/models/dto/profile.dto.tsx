@@ -29,6 +29,7 @@ interface ProfileDTO {
   parentName: string
   parentTelephone: string
   parentRelationship: string
+  shirtSize?: string
 }
 
 export default ProfileDTO

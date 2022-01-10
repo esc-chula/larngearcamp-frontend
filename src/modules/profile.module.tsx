@@ -7,6 +7,9 @@ import RegisterCard from "../core/components/profile/registercard.component"
 import StepCardList from "../core/components/profile/stepCardList.component"
 import MyProfileModel from "../core/models/myprofile.models"
 import { FileStatus } from "../core/models/dto/application.dto"
+import StepCard from "../core/components/profile/stepCard.component"
+import CustomDialog from "../core/components/profile/customDialog.component"
+import { useDialogContext } from "../core/providers/dialog.provider"
 
 const useStyles = makeStyles(theme => ({
   bg: {
@@ -29,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 const ProfileModule = () => {
   const classes = useStyles()
   const { me } = useAuthContext()
+  const { isOpen } = useDialogContext()
 
   const { lgCode, applicationState, firstname, lastname, documentState } = me.data as MyProfileModel
 
@@ -71,6 +75,7 @@ const ProfileModule = () => {
     <>
       <div className={classes.bg} />
       <Container maxWidth="lg" className={classes.container}>
+        <CustomDialog open={isOpen} />
         {content}
       </Container>
     </>

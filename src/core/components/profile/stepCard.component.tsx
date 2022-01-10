@@ -2,6 +2,7 @@ import { Button, makeStyles, Card, Typography, Box } from "@material-ui/core"
 import React from "react"
 import { Link } from "react-router-dom"
 import stepCardConstant from "../../constants/stepCard.constant"
+import { useDialogContext } from "../../providers/dialog.provider"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -124,6 +125,7 @@ export interface StepCardProps {
 
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const classes = useStyles()
+  const { openDialog } = useDialogContext()
 
   const setStepIndicatorStyles = (status: String) => {
     switch (status) {
@@ -140,36 +142,34 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
 
   const text = stepCardConstant[step][status][isApproved]!
 
-  const styleButton = (isPrimary: boolean) => {
+  const resolveButton = (isPrimary: boolean, onClick?: () => void) => {
     return (
       <Button
         variant={`${isPrimary ? "contained" : "outlined"}`}
         disableElevation
-        className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}>
+        className={`${classes.button} ${isPrimary ? classes.solid : classes.outlined}`}
+        onClick={onClick}>
         {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
       </Button>
     )
   }
 
   const renderButton = (opensDialog: boolean, isPrimary: boolean, isExternalPath: boolean) => {
-    if (opensDialog)
-      return (
-        // TODO : Handle Dialog
-        styleButton(isPrimary)
-      )
+    if (opensDialog) return resolveButton(isPrimary, openDialog)
     if (isExternalPath)
       return (
         <a
           href={`${isPrimary ? text.primaryButton!.path : text.secondaryButton!.path}`}
           target="_blank"
+          rel="noopener noreferrer"
           className={`no-underline ${classes.linkButton}`}>
-          {styleButton(isPrimary)}
+          {resolveButton(isPrimary)}
         </a>
       )
     else
       return (
         <Link to={`${isPrimary ? text.primaryButton!.path : text.secondaryButton!.path}`} className={`no-underline ${classes.linkButton}`}>
-          {styleButton(isPrimary)}
+          {resolveButton(isPrimary)}
         </Link>
       )
   }

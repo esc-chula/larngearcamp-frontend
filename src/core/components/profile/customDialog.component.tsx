@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
 import paymentQR from "../../../assets/images/paymentQR.png"
+import { useDialogContext } from "../../providers/dialog.provider"
 
 const useStyles = makeStyles(theme => ({
   dialog: {
@@ -50,22 +51,26 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export interface CustomDialogProps {
-  isOpen: boolean
+  open: boolean
   selectedShirtSize?: string
   onClose?: (value: string) => void
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({ isOpen, selectedShirtSize, onClose }) => {
+// TODO : Do I need a shirtSize type?
+
+const CustomDialog: React.FC<CustomDialogProps> = ({ open, selectedShirtSize, onClose }) => {
   const classes = useStyles()
   const [shirtSize, setShirtSize] = useState("")
+  const { closeDialog } = useDialogContext()
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
     setShirtSize(event.target.value)
   }
 
+  // TODO : handle backdrop click in different cases? (shirtSize selected/not selected)
+
   return (
-    <Dialog open={isOpen} classes={{ paper: classes.dialog }}>
+    <Dialog open={open} classes={{ paper: classes.dialog }} onBackdropClick={closeDialog}>
       <DialogTitle>ชำระค่าใช้จ่าย</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -84,13 +89,17 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ isOpen, selectedShirtSize, 
           เลือกไซส์เสื้อ
         </Typography>
         <RadioGroup aria-label="Select shirt size" name="shirt-size-select" onChange={handleRadioChange}>
-          <FormControlLabel value="S" control={<Radio color="primary" />} label="Size S (อก 33 นิ้ว / ยาว 25 นิ้ว)" />
-          <FormControlLabel value="M" control={<Radio color="primary" />} label="Size M (อก 36 นิ้ว / ยาว 27 นิ้ว)" />
-          <FormControlLabel value="L" control={<Radio color="primary" />} label="Size L (อก 40 นิ้ว / ยาว 28 นิ้ว)" />
-          <FormControlLabel value="XL" control={<Radio color="primary" />} label="Size XL (อก 44 นิ้ว / ยาว 30 นิ้ว)" />
+          <FormControlLabel value="S" control={<Radio color="primary" />} label="Size S (อก 33 นิ้ว / ยาว 25 นิ้ว)" checked={shirtSize === "S"} />
+          <FormControlLabel value="M" control={<Radio color="primary" />} label="Size M (อก 36 นิ้ว / ยาว 27 นิ้ว)" checked={shirtSize === "M"} />
+          <FormControlLabel value="L" control={<Radio color="primary" />} label="Size L (อก 40 นิ้ว / ยาว 28 นิ้ว)" checked={shirtSize === "L"} />
+          <FormControlLabel value="XL" control={<Radio color="primary" />} label="Size XL (อก 44 นิ้ว / ยาว 30 นิ้ว)" checked={shirtSize === "XL"} />
         </RadioGroup>
       </DialogContent>
-      <Button variant="contained" className={`${classes.button} ${classes.dialogAction}`} disabled={shirtSize === "" ? true : false}>
+      <Button
+        variant="contained"
+        className={`${classes.button} ${classes.dialogAction}`}
+        disabled={shirtSize === "" ? true : false}
+        onClick={closeDialog}>
         ยืนยัน
       </Button>
     </Dialog>
