@@ -75,7 +75,7 @@ const ProfileModule = () => {
     <>
       <div className={classes.bg} />
       <Container maxWidth="lg" className={classes.container}>
-        <CustomDialog open={isOpen} />
+        <CustomDialog open={isOpen} selectedShirtSize="" />
         {content}
       </Container>
     </>

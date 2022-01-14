@@ -14,6 +14,7 @@ import {
 import { makeStyles } from "@material-ui/styles"
 import paymentQR from "../../../assets/images/paymentQR.png"
 import { useDialogContext } from "../../providers/dialog.provider"
+import { ValidShirtSize } from "../../models/dto/profile.dto"
 
 const useStyles = makeStyles(theme => ({
   dialog: {
@@ -52,19 +53,16 @@ const useStyles = makeStyles(theme => ({
 
 export interface CustomDialogProps {
   open: boolean
-  selectedShirtSize?: string
-  onClose?: (value: string) => void
+  selectedShirtSize: ValidShirtSize
 }
 
-// TODO : Do I need a shirtSize type?
-
-const CustomDialog: React.FC<CustomDialogProps> = ({ open, selectedShirtSize, onClose }) => {
+const CustomDialog: React.FC<CustomDialogProps> = ({ open, selectedShirtSize }) => {
   const classes = useStyles()
-  const [shirtSize, setShirtSize] = useState("")
+  const [shirtSize, setShirtSize] = useState(selectedShirtSize)
   const { closeDialog } = useDialogContext()
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setShirtSize(event.target.value)
+    setShirtSize(event.target.value as ValidShirtSize)
   }
 
   // TODO : handle backdrop click in different cases? (shirtSize selected/not selected)

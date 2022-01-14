@@ -29,6 +29,7 @@ export interface AllDocumentStateDetail {
   photo: DocumentStateDetail
   parentalConsent: DocumentStateDetail
   transcript: DocumentStateDetail
+  payment: DocumentStateDetail
 }
 
 export interface ApplicationStateDTO {

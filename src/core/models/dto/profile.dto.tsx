@@ -1,3 +1,5 @@
+export type ValidShirtSize = "" | "S" | "M" | "L" | "XL"
+
 interface ProfileDTO {
   title: string
   firstName: string
@@ -29,7 +31,7 @@ interface ProfileDTO {
   parentName: string
   parentTelephone: string
   parentRelationship: string
-  shirtSize?: string
+  shirtSize: ValidShirtSize
 }
 
 export default ProfileDTO
