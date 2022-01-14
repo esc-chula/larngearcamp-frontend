@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: "10px"
   },
   upload: {
+    marginTop: theme.spacing(1),
     color: theme.palette.primary.main,
     borderColor: theme.palette.primary.main
   },
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   image: {
-    maxWidth: "500px",
+    maxWidth: "200px",
     padding: theme.spacing(2)
   },
   paymentContainer: {
@@ -76,6 +77,8 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, selectedShirtSize }) 
         </DialogContentText>
         <div className={classes.paymentContainer}>
           <img src={paymentQR} alt="QR Code" className={classes.image} />
+          <Typography variant="subtitle2">ชื่อบัญชี</Typography>
+          <Typography variant="subtitle1">จำนวน 500 บาท</Typography>
           <Button variant="outlined" className={`${classes.button} ${classes.upload}`}>
             อัพโหลดหลักฐานการชำระเงิน
           </Button>
