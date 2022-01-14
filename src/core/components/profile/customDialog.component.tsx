@@ -12,7 +12,7 @@ import {
   Divider
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
-import paymentQR from "../../../assets/images/paymentQR.png"
+import paymentQR from "../../../assets/images/paymentQR.jpg"
 import { useDialogContext } from "../../providers/dialog.provider"
 import { ValidShirtSize } from "../../models/dto/profile.dto"
 
@@ -41,8 +41,11 @@ const useStyles = makeStyles(theme => ({
     }
   },
   image: {
-    maxWidth: "200px",
-    padding: theme.spacing(2)
+    maxWidth: "400px",
+    padding: theme.spacing(2),
+    [theme.breakpoints.down("sm")]: {
+      maxWidth: "250px"
+    }
   },
   paymentContainer: {
     marginBottom: theme.spacing(4),
@@ -77,7 +80,6 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, selectedShirtSize }) 
         </DialogContentText>
         <div className={classes.paymentContainer}>
           <img src={paymentQR} alt="QR Code" className={classes.image} />
-          <Typography variant="subtitle2">ชื่อบัญชี</Typography>
           <Typography variant="subtitle1">จำนวน 500 บาท</Typography>
           <Button variant="outlined" className={`${classes.button} ${classes.upload}`}>
             อัพโหลดหลักฐานการชำระเงิน
