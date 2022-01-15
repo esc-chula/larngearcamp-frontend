@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import {
   Button,
   Dialog,
@@ -14,7 +14,8 @@ import {
 import { makeStyles } from "@material-ui/styles"
 import paymentQR from "../../../assets/images/paymentQR.jpg"
 import { useDialogContext } from "../../providers/dialog.provider"
-import { ValidShirtSize } from "../../models/dto/profile.dto"
+import { ShirtSizeDTO, ValidShirtSize } from "../../models/dto/profile.dto"
+import ApplicationServiceAPI from "../../services/application.service"
 
 const useStyles = makeStyles(theme => ({
   dialog: {
@@ -57,22 +58,35 @@ const useStyles = makeStyles(theme => ({
 
 export interface CustomDialogProps {
   open: boolean
-  selectedShirtSize: ValidShirtSize
+  existingShirtSize: ValidShirtSize
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({ open, selectedShirtSize }) => {
+const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize }) => {
   const classes = useStyles()
-  const [shirtSize, setShirtSize] = useState(selectedShirtSize)
+  const [shirtSize, setShirtSize] = useState(existingShirtSize)
   const { closeDialog } = useDialogContext()
+
+  const selectedShirtSize = useRef(existingShirtSize)
 
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setShirtSize(event.target.value as ValidShirtSize)
   }
 
-  // TODO : handle backdrop click in different cases? (shirtSize selected/not selected)
+  const handleClose = () => {
+    closeDialog()
+    if (shirtSize !== "" && shirtSize != selectedShirtSize.current) {
+      selectedShirtSize.current = shirtSize
+      updateShirtSize(selectedShirtSize.current)
+    }
+  }
+
+  const updateShirtSize = async (shirtSize: ValidShirtSize) => {
+    const partialApplication: ShirtSizeDTO = { shirtSize: shirtSize }
+    await ApplicationServiceAPI.updateApplicationPostSubmitAPI(partialApplication)
+  }
 
   return (
-    <Dialog open={open} classes={{ paper: classes.dialog }} onBackdropClick={closeDialog}>
+    <Dialog open={open} classes={{ paper: classes.dialog }} onBackdropClick={handleClose}>
       <DialogTitle>ชำระค่าใช้จ่าย</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -102,15 +116,13 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, selectedShirtSize }) 
         variant="contained"
         className={`${classes.button} ${classes.dialogAction}`}
         disabled={shirtSize === "" ? true : false}
-        onClick={closeDialog}>
+        onClick={handleClose}>
         ยืนยัน
       </Button>
     </Dialog>
   )
 }
 
-// TODO : handle select shirtSize
 // TODO : handle upload payment
-// TODO : If size already exists in application, select that, and only call API if value changed
 
 export default CustomDialog

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import { Container } from "@material-ui/core"
 import { useAuthContext } from "../core/providers/auth.provider"
@@ -10,6 +10,8 @@ import { FileStatus } from "../core/models/dto/application.dto"
 import StepCard from "../core/components/profile/stepCard.component"
 import CustomDialog from "../core/components/profile/customDialog.component"
 import { useDialogContext } from "../core/providers/dialog.provider"
+import { useApplicationStateContext } from "../core/providers/applicationState.provider"
+import { ValidShirtSize } from "../core/models/dto/profile.dto"
 
 const useStyles = makeStyles(theme => ({
   bg: {
@@ -33,6 +35,7 @@ const ProfileModule = () => {
   const classes = useStyles()
   const { me } = useAuthContext()
   const { isOpen } = useDialogContext()
+  const { application } = useApplicationStateContext()
 
   const { lgCode, applicationState, firstname, lastname, documentState } = me.data as MyProfileModel
 
@@ -75,7 +78,10 @@ const ProfileModule = () => {
     <>
       <div className={classes.bg} />
       <Container maxWidth="lg" className={classes.container}>
-        <CustomDialog open={isOpen} selectedShirtSize="" />
+        <CustomDialog
+          open={isOpen}
+          existingShirtSize={application.shirtSize === null ? ("" as ValidShirtSize) : (application.shirtSize as ValidShirtSize)}
+        />
         {content}
       </Container>
     </>
