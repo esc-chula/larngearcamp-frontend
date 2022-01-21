@@ -1,4 +1,4 @@
-import ProfileDTO from "./profile.dto"
+import ProfileDTO, { ShirtSizeDTO } from "./profile.dto"
 import Answer1DTO from "./answer1.dto"
 import Answer2DTO from "./answer2.dto"
 
@@ -29,6 +29,7 @@ export interface AllDocumentStateDetail {
   photo: DocumentStateDetail
   parentalConsent: DocumentStateDetail
   transcript: DocumentStateDetail
+  payment: DocumentStateDetail
 }
 
 export interface ApplicationStateDTO {
@@ -38,3 +39,4 @@ export interface ApplicationStateDTO {
 
 export declare type ApplicationDTO = ProfileDTO & Answer1DTO & Answer2DTO
 export declare type UpdateApplicationDTO = ProfileDTO | Answer1DTO | Answer2DTO
+export declare type updateApplicationPostSubmitDTO = ShirtSizeDTO

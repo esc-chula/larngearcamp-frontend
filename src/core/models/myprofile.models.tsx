@@ -1,5 +1,5 @@
 import { ApplicationState, FileStatus } from "./dto/application.dto"
-import DocumentType from "./documentType.constant"
+import DocumentType from "../constants/documentType.constant"
 
 type DocumentState = {
   [index in DocumentType]: FileStatus

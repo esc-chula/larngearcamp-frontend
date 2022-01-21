@@ -1,4 +1,4 @@
-import DocumentType from "./documentType.constant"
+import DocumentType from "../constants/documentType.constant"
 
 interface UploadFileModel {
   name: DocumentType

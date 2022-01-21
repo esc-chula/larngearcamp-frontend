@@ -14,6 +14,7 @@ import { ShowLoadingComponent } from "../core/components/loading.component"
 import { DocModule } from "./doc.module"
 import { ApplicationStatus, useAnnounceContext } from "../core/providers/announce.provider"
 import { PrivacyPoflicyModule } from "./privacy-policy.module"
+import { DialogProvider } from "../core/providers/dialog.provider"
 
 const ApplicationModule = React.lazy(() => import(/* webpackPrefetch: true, webpackChunkName: "application-module" */ "./applications"))
 
@@ -47,7 +48,17 @@ const RouteModule: React.FC = () => {
 
         {/* User Guard */}
         <UserGuardedRoute exact path="/profile">
-          <ApplicationStateProvider>{(render, is404) => (render || is404 ? <ProfileModule /> : <ShowLoadingComponent />)}</ApplicationStateProvider>
+          <ApplicationStateProvider>
+            {(render, is404) =>
+              render || is404 ? (
+                <DialogProvider>
+                  <ProfileModule />
+                </DialogProvider>
+              ) : (
+                <ShowLoadingComponent />
+              )
+            }
+          </ApplicationStateProvider>
         </UserGuardedRoute>
         <UserGuardedRoute path="/application">
           {state === ApplicationStatus.EARLY || state === ApplicationStatus.LATE ? (

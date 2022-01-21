@@ -169,7 +169,7 @@ const stepCardConstant: StepCardModel = {
           </>
         ),
         primaryButton: {
-          label: "ชำระค่าใช้จ่าย",
+          label: "ชำระค่าใช้จ่าย  & เลือกไซส์เสื้อ",
           opensDialog: true
         }
       }
