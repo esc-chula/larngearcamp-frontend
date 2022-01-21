@@ -12,10 +12,12 @@ import {
   Divider
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
-import paymentQR from "../../../assets/images/paymentQR.jpg"
 import { useDialogContext } from "../../providers/dialog.provider"
 import { ShirtSizeDTO, ValidShirtSize } from "../../models/dto/profile.dto"
 import ApplicationServiceAPI from "../../services/application.service"
+import { FileStatus } from "../../models/dto/application.dto"
+import { DocumentItem } from "../../models/dto/document.dto"
+import UploadPaymentBlock from "./uploadPaymentBlock.component"
 
 const useStyles = makeStyles(theme => ({
   dialog: {
@@ -26,42 +28,24 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     padding: theme.spacing(0.5, 3),
-    borderRadius: "10px"
-  },
-  upload: {
-    marginTop: theme.spacing(1),
-    color: theme.palette.primary.main,
-    borderColor: theme.palette.primary.main
-  },
-  dialogAction: {
+    borderRadius: "10px",
     margin: theme.spacing(2, 3),
     color: "white",
     background: theme.palette.primary.main,
     "&:hover": {
       background: theme.palette.primary.dark
     }
-  },
-  image: {
-    maxWidth: "400px",
-    padding: theme.spacing(2),
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "250px"
-    }
-  },
-  paymentContainer: {
-    marginBottom: theme.spacing(4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
   }
 }))
 
 export interface CustomDialogProps {
   open: boolean
   existingShirtSize: ValidShirtSize
+  paymentStatus: FileStatus
+  serverFile: DocumentItem
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize }) => {
+const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize, paymentStatus, serverFile }) => {
   const classes = useStyles()
   const [shirtSize, setShirtSize] = useState(existingShirtSize)
   const { closeDialog } = useDialogContext()
@@ -74,7 +58,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize }) 
 
   const handleClose = () => {
     closeDialog()
-    if (shirtSize !== "" && shirtSize != selectedShirtSize.current) {
+    if (shirtSize !== "" && shirtSize !== selectedShirtSize.current) {
       selectedShirtSize.current = shirtSize
       updateShirtSize(selectedShirtSize.current)
     }
@@ -92,13 +76,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize }) 
         <DialogContentText>
           แสกน QR Code เพื่อชำระค่าใช้จ่ายด้วย Mobile Banking Application จากนั้นอัพโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ
         </DialogContentText>
-        <div className={classes.paymentContainer}>
-          <img src={paymentQR} alt="QR Code" className={classes.image} />
-          <Typography variant="subtitle1">จำนวน 500 บาท</Typography>
-          <Button variant="outlined" className={`${classes.button} ${classes.upload}`}>
-            อัพโหลดหลักฐานการชำระเงิน
-          </Button>
-        </div>
+        <UploadPaymentBlock paymentStatus={paymentStatus} serverFile={serverFile} />
 
         <Divider />
 
@@ -112,17 +90,11 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize }) 
           <FormControlLabel value="XL" control={<Radio color="primary" />} label="Size XL (อก 44 นิ้ว / ยาว 30 นิ้ว)" checked={shirtSize === "XL"} />
         </RadioGroup>
       </DialogContent>
-      <Button
-        variant="contained"
-        className={`${classes.button} ${classes.dialogAction}`}
-        disabled={shirtSize === "" ? true : false}
-        onClick={handleClose}>
+      <Button variant="contained" className={classes.button} disabled={shirtSize === "" ? true : false} onClick={handleClose}>
         ยืนยัน
       </Button>
     </Dialog>
   )
 }
-
-// TODO : handle upload payment
 
 export default CustomDialog
