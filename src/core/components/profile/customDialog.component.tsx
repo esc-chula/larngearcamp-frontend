@@ -74,7 +74,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize, pa
       <DialogTitle>ชำระค่าใช้จ่าย</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          แสกน QR Code เพื่อชำระค่าใช้จ่ายด้วย Mobile Banking Application จากนั้นอัพโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ
+          สแกน QR Code เพื่อชำระค่าใช้จ่ายด้วย Mobile Banking Application จากนั้นอัพโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ
         </DialogContentText>
         <UploadPaymentBlock paymentStatus={paymentStatus} serverFile={serverFile} />
 
