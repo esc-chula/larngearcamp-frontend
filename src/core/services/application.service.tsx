@@ -7,7 +7,6 @@ import {
   DocumentStateDetail,
   updateApplicationPostSubmitDTO
 } from "../models/dto/application.dto"
-import FileDTO from "../models/dto/file.dto"
 
 export interface ApplicationService {
   createApplicationAPI: () => Promise<void>

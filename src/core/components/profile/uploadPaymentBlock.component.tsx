@@ -80,7 +80,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
           errorMessage.current = (error as Error).message
         }
       },
-      [paymentStatus, serverFile]
+      [uploadDocument]
     )
   )
 
@@ -97,7 +97,9 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
         {status === "EMPTY" ? "อัพโหลดหลักฐานการชำระเงิน" : "อัพโหลดอีกครั้ง"}
         <input type="file" name="payment" hidden accept="image/jpeg, image/png" onChange={uploadFile} />
       </Button>
-      {!!displayFile.url && status !== "EMPTY" && errorMessage.current === "" && <img src={displayFile.url} className={classes.image} />}
+      {!!displayFile.url && status !== "EMPTY" && errorMessage.current === "" && (
+        <img src={displayFile.url} alt="uploaded preview" className={classes.image} />
+      )}
     </div>
   )
 }

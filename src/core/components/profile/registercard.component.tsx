@@ -122,8 +122,8 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
             เปิดรับสมัครวันที่ 15 พฤศจิกายน
           </Button>
         )}
-        <img src={Gear} className={classes.gear1} />
-        <img src={Gear} className={classes.gear2} />
+        <img src={Gear} alt="" className={classes.gear1} />
+        <img src={Gear} alt="" className={classes.gear2} />
       </Card>
       <Typography variant="body2" className={classes.bodyText}>
         * คุณไม่จำเป็นที่จะต้องลงทะเบียนให้เสร็จในครั้งเดียว เพราะระบบจะคอยบันทึกข้อมูลให้คุณเอง
