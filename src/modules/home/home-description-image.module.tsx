@@ -54,7 +54,7 @@ const HomeDescriptionImage = () => {
           <img
             src={src}
             key={`home-image-${idx}`}
-            alt="home-image-${idx}"
+            alt={`home-${idx}`}
             onLoad={() => idx === 0 && setLoading(false)}
             style={{ display: index === idx && !isLoading ? "block" : "none" }}
             className={classes.image}
