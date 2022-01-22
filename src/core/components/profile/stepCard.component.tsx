@@ -65,6 +65,9 @@ const useStyles = makeStyles(theme => ({
   grayText: {
     color: "#BFBFBF" //theme.palette.gray[200]
   },
+  boldText: {
+    fontWeight: 500
+  },
   content: {
     color: "#8C8C8C" //theme.palette.gray[300]
   },
@@ -77,6 +80,18 @@ const useStyles = makeStyles(theme => ({
   linkButton: {
     display: "flex",
     flexGrow: 1,
+    "&::after": {
+      content: "none"
+    }
+  },
+  paragraphTop: {
+    marginBottom: theme.spacing(1.5)
+  },
+  paragraphBottom: {
+    marginTop: theme.spacing(1.5)
+  },
+  link: {
+    color: theme.palette.primary.main,
     "&::after": {
       content: "none"
     }
@@ -189,9 +204,20 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
         <Typography variant="h4" className={`${classes.text} ${classes.title} ${classes.blackText}`}>
           {text.title}
         </Typography>
+
+        {step === 4 && status === "inProgress" && (
+          /*interviewTime exists*/
+          <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
+            รอบสัมภาษณ์ของน้องจะเป็น{" "}
+            <span className={`${classes.redText} ${classes.boldText}`}>
+              วันที่ {1} เวลา {13} น.
+            </span>
+          </Typography>
+        )}
         <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
           {text.contents}
         </Typography>
+
         {text.primaryButton && (
           <div className={classes.buttonContainer}>
             {text.primaryButton && renderButton(text.primaryButton.opensDialog, true, text.primaryButton.isExternalPath!)}
