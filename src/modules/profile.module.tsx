@@ -7,10 +7,10 @@ import RegisterCard from "../core/components/profile/registercard.component"
 import StepCardList from "../core/components/profile/stepCardList.component"
 import MyProfileModel from "../core/models/myprofile.models"
 import { FileStatus } from "../core/models/dto/application.dto"
-import CustomDialog from "../core/components/profile/customDialog.component"
 import { useDialogContext } from "../core/providers/dialog.provider"
 import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 import { ValidShirtSize } from "../core/models/dto/profile.dto"
+const CustomDialog = React.lazy(() => import("../core/components/profile/customDialog.component"))
 
 const useStyles = makeStyles(theme => ({
   bg: {
