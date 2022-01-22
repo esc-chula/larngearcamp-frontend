@@ -1,4 +1,10 @@
-export type ValidShirtSize = "" | "S" | "M" | "L" | "XL"
+export enum ValidShirtSize {
+  none = "",
+  S = "S",
+  M = "M",
+  L = "L",
+  XL = "XL"
+}
 
 export interface ShirtSizeDTO {
   shirtSize: ValidShirtSize

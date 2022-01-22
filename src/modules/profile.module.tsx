@@ -79,7 +79,7 @@ const ProfileModule = () => {
       <Container maxWidth="lg" className={classes.container}>
         <CustomDialog
           open={isOpen}
-          existingShirtSize={application.shirtSize === null ? ("" as ValidShirtSize) : (application.shirtSize as ValidShirtSize)}
+          existingShirtSize={application.shirtSize === null ? ValidShirtSize.none : application.shirtSize!}
           paymentStatus={documentState.payment}
           serverFile={application.payment}
         />
