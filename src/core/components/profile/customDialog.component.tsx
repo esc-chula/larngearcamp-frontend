@@ -9,9 +9,11 @@ import {
   Radio,
   FormControlLabel,
   Typography,
-  Divider
+  Divider,
+  IconButton
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
+import CloseIcon from "@material-ui/icons/Close"
 import { useDialogContext } from "../../providers/dialog.provider"
 import { ShirtSizeDTO, ValidShirtSize } from "../../models/dto/profile.dto"
 import ApplicationServiceAPI from "../../services/application.service"
@@ -25,6 +27,12 @@ const useStyles = makeStyles(theme => ({
   },
   heading: {
     margin: theme.spacing(2, 0)
+  },
+  closeButton: {
+    position: "absolute",
+    right: 8,
+    top: 8,
+    color: "#8C8C8C" //theme.palette.gray[300]
   },
   button: {
     padding: theme.spacing(0.5, 3),
@@ -71,7 +79,13 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize, pa
 
   return (
     <Dialog open={open} classes={{ paper: classes.dialog }} onBackdropClick={handleClose}>
-      <DialogTitle>ชำระค่าใช้จ่าย</DialogTitle>
+      <DialogTitle>
+        ชำระค่าใช้จ่าย
+        <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+
       <DialogContent>
         <DialogContentText>
           สแกน QR Code เพื่อชำระค่าใช้จ่ายด้วย Mobile Banking Application จากนั้นอัพโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ
