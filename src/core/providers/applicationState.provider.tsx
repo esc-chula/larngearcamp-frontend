@@ -53,6 +53,10 @@ export const ApplicationStateProvider: React.FC<{ children: (render: boolean, is
       transcript: {
         ...resAttach.transcript,
         url: resAttach.transcript.url || ""
+      },
+      payment: {
+        ...resAttach.payment,
+        url: resAttach.payment.url || ""
       }
     }
   }

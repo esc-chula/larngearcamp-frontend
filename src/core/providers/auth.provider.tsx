@@ -60,7 +60,8 @@ export const AuthProvider: React.FC = ({ ...other }) => {
         documentState: {
           photo: attachRes.photo.status,
           parentalConsent: attachRes.parentalConsent.status,
-          transcript: attachRes.transcript.status
+          transcript: attachRes.transcript.status,
+          payment: attachRes.payment.status
         }
       }
 

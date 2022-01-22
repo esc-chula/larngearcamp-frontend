@@ -7,6 +7,10 @@ import RegisterCard from "../core/components/profile/registercard.component"
 import StepCardList from "../core/components/profile/stepCardList.component"
 import MyProfileModel from "../core/models/myprofile.models"
 import { FileStatus } from "../core/models/dto/application.dto"
+import { useDialogContext } from "../core/providers/dialog.provider"
+import { useApplicationStateContext } from "../core/providers/applicationState.provider"
+import { ValidShirtSize } from "../core/models/dto/profile.dto"
+const CustomDialog = React.lazy(() => import("../core/components/profile/customDialog.component"))
 
 const useStyles = makeStyles(theme => ({
   bg: {
@@ -29,6 +33,8 @@ const useStyles = makeStyles(theme => ({
 const ProfileModule = () => {
   const classes = useStyles()
   const { me } = useAuthContext()
+  const { isOpen } = useDialogContext()
+  const { application } = useApplicationStateContext()
 
   const { lgCode, applicationState, firstname, lastname, documentState } = me.data as MyProfileModel
 
@@ -71,6 +77,12 @@ const ProfileModule = () => {
     <>
       <div className={classes.bg} />
       <Container maxWidth="lg" className={classes.container}>
+        <CustomDialog
+          open={isOpen}
+          existingShirtSize={application.shirtSize === null ? ValidShirtSize.none : application.shirtSize!}
+          paymentStatus={documentState.payment}
+          serverFile={application.payment}
+        />
         {content}
       </Container>
     </>

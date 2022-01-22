@@ -1,6 +1,12 @@
 import { httpClient } from "../../utils/http"
-import { ApplicationDTO, UpdateApplicationDTO, ApplicationStateDTO, AllDocumentStateDetail, DocumentStateDetail } from "../models/dto/application.dto"
-import FileDTO from "../models/dto/file.dto"
+import {
+  ApplicationDTO,
+  UpdateApplicationDTO,
+  ApplicationStateDTO,
+  AllDocumentStateDetail,
+  DocumentStateDetail,
+  updateApplicationPostSubmitDTO
+} from "../models/dto/application.dto"
 
 export interface ApplicationService {
   createApplicationAPI: () => Promise<void>
@@ -10,6 +16,7 @@ export interface ApplicationService {
   finalizeApplicationAPI: () => Promise<ApplicationDTO>
   getApplicationStateAPI: () => Promise<ApplicationStateDTO>
   getAttachmentAPI: () => Promise<AllDocumentStateDetail>
+  updateApplicationPostSubmitAPI: (application: updateApplicationPostSubmitDTO) => Promise<ApplicationDTO>
 }
 
 const createApplicationAPI = async (): Promise<void> => {
@@ -40,6 +47,10 @@ const finalizeApplicationAPI = async (): Promise<ApplicationDTO> => {
   return (await httpClient.post(`/application`)).data
 }
 
+const updateApplicationPostSubmitAPI = async (partialApplication: updateApplicationPostSubmitDTO): Promise<ApplicationDTO> => {
+  return (await httpClient.patch(`/application/post_submission`, partialApplication)).data
+}
+
 const ApplicationServiceAPI: ApplicationService = {
   createApplicationAPI,
   uploadDocumentAPI,
@@ -47,7 +58,8 @@ const ApplicationServiceAPI: ApplicationService = {
   updateApplicationAPI,
   finalizeApplicationAPI,
   getApplicationStateAPI,
-  getAttachmentAPI
+  getAttachmentAPI,
+  updateApplicationPostSubmitAPI
 }
 
 export default ApplicationServiceAPI

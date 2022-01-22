@@ -1,3 +1,15 @@
+export enum ValidShirtSize {
+  none = "",
+  S = "S",
+  M = "M",
+  L = "L",
+  XL = "XL"
+}
+
+export interface ShirtSizeDTO {
+  shirtSize: ValidShirtSize
+}
+
 interface ProfileDTO {
   title: string
   firstName: string
@@ -29,6 +41,7 @@ interface ProfileDTO {
   parentName: string
   parentTelephone: string
   parentRelationship: string
+  shirtSize?: ValidShirtSize
 }
 
 export default ProfileDTO
