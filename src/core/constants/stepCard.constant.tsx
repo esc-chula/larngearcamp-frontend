@@ -130,13 +130,13 @@ const stepCardConstant: StepCardModel = {
         primaryButton: {
           label: "ตรวจสอบคิวสัมภาษณ์ทั้งหมด",
           opensDialog: false,
-          path: "https://www.facebook.com/LARNGEARCAMP/posts/10160028116987425",
+          path: "https://www.facebook.com/LARNGEARCAMP/posts/10160055610077425",
           isExternalPath: true
         },
         secondaryButton: {
           label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
-          path: "https://zoom.us/",
+          path: "https://chula.zoom.us/j/99712663620?pwd=ZllMVU94OE5SU1ZacUIyeWwwc012QT09",
           isExternalPath: true
         }
       }
