@@ -115,16 +115,20 @@ const stepCardConstant: StepCardModel = {
         title: "รอบสัมภาษณ์",
         contents: (
           <>
-            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ที่ปุ่มด้านล่าง ก่อนเวลาอย่างน้อย 10 นาทีนะครับ สามารถศึกษาวิธีการใช้งานโปรแกรม
-            ZOOM ได้ที่
+            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ที่ปุ่มด้านล่าง ก่อนเวลาอย่างน้อย 5 นาทีนะครับ{" "}
             <a
               className="no-underline"
               href="https://drive.google.com/drive/folders/1XLjpgeZYoD9cbsv3oZgdVwuz8mTPZOSM"
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: "#941014" }}>
-              ลิงก์นี้
+              สามารถศึกษาวิธีการใช้งานโปรแกรม ZOOM ได้ที่ลิงก์นี้เลย !
             </a>
+            <div style={{ marginTop: "0.75rem" }}>
+              <div>หากมีปัญหาในการคลิกลิงก์ สามารถเข้าห้อง ZOOM ได้โดยการกรอก</div>
+              <div style={{ fontWeight: 400 }}>Meeting ID: 997 1266 3620</div>
+              <div style={{ fontWeight: 400 }}>Password: 886406</div>
+            </div>
           </>
         ),
         primaryButton: {
