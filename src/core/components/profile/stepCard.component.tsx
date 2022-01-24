@@ -89,9 +89,6 @@ const useStyles = makeStyles(theme => ({
   paragraphTop: {
     marginBottom: theme.spacing(1.5)
   },
-  paragraphBottom: {
-    marginTop: theme.spacing(1.5)
-  },
   link: {
     color: theme.palette.primary.main,
     "&::after": {
