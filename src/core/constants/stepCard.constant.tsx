@@ -125,7 +125,7 @@ const stepCardConstant: StepCardModel = {
               สามารถศึกษาวิธีการใช้งานโปรแกรม ZOOM ได้ที่ลิงก์นี้เลย !
             </a>
             <div style={{ marginTop: "0.75rem" }}>
-              <div>หากมีปัญหาในการคลิกลิงก์ สามารถเข้าห้อง ZOOM ได้โดยการกรอก</div>
+              <div>หากมีปัญหาในการกดเข้าสู่ห้องสัมภาษณ์ สามารถเข้า ZOOM ได้โดยได้โดยการกรอก</div>
               <div style={{ fontWeight: 400 }}>Meeting ID: 997 1266 3620</div>
               <div style={{ fontWeight: 400 }}>Password: 886406</div>
             </div>
