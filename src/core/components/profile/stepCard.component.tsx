@@ -3,6 +3,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 import stepCardConstant from "../../constants/stepCard.constant"
 import { useDialogContext } from "../../providers/dialog.provider"
+import { useApplicationStateContext } from "../../providers/applicationState.provider"
+import { dateToLocaleString } from "../../../utils/conversion"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -65,6 +67,9 @@ const useStyles = makeStyles(theme => ({
   grayText: {
     color: "#BFBFBF" //theme.palette.gray[200]
   },
+  boldText: {
+    fontWeight: 500
+  },
   content: {
     color: "#8C8C8C" //theme.palette.gray[300]
   },
@@ -77,6 +82,15 @@ const useStyles = makeStyles(theme => ({
   linkButton: {
     display: "flex",
     flexGrow: 1,
+    "&::after": {
+      content: "none"
+    }
+  },
+  paragraphTop: {
+    marginBottom: theme.spacing(1.5)
+  },
+  link: {
+    color: theme.palette.primary.main,
     "&::after": {
       content: "none"
     }
@@ -126,6 +140,9 @@ export interface StepCardProps {
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const classes = useStyles()
   const { openDialog } = useDialogContext()
+  const { application } = useApplicationStateContext()
+
+  const text = stepCardConstant[step][status][isApproved]!
 
   const setStepIndicatorStyles = (status: String) => {
     switch (status) {
@@ -139,8 +156,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
         return []
     }
   }
-
-  const text = stepCardConstant[step][status][isApproved]!
 
   const resolveButton = (isPrimary: boolean, onClick?: () => void) => {
     return (
@@ -189,9 +204,16 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
         <Typography variant="h4" className={`${classes.text} ${classes.title} ${classes.blackText}`}>
           {text.title}
         </Typography>
+
+        {step === 4 && status === "inProgress" && application.interviewTime && (
+          <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
+            รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(application.interviewTime)}</span>
+          </Typography>
+        )}
         <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
           {text.contents}
         </Typography>
+
         {text.primaryButton && (
           <div className={classes.buttonContainer}>
             {text.primaryButton && renderButton(text.primaryButton.opensDialog, true, text.primaryButton.isExternalPath!)}

@@ -113,12 +113,34 @@ const stepCardConstant: StepCardModel = {
     inProgress: {
       true: {
         title: "รอบสัมภาษณ์",
-        contents:
-          "ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์สัมภาษณ์ เตรียมตัวได้พบปะพูดคุยกับพี่ ๆ ผู้สัมภาษณ์สุดน่ารักและใจดีในวันที่ 29 มกรา สำหรับน้อง ๆ กรุงเทพฯ และปริมณฑล หรือ 31 มกรา ถึง 6 กุมภา สำหรับน้อง ๆ ต่างจังหวัดได้เลย !!",
+        contents: (
+          <>
+            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ที่ปุ่มด้านล่าง ก่อนเวลาอย่างน้อย 5 นาทีนะครับ{" "}
+            <a
+              className="no-underline"
+              href="https://drive.google.com/drive/folders/1XLjpgeZYoD9cbsv3oZgdVwuz8mTPZOSM"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#941014" }}>
+              สามารถศึกษาวิธีการใช้งานโปรแกรม ZOOM ได้ที่ลิงก์นี้เลย !
+            </a>
+            <div style={{ marginTop: "0.75rem" }}>
+              <div>หากมีปัญหาในการกดเข้าสู่ห้องสัมภาษณ์ สามารถเข้า ZOOM ได้โดยการกรอก</div>
+              <div style={{ fontWeight: 400 }}>Meeting ID: 997 1266 3620</div>
+              <div style={{ fontWeight: 400 }}>Password: 886406</div>
+            </div>
+          </>
+        ),
         primaryButton: {
           label: "ตรวจสอบคิวสัมภาษณ์ทั้งหมด",
           opensDialog: false,
-          path: "https://www.facebook.com/LARNGEARCAMP/posts/10160028116987425",
+          path: "https://www.facebook.com/LARNGEARCAMP/posts/10160055610077425",
+          isExternalPath: true
+        },
+        secondaryButton: {
+          label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
+          opensDialog: false,
+          path: "https://chula.zoom.us/j/99712663620?pwd=ZllMVU94OE5SU1ZacUIyeWwwc012QT09",
           isExternalPath: true
         }
       }

@@ -42,6 +42,7 @@ interface ProfileDTO {
   parentTelephone: string
   parentRelationship: string
   shirtSize?: ValidShirtSize
+  interviewTime?: string
 }
 
 export default ProfileDTO
