@@ -3,6 +3,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 import stepCardConstant from "../../constants/stepCard.constant"
 import { useDialogContext } from "../../providers/dialog.provider"
+import { useApplicationStateContext } from "../../providers/applicationState.provider"
+import { dateToLocaleString } from "../../../utils/conversion"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -141,6 +143,9 @@ export interface StepCardProps {
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const classes = useStyles()
   const { openDialog } = useDialogContext()
+  const { application } = useApplicationStateContext()
+
+  const text = stepCardConstant[step][status][isApproved]!
 
   const setStepIndicatorStyles = (status: String) => {
     switch (status) {
@@ -154,8 +159,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
         return []
     }
   }
-
-  const text = stepCardConstant[step][status][isApproved]!
 
   const resolveButton = (isPrimary: boolean, onClick?: () => void) => {
     return (
@@ -205,13 +208,9 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           {text.title}
         </Typography>
 
-        {step === 4 && status === "inProgress" && (
-          /*interviewTime exists*/
+        {step === 4 && status === "inProgress" && application.interviewTime && (
           <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-            รอบสัมภาษณ์ของน้องจะเป็น{" "}
-            <span className={`${classes.redText} ${classes.boldText}`}>
-              วันที่ {1} เวลา {13} น.
-            </span>
+            รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(application.interviewTime)}</span>
           </Typography>
         )}
         <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
