@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import React from "react"
 import StepCardModel from "../models/stepCard.model"
 
@@ -116,18 +117,42 @@ const stepCardConstant: StepCardModel = {
         contents: (
           <>
             การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ที่ปุ่มด้านล่าง ก่อนเวลาอย่างน้อย 5 นาทีนะครับ{" "}
-            <a
-              className="no-underline"
-              href="https://drive.google.com/drive/folders/1XLjpgeZYoD9cbsv3oZgdVwuz8mTPZOSM"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#941014" }}>
-              สามารถศึกษาวิธีการใช้งานโปรแกรม ZOOM ได้ที่ลิงก์นี้เลย !
-            </a>
             <div style={{ marginTop: "0.75rem" }}>
-              <div>หากมีปัญหาในการกดเข้าสู่ห้องสัมภาษณ์ สามารถเข้า ZOOM ได้โดยการกรอก</div>
+              <Link to="/assets/file/virtualbg.png" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+                ดาวน์โหลดรูป Virtual Background ที่ใช้ในการสัมภาษณ์
+              </Link>
+            </div>
+            <div style={{ marginTop: "0.75rem" }}>
+              <a
+                className="no-underline"
+                href="https://drive.google.com/drive/folders/1XLjpgeZYoD9cbsv3oZgdVwuz8mTPZOSM"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#941014" }}>
+                ศึกษาวิธีการใช้งานโปรแกรม ZOOM
+              </a>
+            </div>
+            <div style={{ marginTop: "0.75rem" }}>
+              <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
               <div style={{ fontWeight: 400 }}>Meeting ID: 997 1266 3620</div>
               <div style={{ fontWeight: 400 }}>Password: 886406</div>
+            </div>
+            <div style={{ marginTop: "0.75rem" }}>
+              <div>
+                หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
+                <div>
+                  พี่บูม:{" "}
+                  <a className="no-underline" href="tel:+6694-447-6075" style={{ color: "#941014" }}>
+                    094-447-6075
+                  </a>
+                </div>
+                <div>
+                  ข้าวหอม:{" "}
+                  <a className="no-underline" href="tel:+6689-939-7816" style={{ color: "#941014" }}>
+                    089-939-7816
+                  </a>
+                </div>
+              </div>
             </div>
           </>
         ),
