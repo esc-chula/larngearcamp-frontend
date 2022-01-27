@@ -138,7 +138,21 @@ const stepCardConstant: StepCardModel = {
               <div style={{ fontWeight: 400 }}>Password: 886406</div>
             </div>
             <div style={{ marginTop: "0.75rem" }}>
-              <div>หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง พี่บูม: 094-447-6075 หรือ ข้าวหอม: 089-939-7816</div>
+              <div>
+                หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
+                <div>
+                  พี่บูม:{" "}
+                  <a className="no-underline" href="tel:+6694-447-6075" style={{ color: "#941014" }}>
+                    094-447-6075
+                  </a>
+                </div>
+                <div>
+                  ข้าวหอม:{" "}
+                  <a className="no-underline" href="tel:+6689-939-7816" style={{ color: "#941014" }}>
+                    089-939-7816
+                  </a>
+                </div>
+              </div>
             </div>
           </>
         ),
