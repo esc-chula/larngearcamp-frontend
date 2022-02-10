@@ -3,7 +3,7 @@ import { Button, Dialog, DialogContent, DialogTitle, RadioGroup, Radio, FormCont
 import { makeStyles } from "@material-ui/styles"
 import CloseIcon from "@material-ui/icons/Close"
 import { useDialogContext } from "../../providers/dialog.provider"
-import { ShirtSizeDTO, ValidShirtSize } from "../../models/dto/profile.dto"
+import { OptionsDTO, ValidShirtSize } from "../../models/dto/profile.dto"
 import ApplicationServiceAPI from "../../services/application.service"
 
 const useStyles = makeStyles(theme => ({
@@ -53,7 +53,7 @@ const ShirtSizeDialog: React.FC<ShirtSizeDialogProps> = ({ open, existingShirtSi
   }
 
   const updateShirtSize = async (shirtSize: ValidShirtSize) => {
-    const partialApplication: ShirtSizeDTO = { shirtSize: shirtSize }
+    const partialApplication: OptionsDTO = { shirtSize: shirtSize }
     await ApplicationServiceAPI.updateApplicationPostSubmitAPI(partialApplication)
   }
 

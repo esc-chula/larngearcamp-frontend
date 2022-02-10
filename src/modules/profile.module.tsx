@@ -78,7 +78,13 @@ const ProfileModule = () => {
     <>
       <div className={classes.bg} />
       <Container maxWidth="lg" className={classes.container}>
-        <PaymentDialog open={paymentDialog} paymentStatus={documentState.payment} serverFile={application.payment} />
+        <PaymentDialog
+          open={paymentDialog}
+          paymentStatus={documentState.payment}
+          serverFile={application.payment}
+          accommodationRequested={!!application.accomodationRequested}
+          breakfastRequested={!!application.breakfastRequested}
+        />
         <ShirtSizeDialog open={shirtSizeDialog} existingShirtSize={application.shirtSize === null ? ValidShirtSize.none : application.shirtSize!} />
         {content}
       </Container>

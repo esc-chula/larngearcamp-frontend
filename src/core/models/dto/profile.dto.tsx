@@ -6,8 +6,10 @@ export enum ValidShirtSize {
   XL = "XL"
 }
 
-export interface ShirtSizeDTO {
-  shirtSize: ValidShirtSize
+export interface OptionsDTO {
+  shirtSize?: ValidShirtSize
+  accomodationRequested?: boolean
+  breakfastRequested?: boolean
 }
 
 interface ProfileDTO {
@@ -43,6 +45,8 @@ interface ProfileDTO {
   parentRelationship: string
   shirtSize?: ValidShirtSize
   interviewTime?: string
+  accomodationRequested?: boolean
+  breakfastRequested?: boolean
 }
 
 export default ProfileDTO
