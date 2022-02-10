@@ -268,20 +268,41 @@ const stepCardConstant: StepCardModel = {
               หลังจากนี้หากน้อง ๆ ยังไม่ได้กรอกฟอร์มยืนยันการฉีควัคซีนอย่างลืมกรอกกันด้วยล่ะ และหากน้อง ๆ มีข้อสงสัยใด ๆ
               สามารถทักมาสอบถามได้ผ่านทางเฟสบุ๊คเพจ LarnGear Camp ตลอดเลยนะครับ ไว้เจอกันที่ลานเกียร์ค้าบบบบ :)
             </div>
+            <div style={{ marginTop: "0.75rem" }}>
+              สำหรับน้อง ๆ ที่ต้องการขอเอกสารเพื่อขอลาเรียนที่โรงเรียน ให้ดาวน์โหลดเอกสารด้านล่างได้เลย
+              <div>
+                <Link
+                  to="/assets/file/ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ 21.pdf"
+                  className="no-underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#941014" }}>
+                  ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ 21.pdf
+                </Link>
+                <Link
+                  to="/assets/file/รายชื่อนักเรียนที่เข้าร่วมโครงการค่ายลานเกียร์ครั้งที่ 21.pdf"
+                  className="no-underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#941014" }}>
+                  รายชื่อนักเรียนที่เข้าร่วมโครงการค่ายลานเกียร์ ครั้งที่ 21.pdf
+                </Link>
+              </div>
+            </div>
           </>
-        ),
-        primaryButton: {
-          label: "ตรวจสอบบ้านของตัวเอง",
-          opensDialog: false,
-          path: "/",
-          isExternalPath: true
-        },
-        secondaryButton: {
-          label: "แผนที่การเดินทาง",
-          opensDialog: false,
-          path: "/",
-          isExternalPath: true
-        }
+        )
+        // primaryButton: {
+        //   label: "ตรวจสอบบ้านของตัวเอง",
+        //   opensDialog: false,
+        //   path: "/",
+        //   isExternalPath: true
+        // },
+        // secondaryButton: {
+        //   label: "แผนที่การเดินทาง",
+        //   opensDialog: false,
+        //   path: "/",
+        //   isExternalPath: true
+        // }
       }
     },
     complete: {
