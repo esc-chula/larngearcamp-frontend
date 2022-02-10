@@ -1,32 +1,14 @@
 import React, { useState, useRef } from "react"
-import {
-  Button,
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  Typography,
-  Divider,
-  IconButton
-} from "@material-ui/core"
+import { Button, Dialog, DialogContent, DialogTitle, RadioGroup, Radio, FormControlLabel, IconButton } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
 import CloseIcon from "@material-ui/icons/Close"
 import { useDialogContext } from "../../providers/dialog.provider"
 import { ShirtSizeDTO, ValidShirtSize } from "../../models/dto/profile.dto"
 import ApplicationServiceAPI from "../../services/application.service"
-import { FileStatus } from "../../models/dto/application.dto"
-import { DocumentItem } from "../../models/dto/document.dto"
-import UploadPaymentBlock from "./uploadPaymentBlock.component"
 
 const useStyles = makeStyles(theme => ({
   dialog: {
     borderRadius: "10px"
-  },
-  heading: {
-    margin: theme.spacing(2, 0)
   },
   closeButton: {
     position: "absolute",
@@ -46,17 +28,15 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export interface CustomDialogProps {
+export interface ShirtSizeDialogProps {
   open: boolean
   existingShirtSize: ValidShirtSize
-  paymentStatus: FileStatus
-  serverFile: DocumentItem
 }
 
-const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize, paymentStatus, serverFile }) => {
+const ShirtSizeDialog: React.FC<ShirtSizeDialogProps> = ({ open, existingShirtSize }) => {
   const classes = useStyles()
   const [shirtSize, setShirtSize] = useState(existingShirtSize)
-  const { closeDialog } = useDialogContext()
+  const { closeShirtSizeDialog } = useDialogContext()
 
   const selectedShirtSize = useRef(existingShirtSize)
 
@@ -65,7 +45,7 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize, pa
   }
 
   const handleClose = () => {
-    closeDialog()
+    closeShirtSizeDialog()
     if (shirtSize !== "" && shirtSize !== selectedShirtSize.current) {
       selectedShirtSize.current = shirtSize
       updateShirtSize(selectedShirtSize.current)
@@ -80,23 +60,13 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize, pa
   return (
     <Dialog open={open} classes={{ paper: classes.dialog }} onBackdropClick={handleClose}>
       <DialogTitle>
-        ชำระค่าใช้จ่าย
+        เลือกไซส์เสื้อ
         <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
 
       <DialogContent>
-        <DialogContentText>
-          สแกน QR Code เพื่อชำระค่าใช้จ่ายด้วย Mobile Banking Application จากนั้นอัพโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ
-        </DialogContentText>
-        <UploadPaymentBlock paymentStatus={paymentStatus} serverFile={serverFile} />
-
-        <Divider />
-
-        <Typography variant="h6" className={classes.heading}>
-          เลือกไซส์เสื้อ
-        </Typography>
         <RadioGroup aria-label="Select shirt size" name="shirt-size-select" onChange={handleRadioChange}>
           <FormControlLabel value="S" control={<Radio color="primary" />} label="Size S (อก 33 นิ้ว / ยาว 25 นิ้ว)" checked={shirtSize === "S"} />
           <FormControlLabel value="M" control={<Radio color="primary" />} label="Size M (อก 36 นิ้ว / ยาว 27 นิ้ว)" checked={shirtSize === "M"} />
@@ -111,4 +81,4 @@ const CustomDialog: React.FC<CustomDialogProps> = ({ open, existingShirtSize, pa
   )
 }
 
-export default CustomDialog
+export default ShirtSizeDialog

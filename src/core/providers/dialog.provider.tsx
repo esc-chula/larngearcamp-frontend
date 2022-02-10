@@ -1,29 +1,56 @@
 import React, { useState, useContext } from "react"
 
 interface DialogContextValue {
-  isOpen: boolean
-  openDialog: () => void
-  closeDialog: () => void
+  paymentDialog: boolean
+  shirtSizeDialog: boolean
+  openPaymentDialog: () => void
+  closePaymentDialog: () => void
+  openShirtSizeDialog: () => void
+  closeShirtSizeDialog: () => void
 }
 
 const DialogContext = React.createContext({
-  isOpen: false,
-  openDialog: () => {},
-  closeDialog: () => {}
+  paymentDialog: false,
+  shirtSizeDialog: false,
+  openPaymentDialog: () => {},
+  closePaymentDialog: () => {},
+  openShirtSizeDialog: () => {},
+  closeShirtSizeDialog: () => {}
 } as DialogContextValue)
 
 export const useDialogContext = () => useContext(DialogContext)
 
 export const DialogProvider: React.FC = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [paymentDialog, setPaymentDialog] = useState(false)
+  const [shirtSizeDialog, setShirtSizeDialog] = useState(false)
 
-  const openDialog = () => {
-    setIsOpen(true)
+  const openPaymentDialog = () => {
+    setPaymentDialog(true)
   }
 
-  const closeDialog = () => {
-    setIsOpen(false)
+  const closePaymentDialog = () => {
+    setPaymentDialog(false)
   }
 
-  return <DialogContext.Provider value={{ isOpen, openDialog, closeDialog }}>{children}</DialogContext.Provider>
+  const openShirtSizeDialog = () => {
+    setShirtSizeDialog(true)
+  }
+
+  const closeShirtSizeDialog = () => {
+    setShirtSizeDialog(false)
+  }
+
+  return (
+    <DialogContext.Provider
+      value={{
+        paymentDialog,
+        shirtSizeDialog,
+        openPaymentDialog,
+        closePaymentDialog,
+        openShirtSizeDialog,
+        closeShirtSizeDialog
+      }}>
+      {children}
+    </DialogContext.Provider>
+  )
 }

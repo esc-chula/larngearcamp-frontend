@@ -1,6 +1,7 @@
 interface ButtonModel {
   label: string
   opensDialog: boolean
+  dialogType?: string
   path?: string
   isExternalPath?: boolean
 }

@@ -139,7 +139,7 @@ export interface StepCardProps {
 
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const classes = useStyles()
-  const { openDialog } = useDialogContext()
+  const { openPaymentDialog, openShirtSizeDialog } = useDialogContext()
   const { application } = useApplicationStateContext()
 
   const text = stepCardConstant[step][status][isApproved]!
@@ -169,8 +169,11 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
     )
   }
 
-  const renderButton = (opensDialog: boolean, isPrimary: boolean, isExternalPath: boolean) => {
-    if (opensDialog) return resolveButton(isPrimary, openDialog)
+  const renderButton = (opensDialog: boolean, dialogType: string | undefined, isPrimary: boolean, isExternalPath: boolean | undefined) => {
+    if (opensDialog) {
+      if (dialogType === "payment") return resolveButton(isPrimary, openPaymentDialog)
+      if (dialogType === "shirtSize") return resolveButton(isPrimary, openShirtSizeDialog)
+    }
     if (isExternalPath)
       return (
         <a
@@ -216,8 +219,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
 
         {text.primaryButton && (
           <div className={classes.buttonContainer}>
-            {text.primaryButton && renderButton(text.primaryButton.opensDialog, true, text.primaryButton.isExternalPath!)}
-            {text.secondaryButton && renderButton(text.secondaryButton.opensDialog, false, text.secondaryButton.isExternalPath!)}
+            {text.primaryButton &&
+              renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
+            {text.secondaryButton &&
+              renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
           </div>
         )}
       </div>
