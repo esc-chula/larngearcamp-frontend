@@ -33,7 +33,8 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.primary.main
   },
   checkboxContainer: {
-    display: "flex"
+    display: "flex",
+    marginBottom: theme.spacing(1.5)
   },
   checkbox: {
     margin: theme.spacing(0.5, 0)
@@ -95,7 +96,7 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
             label={
               <>
                 ประสงค์จะให้ทางค่ายจัดหาที่พักให้
-                <div className={classes.redText}>(มีค่าใช้จ่ายเพิ่ม xxx บาท)</div>
+                <span className={classes.redText}> (มีค่าใช้จ่ายเพิ่มเติม 1,350 บาท อยู่ใกล้คณะ มีพี่ค่ายไปรับ-ส่ง พักห้องละ 2-3 คน)</span>
               </>
             }
             checked={options.accommodationRequested}
@@ -104,10 +105,18 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
             name="breakfastRequested"
             className={classes.checkbox}
             control={<Checkbox color="primary" onChange={handleChange} />}
-            label="ประสงค์จะให้ทางค่ายจัดเตรียมอาหารเช้า (ไม่มีค่าใช้จ่ายเพิ่มเติม)"
+            label="ประสงค์ที่จะรับประทานอาหารเช้ากับทางค่าย"
             checked={options.breakfastRequested}
           />
         </FormGroup>
+        <DialogContentText>
+          ค่ายลานเกียร์เล็งเห็นถึงและให้ความสำคัญเรื่องปัญหาขยะ ดังนั้น เพื่อเป็นการลดการเกิด Food Waste
+          ทางค่ายจึงได้มีการจัดเตรียมจำนวนอาหารเช้าให้พอดีกับจำนวนของน้อง ๆ ที่มีความประสงค์ที่ต้องการรับประทานอาหารเช้าของทุกวัน
+        </DialogContentText>
+        <DialogContentText>
+          โดยหากน้อง ๆ ไม่มีความประสงค์ที่จะรับประทานอาหารเช้าที่ค่าย น้องสามารถทานอาหารเช้ามาก่อนได้จากที่บ้าน และมาลงทะเบียนตามเวลาที่กำหนด
+          ก่อนที่กิจกรรมแรกของแต่ละวันจะเริ่มต้นขึ้น ซึ่งจะมีการชี้แจงวันเวลาในการจัดกิจกรรมค่ายต่อไป
+        </DialogContentText>
         <UploadPaymentBlock accomodation={options.accommodationRequested} paymentStatus={paymentStatus} serverFile={serverFile} />
       </DialogContent>
       <Button variant="contained" className={classes.button} disabled={paymentStatus === "EMPTY" ? true : false} onClick={handleClose}>

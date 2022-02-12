@@ -89,7 +89,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ accomodation, p
   return (
     <div className={classes.paymentContainer}>
       <img src={paymentQR} alt="QR Code" className={classes.image} />
-      <Typography variant="subtitle1">จำนวน {accomodation ? `5xx บาท (500 + xxx)` : `500 บาท`} </Typography>
+      <Typography variant="subtitle1">จำนวน {accomodation ? `1,850 บาท (500 + 1,350)` : `500 บาท`} </Typography>
       {errorMessage.current !== "" && (
         <Typography variant="subtitle2" component="div" className={classes.error}>
           {errorMessage.current}
