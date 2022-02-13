@@ -75,7 +75,7 @@ const ShirtSizeDialog: React.FC<ShirtSizeDialogProps> = ({ open, existingShirtSi
         </RadioGroup>
       </DialogContent>
       <Button variant="contained" className={classes.button} disabled={shirtSize === "" ? true : false} onClick={handleClose}>
-        ยืนยัน
+        {shirtSize === "" ? "เลือกไซส์เสื้อ" : `เลือกไซส์ ${shirtSize}`}
       </Button>
     </Dialog>
   )
