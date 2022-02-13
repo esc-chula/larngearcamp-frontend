@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export interface UploadPaymentBlockProps {
+  accomodation: boolean
   paymentStatus: FileStatus
   serverFile: DocumentItem
 }
@@ -44,8 +45,9 @@ export interface DisplayedError {
   message: null | string
 }
 
-const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, serverFile }) => {
+const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ accomodation, paymentStatus, serverFile }) => {
   const classes = useStyles()
+  //const [isAccomodationRequested, setIsAccomodationRequested] = useState(accomodation)
   const [status, setStatus] = useState(paymentStatus)
   const [displayFile, setDisplayFile] = useState(serverFile)
   const { uploadDocument } = useApplicationContext()
@@ -87,7 +89,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
   return (
     <div className={classes.paymentContainer}>
       <img src={paymentQR} alt="QR Code" className={classes.image} />
-      <Typography variant="subtitle1">จำนวน 500 บาท</Typography>
+      <Typography variant="subtitle1">จำนวน {accomodation ? `1,850 บาท (500 + 1,350)` : `500 บาท`} </Typography>
       {errorMessage.current !== "" && (
         <Typography variant="subtitle2" component="div" className={classes.error}>
           {errorMessage.current}

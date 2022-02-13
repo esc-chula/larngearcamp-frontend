@@ -210,14 +210,22 @@ const stepCardConstant: StepCardModel = {
         title: "ชำระค่าใช้จ่าย",
         contents: (
           <>
-            อย่าลืมชำระค่าสนับสนุนกิจกรรมเป็นจำนวน 500 บาท <span style={{ fontWeight: 500, color: "#941014" }}>ก่อนวันที่ 15 มีนาคม 2565</span>{" "}
-            และกรอกฟอร์มยืนยันการฉีดวัคซีน
-            <span style={{ fontWeight: 500, color: "#941014" }}>ก่อนวันที่ 19 พฤษภาคม 2565</span> เพื่อยืนยันสิทธิ์การเข้าร่วมค่ายด้วยล่ะ !!
+            ในขั้นตอนนี้ขอให้น้อง ๆ ชำระค่าสนับสนุนกิจกรรมเป็นจำนวน 500 บาท และในกรณีที่ให้ทางค่ายจัดหาที่พักให้ จะมีค่าใช้จ่ายเพิ่มเติมอีก 1,350 บาท
+            <div style={{ marginTop: "0.75rem" }}>
+              อย่าลืมชำระเงิน<span style={{ fontWeight: 500, color: "#941014" }}>ก่อนวันที่ 15 มีนาคม 2565</span> และกรอกฟอร์มยืนยันการฉีดวัคซีน
+              <span style={{ fontWeight: 500, color: "#941014" }}>ก่อนวันที่ 19 พฤษภาคม 2565</span> เพื่อยืนยันสิทธิ์การเข้าร่วมค่ายด้วยล่ะ !!
+            </div>
           </>
         ),
         primaryButton: {
-          label: "ชำระค่าใช้จ่าย  & เลือกไซส์เสื้อ",
-          opensDialog: true
+          label: "ชำระค่าใช้จ่าย",
+          opensDialog: true,
+          dialogType: "payment"
+        },
+        secondaryButton: {
+          label: "เลือกไซส์เสื้อ",
+          opensDialog: true,
+          dialogType: "shirtSize"
         }
       }
     },
@@ -268,18 +276,33 @@ const stepCardConstant: StepCardModel = {
               หลังจากนี้หากน้อง ๆ ยังไม่ได้กรอกฟอร์มยืนยันการฉีควัคซีนอย่างลืมกรอกกันด้วยล่ะ และหากน้อง ๆ มีข้อสงสัยใด ๆ
               สามารถทักมาสอบถามได้ผ่านทางเฟสบุ๊คเพจ LarnGear Camp ตลอดเลยนะครับ ไว้เจอกันที่ลานเกียร์ค้าบบบบ :)
             </div>
+            <div style={{ marginTop: "0.75rem" }}>
+              สำหรับน้อง ๆ ที่ต้องการขอเอกสารเพื่อขอลาเรียนที่โรงเรียน ให้ดาวน์โหลดเอกสารด้านล่างได้เลย
+              <ul>
+                <li>
+                  <Link
+                    to="/assets/file/ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ 21.pdf"
+                    className="no-underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "#941014" }}>
+                    ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ 21.pdf
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </>
         ),
+        // primaryButton: {
+        //   label: "ตรวจสอบบ้านของตัวเอง",
+        //   opensDialog: false,
+        //   path: "/",
+        //   isExternalPath: true
+        // },
         primaryButton: {
-          label: "ตรวจสอบบ้านของตัวเอง",
-          opensDialog: false,
-          path: "/",
-          isExternalPath: true
-        },
-        secondaryButton: {
           label: "แผนที่การเดินทาง",
           opensDialog: false,
-          path: "/",
+          path: "https://goo.gl/maps/UTZFQZgm2PVaeKYT9",
           isExternalPath: true
         }
       }

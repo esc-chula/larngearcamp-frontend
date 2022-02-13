@@ -10,7 +10,8 @@ import { FileStatus } from "../core/models/dto/application.dto"
 import { useDialogContext } from "../core/providers/dialog.provider"
 import { useApplicationStateContext } from "../core/providers/applicationState.provider"
 import { ValidShirtSize } from "../core/models/dto/profile.dto"
-const CustomDialog = React.lazy(() => import("../core/components/profile/customDialog.component"))
+import ShirtSizeDialog from "../core/components/profile/shirtSizeDialog.component"
+const PaymentDialog = React.lazy(() => import("../core/components/profile/paymentDialog.component"))
 
 const useStyles = makeStyles(theme => ({
   bg: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 const ProfileModule = () => {
   const classes = useStyles()
   const { me } = useAuthContext()
-  const { isOpen } = useDialogContext()
+  const { paymentDialog, shirtSizeDialog } = useDialogContext()
   const { application } = useApplicationStateContext()
 
   const { lgCode, applicationState, firstname, lastname, documentState } = me.data as MyProfileModel
@@ -77,12 +78,14 @@ const ProfileModule = () => {
     <>
       <div className={classes.bg} />
       <Container maxWidth="lg" className={classes.container}>
-        <CustomDialog
-          open={isOpen}
-          existingShirtSize={application.shirtSize === null ? ValidShirtSize.none : application.shirtSize!}
+        <PaymentDialog
+          open={paymentDialog}
           paymentStatus={documentState.payment}
           serverFile={application.payment}
+          accommodationRequested={!!application.accommodationRequested} // Something wrong here
+          breakfastRequested={!!application.breakfastRequested}
         />
+        <ShirtSizeDialog open={shirtSizeDialog} existingShirtSize={application.shirtSize === null ? ValidShirtSize.none : application.shirtSize!} />
         {content}
       </Container>
     </>
