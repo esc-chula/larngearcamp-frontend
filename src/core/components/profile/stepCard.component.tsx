@@ -5,6 +5,8 @@ import stepCardConstant from "../../constants/stepCard.constant"
 import { useDialogContext } from "../../providers/dialog.provider"
 import { useApplicationStateContext } from "../../providers/applicationState.provider"
 import { dateToLocaleString } from "../../../utils/conversion"
+import { useAuthContext } from "../../providers/auth.provider"
+import MyProfileModel from "../../models/myprofile.models"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -140,7 +142,10 @@ export interface StepCardProps {
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const classes = useStyles()
   const { openPaymentDialog, openShirtSizeDialog } = useDialogContext()
+  const { me } = useAuthContext()
   const { application } = useApplicationStateContext()
+
+  const { documentState } = me.data as MyProfileModel
 
   const text = stepCardConstant[step][status][isApproved]!
 
@@ -213,6 +218,14 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(application.interviewTime)}</span>
           </Typography>
         )}
+        {step === 5 && status === "inProgress" && (
+          <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.content} ${classes.paragraphTop}`}>
+            {documentState.payment === "EMPTY" ? "น้องยังไม่ได้อัพโหลดไฟล์" : `น้องอัพโหลดไฟล์แล้ว`}
+            <br />
+            {application.shirtSize === null ? "น้องยังไม่ได้เลือกไซส์เสื้อ" : `น้องเลือกเสื้อไซส์ ${application.shirtSize} แล้ว`}
+          </Typography>
+        )}
+
         <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
           {text.contents}
         </Typography>

@@ -74,6 +74,9 @@ const ProfileModule = () => {
   if (profileStatus === ProfileStatus.start || profileStatus === ProfileStatus.draft) content = <RegisterCard profileStatus={profileStatus} />
   else content = <StepCardList status={profileStatus} lgCode={lgCode} firstname={firstname} lastname={lastname} />
 
+  console.log(application.accomodationRequested)
+  console.log(application.breakfastRequested)
+
   return (
     <>
       <div className={classes.bg} />
@@ -82,7 +85,7 @@ const ProfileModule = () => {
           open={paymentDialog}
           paymentStatus={documentState.payment}
           serverFile={application.payment}
-          accommodationRequested={!!application.accomodationRequested}
+          accommodationRequested={!!application.accomodationRequested} // Something wrong here
           breakfastRequested={!!application.breakfastRequested}
         />
         <ShirtSizeDialog open={shirtSizeDialog} existingShirtSize={application.shirtSize === null ? ValidShirtSize.none : application.shirtSize!} />
