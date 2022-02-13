@@ -119,7 +119,7 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
         </DialogContentText>
         <UploadPaymentBlock accomodation={options.accommodationRequested} paymentStatus={paymentStatus} serverFile={serverFile} />
       </DialogContent>
-      <Button variant="contained" className={classes.button} disabled={paymentStatus === "EMPTY" ? true : false} onClick={handleClose}>
+      <Button variant="contained" className={classes.button} onClick={handleClose}>
         ยืนยัน
       </Button>
     </Dialog>
