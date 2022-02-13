@@ -278,39 +278,33 @@ const stepCardConstant: StepCardModel = {
             </div>
             <div style={{ marginTop: "0.75rem" }}>
               สำหรับน้อง ๆ ที่ต้องการขอเอกสารเพื่อขอลาเรียนที่โรงเรียน ให้ดาวน์โหลดเอกสารด้านล่างได้เลย
-              <div>
-                <Link
-                  to="/assets/file/ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ 21.pdf"
-                  className="no-underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "#941014" }}>
-                  ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ 21.pdf
-                </Link>
-                <Link
-                  to="/assets/file/รายชื่อนักเรียนที่เข้าร่วมโครงการค่ายลานเกียร์ครั้งที่ 21.pdf"
-                  className="no-underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "#941014" }}>
-                  รายชื่อนักเรียนที่เข้าร่วมโครงการค่ายลานเกียร์ ครั้งที่ 21.pdf
-                </Link>
-              </div>
+              <ul>
+                <li>
+                  <Link
+                    to="/assets/file/ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ 21.pdf"
+                    className="no-underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "#941014" }}>
+                    ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ 21.pdf
+                  </Link>
+                </li>
+              </ul>
             </div>
           </>
-        )
+        ),
         // primaryButton: {
         //   label: "ตรวจสอบบ้านของตัวเอง",
         //   opensDialog: false,
         //   path: "/",
         //   isExternalPath: true
         // },
-        // secondaryButton: {
-        //   label: "แผนที่การเดินทาง",
-        //   opensDialog: false,
-        //   path: "/",
-        //   isExternalPath: true
-        // }
+        primaryButton: {
+          label: "แผนที่การเดินทาง",
+          opensDialog: false,
+          path: "https://goo.gl/maps/UTZFQZgm2PVaeKYT9",
+          isExternalPath: true
+        }
       }
     },
     complete: {

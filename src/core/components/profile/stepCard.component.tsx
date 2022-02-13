@@ -218,13 +218,13 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(application.interviewTime)}</span>
           </Typography>
         )}
-        {step === 5 && status === "inProgress" && (
-          <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.content} ${classes.paragraphTop}`}>
-            {documentState.payment === "EMPTY" ? "น้องยังไม่ได้อัพโหลดไฟล์" : `น้องอัพโหลดไฟล์แล้ว`}
+        {/* {step === 5 && status === "inProgress" && (
+          <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
+            {documentState.payment === "EMPTY" ? "น้องยังไม่ได้ส่งหลักฐานการชำระเงิน" : `น้องส่งหลักฐานการชำระเงินแล้ว`}
             <br />
             {application.shirtSize === null ? "น้องยังไม่ได้เลือกไซส์เสื้อ" : `น้องเลือกเสื้อไซส์ ${application.shirtSize} แล้ว`}
           </Typography>
-        )}
+        )} */}
 
         <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
           {text.contents}
