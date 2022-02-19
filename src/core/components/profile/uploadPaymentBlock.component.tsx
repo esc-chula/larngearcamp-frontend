@@ -7,6 +7,8 @@ import { useApplicationContext } from "../../providers/application.provider"
 import { AxiosError } from "axios"
 import { DocumentItem } from "../../models/dto/document.dto"
 import { useLoadingCallback } from "../loading.component"
+import { useAuthContext } from "../../providers/auth.provider"
+import MyProfileModel from "../../models/myprofile.models"
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -47,10 +49,13 @@ export interface DisplayedError {
 
 const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ accomodation, paymentStatus, serverFile }) => {
   const classes = useStyles()
-  //const [isAccomodationRequested, setIsAccomodationRequested] = useState(accomodation)
   const [status, setStatus] = useState(paymentStatus)
   const [displayFile, setDisplayFile] = useState(serverFile)
+  const { me } = useAuthContext()
   const { uploadDocument } = useApplicationContext()
+
+  const { documentState } = me.data as MyProfileModel
+  const isUploadPassed = documentState.payment === "PASSED"
 
   const errorMessage = useRef("")
 
@@ -95,7 +100,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ accomodation, p
           {errorMessage.current}
         </Typography>
       )}
-      <Button variant="outlined" component="label" className={classes.button}>
+      <Button variant="outlined" component="label" className={classes.button} disabled={isUploadPassed}>
         {status === "EMPTY" ? "อัพโหลดหลักฐานการชำระเงิน" : "อัพโหลดอีกครั้ง"}
         <input type="file" name="payment" hidden accept="image/jpeg, image/png" onChange={uploadFile} />
       </Button>

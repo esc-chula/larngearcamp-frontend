@@ -8,6 +8,8 @@ import { FileStatus } from "../../models/dto/application.dto"
 import { DocumentItem } from "../../models/dto/document.dto"
 import UploadPaymentBlock from "./uploadPaymentBlock.component"
 import { OptionsDTO } from "../../models/dto/profile.dto"
+import { useAuthContext } from "../../providers/auth.provider"
+import MyProfileModel from "../../models/myprofile.models"
 
 const useStyles = makeStyles(theme => ({
   dialog: {
@@ -53,6 +55,10 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
   const classes = useStyles()
   const [options, setOptions] = useState({ accommodationRequested: accommodationRequested, breakfastRequested: breakfastRequested })
   const { closePaymentDialog } = useDialogContext()
+  const { me } = useAuthContext()
+
+  const { documentState } = me.data as MyProfileModel
+  const isUploadPassed = documentState.payment === "PASSED"
 
   const selectedOptions = useRef({ accommodationRequested: accommodationRequested, breakfastRequested: breakfastRequested })
 
@@ -100,6 +106,7 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
               </>
             }
             checked={options.accommodationRequested}
+            disabled={isUploadPassed}
           />
           <FormControlLabel
             name="breakfastRequested"
