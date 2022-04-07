@@ -304,6 +304,12 @@ const stepCardConstant: StepCardModel = {
           opensDialog: false,
           path: "https://goo.gl/maps/UTZFQZgm2PVaeKYT9",
           isExternalPath: true
+        },
+        secondaryButton: {
+          label: "ฟอร์มยืนยันการฉีดวัคซีน",
+          opensDialog: false,
+          path: "https://forms.gle/4tohXoUAPvbQDcNX7",
+          isExternalPath: true
         }
       }
     },
