@@ -7,6 +7,8 @@ import { safeArea } from "../../core/components/safeArea.component"
 import { grey } from "@material-ui/core/colors"
 import { BsFacebook, BsInstagram } from "react-icons/bs"
 import { HomeProfileButton } from "./home-profile-button.module"
+import { AnnouncementBar } from "../../core/components/announcementBar.component"
+import { announcementConstant } from "../../core/constants/announcements.constant"
 
 const useStyle = makeStyles(theme => ({
   titleContainer: {
@@ -14,7 +16,8 @@ const useStyle = makeStyles(theme => ({
     backgroundImage: `url(${landing1})`,
 
     color: "white",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
+    padding: theme.spacing(2)
   },
   title: {
     margin: "auto",
@@ -75,11 +78,24 @@ const useStyle = makeStyles(theme => ({
   }
 }))
 
+const Announcements: React.FC = () => {
+  return (
+    <>
+      {announcementConstant.map(({ severity, variant, content }, index) => (
+        <AnnouncementBar key={index} severity={severity} variant={variant}>
+          {content}
+        </AnnouncementBar>
+      ))}
+    </>
+  )
+}
+
 const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   const classes = useStyle()
 
   return (
     <div className={classes.titleContainer}>
+      <Announcements />
       <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="100%" minHeight="542px">
         <Box textAlign="center" display="flex" flexDirection="column">
           <Typography className={classes.title}>
