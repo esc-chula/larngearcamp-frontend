@@ -27,3 +27,5 @@ yarn-error.log*
 
 *.rest
 *.http
+
+.yarn
