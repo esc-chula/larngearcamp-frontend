@@ -99,7 +99,7 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
       <Box className={classes.safeArea} display="flex" justifyContent="center" alignItems="center" height="100%" minHeight="542px">
         <Box textAlign="center" display="flex" flexDirection="column">
           <Typography className={classes.title}>
-            <span className="big">L</span>ARNGEAR CAMP 21st
+            <span className="big">L</span>ARNGEAR CAMP 22st
           </Typography>
           <Typography variant="h5" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง

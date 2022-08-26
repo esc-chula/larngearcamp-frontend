@@ -61,7 +61,7 @@ const timelineConstant: Array<TimelineModel> = [
       start: new Date(2565, 5, 2),
       end: new Date(2565, 5, 5)
     },
-    title: "ค่ายลานเกียร์ครั้งที่ 21"
+    title: "ค่ายลานเกียร์ครั้งที่ 22"
   }
 ]
 
