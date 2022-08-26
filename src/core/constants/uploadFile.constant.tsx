@@ -10,7 +10,7 @@ const uploadFileConstant: Array<UploadFileModel> = [
   },
   {
     name: "parentalConsent",
-    body1: "หนังสือรับรองจากผู้ปกครองเพื่อเข้าร่วมค่ายลานเกียร์ครั้งที่ 21",
+    body1: "หนังสือรับรองจากผู้ปกครองเพื่อเข้าร่วมค่ายลานเกียร์ครั้งที่ 22",
     body2: "ไฟล์ประเภท .pdf / .jpg / .png ขนาดไม่เกิน 4 MB",
     accept: "application/pdf, image/jpeg, image/png",
     size: 4000000
