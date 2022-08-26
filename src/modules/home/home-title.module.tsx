@@ -12,7 +12,7 @@ import { announcementConstant } from "../../core/constants/announcements.constan
 
 const useStyle = makeStyles(theme => ({
   titleContainer: {
-    minHeight: "542px",
+    minHeight: `calc(100vh - 48px)`,
     backgroundImage: `url(${landing1})`,
 
     color: "white",
