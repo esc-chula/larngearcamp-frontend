@@ -59,8 +59,8 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2566, 0, 26),
-      end: new Date(2566, 0, 29)
+      start: new Date(2566, 0, 5),
+      end: new Date(2566, 0, 8)
     },
     title: "ค่ายลานเกียร์ครั้งที่ 22"
   }
