@@ -91,7 +91,7 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
     <Container className={classes.root}>
       <Card className={classes.card}>
         <Typography variant="h1" className={classes.headingText}>
-          Larngear Camp 22st
+          Larngear Camp 21st
         </Typography>
         <Typography variant="body1" className={classes.bodyText}>
           ดูเหมือนว่าคุณจะยังไม่ได้ส่งใบสมัครเข้าค่ายลานเกียร์ครั้งที่ 22 นะ คลิกสมัครเข้าค่าย
@@ -119,7 +119,7 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
           ))}
         {state === ApplicationStatus.EARLY && (
           <Button variant="contained" disableElevation disabled={true} className={`${classes.button} ${classes.solid}`}>
-            เปิดรับสมัครวันที่ 15 พฤศจิกายน
+            เปิดรับสมัครวันที่ 12 กันยายน
           </Button>
         )}
         <img src={Gear} alt="" className={classes.gear1} />
