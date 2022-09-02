@@ -5,12 +5,13 @@ export interface TimelineModel {
     end: Date
   }
 }
-
+const nowDate = new Date()
+const endFakeDate = new Date(2565, 8, 30)
 const timelineConstant: Array<TimelineModel> = [
   {
     duration: {
       start: new Date(2565, 8, 12),
-      end: new Date(2565, 9, 7)
+      end: (nowDate > endFakeDate) ? new Date(2565, 9, 7) : new Date(2565, 8, 30)
     },
     title: "รับสมัคร"
   },
