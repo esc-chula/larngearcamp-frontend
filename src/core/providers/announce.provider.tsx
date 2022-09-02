@@ -40,7 +40,7 @@ export const useAnnounceContext = () => useContext(AnnounceContext)
 
 export const AnnounceProvider: React.FC = ({ ...other }) => {
   const isDev = process.env.REACT_APP_ENVIRONMENT === "development"
-  const nowDate = new Date("October 7, 2022 00:00:00 GMT+07:00")
+  const nowDate = new Date()
 
   // Schedule time
   let state = SCHEDULE.reduce((prev, cur) => {

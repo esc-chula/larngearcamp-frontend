@@ -44,15 +44,15 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2565, 10, 4),
-      end: new Date(2565, 10, 4)
+      start: new Date(2565, 10, 5),
+      end: new Date(2565, 10, 5)
     },
     title: "ประกาศรายชื่อผู้มีสิทธิ์เข้าร่วมค่าย"
   },
   {
     duration: {
-      start: new Date(2565, 11, 4),
-      end: new Date(2565, 11, 4)
+      start: new Date(2565, 10, 5),
+      end: new Date(2565, 10, 25)
     },
     title: "ยืนยันสิทธิ์การเข้าร่วมค่าย"
   },
