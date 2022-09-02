@@ -91,7 +91,7 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
     <Container className={classes.root}>
       <Card className={classes.card}>
         <Typography variant="h1" className={classes.headingText}>
-          Larngear Camp 21st
+          Larngear Camp 22nd
         </Typography>
         <Typography variant="body1" className={classes.bodyText}>
           ดูเหมือนว่าคุณจะยังไม่ได้ส่งใบสมัครเข้าค่ายลานเกียร์ครั้งที่ 22 นะ คลิกสมัครเข้าค่าย
