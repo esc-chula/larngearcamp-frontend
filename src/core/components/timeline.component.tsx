@@ -92,7 +92,7 @@ export const TimelineDisplay: React.FC<TimelineProps> = props => {
     <Timeline>
       {label.map(({ duration, title }, index) => {
         return (
-          <TimelineItem>
+          <TimelineItem key = {index}>
             <TimelineOppositeContent style={{ display: "none" }} />
             <TimelineSeparator className={classes.timelineSeparator}>
               <TimelineDot className={`${classes.timelineDot} ${getDotStatus(duration.start, duration.end)}`} />

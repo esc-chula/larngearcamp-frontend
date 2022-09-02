@@ -17,11 +17,13 @@ const useStyle = makeStyles(theme => ({
   facebookEmbed: {
     color: theme.palette.gray[700],
     border: "none",
-    overflow: "hidden"
+    overflow: "auto",
+    maxHeight : "600px"
   },socialContainer:{
     display: "flex",
     flexWrap: "wrap",
-    gap: `${theme.spacing(6)}px`,
+    height : "auto",
+    gap: `${theme.spacing(4)}px`,
     justifyContent: "center"
   }
 }))
@@ -31,9 +33,16 @@ const useFacebookEmbedWidth = () => {
   if (isSm) return "300px"
   return "500px"
 }
+const IGEmbedHeight = () => {
+  const theme = useTheme()
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"))
+  if (isSm) return "410px" //depend on post
+  return "550px" //depend on post
+}
 const HomeFacebookEmbed: React.FC = props => {
   const classes = useStyle()
   const width = useFacebookEmbedWidth()
+  const IGHeight = IGEmbedHeight()
   return (
     <div className={classes.container}>
       <Typography align="center" variant="h2" className={classes.title}>
@@ -53,7 +62,7 @@ const HomeFacebookEmbed: React.FC = props => {
         <Iframe
           url={`http://instagram.com/p/Ceqy-BtJCY4/embed`}
           width={`${width}px`}
-          height="600px"
+          height={`${IGHeight}px`}
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
           allowFullScreen={true}
           frameBorder={0}

@@ -48,7 +48,7 @@ const SideBarComponent: React.FC<Props> = ({ open, onClose }) => {
     <Drawer anchor="left" open={open} onClose={onClose}>
       <Box minWidth={200} height="100%" display="flex" flexDirection="column" alignItems="center" py={6} px={5} className={classes.content}>
         <Link className={classes.homeLink + " no-underline"} to="/">
-          <LogoLong style={{ width: 80, height: 80 }} />
+          <LogoLong style={{ width: 150, height: "auto" }} />
         </Link>
         <SideBarLink to="/docs">เอกสารการสมัคร</SideBarLink>
         <SideBarLink to="/faq">คำถามที่พบบ่อย</SideBarLink>

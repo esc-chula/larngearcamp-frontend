@@ -4,9 +4,11 @@ import { ReactComponent as LogoInverse } from "../../assets/images/logo/logo_inv
 
 const useStyles = makeStyles(theme => ({
   logo: {
+    minWidth : 354,
     display: "flex",
     flexDirection:"row",
     alignItems : "center",
+    justifyContent: "center",
     marginBottom: theme.spacing(3),
     marginRight: "auto",
     marginLeft: "auto",
@@ -22,9 +24,11 @@ const useStyles = makeStyles(theme => ({
       }
     }
   },text: {
-    fontSize : 30,
+    display: "inline",
+    fontSize : "27px",
     color : "white",
     fontWeight : "bold",
+    overflow: "hidden",
     userSelect: "none"
   }
 }))

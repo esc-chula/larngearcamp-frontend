@@ -31,15 +31,15 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2565, 9, 29),
-      end: new Date(2565, 9, 29)
+      start: new Date(2565, 9, 30),
+      end: new Date(2565, 9, 30)
     },
     title: "สัมภาษณ์รอบกรุงเทพฯ และปริมณฑล"
   },
   {
     duration: {
-      start: new Date(2565, 9, 29),
-      end: new Date(2565, 9, 29)
+      start: new Date(2565, 9, 30),
+      end: new Date(2565, 9, 30)
     },
     title: "สัมภาษณ์รอบต่างจังหวัด"
   },
