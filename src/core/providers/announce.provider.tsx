@@ -15,11 +15,11 @@ const SCHEDULE = [
   {
     state: ApplicationStatus.EARLY,
     start: null,
-    end: new Date("September 12, 2022 10:00:00 GMT+07:00")
+    end: new Date("September 12, 2022 6:00:00 GMT+07:00")
   },
   {
     state: ApplicationStatus.APPLICABLE,
-    start: new Date("September 12, 2022 10:00:00 GMT+07:00"),
+    start: new Date("September 12, 2022 6:00:00 GMT+07:00"),
     end: new Date("October 8, 2022 00:30:00 GMT+07:00")
   },
   {
