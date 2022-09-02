@@ -16,9 +16,13 @@ const useStyle = makeStyles(theme => ({
   },
   facebookEmbed: {
     color: theme.palette.gray[700],
-    margin: "auto",
     border: "none",
     overflow: "hidden"
+  },socialContainer:{
+    display: "flex",
+    flexWrap: "wrap",
+    gap: `${theme.spacing(6)}px`,
+    justifyContent: "center"
   }
 }))
 const useFacebookEmbedWidth = () => {
@@ -35,16 +39,28 @@ const HomeFacebookEmbed: React.FC = props => {
       <Typography align="center" variant="h2" className={classes.title}>
         FOLLOW US
       </Typography>
-      <Iframe
-        url={`https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FLARNGEARCAMP%2F&tabs=timeline&width=${width}&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId`}
-        width={`${width}px`}
-        height="600px"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        allowFullScreen={true}
-        frameBorder={0}
-        scrolling="no"
-        className={classes.facebookEmbed}
-      />
+      <div className = {classes.socialContainer}>
+        <Iframe
+          url={`https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FLARNGEARCAMP%2F&tabs=timeline&width=${width}&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId`}
+          width={`${width}px`}
+          height="600px"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          allowFullScreen={true}
+          frameBorder={0}
+          scrolling="no"
+          className={classes.facebookEmbed}
+        />
+        <Iframe
+          url={`http://instagram.com/p/Ceqy-BtJCY4/embed`}
+          width={`${width}px`}
+          height="600px"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          allowFullScreen={true}
+          frameBorder={0}
+          scrolling="no"
+          className={classes.facebookEmbed}
+        />
+      </div>
     </div>
   )
 }

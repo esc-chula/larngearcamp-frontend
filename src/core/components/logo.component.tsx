@@ -1,9 +1,12 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { ReactComponent as LogoLongInverse } from "../../assets/images/logo/logo_long_inverse.svg"
+import { ReactComponent as LogoInverse } from "../../assets/images/logo/logo_inverse.svg"
 
 const useStyles = makeStyles(theme => ({
   logo: {
+    display: "flex",
+    flexDirection:"row",
+    alignItems : "center",
     marginBottom: theme.spacing(3),
     marginRight: "auto",
     marginLeft: "auto",
@@ -13,10 +16,16 @@ const useStyles = makeStyles(theme => ({
     },
     "&>svg": {
       height: 70,
+      width: "auto",
       [theme.breakpoints.down("sm")]: {
         height: 60
       }
     }
+  },text: {
+    fontSize : 30,
+    color : "white",
+    fontWeight : "bold",
+    userSelect: "none"
   }
 }))
 
@@ -25,7 +34,7 @@ const LogoComponent: React.FC = () => {
 
   return (
     <div className={classes.logo}>
-      <LogoLongInverse />
+      <LogoInverse /> <span className = {classes.text}>Larngear Camp 22nd </span>
     </div>
   )
 }
