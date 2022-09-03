@@ -3,7 +3,7 @@ import { Typography } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import facebookIcon from "../../assets/images/icon/facebook-icon.svg"
 import instagramIcon from "../../assets/images/icon/instagram-icon.svg"
-import PhoneIcon from "@material-ui/icons/Phone"
+import lineIcon from "../../assets/images/icon/line-icon.svg"
 import { ContactModel } from "../../core/constants/contact.constant"
 import { SafeArea } from "../../core/components/safeArea.component"
 
@@ -13,6 +13,9 @@ const FacebookIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => 
 
 const InstagramIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
   return <img src={instagramIcon} alt="" {...props} />
+}
+const LineIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
+  return <img src={lineIcon} alt="" {...props} />
 }
 
 const useStyles = makeStyles(theme => ({
@@ -77,11 +80,11 @@ const HomeFooter: React.FC<{ contacts: Array<ContactModel> }> = props => {
           <Typography variant="subtitle1" className={classes.title}>
             หากมีข้อสงสัยเพิ่มเติม สามารถติดต่อได้ที่
           </Typography>
-          {props.contacts.map(({ name, tel }) => (
+          {props.contacts.map(({ name, lineId }) => (
             <div key={name} className={classes.inline}>
-              <PhoneIcon className={classes.icon} />
+              <LineIcon className={classes.icon} />
               <Typography variant="body2">{name}</Typography>
-              <Typography variant="body2">{tel}</Typography>
+              <Typography variant="body2">{lineId}</Typography>
             </div>
           ))}
         </div>
