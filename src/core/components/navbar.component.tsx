@@ -52,7 +52,8 @@ const useStyles = makeStyles(theme => ({
       content: "initial"
     },
     "&>svg": {
-      height: 30
+      height: 50,
+      width: 102
     }
   }
 }))

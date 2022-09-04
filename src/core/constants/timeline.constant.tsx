@@ -5,61 +5,62 @@ export interface TimelineModel {
     end: Date
   }
 }
-
+const nowDate = new Date()
+const endFakeDate = new Date(2565, 8, 30)
 const timelineConstant: Array<TimelineModel> = [
   {
     duration: {
-      start: new Date(2564, 10, 15),
-      end: new Date(2564, 11, 15)
+      start: new Date(2565, 8, 12),
+      end: (nowDate > endFakeDate) ? new Date(2565, 9, 7) : new Date(2565, 8, 30)
     },
     title: "รับสมัคร"
   },
   {
     duration: {
-      start: new Date(2564, 11, 24),
-      end: new Date(2564, 11, 24)
+      start: new Date(2565, 9, 14),
+      end: new Date(2565, 9, 14)
     },
     title: "แก้ไขเอกสารประกอบการสมัครวันสุดท้าย"
   },
   {
     duration: {
-      start: new Date(2565, 0, 8),
-      end: new Date(2565, 0, 8)
+      start: new Date(2565, 9, 23),
+      end: new Date(2565, 9, 23)
     },
     title: "ประกาศผลผู้มีสิทธิ์สัมภาษณ์"
   },
   {
     duration: {
-      start: new Date(2565, 0, 29),
-      end: new Date(2565, 0, 29)
+      start: new Date(2565, 9, 30),
+      end: new Date(2565, 9, 30)
     },
     title: "สัมภาษณ์รอบกรุงเทพฯ และปริมณฑล"
   },
   {
     duration: {
-      start: new Date(2565, 0, 31),
-      end: new Date(2565, 1, 6)
+      start: new Date(2565, 9, 30),
+      end: new Date(2565, 9, 30)
     },
     title: "สัมภาษณ์รอบต่างจังหวัด"
   },
   {
     duration: {
-      start: new Date(2565, 1, 14),
-      end: new Date(2565, 1, 14)
+      start: new Date(2565, 10, 5),
+      end: new Date(2565, 10, 5)
     },
     title: "ประกาศรายชื่อผู้มีสิทธิ์เข้าร่วมค่าย"
   },
   {
     duration: {
-      start: new Date(2565, 1, 14),
-      end: new Date(2565, 2, 15)
+      start: new Date(2565, 10, 5),
+      end: new Date(2565, 10, 25)
     },
     title: "ยืนยันสิทธิ์การเข้าร่วมค่าย"
   },
   {
     duration: {
-      start: new Date(2565, 5, 2),
-      end: new Date(2565, 5, 5)
+      start: new Date(2566, 0, 5),
+      end: new Date(2566, 0, 8)
     },
     title: "ค่ายลานเกียร์ครั้งที่ 22"
   }
