@@ -10,6 +10,8 @@ export const HomeProfileButton: React.FC<ButtonProps> = props => {
   const { state } = useAnnounceContext()
 
   const getButtonLabel = () => {
+    const nowDate = new Date()
+    const endFakeDate = new Date("September 30, 2022 00:00:00 GMT+07:00")
     if (isLoggedIn) {
       const isNotSubmit = me.data?.applicationState === "DRAFT" || me.data?.applicationState === "NOT_FILLED"
       if (state !== ApplicationStatus.APPLICABLE && isNotSubmit) {
@@ -21,8 +23,9 @@ export const HomeProfileButton: React.FC<ButtonProps> = props => {
       }
     }
     if (state === ApplicationStatus.LATE || state === ApplicationStatus.DOCUMENT_EDIT) return "หมดเขตรับสมัคร"
-    if (state === ApplicationStatus.EARLY) return "เปิดรับสมัครวันที่ 15 พฤศจิกายน"
-    return "สมัครเลย! วันนี้ - 15 ธันวาคม 2564"
+    if (state === ApplicationStatus.EARLY) return "เปิดรับสมัครเร็ว ๆ นี้"
+    if (state === ApplicationStatus.APPLICABLE && nowDate <= endFakeDate) return "สมัครเลย! วันนี้ - 30 กันยายน 2565"
+    return "สมัครเลย! วันนี้ -  7  ตุลาคม 2565"
   }
 
   const notAllow = useMemo(() => {

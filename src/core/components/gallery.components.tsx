@@ -128,8 +128,8 @@ const HomeGallery: React.FC<HomeGalleryProps> = props => {
       <div className={classes.galleryRoot}>
         <Slider {...settings}>
           {images.map(({ src, topic, description }, key) => (
-            <div>
-              <div key={key} className={classes.contentDiv}>
+            <div key={key}>
+              <div className={classes.contentDiv}>
                 <LazyLoad height={336} resize={true}>
                   <img className={classes.image} src={(src as unknown) as string} alt="Hello" />
                 </LazyLoad>
