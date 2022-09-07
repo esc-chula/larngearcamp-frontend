@@ -45,6 +45,7 @@ const ProfileSchema = object()
         .matches(/^(\d{9})|(-)|\s{0}$/, "เบอร์โทรศัพท์บ้านไม่ถูกต้อง"),
       facebookName: string().trim().required("กรุณาระบุชื่อเฟสบุ๊ค"),
       lineId: string().trim().required("กรุณาระบุไลน์ไอดี"),
+      email : string().trim().required("กรุณาระบุอีเมล").matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, "อีเมลไม่ถูกต้อง"),
       parentName: string().trim().required("กรุณาระบุชื่อผู้ปกครอง"),
       parentNumber: string()
         .trim()

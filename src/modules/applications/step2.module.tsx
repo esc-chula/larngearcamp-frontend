@@ -58,6 +58,7 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
       province: application.mailProvince,
       facebookName: application.contactFacebook,
       lineId: application.contactLineApp,
+      email : application.contactEmail,
       parentName: application.parentName,
       parentNumber: application.parentTelephone,
       parentRelationship: application.parentRelationship,
