@@ -61,6 +61,9 @@ const PersonalContactComponent = () => {
           <Grid item xs={12} sm={6} md={6}>
             <TextFieldComponent name="contact.lineId" label="Line ID" type="text" />
           </Grid>
+          <Grid item xs={12} sm={6} md={6}>
+            <TextFieldComponent name="contact.email" label="อีเมล" type="email"/>
+          </Grid>
         </Grid>
       </Box>
     </>

@@ -2,7 +2,7 @@ import QuestionModel from "../models/question.model"
 
 const questionsSection1Constant: Array<QuestionModel> = [
   {
-    question: "ให้น้อง ๆ แนะนำตัวในแบบของน้องให้พี่รู้จัก",
+    question: "แนะนำตัวเองแบบปัง ๆ ให้พี่รู้จักหน่อย",
     type: "multiline"
   },
   {
@@ -18,7 +18,7 @@ const questionsSection1Constant: Array<QuestionModel> = [
     ]
   },
   {
-    question: "ทำไมน้องถึงอยากมาเข้าค่ายลานเกียร์ น้องคาดหวังอะไรจากค่าย ๆ นี้",
+    question: "ทำไมน้องถึงอยากเข้าค่ายลานเกียร์ และคาดหวังอะไรจากค่ายนี้ (ไม่เกิน 150 คำ)",
     type: "multiline"
   },
   {
@@ -45,7 +45,7 @@ const questionsSection1Constant: Array<QuestionModel> = [
     type: "multiline"
   },
   {
-    question: "อยากให้น้องบอกอะไรก็ได้ที่ทำให้พี่ยิ้มมุมปาก ",
+    question: "ก่อนจะไปกันต่อ มาแต่งกลอนกันสักนิด “ฉลามแรกไม่เป็นไร  ...........................................”",
     type: "multiline"
   }
 ]

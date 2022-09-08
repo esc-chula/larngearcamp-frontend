@@ -37,7 +37,7 @@ interface ProfileDTO {
   mailPostalCode: string
   mobileTelephone: string
   landlineTelephone: string | null
-  contactEmail: null
+  contactEmail: string
   contactFacebook: string
   contactLineApp: string
   parentName: string
