@@ -14,7 +14,9 @@ export const HomeProfileButton: React.FC<ButtonProps> = props => {
     const endFakeDate = new Date("September 30, 2022 00:00:00 GMT+07:00")
     if (isLoggedIn) {
       const isNotSubmit = me.data?.applicationState === "DRAFT" || me.data?.applicationState === "NOT_FILLED"
-      if (state !== ApplicationStatus.APPLICABLE && isNotSubmit) {
+      if (state ===  ApplicationStatus.EARLY) {
+        return "เปิดรับสมัครเร็ว ๆ นี้"
+      } else if (state !== ApplicationStatus.APPLICABLE && isNotSubmit) {
         return "หมดเขตรับสมัคร"
       } else if (state === ApplicationStatus.DOCUMENT_EDIT && !isNotSubmit) {
         return "ตรวจสอบเอกสาร"
