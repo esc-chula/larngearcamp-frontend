@@ -59,7 +59,7 @@ const ProfileModule = () => {
       PASSED: ProfileStatus.fileChecked
     },
     FILE_CHECKED: ProfileStatus.fileChecked,
-    REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE: ProfileStatus.fileRejected,
+    REJECTED_RESOLVE_FILE_ISSUE_TOO_LATE: ProfileStatus.fileLated,
     INVITED_TO_INTERVIEW: ProfileStatus.invitedToInterview,
     REJECTED_NOT_INVITED_TO_INTERVIEW: ProfileStatus.notInvitedToInterview,
     PASSED_INTERVIEW: ProfileStatus.passedInterview,

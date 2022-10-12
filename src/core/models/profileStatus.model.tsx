@@ -4,6 +4,7 @@ export enum ProfileStatus {
   submitted = "submitted",
   fileChecked = "fileChecked",
   fileRejected = "fileRejected",
+  fileLated = "fileLated",
   invitedToInterview = "invitedToInterview",
   notInvitedToInterview = "notInvitedToInterview",
   passedInterview = "passedInterview",

@@ -38,6 +38,14 @@ const StepCardList: React.FC<StepCardListProps> = ({ status, lgCode, firstname, 
         props[5] = { step: 5, status: "incomplete", isApproved: "true" }
         props[6] = { step: 6, status: "incomplete", isApproved: "true" }
         break
+      case ProfileStatus.fileLated:
+        props[1] = { step: 1, status: "complete", isApproved: "true" }
+        props[2] = { step: 2, status: "complete", isApproved: "false" }
+        props[3] = { step: 3, status: "incomplete", isApproved: "true" }
+        props[4] = { step: 4, status: "incomplete", isApproved: "true" }
+        props[5] = { step: 5, status: "incomplete", isApproved: "true" }
+        props[6] = { step: 6, status: "incomplete", isApproved: "true" }
+        break
       case ProfileStatus.invitedToInterview:
         props[1] = { step: 1, status: "complete", isApproved: "true" }
         props[2] = { step: 2, status: "complete", isApproved: "true" }
