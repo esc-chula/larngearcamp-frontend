@@ -139,6 +139,12 @@ export interface StepCardProps {
   isApproved: "true" | "false"
 }
 
+interface InterviewStepCardProps {
+  status : "complete" | "inProgress" | "incomplete"
+  interviewType : string
+  interviewTime : string | undefined
+}
+
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const classes = useStyles()
   const { openPaymentDialog, openShirtSizeDialog } = useDialogContext()
@@ -197,6 +203,73 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
       )
   }
 
+  const InterviewStepCard : React.FC<InterviewStepCardProps> = ({status, interviewType, interviewTime}) => {
+    if (status === 'inProgress') {
+      if (!interviewTime) {
+        return (
+          <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
+              <>ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์สัมภาษณ์ เตรียมตัวได้พบปะพูดคุยกับพี่ ๆ ผู้สัมภาษณ์สุดน่ารักและใจดีในวันที่ 30 ตุลาคม 2565 ณ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย สำหรับน้อง ๆ กรุงเทพฯ และปริมณฑล หรือ สัมภาษณ์ผ่านทางซูมสำหรับน้อง ๆ ต่างจังหวัด ได้เลย !!
+            </>
+            </Typography>
+        )
+      }
+      else {
+        return (
+          <>
+            {interviewType === "online" && (
+              <>
+                <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
+                  รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(interviewTime)}</span>
+                </Typography>
+                <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
+                  {text.contents}
+                </Typography>
+                {/* <div className={classes.buttonContainer}>
+                  {text.primaryButton &&
+                    renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
+                  {text.secondaryButton &&
+                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
+                </div> */}
+                <div className={classes.buttonContainer}>
+                  {text.secondaryButton &&
+                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
+                </div>
+              </>
+            )}
+            {interviewType === "onsite" && (
+              <>
+                <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
+                  รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(interviewTime)}</span>
+                </Typography>
+                <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
+                  <>
+                  การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
+                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา 08:15 - 08:45  น้อง ๆ สามารถดูรายละเอียดการสัมภาษณ์ได้ที่
+                  <Link to="/assets/file/virtualbg.png" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+                    รายละเอียดการสัมภาษณ์
+                  </Link>
+                  </>
+                </Typography>
+              </>
+            )}
+          </>
+        )
+      }
+    }
+    return (
+      <>
+        <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
+          {text.contents}
+        </Typography>
+      </>
+    )
+  }
+
+  const checkInterviewType = (lgNumber : string) : string => {
+    if (lgNumber.includes('A') || lgNumber.includes('C')) return "onsite"
+    return "online"
+  }
+
   return (
     <Card className={`${classes.card} ${classes.flexRow}`}>
       <div className={classes.stepIndicator}>
@@ -212,29 +285,26 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
         <Typography variant="h4" className={`${classes.text} ${classes.title} ${classes.blackText}`}>
           {text.title}
         </Typography>
-
-        {step === 4 && status === "inProgress" && application.interviewTime && (
-          <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-            รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(application.interviewTime)}</span>
-          </Typography>
-        )}
         {step === 5 && documentState.payment === "PASSED" && (
           <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
             หลักฐานการชำระเงินได้รับการอนุมัติแล้ว
           </Typography>
         )}
-
-        <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
-          {text.contents}
-        </Typography>
-
-        {text.primaryButton && (
-          <div className={classes.buttonContainer}>
-            {text.primaryButton &&
-              renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
-            {text.secondaryButton &&
-              renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
-          </div>
+        {step === 4 && (
+          <InterviewStepCard status = {status} interviewType = {checkInterviewType(application.lgNumber)} interviewTime = {application.interviewTime}/>
+        )}
+        {step !== 4 && (
+          <>
+            <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
+              {text.contents}
+            </Typography>
+            <div className={classes.buttonContainer}>
+              {text.primaryButton &&
+                renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
+              {text.secondaryButton &&
+                renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
+            </div>
+          </>
         )}
       </div>
     </Card>
