@@ -121,7 +121,7 @@ const stepCardConstant: StepCardModel = {
         contents: (
           <>
             การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ที่ปุ่มด้านล่าง ก่อนเวลาอย่างน้อย 5 นาทีนะครับ{" "}
-            <div style={{ marginTop: "0.75rem" }}>
+            {/* <div style={{ marginTop: "0.75rem" }}>
               <Link to="/assets/file/virtualbg.png" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
                 ดาวน์โหลดรูป Virtual Background ที่ใช้ในการสัมภาษณ์
               </Link>
@@ -135,8 +135,8 @@ const stepCardConstant: StepCardModel = {
                 style={{ color: "#941014" }}>
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
-            </div>
-            <div style={{ marginTop: "0.75rem" }}>
+            </div> */}
+            {/*<div style={{ marginTop: "0.75rem" }}>
               <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
               <div style={{ fontWeight: 400 }}>Meeting ID: 997 1266 3620</div>
               <div style={{ fontWeight: 400 }}>Password: 886406</div>
@@ -157,7 +157,7 @@ const stepCardConstant: StepCardModel = {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </>
         ),
         primaryButton: {
@@ -166,12 +166,12 @@ const stepCardConstant: StepCardModel = {
           path: "https://www.facebook.com/LARNGEARCAMP/posts/10160055610077425",
           isExternalPath: true
         },
-        secondaryButton: {
-          label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
-          opensDialog: false,
-          path: "https://chula.zoom.us/j/99712663620?pwd=ZllMVU94OE5SU1ZacUIyeWwwc012QT09",
-          isExternalPath: true
-        }
+        // secondaryButton: {
+        //   label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
+        //   opensDialog: false,
+        //   path: "https://chula.zoom.us/j/99712663620?pwd=ZllMVU94OE5SU1ZacUIyeWwwc012QT09",
+        //   isExternalPath: true
+        // }
       }
     },
     complete: {

@@ -244,12 +244,12 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                   <>
                   การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
-                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา 08:15 - 08:45  น้อง ๆ สามารถดูรายละเอียดการสัมภาษณ์ได้ที่
-                  <Link to="/assets/file/virtualbg.png" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
-                    รายละเอียดการสัมภาษณ์
-                  </Link>
+                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา 08:15 - 08:45  น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟสบุค LarnGear Camp
                   </>
                 </Typography>
+                {/* <a href="/" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+                  รายละเอียดการสัมภาษณ์
+                </a> */}
               </>
             )}
           </>
@@ -291,7 +291,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           </Typography>
         )}
         {step === 4 && (
-          <InterviewStepCard status = {status} interviewType = {checkInterviewType(application.lgNumber)} interviewTime = {application.interviewTime}/>
+          <InterviewStepCard status = {status} interviewType = "online" interviewTime = {application.interviewTime}/>
         )}
         {step !== 4 && (
           <>
