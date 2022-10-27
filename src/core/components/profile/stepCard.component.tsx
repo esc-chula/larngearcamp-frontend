@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import stepCardConstant from "../../constants/stepCard.constant"
 import { useDialogContext } from "../../providers/dialog.provider"
 import { useApplicationStateContext } from "../../providers/applicationState.provider"
-import { dateToLocaleString } from "../../../utils/conversion"
+import { dateToLocaleString, resolveRegistraionTime } from "../../../utils/conversion"
 import { useAuthContext } from "../../providers/auth.provider"
 import MyProfileModel from "../../models/myprofile.models"
 
@@ -241,11 +241,12 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(interviewTime)}</span>
                 </Typography>
-                <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
-                  <>
+                <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
-                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา 08:15 - 08:45  น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟสบุค LarnGear Camp
-                  </>
+                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา {resolveRegistraionTime(interviewTime)}
+                </Typography>
+                <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
+                  น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟสบุค LarnGear Camp
                 </Typography>
                 {/* <a href="/" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
                   รายละเอียดการสัมภาษณ์
@@ -291,7 +292,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           </Typography>
         )}
         {step === 4 && (
-          <InterviewStepCard status = {status} interviewType = "online" interviewTime = {application.interviewTime}/>
+          <InterviewStepCard status = {status} interviewType = {checkInterviewType(application.lgNumber)} interviewTime = {application.interviewTime}/>
         )}
         {step !== 4 && (
           <>
