@@ -231,8 +231,8 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
                 </div> */}
                 <div className={classes.buttonContainer}>
-                  {text.secondaryButton &&
-                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
+                  {text.primaryButton &&
+                    renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
                 </div>
               </>
             )}
@@ -245,12 +245,15 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
                   โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา {resolveRegistraionTime(interviewTime)}
                 </Typography>
-                <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
+                <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟสบุค LarnGear Camp
                 </Typography>
-                {/* <a href="/" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
-                  รายละเอียดการสัมภาษณ์
-                </a> */}
+                <a href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+                  Checklist สำหรับการเตรียมตัวสัมภาษณ์
+                </a>
+                <a href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid0qHjUB1QDSmzqxhhjDPmt5E42BKmcD37qqcTJXkYPjnp6jvy6CK125dvHCmm6AhScl" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+                  แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
+                </a>
               </>
             )}
           </>

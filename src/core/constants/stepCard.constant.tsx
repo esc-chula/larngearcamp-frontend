@@ -120,7 +120,7 @@ const stepCardConstant: StepCardModel = {
         title: "รอบสัมภาษณ์",
         contents: (
           <>
-            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ก่อนเวลาอย่างน้อย 10 นาทีนะครับ{" "}
+            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ที่ปุ่มด้านล่างก่อนเวลาอย่างน้อย 10 นาทีนะครับ{" "}
             {/* <div style={{ marginTop: "0.75rem" }}>
               <Link to="/assets/file/virtualbg.png" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
                 ดาวน์โหลดรูป Virtual Background ที่ใช้ในการสัมภาษณ์
@@ -136,12 +136,12 @@ const stepCardConstant: StepCardModel = {
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
             </div> */}
-            {/*<div style={{ marginTop: "0.75rem" }}>
-              <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
-              <div style={{ fontWeight: 400 }}>Meeting ID: 997 1266 3620</div>
-              <div style={{ fontWeight: 400 }}>Password: 886406</div>
-            </div>
             <div style={{ marginTop: "0.75rem" }}>
+              <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
+              <div style={{ fontWeight: 400 }}>Meeting ID: 740 994 8814</div>
+              <div style={{ fontWeight: 400 }}>Password: 311510</div>
+            </div>
+            {/* <div style={{ marginTop: "0.75rem" }}>
               <div>
                 หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                 <div>
@@ -161,17 +161,11 @@ const stepCardConstant: StepCardModel = {
           </>
         ),
         primaryButton: {
-          label: "ตรวจสอบคิวสัมภาษณ์ทั้งหมด",
+          label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
-          path: "https://www.facebook.com/LARNGEARCAMP/posts/10160055610077425",
+          path: "https://chula.zoom.us/j/7409948814?pwd=eE03cGc5YlRpWElCM3BNWWUwakhNZz09",
           isExternalPath: true
-        },
-        // secondaryButton: {
-        //   label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
-        //   opensDialog: false,
-        //   path: "https://chula.zoom.us/j/99712663620?pwd=ZllMVU94OE5SU1ZacUIyeWwwc012QT09",
-        //   isExternalPath: true
-        // }
+        }
       }
     },
     complete: {
