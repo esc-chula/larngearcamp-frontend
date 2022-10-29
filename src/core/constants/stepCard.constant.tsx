@@ -125,17 +125,22 @@ const stepCardConstant: StepCardModel = {
               <Link to="/assets/file/virtualbg.png" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
                 ดาวน์โหลดรูป Virtual Background ที่ใช้ในการสัมภาษณ์
               </Link>
+            </div> */}
+            <div style={{ marginTop: "0.75rem" }}>
+              <a href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+                Checklist สำหรับการเตรียมตัวสัมภาษณ์
+              </a>
             </div>
             <div style={{ marginTop: "0.75rem" }}>
               <a
                 className="no-underline"
-                href="https://drive.google.com/drive/folders/1XLjpgeZYoD9cbsv3oZgdVwuz8mTPZOSM"
+                href="https://drive.google.com/drive/folders/1ep5HLhhtOoQZmeYC_72k-N5_R8uZ0OV7?fbclid=IwAR2D54svAORwa_eIZkqsqplJcYacucO4kBK6Pe40a6f5BpDBh7bNTIClkOE"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#941014" }}>
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
-            </div> */}
+            </div>
             <div style={{ marginTop: "0.75rem" }}>
               <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
               <div style={{ fontWeight: 400 }}>Meeting ID: 740 994 8814</div>
