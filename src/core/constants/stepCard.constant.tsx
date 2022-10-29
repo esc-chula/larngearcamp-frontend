@@ -146,23 +146,17 @@ const stepCardConstant: StepCardModel = {
               <div style={{ fontWeight: 400 }}>Meeting ID: 740 994 8814</div>
               <div style={{ fontWeight: 400 }}>Password: 311510</div>
             </div>
-            {/* <div style={{ marginTop: "0.75rem" }}>
+            <div style={{ marginTop: "0.75rem" }}>
               <div>
                 หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                 <div>
-                  พี่บูม:{" "}
-                  <a className="no-underline" href="tel:+6694-447-6075" style={{ color: "#941014" }}>
-                    094-447-6075
-                  </a>
-                </div>
-                <div>
-                  ข้าวหอม:{" "}
-                  <a className="no-underline" href="tel:+6689-939-7816" style={{ color: "#941014" }}>
-                    089-939-7816
+                  พี่ต้นกล้า:{" "}
+                  <a className="no-underline" href="tel:+6693-156-9544" style={{ color: "#941014" }}>
+                    093-156-9544
                   </a>
                 </div>
               </div>
-            </div> */}
+            </div>
           </>
         ),
         primaryButton: {
