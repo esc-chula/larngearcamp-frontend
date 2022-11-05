@@ -58,7 +58,6 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
   const { me } = useAuthContext()
 
   const { documentState } = me.data as MyProfileModel
-  const isUploadPassed = documentState.payment === "PASSED"
 
   const selectedOptions = useRef({ accommodationRequested: accommodationRequested, breakfastRequested: breakfastRequested })
 
@@ -94,7 +93,7 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
         <DialogContentText>
           สแกน QR Code เพื่อชำระค่าใช้จ่ายด้วย Mobile Banking Application จากนั้นอัพโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ
         </DialogContentText>
-        <FormGroup className={classes.checkboxContainer}>
+        {/* <FormGroup className={classes.checkboxContainer}>
           <FormControlLabel
             name="accommodationRequested"
             className={classes.checkbox}
@@ -123,8 +122,8 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
         <DialogContentText>
           โดยหากน้อง ๆ ไม่มีความประสงค์ที่จะรับประทานอาหารเช้าที่ค่าย น้องสามารถทานอาหารเช้ามาก่อนได้จากที่บ้าน และมาลงทะเบียนตามเวลาที่กำหนด
           ก่อนที่กิจกรรมแรกของแต่ละวันจะเริ่มต้นขึ้น ซึ่งจะมีการชี้แจงวันเวลาในการจัดกิจกรรมค่ายต่อไป
-        </DialogContentText>
-        <UploadPaymentBlock accomodation={options.accommodationRequested} paymentStatus={paymentStatus} serverFile={serverFile} />
+        </DialogContentText> */}
+        <UploadPaymentBlock paymentStatus={paymentStatus} serverFile={serverFile} />
       </DialogContent>
       <Button variant="contained" className={classes.button} onClick={handleClose}>
         ยืนยัน

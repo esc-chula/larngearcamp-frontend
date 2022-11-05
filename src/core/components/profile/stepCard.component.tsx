@@ -294,6 +294,16 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             หลักฐานการชำระเงินได้รับการอนุมัติแล้ว
           </Typography>
         )}
+        {step === 5 && documentState.payment === "CHANGE_REQUIRED" && (
+          <>
+            <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
+              หลักฐานการชำระเงินไม่ถูกต้อง
+            </Typography>
+            <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
+              จากทีมงาน : {application.payment.comment !== "" ? application.payment.comment : "โปรดอัพโหลดอีกครั้ง"}
+            </Typography>
+          </>
+        )}
         {step === 4 && (
           <InterviewStepCard status = {status} interviewType = {checkInterviewType(application.lgNumber)} interviewTime = {application.interviewTime}/>
         )}

@@ -38,7 +38,6 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export interface UploadPaymentBlockProps {
-  accomodation: boolean
   paymentStatus: FileStatus
   serverFile: DocumentItem
 }
@@ -47,7 +46,7 @@ export interface DisplayedError {
   message: null | string
 }
 
-const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ accomodation, paymentStatus, serverFile }) => {
+const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, serverFile }) => {
   const classes = useStyles()
   const [status, setStatus] = useState(paymentStatus)
   const [displayFile, setDisplayFile] = useState(serverFile)
@@ -55,7 +54,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ accomodation, p
   const { uploadDocument } = useApplicationContext()
 
   const { documentState } = me.data as MyProfileModel
-  const isUploadPassed = documentState.payment === "PASSED"
+  const isUpload = documentState.payment === "PASSED" || documentState.payment === "UPLOADED"
 
   const errorMessage = useRef("")
 
@@ -93,14 +92,14 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ accomodation, p
 
   return (
     <div className={classes.paymentContainer}>
-      <img src={paymentQR} alt="QR Code" className={classes.image} />
-      <Typography variant="subtitle1">จำนวน {accomodation ? `1,850 บาท (500 + 1,350)` : `500 บาท`} </Typography>
+      {/* <img src={paymentQR} alt="QR Code" className={classes.image} /> */}
+      <Typography variant="subtitle1">จำนวน 700 บาท</Typography>
       {errorMessage.current !== "" && (
         <Typography variant="subtitle2" component="div" className={classes.error}>
           {errorMessage.current}
         </Typography>
       )}
-      <Button variant="outlined" component="label" className={classes.button} disabled={isUploadPassed}>
+      <Button variant="outlined" component="label" className={classes.button} disabled={isUpload}>
         {status === "EMPTY" ? "อัพโหลดหลักฐานการชำระเงิน" : "อัพโหลดอีกครั้ง"}
         <input type="file" name="payment" hidden accept="image/jpeg, image/png" onChange={uploadFile} />
       </Button>
