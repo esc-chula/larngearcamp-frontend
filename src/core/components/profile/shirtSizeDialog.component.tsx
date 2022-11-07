@@ -69,9 +69,9 @@ const ShirtSizeDialog: React.FC<ShirtSizeDialogProps> = ({ open, existingShirtSi
       <DialogContent>
         <RadioGroup aria-label="Select shirt size" name="shirt-size-select" onChange={handleRadioChange}>
           <FormControlLabel value="S" control={<Radio color="primary" />} label="Size S (อก 33 นิ้ว / ยาว 25 นิ้ว)" checked={shirtSize === "S"} />
-          <FormControlLabel value="M" control={<Radio color="primary" />} label="Size M (อก 36 นิ้ว / ยาว 27 นิ้ว)" checked={shirtSize === "M"} />
-          <FormControlLabel value="L" control={<Radio color="primary" />} label="Size L (อก 40 นิ้ว / ยาว 28 นิ้ว)" checked={shirtSize === "L"} />
-          <FormControlLabel value="XL" control={<Radio color="primary" />} label="Size XL (อก 44 นิ้ว / ยาว 30 นิ้ว)" checked={shirtSize === "XL"} />
+          <FormControlLabel value="M" control={<Radio color="primary" />} label="Size M (อก 36 นิ้ว / ยาว 26 นิ้ว)" checked={shirtSize === "M"} />
+          <FormControlLabel value="L" control={<Radio color="primary" />} label="Size L (อก 40 นิ้ว / ยาว 29 นิ้ว)" checked={shirtSize === "L"} />
+          <FormControlLabel value="XL" control={<Radio color="primary" />} label="Size XL (อก 44 นิ้ว / ยาว 29.5 นิ้ว)" checked={shirtSize === "XL"} />
         </RadioGroup>
       </DialogContent>
       <Button variant="contained" className={classes.button} disabled={shirtSize === "" ? true : false} onClick={handleClose}>
