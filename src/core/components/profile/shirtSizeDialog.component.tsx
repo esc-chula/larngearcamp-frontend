@@ -72,6 +72,8 @@ const ShirtSizeDialog: React.FC<ShirtSizeDialogProps> = ({ open, existingShirtSi
           <FormControlLabel value="M" control={<Radio color="primary" />} label="Size M (อก 36 นิ้ว / ยาว 26 นิ้ว)" checked={shirtSize === "M"} />
           <FormControlLabel value="L" control={<Radio color="primary" />} label="Size L (อก 40 นิ้ว / ยาว 29 นิ้ว)" checked={shirtSize === "L"} />
           <FormControlLabel value="XL" control={<Radio color="primary" />} label="Size XL (อก 44 นิ้ว / ยาว 29.5 นิ้ว)" checked={shirtSize === "XL"} />
+          <FormControlLabel value="2XL" control={<Radio color="primary" />} label="Size 2XL (อก 48 นิ้ว / ยาว 30 นิ้ว)" checked={shirtSize === "2XL"} />
+          <FormControlLabel value="3XL" control={<Radio color="primary" />} label="Size 3XL (อก 52 นิ้ว / ยาว 31 นิ้ว)" checked={shirtSize === "3XL"} />
         </RadioGroup>
       </DialogContent>
       <Button variant="contained" className={classes.button} disabled={shirtSize === "" ? true : false} onClick={handleClose}>

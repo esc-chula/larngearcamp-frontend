@@ -3,7 +3,9 @@ export enum ValidShirtSize {
   S = "S",
   M = "M",
   L = "L",
-  XL = "XL"
+  XL = "XL",
+  XL2 = "2XL",
+  XL3 = "3XL"
 }
 
 export interface OptionsDTO {
