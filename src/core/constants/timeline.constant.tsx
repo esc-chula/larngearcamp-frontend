@@ -53,7 +53,7 @@ const timelineConstant: Array<TimelineModel> = [
   {
     duration: {
       start: new Date(2565, 10, 5),
-      end: new Date(2565, 10, 28)
+      end: new Date(2565, 10, 25)
     },
     title: "ยืนยันสิทธิ์การเข้าร่วมค่าย"
   },
