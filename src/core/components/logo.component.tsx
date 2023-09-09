@@ -1,6 +1,6 @@
 import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
-import { ReactComponent as LogoInverse } from "../../assets/images/logo/logo_inverse.svg"
+import { ReactComponent as LogoInverse } from "../../assets/images/logo/logo_inverse_without_text.svg"
 
 const useStyles = makeStyles(theme => ({
   logo: {
@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     color: "white",
     fontWeight: "bold",
     overflow: "hidden",
-    userSelect: "none"
+    userSelect: "none",
+    marginLeft: theme.spacing(3)
   }
 }))
 
