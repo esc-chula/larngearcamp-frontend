@@ -58,20 +58,19 @@ jobs:
           cache-from: type=registry,ref=${{ env.IMAGE_REPO }}:buildcache
           cache-to: type=registry,ref=${{ env.IMAGE_REPO }}:buildcache,mode=max
           context: .
-
-      - name: Deploy to VM
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: |
-            cd larngearcamp
-            docker pull ${{ env.IMAGE_REPO }}:${{ steps.meta.outputs.version }}
-            docker-compose up -d
-            if [[ "$(docker images --filter "dangling=true" -q)" == "" ]]; then
-              echo "No image with <none> tag"
-            else
-              docker rmi $(docker images --filter "dangling=true" -q) || true
-            fi
+      # - name: Deploy to VM
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     passphrase: ${{ secrets.SSH_PASSPHRASE }}
+      #     script: |
+      #       cd larngearcamp
+      #       docker pull ${{ env.IMAGE_REPO }}:${{ steps.meta.outputs.version }}
+      #       docker-compose up -d
+      #       if [[ "$(docker images --filter "dangling=true" -q)" == "" ]]; then
+      #         echo "No image with <none> tag"
+      #       else
+      #         docker rmi $(docker images --filter "dangling=true" -q) || true
+      #       fi

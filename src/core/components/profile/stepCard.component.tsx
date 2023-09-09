@@ -140,9 +140,9 @@ export interface StepCardProps {
 }
 
 interface InterviewStepCardProps {
-  status : "complete" | "inProgress" | "incomplete"
-  interviewType : string
-  interviewTime : string | undefined
+  status: "complete" | "inProgress" | "incomplete"
+  interviewType: string
+  interviewTime: string | undefined
 }
 
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
@@ -203,17 +203,18 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
       )
   }
 
-  const InterviewStepCard : React.FC<InterviewStepCardProps> = ({status, interviewType, interviewTime}) => {
-    if (status === 'inProgress') {
+  const InterviewStepCard: React.FC<InterviewStepCardProps> = ({ status, interviewType, interviewTime }) => {
+    if (status === "inProgress") {
       if (!interviewTime) {
         return (
           <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
-              <>ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์สัมภาษณ์ เตรียมตัวได้พบปะพูดคุยกับพี่ ๆ ผู้สัมภาษณ์สุดน่ารักและใจดีในวันที่ 30 ตุลาคม 2565 ณ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย สำหรับน้อง ๆ กรุงเทพฯ และปริมณฑล หรือ สัมภาษณ์ผ่านทางซูมสำหรับน้อง ๆ ต่างจังหวัด ได้เลย !!
+            <>
+              ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์สัมภาษณ์ เตรียมตัวได้พบปะพูดคุยกับพี่ ๆ ผู้สัมภาษณ์สุดน่ารักและใจดีในวันที่ 21 ตุลาคม 2566
+              ณ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย สำหรับน้อง ๆ กรุงเทพฯ และปริมณฑล หรือ สัมภาษณ์ผ่านทางซูมสำหรับน้อง ๆ ต่างจังหวัด ได้เลย !!
             </>
-            </Typography>
+          </Typography>
         )
-      }
-      else {
+      } else {
         return (
           <>
             {interviewType === "online" && (
@@ -242,16 +243,26 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(interviewTime)}</span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
-                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา {resolveRegistraionTime(interviewTime)}
+                  การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา{" "}
+                  {resolveRegistraionTime(interviewTime)}
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟสบุค LarnGear Camp
                 </Typography>
-                <a href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+                <a
+                  href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl"
+                  className="no-underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#941014" }}>
                   Checklist สำหรับการเตรียมตัวสัมภาษณ์
                 </a>
-                <a href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid0qHjUB1QDSmzqxhhjDPmt5E42BKmcD37qqcTJXkYPjnp6jvy6CK125dvHCmm6AhScl" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+                <a
+                  href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid0qHjUB1QDSmzqxhhjDPmt5E42BKmcD37qqcTJXkYPjnp6jvy6CK125dvHCmm6AhScl"
+                  className="no-underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#941014" }}>
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
                 </a>
               </>
@@ -269,8 +280,8 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
     )
   }
 
-  const checkInterviewType = (lgNumber : string) : string => {
-    if (lgNumber.includes('A') || lgNumber.includes('C')) return "onsite"
+  const checkInterviewType = (lgNumber: string): string => {
+    if (lgNumber.includes("A") || lgNumber.includes("C")) return "onsite"
     return "online"
   }
 
@@ -305,7 +316,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           </>
         )}
         {step === 4 && (
-          <InterviewStepCard status = {status} interviewType = {checkInterviewType(application.lgNumber)} interviewTime = {application.interviewTime}/>
+          <InterviewStepCard status={status} interviewType={checkInterviewType(application.lgNumber)} interviewTime={application.interviewTime} />
         )}
         {step !== 4 && (
           <>

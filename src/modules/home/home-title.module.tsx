@@ -15,7 +15,7 @@ const useStyle = makeStyles(theme => ({
     minHeight: `calc(100vh - 48px)`,
     backgroundImage: `url(${landing1})`,
 
-    alignItems :"center",
+    alignItems: "center",
     color: "white",
     backgroundSize: "cover",
     padding: theme.spacing(2)
@@ -97,10 +97,10 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
   return (
     <div className={classes.titleContainer}>
       <Announcements />
-      <Box className={classes.safeArea} display="flex" justifyContent="center" margin = "auto" alignItems="center" height="100vh" minHeight="542px">
+      <Box className={classes.safeArea} display="flex" justifyContent="center" margin="auto" alignItems="center" height="100vh" minHeight="542px">
         <Box textAlign="center" display="flex" flexDirection="column">
           <Typography className={classes.title}>
-            <span className="big">L</span>ARNGEAR CAMP 22nd
+            <span className="big">L</span>ARNGEAR CAMP 23rd
           </Typography>
           <Typography variant="h5" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง
