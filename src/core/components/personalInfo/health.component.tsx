@@ -26,7 +26,7 @@ const PersonalHealthComponent = () => {
           ข้อมูลสุขภาพ
         </Typography>
         <Typography variant="body2" className={`${classes.title}`}>
-          หากมีหลายข้อให้คั่นคำตอบด้วย comma
+          หากมีหลายข้อให้คั่นคำตอบด้วย Comma
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={3}>

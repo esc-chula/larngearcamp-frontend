@@ -5,62 +5,63 @@ export interface TimelineModel {
     end: Date
   }
 }
+// Month is 0-based index
 const nowDate = new Date()
-const endFakeDate = new Date(2565, 8, 30)
+const endFakeDate = new Date(2566, 8, 29)
 const timelineConstant: Array<TimelineModel> = [
   {
     duration: {
-      start: new Date(2565, 8, 12),
-      end: nowDate < endFakeDate ? new Date(2565, 9, 7) : new Date(2565, 8, 30)
+      start: new Date(2566, 8, 11),
+      end: nowDate < endFakeDate ? new Date(2566, 8, 29) : new Date(2566, 8, 29)
     },
     title: "รับสมัคร"
   },
   {
     duration: {
-      start: new Date(2565, 9, 14),
-      end: new Date(2565, 9, 14)
+      start: new Date(2566, 9, 6),
+      end: new Date(2566, 9, 6)
     },
     title: "แก้ไขเอกสารประกอบการสมัครวันสุดท้าย"
   },
   {
     duration: {
-      start: new Date(2565, 9, 23),
-      end: new Date(2565, 9, 23)
+      start: new Date(2566, 9, 11),
+      end: new Date(2566, 9, 11)
     },
     title: "ประกาศผลผู้มีสิทธิ์สัมภาษณ์"
   },
   {
     duration: {
-      start: new Date(2565, 9, 30),
-      end: new Date(2565, 9, 30)
+      start: new Date(2566, 9, 21),
+      end: new Date(2566, 9, 21)
     },
     title: "สัมภาษณ์รอบกรุงเทพฯ และปริมณฑล"
   },
   {
     duration: {
-      start: new Date(2565, 9, 30),
-      end: new Date(2565, 9, 30)
+      start: new Date(2566, 9, 21),
+      end: new Date(2566, 9, 21)
     },
     title: "สัมภาษณ์รอบต่างจังหวัด"
   },
   {
     duration: {
-      start: new Date(2565, 10, 5),
-      end: new Date(2565, 10, 5)
+      start: new Date(2566, 9, 30),
+      end: new Date(2566, 9, 30)
     },
     title: "ประกาศรายชื่อผู้มีสิทธิ์เข้าร่วมค่าย"
   },
   {
     duration: {
-      start: new Date(2565, 10, 5),
-      end: new Date(2565, 10, 25)
+      start: new Date(2566, 9, 30),
+      end: new Date(2566, 10, 19)
     },
     title: "ยืนยันสิทธิ์การเข้าร่วมค่าย"
   },
   {
     duration: {
-      start: new Date(2566, 0, 5),
-      end: new Date(2566, 0, 8)
+      start: new Date(2567, 0, 4),
+      end: new Date(2567, 0, 7)
     },
     title: "ค่ายลานเกียร์ครั้งที่ 23"
   }

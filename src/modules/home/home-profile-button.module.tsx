@@ -15,7 +15,7 @@ export const HomeProfileButton: React.FC<ButtonProps> = props => {
     if (isLoggedIn) {
       const isNotSubmit = me.data?.applicationState === "DRAFT" || me.data?.applicationState === "NOT_FILLED"
       if (state === ApplicationStatus.EARLY) {
-        return "เปิดรับสมัครเร็ว ๆ นี้"
+        return "เปิดรับสมัคร 11 กันยายน 2566 นี้"
       } else if (state !== ApplicationStatus.APPLICABLE && isNotSubmit) {
         return "หมดเขตรับสมัคร"
       } else if (state === ApplicationStatus.DOCUMENT_EDIT && !isNotSubmit) {

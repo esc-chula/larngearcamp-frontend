@@ -18,11 +18,12 @@ const useStyle = makeStyles(theme => ({
     color: theme.palette.gray[700],
     border: "none",
     overflow: "auto",
-    maxHeight : "600px"
-  },socialContainer:{
+    maxHeight: "600px"
+  },
+  socialContainer: {
     display: "flex",
     flexWrap: "wrap",
-    height : "auto",
+    height: "auto",
     gap: `${theme.spacing(4)}px`,
     justifyContent: "center"
   }
@@ -48,7 +49,7 @@ const HomeFacebookEmbed: React.FC = props => {
       <Typography align="center" variant="h2" className={classes.title}>
         FOLLOW US
       </Typography>
-      <div className = {classes.socialContainer}>
+      <div className={classes.socialContainer}>
         <Iframe
           url={`https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FLARNGEARCAMP%2F&tabs=timeline&width=${width}&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId`}
           width={`${width}px`}
@@ -60,7 +61,7 @@ const HomeFacebookEmbed: React.FC = props => {
           className={classes.facebookEmbed}
         />
         <Iframe
-          url={`https://www.instagram.com/p/CiHvZXsvnCO/embed`}
+          url={`https://www.instagram.com/p/Cw9SOXDpFGg/embed`}
           width={`${width}px`}
           height={`${IGHeight}px`}
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"

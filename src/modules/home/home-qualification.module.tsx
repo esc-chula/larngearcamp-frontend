@@ -50,7 +50,7 @@ const HomeQualification: React.FC<{ qualifications: QualificationModel[] } & Hom
       </Typography>
       <div className={classes.qualificationContainer}>
         {props.qualifications.map(qualification => (
-          <QualificationItem qualification={qualification} key = {qualification.description} />
+          <QualificationItem qualification={qualification} key={qualification.description} />
         ))}
       </div>
     </div>
@@ -73,11 +73,11 @@ const useStyleItem = makeStyles(theme => ({
       maxWidth: "100%",
       width: "100%",
       padding: theme.spacing(2)
-    },
-    "&:last-child": {
-      maxWidth: "1020px",
-      width: "100%"
     }
+    // "&:last-child": {
+    //   maxWidth: "1020px",
+    //   width: "100%"
+    // }
   },
   description: {
     fontSize: pxToRem(20),
@@ -109,7 +109,7 @@ const QualificationItem = React.forwardRef<HTMLDivElement, { qualification: Qual
   }
 
   return (
-    <div ref={ref} className={classes.container} >
+    <div ref={ref} className={classes.container}>
       <Avatar src={props.qualification.src} className={classes.logoImg}></Avatar>
       <Typography align="left" className={classes.description}>
         {description.split("\n").map((line, i) => (

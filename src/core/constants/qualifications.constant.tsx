@@ -19,12 +19,12 @@ const qualificationsConstant: Array<QualificationModel> = [
   {
     description: "ไม่เคยเข้าร่วมค่ายลานเกียร์มาก่อน",
     src: require("../../assets/images/icon/qualification-4.svg")
-  },
-  {
-    description:
-      "จะต้องได้รับวัคซีนที่ทางราชการกำหนดอย่างน้อยสองเข็ม หรือวัคซีนชนิดอื่นที่สำนักงานคณะกรรมการอาหารและยารับรองตามจำนวนที่กำหนด แล้วแต่กรณี ก่อนวันที่ 21 ธันวาคม 2566 (14 วัน ก่อนวันค่ายวันแรก)",
-    src: require("../../assets/images/icon/qualification-5.svg")
   }
+  // {
+  //   description:
+  //     "จะต้องได้รับวัคซีนที่ทางราชการกำหนดอย่างน้อยสองเข็ม หรือวัคซีนชนิดอื่นที่สำนักงานคณะกรรมการอาหารและยารับรองตามจำนวนที่กำหนด แล้วแต่กรณี ก่อนวันที่ 21 ธันวาคม 2566 (14 วัน ก่อนวันค่ายวันแรก)",
+  //   src: require("../../assets/images/icon/qualification-5.svg")
+  // }
 ]
 
 export default qualificationsConstant
