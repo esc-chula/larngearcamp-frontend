@@ -11,7 +11,7 @@ const timelineConstant: Array<TimelineModel> = [
   {
     duration: {
       start: new Date(2565, 8, 12),
-      end: (nowDate < endFakeDate) ? new Date(2565, 9, 7) : new Date(2565, 8, 30)
+      end: nowDate < endFakeDate ? new Date(2565, 9, 7) : new Date(2565, 8, 30)
     },
     title: "รับสมัคร"
   },
@@ -62,7 +62,7 @@ const timelineConstant: Array<TimelineModel> = [
       start: new Date(2566, 0, 5),
       end: new Date(2566, 0, 8)
     },
-    title: "ค่ายลานเกียร์ครั้งที่ 22"
+    title: "ค่ายลานเกียร์ครั้งที่ 23"
   }
 ]
 

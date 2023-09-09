@@ -91,10 +91,10 @@ const RegisterCard: React.FC<RegisterCardProps> = props => {
     <Container className={classes.root}>
       <Card className={classes.card}>
         <Typography variant="h1" className={classes.headingText}>
-          Larngear Camp 22nd
+          Larngear Camp 23rd
         </Typography>
         <Typography variant="body1" className={classes.bodyText}>
-          ดูเหมือนว่าคุณจะยังไม่ได้ส่งใบสมัครเข้าค่ายลานเกียร์ครั้งที่ 22 นะ คลิกสมัครเข้าค่าย
+          ดูเหมือนว่าคุณจะยังไม่ได้ส่งใบสมัครเข้าค่ายลานเกียร์ครั้งที่ 23 นะ คลิกสมัครเข้าค่าย
           เพื่อมาเป็นส่วนหนึ่งในความสนุกที่ไม่สามารถหาจากที่อื่นได้อีก!
         </Typography>
         {props.profileStatus === ProfileStatus.start && state === ApplicationStatus.APPLICABLE && (

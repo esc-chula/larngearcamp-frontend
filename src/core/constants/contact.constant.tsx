@@ -4,10 +4,10 @@ export interface ContactModel {
 }
 
 const contactConstant: Array<ContactModel> = [
-  { name: "พี่ตีตี้", lineId: "LineID : tity1506" },
-  { name: "พี่บุ๊ค", lineId: "LineID : book11653" },
-  { name: "พี่เจิ้ง", lineId: "LineID : pasana_jerng" },
-  { name: "พี่เฟรนด์", lineId: "LineID : friendlypp" }
+  { name: "พี่ปิงปอง ( P’Pingpong )", lineId: "LineID : pingpong2003" },
+  { name: "พี่น้ำพั้นซ์ ( P’Numpunch )", lineId: "LineID : _psnrt_" },
+  { name: "พี่ฟลุ๊ก ( P’Fluk )", lineId: "LineID : 085-906-9965" },
+  { name: "พี่ฟ้า ( P’Fah )", lineId: "LineID : fahsasinapa" }
 ]
 
 export default contactConstant

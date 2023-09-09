@@ -26,7 +26,7 @@ const questionsSection1Constant: Array<QuestionModel> = [
     type: "multiline"
   },
   {
-    question: "น้องทราบข่าวค่ายลานเกียร์ครั้งที่ 22 จากที่ใด/ผู้ใด (เลือกได้มากกว่า 1 ข้อ)",
+    question: "น้องทราบข่าวค่ายลานเกียร์ครั้งที่ 23 จากที่ใด/ผู้ใด (เลือกได้มากกว่า 1 ข้อ)",
     type: "checkbox",
     contents: [
       { label: "Facebook: LarnGear Camp" },
