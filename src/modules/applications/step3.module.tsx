@@ -64,7 +64,9 @@ function mapApplicationToAnswer1(application: ApplicationDTO): Answer1Model {
         }
       },
       answer6: application.answerA6,
-      answer7: application.answerA7 || ""
+      answer7: application.answerA7 || "",
+      answer8: application.answerA8 || "",
+      answer9: application.answerA9 || ""
     }
   }
 }

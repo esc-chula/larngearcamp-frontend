@@ -65,7 +65,9 @@ export const convertAnswer1SchemaToAnswer1DTO = (props: Answer1Model): Answer1DT
     answerA5_7: !!props.firstPart.answer5?.seventh,
     answerA5_8: props.firstPart.answer5.eightth.checked ? props.firstPart.answer5.eightth.text || "" : "",
     answerA6: props.firstPart.answer6,
-    answerA7: props.firstPart.answer7
+    answerA7: props.firstPart.answer7,
+    answerA8: props.firstPart.answer8,
+    answerA9: props.firstPart.answer9
   }
 }
 
