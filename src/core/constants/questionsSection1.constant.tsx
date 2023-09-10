@@ -1,5 +1,5 @@
 import QuestionModel from "../models/question.model"
-const defaultLinkProps = `target="_blank" rel="noopener noreferrer" class="no-underline" style="color: #941014;"`
+const defaultLinkProps = `target="_blank" rel="noopener noreferrer" class="no-underline" style="color: #941014; display: inline-block;"`
 
 const questionsSection1Constant: Array<QuestionModel> = [
   {
