@@ -34,7 +34,6 @@ const useStyles = makeStyles(theme => ({
   },
   aLink: {
     "& a": {
-      color: "#941014",
       display: "inline-block"
     }
   }
