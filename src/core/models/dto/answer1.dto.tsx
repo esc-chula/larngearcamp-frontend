@@ -17,6 +17,8 @@ interface Answer1DTO {
   answerA5_8: string
   answerA6: string
   answerA7: string
+  answerA8: string
+  answerA9: string
 }
 
 export default Answer1DTO

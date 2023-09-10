@@ -1,4 +1,5 @@
 import QuestionModel from "../models/question.model"
+const defaultLinkProps = `target="_blank" rel="noopener noreferrer" class="no-underline" style="color: #941014; display: inline-block;"`
 
 const questionsSection1Constant: Array<QuestionModel> = [
   {
@@ -45,7 +46,15 @@ const questionsSection1Constant: Array<QuestionModel> = [
     type: "multiline"
   },
   {
-    question: "ก่อนจะไปกันต่อ มาแต่งกลอนกันสักนิด “ฉลามแรกไม่เป็นไร  ...........................................”",
+    question: "ทำไมน้องถึงสนใจในอาชีพวิศวกร",
+    type: "multiline"
+  },
+  {
+    question: `ถ้าเลือกได้น้อง ๆ อยากเข้าศึกษาต่อสาขาวิชาไหนในคณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย เป็นพิเศษ ตอบอย่างน้อย 2 เหตุผล <span><a href='https://www.eng.chula.ac.th/th/academics/bachelor' ${defaultLinkProps}>สามารถดูรายละเอียดแต่ละสาขาวิชาได้ที่นี่</a></span>`,
+    type: "multiline"
+  },
+  {
+    question: "ก่อนจะไปกันต่อ มาแต่งวลีกันสักนิด “.................................. ทีนี้ก็ลำบาก ก็ว้าวุ่นเลย”",
     type: "multiline"
   }
 ]

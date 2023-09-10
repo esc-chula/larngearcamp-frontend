@@ -60,7 +60,9 @@ const Answer1Schema = object()
             return booleanAnswer || stringAnswer
           }),
         answer6: string().required("กรุณาเลือกคำตอบ"),
-        answer7: string().trim().required("กรุณากรอกคำตอบ")
+        answer7: string().trim().required("กรุณากรอกคำตอบ"),
+        answer8: string().trim().required("กรุณากรอกคำตอบ"),
+        answer9: string().trim().required("กรุณากรอกคำตอบ")
       })
       .required()
   })
