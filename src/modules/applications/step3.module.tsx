@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
   aLink: {
     "& a": {
-      color: theme.palette.primary.main,
+      color: "#941014",
       display: "inline-block"
     }
   }
