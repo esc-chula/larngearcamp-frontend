@@ -64,6 +64,15 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center"
+  },
+  text: {
+    display: "inline",
+    fontSize: "14px",
+    color: "white",
+    overflow: "hidden",
+    userSelect: "none",
+    textAlign: "center",
+    marginTop: theme.spacing(2)
   }
 }))
 
@@ -77,6 +86,7 @@ const LoginModule = () => {
         <FacebookButtonComponent variant="contained" color="primary"></FacebookButtonComponent>
         <GoogleButtonComponent variant="contained" color="primary"></GoogleButtonComponent>
       </CardComponent>
+      <span className={classes.text}>(ไม่แนะนำให้เข้าสู่ระบบด้วยบัญชี Google หากเข้าเว็บนี้ผ่าน Facebook)</span>
     </div>
   )
 }
