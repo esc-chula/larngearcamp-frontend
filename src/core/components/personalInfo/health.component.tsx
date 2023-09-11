@@ -36,7 +36,7 @@ const PersonalHealthComponent = () => {
             <TextFieldComponent name="health.congenitalDisease" label="โรคประจำตัว" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={5}>
-            <TextFieldComponent name="health.allergicFood" label="อาหารที่แพ้" type="text" />
+            <TextFieldComponent name="health.allergicFood" label="ข้อจำกัดด้านอาหาร (เช่น ฮาลาล, แพ้อาหาร)" type="text" />
           </Grid>
           <Grid item xs={12} sm={12} md={6}>
             <TextFieldComponent name="health.allergicDrug" label="ยาที่แพ้" type="text" />
