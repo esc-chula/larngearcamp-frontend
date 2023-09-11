@@ -20,7 +20,7 @@ const SCHEDULE = [
   {
     state: ApplicationStatus.APPLICABLE,
     start: new Date("September 11, 2023 8:00:01 GMT+07:00"),
-    end: new Date("September 29, 2023 00:00:00 GMT+07:00")
+    end: new Date("September 30, 2023 00:00:00 GMT+07:00")
   },
   {
     state: ApplicationStatus.DOCUMENT_EDIT,
