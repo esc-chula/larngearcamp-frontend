@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { StandardTextFieldProps, TextField } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useFormContext } from "react-hook-form"
@@ -23,10 +23,10 @@ const MultilineTypeComponent: React.FC<StandardTextFieldProps & MultiLineTypePro
   const classes = useStyles()
   const { register, errors } = useFormContext()
   const selfError = resolve(name, errors)
-  let count = 0
+  const [count, setCount] = useState(0)
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    count = wordCount(event.target.value)
     console.log(count)
+    setCount(wordCount(event.target.value))
   }
   return (
     <>
