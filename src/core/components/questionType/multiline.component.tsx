@@ -3,8 +3,7 @@ import { StandardTextFieldProps, TextField } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import { useFormContext } from "react-hook-form"
 import { resolve } from "../../../utils/modify"
-import { log } from "console"
-// import { wordCount } from "../../../utils/wordcount"
+import { wordCount } from "../../../utils/wordcount"
 
 interface MultiLineTypeProps {
   name: string
@@ -26,7 +25,7 @@ const MultilineTypeComponent: React.FC<StandardTextFieldProps & MultiLineTypePro
   const selfError = resolve(name, errors)
   let count = 0
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // count = wordCount(event.target.value)
+    count = wordCount(event.target.value)
     console.log(count)
   }
   return (
@@ -41,9 +40,9 @@ const MultilineTypeComponent: React.FC<StandardTextFieldProps & MultiLineTypePro
         error={!!selfError}
         helperText={selfError?.message}
         {...other}
-        // onChange={handleChange}
+        onChange={handleChange}
       />
-      <span>Count: 135 words</span>
+      <span>Count: {count} words</span>
     </>
   )
 }
