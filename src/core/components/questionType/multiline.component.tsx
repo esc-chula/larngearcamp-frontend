@@ -41,9 +41,9 @@ const MultilineTypeComponent: React.FC<StandardTextFieldProps & MultiLineTypePro
         error={!!selfError}
         helperText={selfError?.message}
         {...other}
-        onChange={handleChange}
+        // onChange={handleChange}
       />
-      <span>Count: {count}</span>
+      <span>Count: 135 words</span>
     </>
   )
 }
