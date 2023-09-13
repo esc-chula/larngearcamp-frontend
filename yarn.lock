@@ -13672,15 +13672,6 @@ wordcut@^0.8.1:
     mocha "*"
     underscore "*"
 
-wordcut@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/wordcut/-/wordcut-0.9.1.tgz#26bc753a9ce6bd6de066356383092a94350279d1"
-  integrity sha512-r7wxFbj3ji638nUYvkDWGJmy1kpqBWQ8W0yH/vRb4I2nXHwlJMClgeJN0FtxTEtbN3tnPhMqMuy/kxfXvCU6UA==
-  dependencies:
-    body "*"
-    glob "^5.0.14"
-    underscore "*"
-
 wordwrapjs@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/wordwrapjs/-/wordwrapjs-3.0.0.tgz"
