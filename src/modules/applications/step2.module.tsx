@@ -18,6 +18,7 @@ import { FormNavigatePrompt } from "../../core/components/formNavigatePrompt.com
 import { useGlobalContext } from "../../core/providers/global.provider"
 import { AxiosError } from "axios"
 import { ApplicationModels } from "../../core/models/application.models"
+import { PersonalMiscComponent } from "../../core/components/personalInfo/misc.component"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -58,7 +59,7 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
       province: application.mailProvince,
       facebookName: application.contactFacebook,
       lineId: application.contactLineApp,
-      email : application.contactEmail,
+      email: application.contactEmail,
       parentName: application.parentName,
       parentNumber: application.parentTelephone,
       parentRelationship: application.parentRelationship,
@@ -78,7 +79,8 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
       bloodType: application.bloodGroup,
       congenitalDisease: application.illness,
       drug: application.illnessDrug
-    }
+    },
+    misc: { interviewAvailability: application.interviewAvailability, unavailableReason: application.unavailableReason }
   }
 }
 
@@ -125,6 +127,7 @@ const ApplicationStepTwoModule: React.FC = () => {
                 <PersonalHealthComponent />
                 <PersonalContactComponent />
                 <PersonalEmergencyComponent />
+                <PersonalMiscComponent />
               </div>
               {buttonBar}
             </CardComponent>

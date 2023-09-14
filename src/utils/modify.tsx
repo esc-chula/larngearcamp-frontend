@@ -42,7 +42,9 @@ export const convertProfileSchemaToProfileDTO = (props: ProfileModel): ProfileDT
     contactLineApp: props.contact.lineId,
     parentName: props.contact.parentName,
     parentRelationship: props.contact.parentRelationship,
-    parentTelephone: props.contact.parentNumber
+    parentTelephone: props.contact.parentNumber,
+    interviewAvailability: props.misc.interviewAvailability,
+    unavailableReason: props.misc.unavailableReason ?? null
   }
 }
 
