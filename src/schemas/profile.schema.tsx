@@ -57,8 +57,8 @@ const ProfileSchema = object()
       parentRelationship: string().trim().required("กรุณาระบุความเกี่ยวข้อง")
     }).required(),
     misc: object({
-      interviewAvailability: string().trim().required("กรุณาระบุความพร้อมในการสัมภาษณ์"),
-      unavailableReason: string().trim()
+      interviewAvailability: string().trim().required("กรุณาเลือกคำตอบ"),
+      unavailableReason: string().trim().nullable(true)
     }).required()
   })
   .defined()

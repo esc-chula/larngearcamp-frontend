@@ -80,8 +80,7 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
       congenitalDisease: application.illness,
       drug: application.illnessDrug
     },
-    interviewAvailability: application.interviewAvailability,
-    unavailableReason: application.unavailableReason
+    misc: { interviewAvailability: application.interviewAvailability, unavailableReason: application.unavailableReason }
   }
 }
 
