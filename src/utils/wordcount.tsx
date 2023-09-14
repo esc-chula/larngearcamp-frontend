@@ -4,9 +4,9 @@ import { WordcutCore } from "wordcut-ts/lib/wordcut_core"
 let wordcut: WordcutCore
 try {
   wordcut = new Wordcut()
-  wordcut.initNoDict()
+  // wordcut.initNoDict()
 } catch (e) {
-  console.log("wordcut init err", e)
+  console.log("wordcut define err", e)
 }
 
 export const wordCount = (text: string) => {
@@ -14,7 +14,18 @@ export const wordCount = (text: string) => {
     console.log("wordcut not init")
     return text.length
   }
-  const words = (wordcut.cut(text.trim()) as string).split("|").filter((word: string) => word.trim().length > 1)
-  // const words = text
-  return words.length
+  try {
+    wordcut.initNoDict()
+  } catch (e) {
+    console.log("wordcut init err", e)
+    return text.length
+  }
+  try {
+    const words = (wordcut.cut(text.trim()) as string).split("|").filter((word: string) => word.trim().length > 1)
+    // const words = text
+    return words.length
+  } catch (e) {
+    console.log("wordcut cut err", e)
+    return text.length
+  }
 }
