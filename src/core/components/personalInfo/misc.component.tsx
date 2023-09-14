@@ -29,13 +29,13 @@ const PersonalMiscComponent = () => {
           คำถามเพิ่มเติม
         </Typography>
         <Typography variant="body2" className={`${classes.subtitle}`}>
-          หากผ่านการคัดเลือก น้องสะดวกมาสัมภาษณ์ที่คณะวิศวฯ จุฬาฯ วันที่ 21 ตุลาคม 2566 หรือไม่?
+          หากน้องผ่านการคัดเลือก น้องสะดวกมาสัมภาษณ์วันที่ 21 ตุลาคม 256 ที่คณะวิศวฯ จุฬาฯ หรือไม่?
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={7} md={8}>
+          <Grid item xs={12} sm={5} md={4}>
             <SelectComponent control={control} data={interviewAvailabilityConstant} />
           </Grid>
-          <Grid item xs={12} sm={5} md={4}>
+          <Grid item xs={12} sm={7} md={8}>
             <TextFieldComponent name="misc.unavailableReason" label="โปรดระบุสาเหตุ หากไม่สะดวก" type="text" />
           </Grid>
         </Grid>

@@ -6,7 +6,7 @@ const interviewAvailabilityConstant: SelectModel = {
   contents: [
     { text: "สะดวก", value: "AVAILABLE" },
     { text: "ไม่สะดวก", value: "UNAVAILABLE" },
-    { text: "ไม่แน่ใจ", value: "NOT_SURE" }
+    { text: "ยังไม่แน่ใจ", value: "NOT_SURE" }
   ]
 }
 
