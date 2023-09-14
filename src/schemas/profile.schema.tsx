@@ -60,11 +60,12 @@ const ProfileSchema = object()
       interviewAvailability: string().trim().required("กรุณาเลือกคำตอบ"),
       unavailableReason: string()
         .trim()
-        .nullable(true)
         .when("interviewAvailability", {
-          is: "ไม่ว่าง",
-          then: string().trim().required("กรุณาระบุสาเหตุที่ไม่สะดวก")
+          is: "UNAVAILABLE",
+          then: string().trim().required("กรุณาระบุสาเหตุที่ไม่สะดวก"),
+          otherwise: string().trim().nullable(true)
         })
+        .nullable(true)
     }).required()
   })
   .defined()
