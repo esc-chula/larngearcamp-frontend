@@ -5,7 +5,8 @@ const interviewAvailabilityConstant: SelectModel = {
   label: "",
   contents: [
     { text: "สะดวก", value: "AVAILABLE" },
-    { text: "ไม่สะดวก", value: "UNAVAILABLE" },
+    { text: "ไม่สะดวกเนื่องจากอยู่ต่างจังหวัด", value: "UPCOUNTRY" },
+    { text: "ไม่สะดวกเนื่องจากเหตุผลอื่น", value: "UNAVAILABLE" },
     { text: "ยังไม่แน่ใจ", value: "NOT_SURE" }
   ]
 }
