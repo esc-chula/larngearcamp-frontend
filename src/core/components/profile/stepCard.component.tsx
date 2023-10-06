@@ -235,6 +235,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   {text.primaryButton &&
                     renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
                 </div>
+                <div className={classes.buttonContainer}>
+                  {text.secondaryButton &&
+                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, true, text.secondaryButton.isExternalPath)}
+                </div>
               </>
             )}
             {interviewType === "onsite" && (
@@ -265,6 +269,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   style={{ color: "#941014" }}>
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
                 </a>
+                <div className={classes.buttonContainer}>
+                  {text.secondaryButton &&
+                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, true, text.secondaryButton.isExternalPath)}
+                </div>
               </>
             )}
           </>
@@ -280,8 +288,8 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
     )
   }
 
-  const checkInterviewType = (lgNumber: string): string => {
-    if (lgNumber.includes("A") || lgNumber.includes("C")) return "onsite"
+  const checkInterviewType = (interviewAvailability: string): string => {
+    if (interviewAvailability.includes("AVAILABLE") || interviewAvailability.includes("NOT_SURE")) return "onsite"
     return "online"
   }
 
@@ -316,7 +324,11 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           </>
         )}
         {step === 4 && (
-          <InterviewStepCard status={status} interviewType={checkInterviewType(application.lgNumber)} interviewTime={application.interviewTime} />
+          <InterviewStepCard
+            status={status}
+            interviewType={checkInterviewType(application.interviewAvailability)}
+            interviewTime={application.interviewTime}
+          />
         )}
         {step !== 4 && (
           <>

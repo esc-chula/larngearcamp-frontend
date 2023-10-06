@@ -170,6 +170,11 @@ const stepCardConstant: StepCardModel = {
           opensDialog: false,
           path: "https://chula.zoom.us/j/7409948814?pwd=eE03cGc5YlRpWElCM3BNWWUwakhNZz09",
           isExternalPath: true
+        },
+        secondaryButton: {
+          label: "เลือกไซส์เสื้อ",
+          opensDialog: true,
+          dialogType: "shirtSize"
         }
       }
     },
@@ -197,7 +202,7 @@ const stepCardConstant: StepCardModel = {
           </>
         ),
         contents:
-          "ขอแสดงความเสียใจด้วยนะครับ น้องไม่ผ่านการคัดเลือก แต่ไม่ต้องเสียใจไปนะ !! พวกพี่ยินดีให้คำปรึกษาได้ ทุก ๆ เรื่องเลย โดยน้องสามารถทักเข้ามาได้ที่เพจเฟสบุค LarnGear Camp ได้เสมอเลยนะ ขอบคุณที่ให้ความสนใจในค่ายลานเกียร์ครับ :)"
+          "ขอแสดงความเสียใจด้วยนะครับ น้องไม่ผ่านการคัดเลือก แต่ไม่ต้องเสียใจไปนะ !! พวกพี่ยินดีให้คำปรึกษาได้ ทุก ๆ เรื่องเลย โดยน้องสามารถทักเข้ามาได้ที่เพจเฟซบุ๊ก LarnGear Camp ได้เสมอเลยนะ ขอบคุณที่ให้ความสนใจในค่ายลานเกียร์ครับ :)"
       }
     }
   },
@@ -226,7 +231,7 @@ const stepCardConstant: StepCardModel = {
           dialogType: "payment"
         },
         secondaryButton: {
-          label: "เลือกไซส์เสื้อ",
+          label: "แก้ไขไซส์เสื้อ",
           opensDialog: true,
           dialogType: "shirtSize"
         }
