@@ -207,12 +207,19 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
     if (status === "inProgress") {
       if (!interviewTime) {
         return (
-          <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
-            <>
-              ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์สัมภาษณ์ เตรียมตัวได้พบปะพูดคุยกับพี่ ๆ ผู้สัมภาษณ์สุดน่ารักและใจดีในวันที่ 21 ตุลาคม 2566
-              ณ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย สำหรับน้อง ๆ กรุงเทพฯ และปริมณฑล หรือ สัมภาษณ์ผ่านทางซูมสำหรับน้อง ๆ ต่างจังหวัด ได้เลย !!
-            </>
-          </Typography>
+          <>
+            <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
+              <>
+                ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์สัมภาษณ์ เตรียมตัวได้พบปะพูดคุยกับพี่ ๆ ผู้สัมภาษณ์สุดน่ารักและใจดีในวันที่ 21 ตุลาคม
+                2566 ณ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย สำหรับน้อง ๆ กรุงเทพฯ และปริมณฑล หรือ สัมภาษณ์ผ่านทางซูมสำหรับน้อง ๆ ต่างจังหวัด ได้เลย
+                !!
+              </>
+            </Typography>
+            <div className={classes.buttonContainer}>
+              {text.secondaryButton &&
+                renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
+            </div>
+          </>
         )
       } else {
         return (
