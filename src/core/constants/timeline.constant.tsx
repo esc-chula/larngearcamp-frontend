@@ -25,8 +25,8 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2566, 9, 11),
-      end: new Date(2566, 9, 11)
+      start: new Date(2566, 9, 14),
+      end: new Date(2566, 9, 14)
     },
     title: "ประกาศผลผู้มีสิทธิ์สัมภาษณ์"
   },
