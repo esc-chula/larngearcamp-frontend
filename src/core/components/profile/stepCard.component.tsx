@@ -234,8 +234,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 <div className={classes.buttonContainer}>
                   {text.primaryButton &&
                     renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
-                </div>
-                <div className={classes.buttonContainer}>
                   {text.secondaryButton &&
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
                 </div>
@@ -270,8 +268,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
                 </a>
                 <div className={classes.buttonContainer}>
-                  {text.primaryButton &&
-                    renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
                   {text.secondaryButton &&
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
                 </div>
@@ -291,7 +287,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   }
 
   const checkInterviewType = (interviewAvailability: string): string => {
-    if (interviewAvailability.includes("AVAILABLE") || interviewAvailability.includes("NOT_SURE")) return "onsite"
+    if (interviewAvailability === "AVAILABLE" || interviewAvailability === "NOT_SURE") return "onsite"
     return "online"
   }
 
