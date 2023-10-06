@@ -43,7 +43,7 @@ const ProfileSchema = object()
       homeNumber: string()
         .trim()
         .matches(/^(\d{9})|(-)|\s{0}$/, "เบอร์โทรศัพท์บ้านไม่ถูกต้อง"),
-      facebookName: string().trim().required("กรุณาระบุชื่อเฟสบุ๊ค"),
+      facebookName: string().trim().required("กรุณาระบุชื่อเฟซบุ๊ก"),
       lineId: string().trim().required("กรุณาระบุไลน์ไอดี"),
       email: string()
         .trim()

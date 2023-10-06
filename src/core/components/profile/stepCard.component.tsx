@@ -237,7 +237,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 </div>
                 <div className={classes.buttonContainer}>
                   {text.secondaryButton &&
-                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, true, text.secondaryButton.isExternalPath)}
+                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
                 </div>
               </>
             )}
@@ -251,7 +251,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   {resolveRegistraionTime(interviewTime)}
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟสบุค LarnGear Camp
+                  น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟซบุ๊ก LarnGear Camp
                 </Typography>
                 <a
                   href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl"
@@ -270,8 +270,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
                 </a>
                 <div className={classes.buttonContainer}>
+                  {text.primaryButton &&
+                    renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
                   {text.secondaryButton &&
-                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, true, text.secondaryButton.isExternalPath)}
+                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
                 </div>
               </>
             )}
