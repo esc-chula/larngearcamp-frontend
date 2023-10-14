@@ -232,12 +232,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                   {text.contents}
                 </Typography>
-                {/* <div className={classes.buttonContainer}>
-                  {text.primaryButton &&
-                    renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
-                  {text.secondaryButton &&
-                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
-                </div> */}
                 <div className={classes.buttonContainer}>
                   {text.primaryButton &&
                     renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
@@ -258,7 +252,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟซบุ๊ก LarnGear Camp
                 </Typography>
-                <a
+                {/* <a
                   href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl"
                   className="no-underline"
                   target="_blank"
@@ -273,7 +267,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
-                </a>
+                </a> */}
                 <div className={classes.buttonContainer}>
                   {text.secondaryButton &&
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}

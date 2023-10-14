@@ -121,13 +121,13 @@ const stepCardConstant: StepCardModel = {
         title: "รอบสัมภาษณ์",
         contents: (
           <>
-            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ที่ปุ่มด้านล่างก่อนเวลาอย่างน้อย 10 นาทีนะครับ{" "}
+            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ก่อนเวลาอย่างน้อย 10 นาทีนะครับ{" "}
             {/* <div style={{ marginTop: "0.75rem" }}>
               <Link to="/assets/file/virtualbg.png" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
                 ดาวน์โหลดรูป Virtual Background ที่ใช้ในการสัมภาษณ์
               </Link>
             </div> */}
-            <div style={{ marginTop: "0.75rem" }}>
+            {/* <div style={{ marginTop: "0.75rem" }}>
               <a
                 href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl"
                 className="no-underline"
@@ -162,15 +162,15 @@ const stepCardConstant: StepCardModel = {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </>
         ),
-        primaryButton: {
-          label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
-          opensDialog: false,
-          path: "https://chula.zoom.us/j/7409948814?pwd=eE03cGc5YlRpWElCM3BNWWUwakhNZz09",
-          isExternalPath: true
-        },
+        // primaryButton: {
+        //   label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
+        //   opensDialog: false,
+        //   path: "https://chula.zoom.us/j/7409948814?pwd=eE03cGc5YlRpWElCM3BNWWUwakhNZz09",
+        //   isExternalPath: true,
+        // },
         secondaryButton: {
           label: "เลือกไซส์เสื้อ",
           opensDialog: true,
