@@ -122,11 +122,11 @@ const stepCardConstant: StepCardModel = {
         contents: (
           <>
             การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ก่อนเวลาอย่างน้อย 10 นาทีนะครับ{" "}
-            {/* <div style={{ marginTop: "0.75rem" }}>
-              <Link to="/assets/file/virtualbg.png" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+            <div style={{ marginTop: "0.75rem" }}>
+              <Link to="/assets/file/BG-zoom-วันสัมภาษณ์.jpg" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
                 ดาวน์โหลดรูป Virtual Background ที่ใช้ในการสัมภาษณ์
               </Link>
-            </div> */}
+            </div>
             {/* <div style={{ marginTop: "0.75rem" }}>
               <a
                 href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl"
