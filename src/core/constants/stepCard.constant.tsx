@@ -151,31 +151,31 @@ const stepCardConstant: StepCardModel = {
                 style={{ color: "#941014" }}>
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
-            </div>
+            </div> */}
             <div style={{ marginTop: "0.75rem" }}>
               <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
-              <div style={{ fontWeight: 400 }}>Meeting ID: 740 994 8814</div>
-              <div style={{ fontWeight: 400 }}>Password: 311510</div>
+              <div style={{ fontWeight: 400 }}>Meeting ID: 702 856 2571</div>
+              {/* <div style={{ fontWeight: 400 }}>Password: 311510</div> */}
             </div>
             <div style={{ marginTop: "0.75rem" }}>
               <div>
                 หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                 <div>
-                  พี่ต้นกล้า:{" "}
-                  <a className="no-underline" href="tel:+6693-156-9544" style={{ color: "#941014" }}>
-                    093-156-9544
+                  พี่เทมส์:{" "}
+                  <a className="no-underline" href="tel:+6696-090-7391" style={{ color: "#941014" }}>
+                    096-090-7391
                   </a>
                 </div>
               </div>
-            </div> */}
+            </div>
           </>
         ),
-        // primaryButton: {
-        //   label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
-        //   opensDialog: false,
-        //   path: "https://chula.zoom.us/j/7409948814?pwd=eE03cGc5YlRpWElCM3BNWWUwakhNZz09",
-        //   isExternalPath: true,
-        // },
+        primaryButton: {
+          label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
+          opensDialog: false,
+          path: "https://chula.zoom.us/j/7028562571?pwd=K09PZ05oTkZ0eFhTNEpkWUdvRUNRUT09",
+          isExternalPath: true
+        },
         secondaryButton: {
           label: "เลือกไซส์เสื้อ",
           opensDialog: true,
