@@ -252,15 +252,15 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟซบุ๊ก LarnGear Camp
                 </Typography>
-                {/* <a
-                  href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl"
+                <a
+                  href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02MyjEW87kj9Jo6GS3nP8cDLnR2yVEWnmxQ2qRWJVdeg6CkBE9AoG1cRUrjrVTy8uKl"
                   className="no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   Checklist สำหรับการเตรียมตัวสัมภาษณ์
                 </a>
-                <a
+                {/* <a
                   href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid0qHjUB1QDSmzqxhhjDPmt5E42BKmcD37qqcTJXkYPjnp6jvy6CK125dvHCmm6AhScl"
                   className="no-underline"
                   target="_blank"

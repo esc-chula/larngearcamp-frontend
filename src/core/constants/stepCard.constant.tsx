@@ -123,13 +123,18 @@ const stepCardConstant: StepCardModel = {
           <>
             การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ก่อนเวลาอย่างน้อย 10 นาทีนะครับ{" "}
             <div style={{ marginTop: "0.75rem" }}>
-              <Link to="/assets/file/BG-zoom-วันสัมภาษณ์.jpg" className="no-underline" target="_blank" rel="noopener noreferrer" style={{ color: "#941014" }}>
+              <Link
+                to="/assets/file/BG-zoom-วันสัมภาษณ์.jpg"
+                className="no-underline"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "#941014" }}>
                 ดาวน์โหลดรูป Virtual Background ที่ใช้ในการสัมภาษณ์
               </Link>
             </div>
-            {/* <div style={{ marginTop: "0.75rem" }}>
+            <div style={{ marginTop: "0.75rem" }}>
               <a
-                href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02Vhwr6ocq8a9tQCgEmeBAweejkbaWrkaCJvpv3jNwaUtsjdFT7Yx7sfc5QXo9oMcyl"
+                href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02MyjEW87kj9Jo6GS3nP8cDLnR2yVEWnmxQ2qRWJVdeg6CkBE9AoG1cRUrjrVTy8uKl"
                 className="no-underline"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -137,7 +142,7 @@ const stepCardConstant: StepCardModel = {
                 Checklist สำหรับการเตรียมตัวสัมภาษณ์
               </a>
             </div>
-            <div style={{ marginTop: "0.75rem" }}>
+            {/* <div style={{ marginTop: "0.75rem" }}>
               <a
                 className="no-underline"
                 href="https://drive.google.com/drive/folders/1ep5HLhhtOoQZmeYC_72k-N5_R8uZ0OV7?fbclid=IwAR2D54svAORwa_eIZkqsqplJcYacucO4kBK6Pe40a6f5BpDBh7bNTIClkOE"
