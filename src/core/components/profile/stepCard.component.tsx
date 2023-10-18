@@ -260,14 +260,14 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   style={{ color: "#941014" }}>
                   Checklist สำหรับการเตรียมตัวสัมภาษณ์
                 </a>
-                {/* <a
-                  href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid0qHjUB1QDSmzqxhhjDPmt5E42BKmcD37qqcTJXkYPjnp6jvy6CK125dvHCmm6AhScl"
+                <a
+                  href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02y318zdQrx7oSCxni9ZfKUGdBFjBpAsfnXEqNhCSW4p2ZUboi8yUdaUyZi8gDLoD1l"
                   className="no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
-                </a> */}
+                </a>
                 <div className={classes.buttonContainer}>
                   {text.secondaryButton &&
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
