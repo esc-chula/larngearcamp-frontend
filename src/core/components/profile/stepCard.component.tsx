@@ -27,8 +27,7 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1)
   },
   icon: {
-    height: 16,
-    padding: theme.spacing(1.5, 2.5)
+    height: 16
   },
   redCircle: {
     background: theme.palette.primary.main,
@@ -248,7 +247,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                   {text.contents}
-                  รบกวนน้องตั้งชื่อใน ZOOM ว่า {zoomName} นะครับ <CopyToClipboardButton className={classes.icon} />
+                  รบกวนน้องตั้งชื่อใน ZOOM ว่า "{zoomName}" นะครับ <CopyToClipboardButton className={classes.icon} />
                 </Typography>
 
                 <div className={classes.buttonContainer}>
