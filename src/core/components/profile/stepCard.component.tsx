@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1)
   },
   icon: {
-    height: 16
+    height: 22,
+    verticalAlign: "sub"
   },
   redCircle: {
     background: theme.palette.primary.main,
