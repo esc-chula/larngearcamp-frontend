@@ -7,6 +7,7 @@ import { useApplicationStateContext } from "../../providers/applicationState.pro
 import { dateToLocaleString, resolveRegistraionTime } from "../../../utils/conversion"
 import { useAuthContext } from "../../providers/auth.provider"
 import MyProfileModel from "../../models/myprofile.models"
+import copyToClipBoard from "../../assets/images/icon/copy-to-clipboard.svg"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -150,10 +151,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const { openPaymentDialog, openShirtSizeDialog } = useDialogContext()
   const { me } = useAuthContext()
   const { application } = useApplicationStateContext()
-
   const { documentState } = me.data as MyProfileModel
 
   const text = stepCardConstant[step][status][isApproved]!
+  const zoomName = application.lgNumber.trim().substring(3) + "_" + application.firstName.trim()
 
   const setStepIndicatorStyles = (status: String) => {
     switch (status) {
@@ -178,6 +179,14 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
         {isPrimary ? text.primaryButton!.label : text.secondaryButton!.label}
       </Button>
     )
+  }
+
+  const copyTextToClipboard = async () => {
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(zoomName)
+    } else {
+      return document.execCommand("copy", true, zoomName)
+    }
   }
 
   const renderButton = (opensDialog: boolean, dialogType: string | undefined, isPrimary: boolean, isExternalPath: boolean | undefined) => {
@@ -231,7 +240,9 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                   {text.contents}
+                  ตั้งชื่อ LG {zoomName} <img src={copyToClipBoard} onClick={copyTextToClipboard} alt="" />
                 </Typography>
+
                 <div className={classes.buttonContainer}>
                   {text.primaryButton &&
                     renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
@@ -267,6 +278,14 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
+                </a>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdKhVP_C7tZ1-xDzVEQu6mloZPcveaLgBvkzx52JBfo4wuKPw/viewform"
+                  className="no-underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#941014" }}>
+                  แบบฟอร์มยินยอมให้เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล
                 </a>
                 <div className={classes.buttonContainer}>
                   {text.secondaryButton &&
