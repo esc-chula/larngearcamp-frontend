@@ -157,7 +157,7 @@ const stepCardConstant: StepCardModel = {
               <div style={{ fontWeight: 400 }}>Meeting ID: 702 856 2571</div>
               {/* <div style={{ fontWeight: 400 }}>Password: 311510</div> */}
             </div>
-            <div style={{ marginTop: "0.75rem" }}>
+            <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
               <div>
                 หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                 <div>
