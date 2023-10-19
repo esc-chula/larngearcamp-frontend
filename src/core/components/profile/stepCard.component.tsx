@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1)
   },
   icon: {
-    height: 16
+    height: 16,
+    padding: theme.spacing(1.5, 2.5)
   },
   redCircle: {
     background: theme.palette.primary.main,
@@ -188,10 +189,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
     if ("clipboard" in navigator) return await navigator.clipboard.writeText(zoomName)
   }
 
-  const CopyToClipboardIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
+  const CopyToClipboardButton: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
     return (
-      <Button variant={"contained"} disableElevation className={classes.solid}>
-        <img src={copyToClipBoard} onClick={copyZoomNameToClipboard} alt="" {...props} />{" "}
+      <Button variant={"contained"} disableElevation className={classes.solid} onClick={copyZoomNameToClipboard}>
+        <img src={copyToClipBoard} alt="" {...props} />{" "}
       </Button>
     )
   }
@@ -247,7 +248,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                   {text.contents}
-                  รบกวนน้องตั้งชื่อใน ZOOM ว่า {zoomName} <CopyToClipboardIcon className={classes.icon} /> นะครับ
+                  รบกวนน้องตั้งชื่อใน ZOOM ว่า {zoomName} นะครับ <CopyToClipboardButton className={classes.icon} />
                 </Typography>
 
                 <div className={classes.buttonContainer}>
