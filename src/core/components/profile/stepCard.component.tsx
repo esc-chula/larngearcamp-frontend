@@ -7,7 +7,7 @@ import { useApplicationStateContext } from "../../providers/applicationState.pro
 import { dateToLocaleString, resolveRegistraionTime } from "../../../utils/conversion"
 import { useAuthContext } from "../../providers/auth.provider"
 import MyProfileModel from "../../models/myprofile.models"
-import copyToClipBoard from "../../assets/images/icon/copy-to-clipboard.svg"
+import copyToClipBoard from "../../../assets/images/icon/copy-to-clipboard.svg"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -181,12 +181,16 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
     )
   }
 
-  const copyTextToClipboard = async () => {
+  const copyZoomNameToClipboard = async () => {
     if ("clipboard" in navigator) {
       return await navigator.clipboard.writeText(zoomName)
     } else {
       return document.execCommand("copy", true, zoomName)
     }
+  }
+
+  const CopyToClipboardIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
+    return <img src={copyToClipBoard} onClick={copyZoomNameToClipboard} alt="" {...props} />
   }
 
   const renderButton = (opensDialog: boolean, dialogType: string | undefined, isPrimary: boolean, isExternalPath: boolean | undefined) => {
@@ -240,7 +244,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                   {text.contents}
-                  ตั้งชื่อ LG {zoomName} <img src={copyToClipBoard} onClick={copyTextToClipboard} alt="" />
+                  ตั้งชื่อ LG {zoomName} <CopyToClipboardIcon />
                 </Typography>
 
                 <div className={classes.buttonContainer}>
