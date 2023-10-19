@@ -188,12 +188,8 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
     if ("clipboard" in navigator) return await navigator.clipboard.writeText(zoomName)
   }
 
-  const CopyToClipboardButton: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
-    return (
-      <Button variant={"contained"} disableElevation className={classes.solid} onClick={copyZoomNameToClipboard}>
-        <img src={copyToClipBoard} alt="" {...props} />{" "}
-      </Button>
-    )
+  const CopyToClipboardIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
+    return <img src={copyToClipBoard} onClick={copyZoomNameToClipboard} alt="" {...props} />
   }
 
   const renderButton = (opensDialog: boolean, dialogType: string | undefined, isPrimary: boolean, isExternalPath: boolean | undefined) => {
@@ -247,7 +243,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                   {text.contents}
-                  รบกวนน้องตั้งชื่อใน ZOOM ว่า "{zoomName}" นะครับ <CopyToClipboardButton className={classes.icon} />
+                  รบกวนน้องตั้งชื่อใน ZOOM ว่า "{zoomName}" นะครับ <CopyToClipboardIcon className={classes.icon} />
                 </Typography>
 
                 <div className={classes.buttonContainer}>
