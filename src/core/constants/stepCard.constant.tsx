@@ -142,16 +142,16 @@ const stepCardConstant: StepCardModel = {
                 Checklist สำหรับการเตรียมตัวสัมภาษณ์
               </a>
             </div>
-            {/* <div style={{ marginTop: "0.75rem" }}>
+            <div style={{ marginTop: "0.75rem" }}>
               <a
                 className="no-underline"
-                href="https://drive.google.com/drive/folders/1ep5HLhhtOoQZmeYC_72k-N5_R8uZ0OV7?fbclid=IwAR2D54svAORwa_eIZkqsqplJcYacucO4kBK6Pe40a6f5BpDBh7bNTIClkOE"
+                href="https://drive.google.com/drive/folders/1J8suhI_8cDvV8aoZKcTNldUTldJGJDWf"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#941014" }}>
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
-            </div> */}
+            </div>
             <div style={{ marginTop: "0.75rem" }}>
               <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
               <div style={{ fontWeight: 400 }}>Meeting ID: 702 856 2571</div>
