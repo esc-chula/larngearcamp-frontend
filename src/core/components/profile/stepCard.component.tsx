@@ -26,6 +26,9 @@ const useStyles = makeStyles(theme => ({
     height: 56,
     margin: theme.spacing(1)
   },
+  icon: {
+    height: 16
+  },
   redCircle: {
     background: theme.palette.primary.main,
     color: "#FFFFFF" //theme.palette.gray[0]
@@ -186,7 +189,11 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   }
 
   const CopyToClipboardIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
-    return <img src={copyToClipBoard} onClick={copyZoomNameToClipboard} alt="" {...props} height={16} />
+    return (
+      <Button variant={"contained"} disableElevation className={classes.solid}>
+        <img src={copyToClipBoard} onClick={copyZoomNameToClipboard} alt="" {...props} />{" "}
+      </Button>
+    )
   }
 
   const renderButton = (opensDialog: boolean, dialogType: string | undefined, isPrimary: boolean, isExternalPath: boolean | undefined) => {
@@ -240,7 +247,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                   {text.contents}
-                  รบกวนน้องตั้งชื่อใน ZOOM ว่า {zoomName} <CopyToClipboardIcon /> นะครับ
+                  รบกวนน้องตั้งชื่อใน ZOOM ว่า {zoomName} <CopyToClipboardIcon className={classes.icon} /> นะครับ
                 </Typography>
 
                 <div className={classes.buttonContainer}>
