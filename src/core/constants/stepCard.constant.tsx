@@ -160,13 +160,13 @@ const stepCardConstant: StepCardModel = {
             <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
               <div>
                 หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
-                <span>
+                <div>
                   พี่เทมส์:{" "}
                   <a className="no-underline" href="tel:+6696-090-7391" style={{ color: "#941014" }}>
                     096-090-7391
                   </a>
-                  (line: chiratt.thames)
-                </span>
+                  <span>(line: chiratt.thames)</span>
+                </div>
               </div>
             </div>
           </>
