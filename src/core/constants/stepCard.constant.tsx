@@ -165,6 +165,7 @@ const stepCardConstant: StepCardModel = {
                   <a className="no-underline" href="tel:+6696-090-7391" style={{ color: "#941014" }}>
                     096-090-7391
                   </a>
+                  <span>(line: chiratt.thames)</span>
                 </div>
               </div>
             </div>
