@@ -359,9 +359,9 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             </Typography>
             <div className={classes.buttonContainer}>
               {text.primaryButton &&
+                (step !== 5 || (step === 5 && application.shirtSize)) &&
                 renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
               {text.secondaryButton &&
-                (step !== 5 || (step === 5 && !application.shirtSize)) &&
                 renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
             </div>
           </>

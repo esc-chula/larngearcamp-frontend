@@ -236,6 +236,7 @@ const stepCardConstant: StepCardModel = {
               อย่าลืมชำระเงิน<span style={{ fontWeight: 500, color: "#941014" }}>ก่อนวันที่ 19 พฤศจิกายน</span>{" "}
               เพื่อยืนยันสิทธิ์การเข้าร่วมค่ายด้วยล่ะ !!
             </div>
+            <div style={{ marginTop: "0.75rem" }}>หากไม่เห็นปุ่มชำระค่าใช้จ่าย ให้เลือกไซส์เสื้อก่อน แล้ว Refresh อีกครั้ง</div>
           </>
         ),
         primaryButton: {
