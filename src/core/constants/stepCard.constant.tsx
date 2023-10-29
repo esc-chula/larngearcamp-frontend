@@ -242,12 +242,12 @@ const stepCardConstant: StepCardModel = {
           label: "ชำระค่าใช้จ่าย",
           opensDialog: true,
           dialogType: "payment"
+        },
+        secondaryButton: {
+          label: "เลือกไซส์เสื้อ",
+          opensDialog: true,
+          dialogType: "shirtSize"
         }
-        // secondaryButton: {
-        //   label: "แก้ไขไซส์เสื้อ",
-        //   opensDialog: true,
-        //   dialogType: "shirtSize"
-        // }
       }
     },
     complete: {
