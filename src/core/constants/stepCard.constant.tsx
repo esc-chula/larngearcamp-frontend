@@ -152,20 +152,27 @@ const stepCardConstant: StepCardModel = {
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
             </div>
-            <div style={{ marginTop: "0.75rem" }}>
+            {/* <div style={{ marginTop: "0.75rem" }}>
               <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
               <div style={{ fontWeight: 400 }}>Meeting ID: 702 856 2571</div>
-              {/* <div style={{ fontWeight: 400 }}>Password: 311510</div> */}
-            </div>
+              <div style={{ fontWeight: 400 }}>Password: 311510</div>
+            </div> */}
             <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
               <div>
                 หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                 <div>
-                  พี่เทมส์:{" "}
-                  <a className="no-underline" href="tel:+6696-090-7391" style={{ color: "#941014" }}>
-                    096-090-7391
+                  พี่ปามมี่:
+                  <a className="no-underline" href="tel:+6681-643-7506" style={{ color: "#941014" }}>
+                    081-643-7506
                   </a>
-                  <span>(line: chiratt.thames)</span>
+                  <span>(line: palmmy648)</span>
+                </div>
+                <div>
+                  พี่เจตน์:
+                  <a className="no-underline" href="tel:+6690-043-6666" style={{ color: "#941014" }}>
+                    090-043-6666
+                  </a>
+                  <span>(line: swanix)</span>
                 </div>
               </div>
             </div>
@@ -174,7 +181,7 @@ const stepCardConstant: StepCardModel = {
         primaryButton: {
           label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
-          path: "https://chula.zoom.us/j/7028562571?pwd=K09PZ05oTkZ0eFhTNEpkWUdvRUNRUT09",
+          path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
           isExternalPath: true
         },
         secondaryButton: {
