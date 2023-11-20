@@ -296,10 +296,10 @@ const stepCardConstant: StepCardModel = {
           <>
             ขอแสดงความยินดีด้วย !! น้องเป็นหนึ่งในผู้ที่มีสิทธิ์เข้าร่วมค่ายลานเกียร์ครั้งที่ 23 อย่างเป็นทางการแล้ว โดยวันค่ายจะจัดขึ้นในวันที่ 4 - 7
             มกราคม 2567 นี้ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัยนั่นเอง
-            {/* <div style={{ marginTop: "0.75rem" }}>
-              หลังจากนี้หากน้อง ๆ ยังไม่ได้กรอกฟอร์มยินยอมมาตราการป้องกันโควิดอย่าลืมกรอกกันด้วยหล่ะ และหากน้อง ๆ มีข้อสงสัยใด ๆ
+            <div style={{ marginTop: "0.75rem" }}>
+              หลังจากนี้หากน้อง ๆ ยังไม่ได้กรอกฟอร์มยินยอมมาตรการป้องกันโควิดอย่าลืมกรอกกันด้วยหล่ะ และหากน้อง ๆ มีข้อสงสัยใด ๆ
               สามารถทักมาสอบถามได้ผ่านทางเฟซบุ๊กเพจ LarnGear Camp ตลอดเลยนะครับ ไว้เจอกันที่ลานเกียร์ฮ๊าฟฟฟฟ :)
-            </div> */}
+            </div>
             <div style={{ marginTop: "0.75rem" }}>
               สำหรับน้อง ๆ ที่ต้องการขอเอกสารเพื่อขอลาเรียนที่โรงเรียน ให้ดาวน์โหลดเอกสารด้านล่างได้เลย
               <ul>
@@ -328,13 +328,13 @@ const stepCardConstant: StepCardModel = {
           opensDialog: false,
           path: "https://goo.gl/maps/UTZFQZgm2PVaeKYT9",
           isExternalPath: true
+        },
+        secondaryButton: {
+          label: "ฟอร์มยินยอมปฏิบัติตามมาตรการป้องกันโควิด",
+          opensDialog: false,
+          path: "https://forms.gle/3RCX8AhD5c6JjDo87",
+          isExternalPath: true
         }
-        // secondaryButton: {
-        //   label: "ฟอร์มยินยอมปฏิบัติตามมาตราการป้องกันโควิด",
-        //   opensDialog: false,
-        //   path: "https://forms.gle/3RCX8AhD5c6JjDo87",
-        //   isExternalPath: true
-        // }
       }
     },
     complete: {
