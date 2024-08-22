@@ -7,12 +7,12 @@ export interface TimelineModel {
 }
 // Month is 0-based index
 const nowDate = new Date()
-const endFakeDate = new Date(2566, 8, 29)
+const endFakeDate = new Date(2567, 8, 15)
 const timelineConstant: Array<TimelineModel> = [
   {
     duration: {
-      start: new Date(2566, 8, 11),
-      end: nowDate < endFakeDate ? new Date(2566, 8, 29) : new Date(2566, 8, 29)
+      start: new Date(2567, 8, 2),
+      end: nowDate < endFakeDate ? new Date(2567, 8, 15) : new Date(2567, 8, 20)
     },
     title: "รับสมัคร"
   },
@@ -25,22 +25,22 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2566, 9, 14),
-      end: new Date(2566, 9, 14)
+      start: new Date(2567, 9, 9),
+      end: new Date(2567, 9, 9)
     },
     title: "ประกาศผลผู้มีสิทธิ์สัมภาษณ์"
   },
   {
     duration: {
-      start: new Date(2566, 9, 21),
-      end: new Date(2566, 9, 21)
+      start: new Date(2567, 9, 19),
+      end: new Date(2567, 9, 19)
     },
     title: "สัมภาษณ์รอบกรุงเทพฯ และปริมณฑล"
   },
   {
     duration: {
-      start: new Date(2566, 9, 21),
-      end: new Date(2566, 9, 21)
+      start: new Date(2567, 9, 19),
+      end: new Date(2567, 9, 19)
     },
     title: "สัมภาษณ์รอบต่างจังหวัด"
   },
@@ -60,10 +60,10 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2567, 0, 4),
-      end: new Date(2567, 0, 7)
+      start: new Date(2568, 0, 2),
+      end: new Date(2568, 0, 5)
     },
-    title: "ค่ายลานเกียร์ครั้งที่ 23"
+    title: `ค่ายลานเกียร์ครั้งที่ ${process.env.REACT_APP_CAMP_YEAR}`
   }
 ]
 

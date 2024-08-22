@@ -91,8 +91,8 @@ const PaymentDialog: React.FC<PaymentDialogProps> = ({ open, paymentStatus, serv
 
       <DialogContent>
         <DialogContentText>
-          โปรดชำระค่าใช้จ่ายมาที่บัญชีด้านล่าง จากนั้นอัพโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ
-          {/* สแกน QR Code เพื่อชำระค่าใช้จ่ายด้วย Mobile Banking Application จากนั้นอัพโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ */}
+          โปรดชำระค่าใช้จ่ายมาที่บัญชีด้านล่าง จากนั้นอัปโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ
+          {/* สแกน QR Code เพื่อชำระค่าใช้จ่ายด้วย Mobile Banking Application จากนั้นอัปโหลดหลักฐานการชำระเงินขึ้นสู่ระบบ */}
         </DialogContentText>
         {/* <FormGroup className={classes.checkboxContainer}>
           <FormControlLabel

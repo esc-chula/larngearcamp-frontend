@@ -68,7 +68,7 @@ const ApplicationFinishModule = () => {
         </Box>
 
         <Typography variant="h5" align="center" className={classes.bold}>
-          สิ้นสุดการสมัครค่ายลานเกียร์ครั้งที่ 23
+          สิ้นสุดการสมัครค่ายลานเกียร์ครั้งที่ {process.env.REACT_APP_CAMP_YEAR}
         </Typography>
 
         <Divider className={classes.divider} />

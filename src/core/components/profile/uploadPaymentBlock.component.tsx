@@ -76,7 +76,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
               errorMessage.current = ""
             } catch (error) {
               if (!(error as AxiosError).request.responseText) {
-                errorMessage.current = "อัพโหลดไม่สำเร็จ กรุณาลองใหม่ด้วยสัญญาณอินเตอร์เน็ตที่เร็วขึ้น หรือเลือกไฟล์ที่มีขนาดเล็กกว่านี้"
+                errorMessage.current = "อัปโหลดไม่สำเร็จ กรุณาลองใหม่ด้วยสัญญาณอินเตอร์เน็ตที่เร็วขึ้น หรือเลือกไฟล์ที่มีขนาดเล็กกว่านี้"
               } else {
                 errorMessage.current = (error as AxiosError).response?.data.message
               }
@@ -103,7 +103,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
         </Typography>
       )}
       <Button variant="outlined" component="label" className={classes.button} disabled={isUpload}>
-        {status === "EMPTY" ? "อัพโหลดหลักฐานการชำระเงิน" : "อัพโหลดอีกครั้ง"}
+        {status === "EMPTY" ? "อัปโหลดหลักฐานการชำระเงิน" : "อัปโหลดอีกครั้ง"}
         <input type="file" name="payment" hidden accept="image/jpeg, image/png" onChange={uploadFile} />
       </Button>
       {!!displayFile.url && status !== "EMPTY" && errorMessage.current === "" && (

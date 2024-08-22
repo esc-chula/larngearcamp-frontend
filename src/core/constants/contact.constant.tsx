@@ -3,6 +3,7 @@ export interface ContactModel {
   lineId: string
 }
 
+// TODO
 const contactConstant: Array<ContactModel> = [
   { name: "พี่ปิงปอง ( P’Pingpong )", lineId: "LineID : pingpong2003" },
   { name: "พี่น้ำพั้นซ์ ( P’Numpunch )", lineId: "LineID : _psnrt_" },
