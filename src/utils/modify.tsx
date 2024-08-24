@@ -20,6 +20,7 @@ export const convertProfileSchemaToProfileDTO = (props: ProfileModel): ProfileDT
     birthDate: props.birthDate,
     phoneNumber: props.phoneNumber,
     religion: props.religion,
+    shirtSize: props.shirtSize,
     educationLevel: props.education,
     educationProgram: props.studyProgram,
     educationalInstitution: props.school,

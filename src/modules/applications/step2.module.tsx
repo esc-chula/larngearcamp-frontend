@@ -73,6 +73,7 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
     school: application.educationalInstitution,
     province: application.educationalInstitutionProvince,
     religion: application.religion,
+    shirtSize: application.shirtSize,
     health: {
       allergicDrug: application.allergicDrug,
       allergicFood: application.foodRestriction,

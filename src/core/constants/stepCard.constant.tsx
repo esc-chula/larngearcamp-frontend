@@ -183,12 +183,12 @@ const stepCardConstant: StepCardModel = {
           opensDialog: false,
           path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
           isExternalPath: true
-        },
-        secondaryButton: {
-          label: "เลือกไซส์เสื้อ",
-          opensDialog: true,
-          dialogType: "shirtSize"
         }
+        // secondaryButton: {
+        //   label: "เลือกไซส์เสื้อ",
+        //   opensDialog: true,
+        //   dialogType: "shirtSize"
+        // }
       }
     },
     complete: {
@@ -243,12 +243,12 @@ const stepCardConstant: StepCardModel = {
           label: "ชำระค่าใช้จ่าย",
           opensDialog: true,
           dialogType: "payment"
-        },
-        secondaryButton: {
-          label: "เลือกไซส์เสื้อ",
-          opensDialog: true,
-          dialogType: "shirtSize"
         }
+        // secondaryButton: {
+        //   label: "เลือกไซส์เสื้อ",
+        //   opensDialog: true,
+        //   dialogType: "shirtSize"
+        // }
       }
     },
     complete: {
@@ -323,13 +323,13 @@ const stepCardConstant: StepCardModel = {
           opensDialog: false,
           path: "https://goo.gl/maps/UTZFQZgm2PVaeKYT9",
           isExternalPath: true
-        },
-        secondaryButton: {
-          label: "ฟอร์มยินยอมปฏิบัติตามมาตรการป้องกันโควิด",
-          opensDialog: false,
-          path: "https://forms.gle/3RCX8AhD5c6JjDo87",
-          isExternalPath: true
         }
+        // secondaryButton: {
+        //   label: "ฟอร์มยินยอมปฏิบัติตามมาตรการป้องกันโควิด",
+        //   opensDialog: false,
+        //   path: "https://forms.gle/3RCX8AhD5c6JjDo87",
+        //   isExternalPath: true
+        // }
       }
     },
     complete: {

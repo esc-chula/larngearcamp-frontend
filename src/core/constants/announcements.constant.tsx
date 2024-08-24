@@ -8,9 +8,9 @@ interface AnnouncementConstant {
 }
 
 export const announcementConstant: AnnouncementConstant[] = [
-  {
-    severity: "warning",
-    variant: "standard",
-    content: <>น้อง ๆ ที่ชำระค่าเข้าค่ายแล้ว อย่าลืมกรอกฟอร์มยินยอมมาตรการป้องกันโควิดนะครับ</>
-  }
+  // {
+  //   severity: "warning",
+  //   variant: "standard",
+  //   content: <>น้อง ๆ ที่ชำระค่าเข้าค่ายแล้ว อย่าลืมกรอกฟอร์มยินยอมมาตรการป้องกันโควิดนะครับ</>
+  // }
 ]
