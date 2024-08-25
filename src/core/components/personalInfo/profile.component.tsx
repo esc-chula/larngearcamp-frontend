@@ -48,10 +48,10 @@ const PersonalProfileComponent = () => {
           <Grid item xs={12} sm={6} md={4}>
             <TextFieldComponent name="birthDate" label="วันเกิด" type="date" InputLabelProps={{ shrink: true }} />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={6}>
             <TextFieldComponent name="phoneNumber" label="โทรศัพท์มือถือ" type="tel" />
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={6}>
             <SelectComponent data={shirtSizeConstant} control={control} />
           </Grid>
         </Grid>

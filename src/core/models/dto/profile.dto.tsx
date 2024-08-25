@@ -45,7 +45,7 @@ interface ProfileDTO {
   parentName: string
   parentTelephone: string
   parentRelationship: string
-  shirtSize?: ValidShirtSize
+  shirtSize: ValidShirtSize
   interviewTime?: string
   accommodationRequested?: boolean
   breakfastRequested?: boolean
