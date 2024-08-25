@@ -1,4 +1,4 @@
-import ProfileDTO from "../core/models/dto/profile.dto"
+import ProfileDTO, { ValidShirtSize } from "../core/models/dto/profile.dto"
 import { ProfileModel } from "../schemas/profile.schema"
 import { Answer1Model } from "../schemas/answer1.schema"
 import Answer1DTO from "../core/models/dto/answer1.dto"
@@ -20,7 +20,7 @@ export const convertProfileSchemaToProfileDTO = (props: ProfileModel): ProfileDT
     birthDate: props.birthDate,
     phoneNumber: props.phoneNumber,
     religion: props.religion,
-    shirtSize: props.shirtSize,
+    shirtSize: props.shirtSize as ValidShirtSize,
     educationLevel: props.education,
     educationProgram: props.studyProgram,
     educationalInstitution: props.school,

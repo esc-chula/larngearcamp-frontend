@@ -19,6 +19,7 @@ import { useGlobalContext } from "../../core/providers/global.provider"
 import { AxiosError } from "axios"
 import { ApplicationModels } from "../../core/models/application.models"
 import { PersonalMiscComponent } from "../../core/components/personalInfo/misc.component"
+import { ValidShirtSize } from "../../core/models/dto/profile.dto"
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -73,7 +74,7 @@ function mapApplicationToProfile(application: ApplicationModels): ProfileModel {
     school: application.educationalInstitution,
     province: application.educationalInstitutionProvince,
     religion: application.religion,
-    shirtSize: application.shirtSize ?? "",
+    shirtSize: application.shirtSize === null ? ValidShirtSize.none : application.shirtSize!,
     health: {
       allergicDrug: application.allergicDrug,
       allergicFood: application.foodRestriction,
