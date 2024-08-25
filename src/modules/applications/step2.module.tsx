@@ -98,6 +98,7 @@ const ApplicationStepTwoModule: React.FC = () => {
   const onSubmit = useCallback(
     async data => {
       const values = convertProfileSchemaToProfileDTO(data)
+      console.log(values)
       try {
         await updateApplication(values)
         return true
