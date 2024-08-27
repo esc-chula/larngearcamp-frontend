@@ -18,8 +18,8 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2566, 9, 6),
-      end: new Date(2566, 9, 6)
+      start: new Date(2567, 8, 30),
+      end: new Date(2567, 8, 30)
     },
     title: "แก้ไขเอกสารประกอบการสมัครวันสุดท้าย"
   },
@@ -46,15 +46,15 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2566, 9, 30),
-      end: new Date(2566, 9, 30)
+      start: new Date(2567, 9, 31),
+      end: new Date(2567, 9, 31)
     },
     title: "ประกาศรายชื่อผู้มีสิทธิ์เข้าร่วมค่าย"
   },
   {
     duration: {
-      start: new Date(2566, 9, 30),
-      end: new Date(2566, 10, 19)
+      start: new Date(2567, 9, 31),
+      end: new Date(2567, 10, 10)
     },
     title: "ยืนยันสิทธิ์การเข้าร่วมค่าย"
   },
