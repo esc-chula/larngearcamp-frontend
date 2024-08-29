@@ -61,7 +61,7 @@ const HomeFacebookEmbed: React.FC = props => {
           className={classes.facebookEmbed}
         />
         <Iframe
-          url={`https://www.instagram.com/p/Cw9SOXDpFGg/embed`}
+          url={`https://www.instagram.com/p/C_NoAsuzSGH/?img_index=2/embed`}
           width={`${width}px`}
           height={`${IGHeight}px`}
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
