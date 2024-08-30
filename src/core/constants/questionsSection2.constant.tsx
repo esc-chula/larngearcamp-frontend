@@ -28,11 +28,12 @@ const questionsSection2Constant: Array<QuestionModel> = [
     question:
       "ในการสอบเก็บคะแนนวิชาคณิตศาสตร์ออนไลน์ที่มีลักษณะคำถามเป็นแบบปรนัย (กาช้อยที่ถูกที่สุด) ซึ่งเป็นวิชาที่น้องถนัดมาก ขณะที่น้องกำลังทำข้อสอบพบว่าเพื่อนสนิทของน้องส่งข้อความมาบอกว่าทำข้อสอบไม่ได้ และเพื่อนอาจจะติด มผ (ไม่ผ่านรายวิชา) หากน้องกดอ่านข้อความนั้นไปแล้ว น้องจะรับมือกับสถานการณ์นี้อย่างไร (ไม่เกิน 200 คำ)",
     type: "multiline",
-    imagePath: "src/assets/images/background/bg1.jpg"
+    imagePath: "../../../assets/images/background/bg1.jpg"
   },
   {
     question: "ถ้าน้องต้องสมัครค่ายลานเกียร์น้องจะเลือกโกหกคำตอบหรือพูดความจริง?",
-    type: "multiline"
+    type: "multiline",
+    imagePath: "../assets/images/background/bg1.jpg"
   }
 ]
 
