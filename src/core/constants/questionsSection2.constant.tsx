@@ -44,6 +44,11 @@ const questionsSection2Constant: Array<QuestionModel> = [
     question: "ถ้าน้องต้องสมัครค่ายลานเกียร์น้องจะเลือกโกหกคำตอบหรือพูดความจริง?",
     type: "multiline",
     imagePath: "../../../../assets/images/background/bg1.jpg"
+  },
+  {
+    question: "ถ้าน้องต้องสมัครค่ายลานเกียร์น้องจะเลือกโกหกคำตอบหรือพูดความจริง?",
+    type: "multiline",
+    imagePath: "src/assets/images/background/bg1.jpg"
   }
 ]
 
