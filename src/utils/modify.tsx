@@ -81,6 +81,7 @@ export const convertAnswer2SchemaToAnswer2DTO = (props: Answer2Model): Answer2DT
     answerB3: props.secondPart.answer3,
     answerB4: props.secondPart.answer4,
     answerB5: props.secondPart.answer5,
-    answerB6: props.secondPart.answer6
+    answerB6: props.secondPart.answer6,
+    answerB7: props.secondPart.answer7
   }
 }
