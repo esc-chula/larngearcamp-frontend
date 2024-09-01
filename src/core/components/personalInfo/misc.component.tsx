@@ -29,7 +29,7 @@ const PersonalMiscComponent = () => {
           คำถามเพิ่มเติม
         </Typography>
         <Typography variant="body2" className={`${classes.subtitle}`}>
-          หากน้องผ่านการคัดเลือก น้องสะดวกมาสัมภาษณ์วันที่ 21 ตุลาคม 256 ที่คณะวิศวฯ จุฬาฯ หรือไม่?
+          หากน้องผ่านการคัดเลือก น้องสะดวกมาสัมภาษณ์วันที่ 19 ตุลาคม 2567 ที่คณะวิศวฯ จุฬาฯ หรือไม่?
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={5} md={4}>

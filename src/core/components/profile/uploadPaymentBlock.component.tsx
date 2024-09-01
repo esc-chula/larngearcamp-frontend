@@ -76,7 +76,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
               errorMessage.current = ""
             } catch (error) {
               if (!(error as AxiosError).request.responseText) {
-                errorMessage.current = "อัพโหลดไม่สำเร็จ กรุณาลองใหม่ด้วยสัญญาณอินเตอร์เน็ตที่เร็วขึ้น หรือเลือกไฟล์ที่มีขนาดเล็กกว่านี้"
+                errorMessage.current = "อัปโหลดไม่สำเร็จ กรุณาลองใหม่ด้วยสัญญาณอินเตอร์เน็ตที่เร็วขึ้น หรือเลือกไฟล์ที่มีขนาดเล็กกว่านี้"
               } else {
                 errorMessage.current = (error as AxiosError).response?.data.message
               }
@@ -93,9 +93,9 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
   return (
     <div className={classes.paymentContainer}>
       {/* <img src={paymentQR} alt="QR Code" className={classes.image} /> */}
-      <Typography variant="subtitle1">ชื่อบัญชี กรรมการนิสิต คณะวิศวกรรมศาสตร์ จุฬาฯ</Typography>
-      <Typography variant="subtitle1">ธนาคารไทยพาณิชย์</Typography>
-      <Typography variant="subtitle1">เลขบัญชี 045-286444-0</Typography>
+      <Typography variant="subtitle1">ชื่อบัญชี TBA</Typography> {/* TODO: แก้ชื่อบัญชี */}
+      <Typography variant="subtitle1">ธนาคาร TBA</Typography> {/* TODO: แก้ชื่อธนาคาร */}
+      <Typography variant="subtitle1">เลขบัญชี TBA</Typography> {/* TODO: แก้เลขบัญชี */}
       <Typography variant="subtitle1">จำนวน 750 บาท</Typography>
       {errorMessage.current !== "" && (
         <Typography variant="subtitle2" component="div" className={classes.error}>
@@ -103,7 +103,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
         </Typography>
       )}
       <Button variant="outlined" component="label" className={classes.button} disabled={isUpload}>
-        {status === "EMPTY" ? "อัพโหลดหลักฐานการชำระเงิน" : "อัพโหลดอีกครั้ง"}
+        {status === "EMPTY" ? "อัปโหลดหลักฐานการชำระเงิน" : "อัปโหลดอีกครั้ง"}
         <input type="file" name="payment" hidden accept="image/jpeg, image/png" onChange={uploadFile} />
       </Button>
       {!!displayFile.url && status !== "EMPTY" && errorMessage.current === "" && (

@@ -9,7 +9,8 @@ const Answer2Schema = object()
       answer3: string().trim().required("กรุณากรอกคำตอบ"),
       answer4: string().trim().required("กรุณากรอกคำตอบ"),
       answer5: string().trim().required("กรุณากรอกคำตอบ"),
-      answer6: string().trim().required("กรุณากรอกคำตอบ")
+      answer6: string().trim().required("กรุณากรอกคำตอบ"),
+      answer7: string().trim().required("กรุณากรอกคำตอบ")
     }).required()
   })
   .defined()

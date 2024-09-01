@@ -223,8 +223,8 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           <>
             <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
               <>
-                ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์สัมภาษณ์ เตรียมตัวได้พบปะพูดคุยกับพี่ ๆ ผู้สัมภาษณ์สุดน่ารักและใจดีในวันที่ 21 ตุลาคม
-                2566 ณ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย สำหรับน้อง ๆ กรุงเทพฯ และปริมณฑล หรือ สัมภาษณ์ผ่านทางซูมสำหรับน้อง ๆ ต่างจังหวัด ได้เลย
+                ขอแสดงความยินดี !! น้องเป็นหนึ่งในผู้มีสิทธิ์สัมภาษณ์ เตรียมตัวได้พบปะพูดคุยกับพี่ ๆ ผู้สัมภาษณ์สุดน่ารักและใจดีในวันที่ 19 ตุลาคม
+                2567 ณ คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย สำหรับน้อง ๆ กรุงเทพฯ และปริมณฑล หรือ สัมภาษณ์ผ่านทางซูมสำหรับน้อง ๆ ต่างจังหวัด ได้เลย
                 !!
               </>
             </Typography>
@@ -341,7 +341,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
               หลักฐานการชำระเงินไม่ถูกต้อง
             </Typography>
             <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
-              จากทีมงาน : {application.payment.comment !== "" ? application.payment.comment : "โปรดอัพโหลดอีกครั้ง"}
+              จากทีมงาน : {application.payment.comment !== "" ? application.payment.comment : "โปรดอัปโหลดอีกครั้ง"}
             </Typography>
           </>
         )}

@@ -40,7 +40,7 @@ const LogoComponent: React.FC = () => {
 
   return (
     <div className={classes.logo}>
-      <LogoInverse /> <span className={classes.text}>Larngear Camp 23rd </span>
+      <LogoInverse /> <span className={classes.text}>Larngear Camp {process.env.REACT_APP_CAMP_YEAR}th </span>
     </div>
   )
 }

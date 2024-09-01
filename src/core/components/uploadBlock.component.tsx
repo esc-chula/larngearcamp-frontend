@@ -159,7 +159,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({
           disabled={disabled}
           className={`${classes.upload} ${!!displayFile && classes.warningButton}`}>
           <div className={classes.withIcon}>
-            <Typography variant="button">{status !== "EMPTY" ? "อัพโหลดอีกครั้ง" : "อัพโหลด"}</Typography>
+            <Typography variant="button">{status !== "EMPTY" ? "อัปโหลดอีกครั้ง" : "อัปโหลด"}</Typography>
             {status !== "EMPTY" ? <ReplayIcon fontSize="small" /> : <AddToPhotosOutlinedIcon fontSize="small" />}
           </div>
           <input type="file" name={name} style={{ display: "none" }} accept={accept} ref={register} onChange={uploadFile} />
@@ -167,7 +167,7 @@ const UploadBlockComponent: React.FC<UploadBlockComponentProps> = ({
         {!!displayFile && status !== "EMPTY" && !currentError && (
           <div style={{ display: "flex", alignItems: "center" }}>
             <Typography variant="caption" className={classes.caption} component="div">
-              ไฟล์ที่อัพโหลดในขณะนี้ :
+              ไฟล์ที่อัปโหลดในขณะนี้ :
             </Typography>
             <Typography className={classes.fit} component="div" variant="caption">
               <a href={displayFile.url} className={classes.fileName} target="_blank" rel="noopener noreferrer">

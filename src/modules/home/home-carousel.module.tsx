@@ -87,7 +87,6 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({ className = "", onClick, dire
   )
 }
 
-// TODO
 const HomeCarousel: React.FC<HomeCarouselProps> = props => {
   const { gradientPercent, images, ...rest } = props
 

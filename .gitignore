@@ -29,3 +29,5 @@ yarn-error.log*
 *.http
 
 .yarn
+
+legacy/

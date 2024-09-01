@@ -12,7 +12,7 @@ const applicationStepConstant = [
     title: "คำถามจากพี่ ๆ ส่วนที่ 2"
   },
   {
-    title: "อัพโหลดเอกสาร"
+    title: "อัปโหลดเอกสาร"
   },
   {
     title: "ยืนยันการสมัคร"

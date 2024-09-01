@@ -100,7 +100,7 @@ const HomeTitle: React.FC<React.HTMLAttributes<HTMLDivElement>> = props => {
       <Box className={classes.safeArea} display="flex" justifyContent="center" margin="auto" alignItems="center" height="100vh" minHeight="542px">
         <Box textAlign="center" display="flex" flexDirection="column">
           <Typography className={classes.title}>
-            <span className="big">L</span>ARNGEAR CAMP 23rd
+            <span className="big">L</span>ARNGEAR CAMP {process.env.REACT_APP_CAMP_YEAR}th
           </Typography>
           <Typography variant="h5" className={classes.subtitle}>
             ค้นหาความเป็นวิศวกร ด้วยมือของคุณเอง

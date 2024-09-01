@@ -2,8 +2,8 @@ import { object, string } from "yup"
 import yup from "yup"
 
 const urlTest = string()
-  .required("ยังไม่ได้อัพโหลดไฟล์")
-  .test("not default", "ยังไม่ได้อัพโหลดไฟล์", value => {
+  .required("ยังไม่ได้อัปโหลดไฟล์")
+  .test("not default", "ยังไม่ได้อัปโหลดไฟล์", value => {
     return !!value && value !== ""
   })
 

@@ -75,7 +75,7 @@ const ApplicationStepFiveModule: React.FC = () => {
       {({ buttonBar }) => (
         <CardComponent maxWidth="lg">
           <Typography variant="h5" align="center" className={classes.bold}>
-            อัพโหลดเอกสารประกอบการรับสมัคร
+            อัปโหลดเอกสารประกอบการรับสมัคร
           </Typography>
           <FormProvider {...methods}>
             <FormNavigatePrompt />
