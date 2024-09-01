@@ -161,15 +161,15 @@ const stepCardConstant: StepCardModel = {
               <div>
                 หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                 <div>
-                  พี่ปามมี่:
-                  <a className="no-underline" href="tel:+6681-643-7506" style={{ color: "#941014" }}>
+                  พี่ปามมี่ :
+                  <a className="no-underline" href="tel:+6681-643-7506" style={{ color: "#941014", paddingLeft: 0.5 }}>
                     081-643-7506
                   </a>
                   <span>(line: palmmy648)</span>
                 </div>
                 <div>
-                  พี่เจตน์:
-                  <a className="no-underline" href="tel:+6690-043-6666" style={{ color: "#941014" }}>
+                  พี่เจตน์ :
+                  <a className="no-underline" href="tel:+6690-043-6666" style={{ color: "#941014", paddingLeft: 0.5 }}>
                     090-043-6666
                   </a>
                   <span>(line: swanix)</span>
