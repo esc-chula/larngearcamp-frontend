@@ -83,7 +83,7 @@ const LoginModule = () => {
       <BackgroundComponent type="bg1" />
       <LogoComponent />
       <CardComponent maxWidth="sm" padding={4} keepPadding>
-        <FacebookButtonComponent variant="contained" color="primary"></FacebookButtonComponent>
+        {/* <FacebookButtonComponent variant="contained" color="primary"></FacebookButtonComponent> */}
         <GoogleButtonComponent variant="contained" color="primary"></GoogleButtonComponent>
       </CardComponent>
       <span className={classes.text}>(ไม่แนะนำให้เข้าสู่ระบบด้วยบัญชี Google หากเข้าเว็บนี้ผ่าน Facebook)</span>
