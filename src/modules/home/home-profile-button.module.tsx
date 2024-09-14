@@ -11,7 +11,7 @@ export const HomeProfileButton: React.FC<ButtonProps> = props => {
 
   const getButtonLabel = () => {
     const nowDate = new Date()
-    const endFakeDate = new Date("September 15, 2024 00:00:00 GMT+07:00")
+    const endFakeDate = new Date("September 16, 2024 00:00:00 GMT+07:00")
     if (isLoggedIn) {
       const isNotSubmit = me.data?.applicationState === "DRAFT" || me.data?.applicationState === "NOT_FILLED"
       if (state === ApplicationStatus.EARLY) {
