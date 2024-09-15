@@ -18,8 +18,8 @@ const timelineConstant: Array<TimelineModel> = [
   },
   {
     duration: {
-      start: new Date(2567, 8, 30),
-      end: new Date(2567, 8, 30)
+      start: new Date(2567, 8, 20),
+      end: new Date(2567, 9, 4)
     },
     title: "แก้ไขเอกสารประกอบการสมัครวันสุดท้าย"
   },
