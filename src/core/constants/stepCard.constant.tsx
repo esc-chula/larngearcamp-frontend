@@ -152,6 +152,7 @@ const stepCardConstant: StepCardModel = {
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
             </div>
+            <span style={{ color: "#941014" }}>ลิงก์เข้าสู่ห้องสัมภาษณ์ยังไม่พร้อมใช้งานในขณะนี้</span>
             {/* <div style={{ marginTop: "0.75rem" }}>
               <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
               <div style={{ fontWeight: 400 }}>Meeting ID: 702 856 2571</div>
@@ -177,15 +178,13 @@ const stepCardConstant: StepCardModel = {
               </div>
             </div> */}
           </>
-        ),
-        primaryButton: {
-          // label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
-          label: "ลิงก์เข้าสู่ห้องสัมภาษณ์ยังไม่พร้อมใช้งานในขณะนี้",
-          opensDialog: false,
-          // path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
-          path: "#",
-          isExternalPath: true
-        }
+        )
+        // primaryButton: {
+        //   label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
+        //   opensDialog: false,
+        //   // path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
+        //   isExternalPath: true
+        // }
         // secondaryButton: {
         //   label: "เลือกไซส์เสื้อ",
         //   opensDialog: true,
