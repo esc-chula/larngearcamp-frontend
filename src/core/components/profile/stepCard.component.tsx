@@ -267,14 +267,14 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟซบุ๊ก LarnGear Camp
                 </Typography>
-                <a
+                {/* <a
                   href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02MyjEW87kj9Jo6GS3nP8cDLnR2yVEWnmxQ2qRWJVdeg6CkBE9AoG1cRUrjrVTy8uKl"
                   className="no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   Checklist สำหรับการเตรียมตัวสัมภาษณ์
-                </a>
+                </a> */}
                 <a
                   href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02y318zdQrx7oSCxni9ZfKUGdBFjBpAsfnXEqNhCSW4p2ZUboi8yUdaUyZi8gDLoD1l"
                   className="no-underline"
@@ -283,14 +283,14 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   style={{ color: "#941014" }}>
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
                 </a>
-                <a
+                {/* <a
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdKhVP_C7tZ1-xDzVEQu6mloZPcveaLgBvkzx52JBfo4wuKPw/viewform"
                   className="no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   แบบฟอร์มยินยอมให้เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล
-                </a>
+                </a> */}
                 <div className={classes.buttonContainer}>
                   {text.secondaryButton &&
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}

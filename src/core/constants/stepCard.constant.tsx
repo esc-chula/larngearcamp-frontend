@@ -133,14 +133,14 @@ const stepCardConstant: StepCardModel = {
               </Link>
             </div>
             <div style={{ marginTop: "0.75rem" }}>
-              <a
+              {/* <a
                 href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02MyjEW87kj9Jo6GS3nP8cDLnR2yVEWnmxQ2qRWJVdeg6CkBE9AoG1cRUrjrVTy8uKl"
                 className="no-underline"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#941014" }}>
                 Checklist สำหรับการเตรียมตัวสัมภาษณ์
-              </a>
+              </a> */}
             </div>
             <div style={{ marginTop: "0.75rem" }}>
               <a
@@ -157,7 +157,7 @@ const stepCardConstant: StepCardModel = {
               <div style={{ fontWeight: 400 }}>Meeting ID: 702 856 2571</div>
               <div style={{ fontWeight: 400 }}>Password: 311510</div>
             </div> */}
-            <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
+            {/* <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
               <div>
                 หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                 <div>
@@ -175,13 +175,13 @@ const stepCardConstant: StepCardModel = {
                   <span>(line: swanix)</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </>
         ),
         primaryButton: {
           label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
-          path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
+          // path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
           isExternalPath: true
         }
         // secondaryButton: {
