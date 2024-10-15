@@ -266,7 +266,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา{" "}
-                  {resolveRegistraionTime(interviewTime)} โดยจะมีการแบ่งกลุ่มน้อง ๆ ออกไปตามรหัสห้องสัมภาษณ์ที่น้องได้รับ
+                  {resolveRegistraionTime(interviewTime)} และจะมีการแบ่งกลุ่มน้อง ๆ ตามรหัสห้องสัมภาษณ์ที่ได้รับ
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟซบุ๊ก LarnGear Camp
