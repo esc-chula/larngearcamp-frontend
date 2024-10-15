@@ -148,6 +148,7 @@ interface InterviewStepCardProps {
   status: "complete" | "inProgress" | "incomplete"
   interviewType: string
   interviewTime: string | undefined
+  interviewRoom: string | undefined
 }
 
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
@@ -216,7 +217,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
       )
   }
 
-  const InterviewStepCard: React.FC<InterviewStepCardProps> = ({ status, interviewType, interviewTime }) => {
+  const InterviewStepCard: React.FC<InterviewStepCardProps> = ({ status, interviewType, interviewTime, interviewRoom }) => {
     if (status === "inProgress") {
       if (!interviewTime) {
         return (
@@ -258,7 +259,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             {interviewType === "onsite" && (
               <>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(interviewTime)}</span>
+                  รอบสัมภาษณ์ของน้องจะเป็น{" "}
+                  <span className={`${classes.redText} ${classes.boldText}`}>
+                    {dateToLocaleString(interviewTime)} ที่ห้อง {interviewRoom}
+                  </span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา{" "}
@@ -350,6 +354,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             status={status}
             interviewType={checkInterviewType(application.interviewAvailability)}
             interviewTime={application.interviewTime}
+            interviewRoom={application.interviewRoom}
           />
         )}
         {step !== 4 && (
