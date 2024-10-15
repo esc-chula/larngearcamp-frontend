@@ -133,14 +133,14 @@ const stepCardConstant: StepCardModel = {
               </Link>
             </div>
             <div style={{ marginTop: "0.75rem" }}>
-              {/* <a
-                href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02MyjEW87kj9Jo6GS3nP8cDLnR2yVEWnmxQ2qRWJVdeg6CkBE9AoG1cRUrjrVTy8uKl"
+              <a
+                href="https://www.facebook.com/share/p/ZbFnujwo5nDBi184/"
                 className="no-underline"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ color: "#941014" }}>
                 Checklist สำหรับการเตรียมตัวสัมภาษณ์
-              </a> */}
+              </a>
             </div>
             <div style={{ marginTop: "0.75rem" }}>
               <a
@@ -179,8 +179,10 @@ const stepCardConstant: StepCardModel = {
           </>
         ),
         primaryButton: {
-          label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
+          label: "ลิงก์เข้าสู่ห้องสัมภาษณ์ยังไม่พร้อมใช้งานในขณะนี้",
+          // label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
+          path: "#",
           // path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
           isExternalPath: true
         }
@@ -233,7 +235,7 @@ const stepCardConstant: StepCardModel = {
           <>
             ในขั้นตอนนี้ขอให้น้อง ๆ ชำระค่าสนับสนุนกิจกรรมเป็นจำนวน 750 บาท
             <div style={{ marginTop: "0.75rem" }}>
-              อย่าลืมชำระเงิน<span style={{ fontWeight: 500, color: "#941014" }}>ก่อนวันที่ 19 พฤศจิกายน</span>{" "}
+              อย่าลืมชำระเงิน<span style={{ fontWeight: 500, color: "#941014" }}>ก่อนวันที่ 10 พฤศจิกายน</span>{" "}
               เพื่อยืนยันสิทธิ์การเข้าร่วมค่ายด้วยล่ะ !!
             </div>
             <div style={{ marginTop: "0.75rem" }}>หากไม่เห็นปุ่มชำระค่าใช้จ่าย ให้เลือกไซส์เสื้อก่อน แล้ว Refresh อีกครั้ง</div>

@@ -51,6 +51,7 @@ interface ProfileDTO {
   breakfastRequested?: boolean
   interviewAvailability: string
   unavailableReason: string | null
+  interviewRoom?: string
 }
 
 export default ProfileDTO

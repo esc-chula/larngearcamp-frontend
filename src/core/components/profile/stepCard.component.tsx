@@ -148,6 +148,7 @@ interface InterviewStepCardProps {
   status: "complete" | "inProgress" | "incomplete"
   interviewType: string
   interviewTime: string | undefined
+  interviewRoom: string | undefined
 }
 
 const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
@@ -216,7 +217,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
       )
   }
 
-  const InterviewStepCard: React.FC<InterviewStepCardProps> = ({ status, interviewType, interviewTime }) => {
+  const InterviewStepCard: React.FC<InterviewStepCardProps> = ({ status, interviewType, interviewTime, interviewRoom }) => {
     if (status === "inProgress") {
       if (!interviewTime) {
         return (
@@ -261,36 +262,39 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(interviewTime)}</span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
+                  รหัสห้องสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{interviewRoom}</span>
+                </Typography>
+                <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา{" "}
-                  {resolveRegistraionTime(interviewTime)}
+                  {resolveRegistraionTime(interviewTime)} และจะมีการแบ่งกลุ่มน้อง ๆ ตามรหัสห้องสัมภาษณ์ที่ได้รับ
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟซบุ๊ก LarnGear Camp
                 </Typography>
-                {/* <a
-                  href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02MyjEW87kj9Jo6GS3nP8cDLnR2yVEWnmxQ2qRWJVdeg6CkBE9AoG1cRUrjrVTy8uKl"
+                <a
+                  href="https://www.facebook.com/share/p/ZbFnujwo5nDBi184/"
                   className="no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   Checklist สำหรับการเตรียมตัวสัมภาษณ์
-                </a> */}
+                </a>
                 <a
-                  href="https://www.facebook.com/LARNGEARCAMP/posts/pfbid02y318zdQrx7oSCxni9ZfKUGdBFjBpAsfnXEqNhCSW4p2ZUboi8yUdaUyZi8gDLoD1l"
+                  href="https://www.facebook.com/share/p/3nHP5xyyFKqJeUYU/"
                   className="no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   แผนที่การเดินทางไปคณะวิศวกรรมศาสตร์
                 </a>
-                {/* <a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLSdKhVP_C7tZ1-xDzVEQu6mloZPcveaLgBvkzx52JBfo4wuKPw/viewform"
+                <a
+                  href="https://forms.gle/CP2nirG9D9MewGH47"
                   className="no-underline"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ color: "#941014" }}>
                   แบบฟอร์มยินยอมให้เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล
-                </a> */}
+                </a>
                 <div className={classes.buttonContainer}>
                   {text.secondaryButton &&
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
@@ -350,6 +354,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             status={status}
             interviewType={checkInterviewType(application.interviewAvailability)}
             interviewTime={application.interviewTime}
+            interviewRoom={application.interviewRoom}
           />
         )}
         {step !== 4 && (

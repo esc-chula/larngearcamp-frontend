@@ -6,6 +6,7 @@ interface FileDTO {
     type: string
     size: number
     url: string
+    createdAt: Date
   }
 }
 
