@@ -182,15 +182,9 @@ const stepCardConstant: StepCardModel = {
           label: "ลิงก์เข้าสู่ห้องสัมภาษณ์ยังไม่พร้อมใช้งานในขณะนี้",
           // label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
-          path: "#",
-          // path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
+          path: "https://chula.zoom.us/j/94782207804?pwd=C7GMdv4oayv8cmNkDathOhTQON0N5i.1",
           isExternalPath: true
         }
-        // secondaryButton: {
-        //   label: "เลือกไซส์เสื้อ",
-        //   opensDialog: true,
-        //   dialogType: "shirtSize"
-        // }
       }
     },
     complete: {
