@@ -159,7 +159,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const { documentState } = me.data as MyProfileModel
 
   const text = stepCardConstant[step][status][isApproved]!
-  const zoomName = application.lgNumber.trim().substring(3) + "_" + application.firstName.trim()
+  const zoomName = application.lgNumber.trim().substring(3) + "_" + application.nickName.trim()
 
   const setStepIndicatorStyles = (status: String) => {
     switch (status) {
