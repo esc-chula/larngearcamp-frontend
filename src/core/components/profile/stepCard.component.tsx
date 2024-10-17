@@ -229,10 +229,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 !!
               </>
             </Typography>
-            <div className={classes.buttonContainer}>
+            {/*<div className={classes.buttonContainer}>
               {text.secondaryButton &&
                 renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
-            </div>
+            </div>*/}
           </>
         )
       } else {
