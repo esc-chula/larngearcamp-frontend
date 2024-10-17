@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import stepCardConstant from "../../constants/stepCard.constant"
 import { useDialogContext } from "../../providers/dialog.provider"
 import { useApplicationStateContext } from "../../providers/applicationState.provider"
-import { dateToLocaleString, resolveRegistraionTime } from "../../../utils/conversion"
+import { dateToLocaleString, dateToInterviewRound, resolveRegistrationTime } from "../../../utils/conversion"
 import { useAuthContext } from "../../providers/auth.provider"
 import MyProfileModel from "../../models/myprofile.models"
 import copyToClipBoard from "../../../assets/images/icon/copy-to-clipboard.svg"
@@ -159,7 +159,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   const { documentState } = me.data as MyProfileModel
 
   const text = stepCardConstant[step][status][isApproved]!
-  const zoomName = application.lgNumber.trim().substring(3) + "_" + application.firstName.trim()
+  const zoomName = application.lgNumber.trim().substring(3) + "_" + application.nickName.trim()
 
   const setStepIndicatorStyles = (status: String) => {
     switch (status) {
@@ -236,6 +236,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           </>
         )
       } else {
+        const date = new Date(application.interviewTime!).getDate()
         return (
           <>
             {interviewType === "online" && (
@@ -250,8 +251,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
 
                 <div className={classes.buttonContainer}>
                   {text.primaryButton &&
+                    date == 19 &&
                     renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
                   {text.secondaryButton &&
+                    date == 21 &&
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
                 </div>
               </>
@@ -259,20 +262,21 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             {interviewType === "onsite" && (
               <>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  รอบสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{dateToLocaleString(interviewTime)}</span>
+                  การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย{" "}
+                  <span className={`${classes.redText} ${classes.boldText}`}>{dateToInterviewRound(interviewTime)}</span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  รหัสห้องสัมภาษณ์ของน้องจะเป็น <span className={`${classes.redText} ${classes.boldText}`}>{interviewRoom}</span>
+                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา{" "}
+                  <span className={`${classes.redText} ${classes.boldText}`}>{resolveRegistrationTime(dateToInterviewRound(interviewTime))}</span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา{" "}
-                  {resolveRegistraionTime(interviewTime)} และจะมีการแบ่งกลุ่มน้อง ๆ ตามรหัสห้องสัมภาษณ์ที่ได้รับ
+                  ที่บริเวณ <span className={`${classes.redText} ${classes.boldText}`}>ลานเกียร์ โต๊ะลงทะเบียน {interviewRoom}</span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟซบุ๊ก LarnGear Camp
                 </Typography>
                 <a
-                  href="https://www.facebook.com/share/p/ZbFnujwo5nDBi184/"
+                  href="https://www.facebook.com/share/p/ZXqd8NQBHzuqx8uS/"
                   className="no-underline"
                   target="_blank"
                   rel="noopener noreferrer"

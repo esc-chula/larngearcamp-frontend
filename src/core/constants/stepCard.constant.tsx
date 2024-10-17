@@ -124,7 +124,7 @@ const stepCardConstant: StepCardModel = {
             การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ก่อนเวลาอย่างน้อย 10 นาทีนะครับ{" "}
             <div style={{ marginTop: "0.75rem" }}>
               <Link
-                to="/assets/file/BG-zoom-วันสัมภาษณ์.jpg"
+                to="/assets/file/BG-zoom-LG24.jpg"
                 className="no-underline"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -134,7 +134,7 @@ const stepCardConstant: StepCardModel = {
             </div>
             <div style={{ marginTop: "0.75rem" }}>
               <a
-                href="https://www.facebook.com/share/p/ZbFnujwo5nDBi184/"
+                href="https://www.facebook.com/share/p/ZXqd8NQBHzuqx8uS/"
                 className="no-underline"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -152,45 +152,48 @@ const stepCardConstant: StepCardModel = {
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
             </div>
-            {/* <div style={{ marginTop: "0.75rem" }}>
-              <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
-              <div style={{ fontWeight: 400 }}>Meeting ID: 702 856 2571</div>
-              <div style={{ fontWeight: 400 }}>Password: 311510</div>
-            </div> */}
-            {/* <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
-              <div>
-                หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
+            {
+              <div style={{ marginTop: "0.75rem" }}>
+                <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
+                <div style={{ fontWeight: 400 }}>Meeting ID: 947 8220 7804</div>
+                <div style={{ fontWeight: 400 }}>Password: LG24</div>
+              </div>
+            }
+            {
+              <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
                 <div>
-                  พี่ปามมี่ :
-                  <a className="no-underline" href="tel:+6681-643-7506" style={{ color: "#941014", paddingLeft: 0.5 }}>
-                    081-643-7506
-                  </a>
-                  <span>(line: palmmy648)</span>
-                </div>
-                <div>
-                  พี่เจตน์ :
-                  <a className="no-underline" href="tel:+6690-043-6666" style={{ color: "#941014", paddingLeft: 0.5 }}>
-                    090-043-6666
-                  </a>
-                  <span>(line: swanix)</span>
+                  หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
+                  <div>
+                    พี่เท็น :
+                    <a className="no-underline" href="tel:+6697-018-8822" style={{ color: "#941014", paddingLeft: 0.5 }}>
+                      097-018-8822
+                    </a>
+                    <span>(line: 1122082543)</span>
+                  </div>
+                  <div>
+                    พี่ไจไหม :
+                    <a className="no-underline" href="tel:+6686-356-1202" style={{ color: "#941014", paddingLeft: 0.5 }}>
+                      086-356-1202
+                    </a>
+                    <span>(line: jaimai2006)</span>
+                  </div>
                 </div>
               </div>
-            </div> */}
+            }
           </>
         ),
         primaryButton: {
-          label: "ลิงก์เข้าสู่ห้องสัมภาษณ์ยังไม่พร้อมใช้งานในขณะนี้",
-          // label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
+          label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
-          path: "#",
-          // path: "https://chula.zoom.us/j/94892657659?pwd=eXUyTm1VWlpXUzY2YXVibEdLV251UT09",
+          path: "https://chula.zoom.us/j/94782207804?pwd=C7GMdv4oayv8cmNkDathOhTQON0N5i.1",
+          isExternalPath: true
+        },
+        secondaryButton: {
+          label: "เข้าสู่ห้องสัมภาษณ์รอบเก็บตก (ZOOM)",
+          opensDialog: false,
+          path: "https://chula.zoom.us/j/98786975771?pwd=TpTrucTj2ie2ajRlHwHeiOoSZ3fo52.1",
           isExternalPath: true
         }
-        // secondaryButton: {
-        //   label: "เลือกไซส์เสื้อ",
-        //   opensDialog: true,
-        //   dialogType: "shirtSize"
-        // }
       }
     },
     complete: {
