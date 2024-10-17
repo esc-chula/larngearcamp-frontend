@@ -121,7 +121,7 @@ const stepCardConstant: StepCardModel = {
         title: "รอบสัมภาษณ์",
         contents: (
           <>
-            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ก่อนเวลาอย่างน้อย 10 นาทีนะครับ{" "}
+            การสัมภาษณ์จะเป็นในรูปแบบออนไลน์ โดยขอให้กดเข้าห้อง ZOOM ก่อนเวลาอย่างน้อย <span style={{ fontWeight: 400 }}>10 นาที</span>นะครับ{" "}
             <div style={{ marginTop: "0.75rem" }}>
               <Link
                 to="/assets/file/BG-zoom-LG24.jpg"
@@ -187,13 +187,13 @@ const stepCardConstant: StepCardModel = {
           opensDialog: false,
           path: "https://chula.zoom.us/j/94782207804?pwd=C7GMdv4oayv8cmNkDathOhTQON0N5i.1",
           isExternalPath: true
+        },
+        secondaryButton: {
+          label: "เข้าสู่ห้องสัมภาษณ์รอบเก็บตก (ZOOM)",
+          opensDialog: false,
+          path: "https://chula.zoom.us/j/98786975771?pwd=TpTrucTj2ie2ajRlHwHeiOoSZ3fo52.1",
+          isExternalPath: true
         }
-        // secondaryButton: {
-        //   label: "เข้าสู่ห้องสัมภาษณ์รอบเก็บตก (ZOOM)",
-        //   opensDialog: false,
-        //   path: "https://chula.zoom.us/j/98786975771?pwd=TpTrucTj2ie2ajRlHwHeiOoSZ3fo52.1",
-        //   isExternalPath: true
-        // }
       }
     },
     complete: {
