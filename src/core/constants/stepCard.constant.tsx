@@ -163,27 +163,27 @@ const stepCardConstant: StepCardModel = {
                 <div style={{ fontWeight: 400 }}>Password: LG24</div>
               </div>
             }
-            { {
+            {
               <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
                 <div>
                   หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                   <div>
-                  พี่เท็น :
-                  <a className="no-underline" href="tel:+6697-018-8822" style={{ color: "#941014", paddingLeft: 0.5 }}>
-                    097-018-8822
-                  </a>
-                  <span>(line: 1122082543)</span>
+                    พี่เท็น :
+                    <a className="no-underline" href="tel:+6697-018-8822" style={{ color: "#941014", paddingLeft: 0.5 }}>
+                      097-018-8822
+                    </a>
+                    <span>(line: 1122082543)</span>
                   </div>
                   <div>
-                  พี่ไจไหม :
-                  <a className="no-underline" href="tel:+6686-356-1202" style={{ color: "#941014", paddingLeft: 0.5 }}>
-                    086-356-1202
-                  </a>
-                  <span>(line: jaimai2006)</span>
+                    พี่ไจไหม :
+                    <a className="no-underline" href="tel:+6686-356-1202" style={{ color: "#941014", paddingLeft: 0.5 }}>
+                      086-356-1202
+                    </a>
+                    <span>(line: jaimai2006)</span>
                   </div>
                 </div>
               </div>
-            } }
+            }
           </>
         ),
         primaryButton: {
