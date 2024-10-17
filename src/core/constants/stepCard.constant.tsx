@@ -187,13 +187,13 @@ const stepCardConstant: StepCardModel = {
           opensDialog: false,
           path: "https://chula.zoom.us/j/94782207804?pwd=C7GMdv4oayv8cmNkDathOhTQON0N5i.1",
           isExternalPath: true
-        },
-        secondaryButton: {
-          label: "เข้าสู่ห้องสัมภาษณ์รอบเก็บตก (ZOOM)",
-          opensDialog: false,
-          path: "https://chula.zoom.us/j/98786975771?pwd=TpTrucTj2ie2ajRlHwHeiOoSZ3fo52.1",
-          isExternalPath: true
         }
+        // secondaryButton: {
+        //   label: "เข้าสู่ห้องสัมภาษณ์รอบเก็บตก (ZOOM)",
+        //   opensDialog: false,
+        //   path: "https://chula.zoom.us/j/98786975771?pwd=TpTrucTj2ie2ajRlHwHeiOoSZ3fo52.1",
+        //   isExternalPath: true
+        // }
       }
     },
     complete: {
