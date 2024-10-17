@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom"
 import React from "react"
 import StepCardModel from "../models/stepCard.model"
+import { useApplicationStateContext } from "../providers/applicationState.provider"
 
 const absenceFileName = `/assets/file/ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ ${process.env.REACT_APP_CAMP_YEAR}.pdf`
+const { application } = useApplicationStateContext()
+
+const date = new Date(application.interviewTime ?? "2024-10-19 02:00:00").getDate()
 
 const stepCardConstant: StepCardModel = {
   1: {
@@ -152,30 +156,34 @@ const stepCardConstant: StepCardModel = {
                 ศึกษาวิธีการใช้งานโปรแกรม ZOOM
               </a>
             </div>
-            {<div style={{ marginTop: "0.75rem" }}>
-              <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
-              <div style={{ fontWeight: 400 }}>Meeting ID: 947 8220 7804</div>
-              <div style={{ fontWeight: 400 }}>Password: LG24</div>
-            </div>}
-            {<div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
-              <div>
-                หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
+            {
+              <div style={{ marginTop: "0.75rem" }}>
+                <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
+                <div style={{ fontWeight: 400 }}>Meeting ID: {date == 19 ? "947 8220 7804" : "987 8697 5771"}</div>
+                <div style={{ fontWeight: 400 }}>Password: LG24</div>
+              </div>
+            }
+            {/* {
+              <div style={{ marginTop: "0.75rem", marginBottom: "0.75rem" }}>
                 <div>
-                  พี่xx :
-                  <a className="no-underline" href="tel:+6681-643-7506" style={{ color: "#941014", paddingLeft: 0.5 }}>
-                    090-000-0000
-                  </a>
-                  <span>(line: palmmy648)</span>
-                </div>
-                <div>
-                  พี่xx :
-                  <a className="no-underline" href="tel:+6690-043-6666" style={{ color: "#941014", paddingLeft: 0.5 }}>
-                    090-000-0000
-                  </a>
-                  <span>(line: swanix)</span>
+                  หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
+                  <div>
+                    พี่xx :
+                    <a className="no-underline" href="tel:+6681-643-7506" style={{ color: "#941014", paddingLeft: 0.5 }}>
+                      090-000-0000
+                    </a>
+                    <span>(line: palmmy648)</span>
+                  </div>
+                  <div>
+                    พี่xx :
+                    <a className="no-underline" href="tel:+6690-043-6666" style={{ color: "#941014", paddingLeft: 0.5 }}>
+                      090-000-0000
+                    </a>
+                    <span>(line: swanix)</span>
+                  </div>
                 </div>
               </div>
-            </div>}
+            } */}
           </>
         ),
         primaryButton: {
@@ -183,7 +191,10 @@ const stepCardConstant: StepCardModel = {
           label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
           // path: "#",
-          path: "https://chula.zoom.us/j/94782207804?pwd=C7GMdv4oayv8cmNkDathOhTQON0N5i.1",
+          path:
+            date == 19
+              ? "https://chula.zoom.us/j/94782207804?pwd=C7GMdv4oayv8cmNkDathOhTQON0N5i.1"
+              : "https://chula.zoom.us/j/98786975771?pwd=TpTrucTj2ie2ajRlHwHeiOoSZ3fo52.1",
           isExternalPath: true
         }
       }

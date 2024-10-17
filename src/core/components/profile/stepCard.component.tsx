@@ -259,13 +259,15 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             {interviewType === "onsite" && (
               <>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย <span className={`${classes.redText} ${classes.boldText}`}>{dateToInterviewRound(interviewTime)}</span>
+                  การสัมภาษณ์จะเป็นในรูปแบบออนไซต์ ที่คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย{" "}
+                  <span className={`${classes.redText} ${classes.boldText}`}>{dateToInterviewRound(interviewTime)}</span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา{" "} <span className={`${classes.redText} ${classes.boldText}`}>{resolveRegistrationTime(dateToInterviewRound(interviewTime))}</span>
+                  โดยจะเปิดให้ลงทะเบียนตั้งแต่เวลา{" "}
+                  <span className={`${classes.redText} ${classes.boldText}`}>{resolveRegistrationTime(dateToInterviewRound(interviewTime))}</span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
-                  ที่บริเวณ <span className={`${classes.redText} ${classes.boldText}`}>ลานเกียร์ โต๊ะลงทะเบียน{" "}{interviewRoom}</span>
+                  ที่บริเวณ <span className={`${classes.redText} ${classes.boldText}`}>ลานเกียร์ โต๊ะลงทะเบียน {interviewRoom}</span>
                 </Typography>
                 <Typography variant="subtitle2" className={`${classes.text} ${classes.content} ${classes.paragraphTop}`}>
                   น้อง ๆ สามารถติดตามรายละเอียดการสัมภาษณ์ได้ที่เพจเฟซบุ๊ก LarnGear Camp
