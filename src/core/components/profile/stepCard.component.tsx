@@ -191,7 +191,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
   }
 
   const CopyToClipboardIcon: React.FC<React.HTMLAttributes<HTMLImageElement>> = props => {
-    return <img src={copyToClipBoard} onClick={copyZoomNameToClipboard} alt="" {...props} />
+    return <img src={copyToClipBoard} onClick={copyZoomNameToClipboard} alt="" style={{ cursor: "pointer" }} {...props} />
   }
 
   const renderButton = (opensDialog: boolean, dialogType: string | undefined, isPrimary: boolean, isExternalPath: boolean | undefined) => {
@@ -299,10 +299,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                   style={{ color: "#941014" }}>
                   แบบฟอร์มยินยอมให้เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล
                 </a>
-                <div className={classes.buttonContainer}>
-                  {text.secondaryButton &&
-                    renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
-                </div>
               </>
             )}
           </>
