@@ -236,6 +236,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           </>
         )
       } else {
+        const date = new Date(application.interviewTime!).getDate()
         return (
           <>
             {interviewType === "online" && (
@@ -250,8 +251,10 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
 
                 <div className={classes.buttonContainer}>
                   {text.primaryButton &&
+                    date == 19 &&
                     renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
                   {text.secondaryButton &&
+                    date == 21 &&
                     renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
                 </div>
               </>

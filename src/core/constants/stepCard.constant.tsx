@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom"
 import React from "react"
 import StepCardModel from "../models/stepCard.model"
-// import { useApplicationStateContext } from "../providers/applicationState.provider"
 
 const absenceFileName = `/assets/file/ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ ${process.env.REACT_APP_CAMP_YEAR}.pdf`
-// const { application } = useApplicationStateContext()
-
-const date = new Date("2024-10-19 02:00:00").getDate()
 
 const stepCardConstant: StepCardModel = {
   1: {
@@ -159,7 +155,7 @@ const stepCardConstant: StepCardModel = {
             {
               <div style={{ marginTop: "0.75rem" }}>
                 <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
-                <div style={{ fontWeight: 400 }}>Meeting ID: {date == 19 ? "947 8220 7804" : "987 8697 5771"}</div>
+                <div style={{ fontWeight: 400 }}>Meeting ID: 947 8220 7804</div>
                 <div style={{ fontWeight: 400 }}>Password: LG24</div>
               </div>
             }
@@ -187,14 +183,15 @@ const stepCardConstant: StepCardModel = {
           </>
         ),
         primaryButton: {
-          // label: "ลิงก์เข้าสู่ห้องสัมภาษณ์ยังไม่พร้อมใช้งานในขณะนี้",
           label: "เข้าสู่ห้องสัมภาษณ์ (ZOOM)",
           opensDialog: false,
-          // path: "#",
-          path:
-            date == 19
-              ? "https://chula.zoom.us/j/94782207804?pwd=C7GMdv4oayv8cmNkDathOhTQON0N5i.1"
-              : "https://chula.zoom.us/j/98786975771?pwd=TpTrucTj2ie2ajRlHwHeiOoSZ3fo52.1",
+          path: "https://chula.zoom.us/j/94782207804?pwd=C7GMdv4oayv8cmNkDathOhTQON0N5i.1",
+          isExternalPath: true
+        },
+        secondaryButton: {
+          label: "เข้าสู่ห้องสัมภาษณ์รอบเก็บตก (ZOOM)",
+          opensDialog: false,
+          path: "https://chula.zoom.us/j/98786975771?pwd=TpTrucTj2ie2ajRlHwHeiOoSZ3fo52.1",
           isExternalPath: true
         }
       }
