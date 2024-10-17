@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 import React from "react"
 import StepCardModel from "../models/stepCard.model"
-import { useApplicationStateContext } from "../providers/applicationState.provider"
+// import { useApplicationStateContext } from "../providers/applicationState.provider"
 
 const absenceFileName = `/assets/file/ใบขออนุเคราะห์เวลาเรียน ค่ายลานเกียร์ครั้งที่ ${process.env.REACT_APP_CAMP_YEAR}.pdf`
-const { application } = useApplicationStateContext()
+// const { application } = useApplicationStateContext()
 
-const date = new Date(application.interviewTime ?? "2024-10-19 02:00:00").getDate()
+const date = new Date("2024-10-19 02:00:00").getDate()
 
 const stepCardConstant: StepCardModel = {
   1: {
