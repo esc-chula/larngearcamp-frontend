@@ -369,7 +369,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
               {text.secondaryButton &&
                 renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
             </div>
-            {step === 5 && (
+            {step === 5 && application.payment.updatedAt && (
               <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
                 Last uploaded at: {application.payment.updatedAt}
               </Typography>
