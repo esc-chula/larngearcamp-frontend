@@ -335,12 +335,9 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
           {text.title}
         </Typography>
         {step === 5 && documentState.payment === "PASSED" && (
-          <>
-            <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
-              หลักฐานการชำระเงินได้รับการอนุมัติแล้ว
-            </Typography>
-            {application.payment.updatedAt}
-          </>
+          <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
+            หลักฐานการชำระเงินได้รับการอนุมัติแล้ว
+          </Typography>
         )}
         {step === 5 && documentState.payment === "CHANGE_REQUIRED" && (
           <>
@@ -350,7 +347,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
               จากทีมงาน : {application.payment.comment !== "" ? application.payment.comment : "โปรดอัปโหลดอีกครั้ง"}
             </Typography>
-            {application.payment.updatedAt}
           </>
         )}
         {step === 4 && (
@@ -372,6 +368,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
                 renderButton(text.primaryButton.opensDialog, text.primaryButton.dialogType, true, text.primaryButton.isExternalPath)}
               {text.secondaryButton &&
                 renderButton(text.secondaryButton.opensDialog, text.secondaryButton.dialogType, false, text.secondaryButton.isExternalPath)}
+              Last uploaded at: {application.payment.updatedAt}
             </div>
           </>
         )}
