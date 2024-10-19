@@ -164,18 +164,18 @@ const stepCardConstant: StepCardModel = {
                 <div>
                   หากมีปัญหาในการเข้าซูมหรือการสัมภาษณ์ สามารถโทรแจ้ง{" "}
                   <div>
-                    พี่เท็น :
-                    <a className="no-underline" href="tel:+6697-018-8822" style={{ color: "#941014", paddingLeft: 0.5 }}>
-                      097-018-8822
+                    พี่นอท :
+                    <a className="no-underline" href="tel:+6695-825-1591" style={{ color: "#941014", paddingLeft: 0.5 }}>
+                      095-825-1591
                     </a>
-                    <span>(line: 1122082543)</span>
+                    <span>(line: north4965)</span>
                   </div>
                   <div>
-                    พี่ไจไหม :
-                    <a className="no-underline" href="tel:+6686-356-1202" style={{ color: "#941014", paddingLeft: 0.5 }}>
-                      086-356-1202
+                    พี่หญิง :
+                    <a className="no-underline" href="tel:+6682-713-5555" style={{ color: "#941014", paddingLeft: 0.5 }}>
+                      082-713-5555
                     </a>
-                    <span>(line: jaimai2006)</span>
+                    <span>(line: yingkosa)</span>
                   </div>
                 </div>
               </div>
