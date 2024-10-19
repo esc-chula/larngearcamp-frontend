@@ -371,7 +371,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             </div>
             {step === 5 && (
               <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
-                {text.contents}
                 Last uploaded at: {application.payment.updatedAt}
               </Typography>
             )}
