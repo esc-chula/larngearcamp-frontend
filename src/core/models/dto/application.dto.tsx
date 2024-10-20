@@ -23,6 +23,7 @@ export interface DocumentStateDetail {
   status: FileStatus
   url: string
   originalName: string
+  updatedAt: string
 }
 
 export interface AllDocumentStateDetail {

@@ -3,6 +3,7 @@ import DocumentType from "../../constants/documentType.constant"
 export interface DocumentItem {
   originalName?: string
   url: string
+  updatedAt: string
 }
 
 type DocumentDTO = {
