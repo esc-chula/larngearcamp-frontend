@@ -155,7 +155,7 @@ const stepCardConstant: StepCardModel = {
             {
               <div style={{ marginTop: "0.75rem" }}>
                 <div>นอกจากการเข้าทางปุ่มแล้ว ยังสามารถเข้า ZOOM ได้โดยการกรอก</div>
-                <div style={{ fontWeight: 400 }}>Meeting ID: 947 8220 7804</div>
+                <div style={{ fontWeight: 400 }}>Meeting ID: 987 8697 5771</div>
                 <div style={{ fontWeight: 400 }}>Password: LG24</div>
               </div>
             }
