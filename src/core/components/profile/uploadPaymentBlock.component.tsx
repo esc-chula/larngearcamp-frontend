@@ -102,7 +102,7 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
           {errorMessage.current}
         </Typography>
       )}
-      <Button variant="outlined" component="label" className={classes.button} disabled={isUpload}>
+      <Button variant="outlined" component="label" className={classes.button}>
         {status === "EMPTY" ? "อัปโหลดหลักฐานการชำระเงิน" : "อัปโหลดอีกครั้ง"}
         <input type="file" name="payment" hidden accept="image/jpeg, image/png" onChange={uploadFile} />
       </Button>
