@@ -93,9 +93,9 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
   return (
     <div className={classes.paymentContainer}>
       {/* <img src={paymentQR} alt="QR Code" className={classes.image} /> */}
-      <Typography variant="subtitle1">ชื่อบัญชี : กรรมการนิสิต คณะวิศวกรรมศาสตร์ จุฬาฯ</Typography> {/* TODO: แก้ชื่อบัญชี */}
+      <Typography variant="subtitle1">ชื่อบัญชี: กรรมการนิสิต คณะวิศวกรรมศาสตร์ จุฬาฯ</Typography> {/* TODO: แก้ชื่อบัญชี */}
       <Typography variant="subtitle1">ธนาคารไทยพาณิชย์</Typography> {/* TODO: แก้ชื่อธนาคาร */}
-      <Typography variant="subtitle1">เลขบัญชี : 045-286444-0</Typography> {/* TODO: แก้เลขบัญชี */}
+      <Typography variant="subtitle1">เลขบัญชี: 045-286444-0</Typography> {/* TODO: แก้เลขบัญชี */}
       <Typography variant="subtitle1">จำนวน 750 บาท</Typography>
       {errorMessage.current !== "" && (
         <Typography variant="subtitle2" component="div" className={classes.error}>
