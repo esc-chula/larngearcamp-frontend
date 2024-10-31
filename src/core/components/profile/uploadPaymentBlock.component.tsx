@@ -93,16 +93,16 @@ const UploadPaymentBlock: React.FC<UploadPaymentBlockProps> = ({ paymentStatus, 
   return (
     <div className={classes.paymentContainer}>
       {/* <img src={paymentQR} alt="QR Code" className={classes.image} /> */}
-      <Typography variant="subtitle1">ชื่อบัญชี TBA</Typography> {/* TODO: แก้ชื่อบัญชี */}
-      <Typography variant="subtitle1">ธนาคาร TBA</Typography> {/* TODO: แก้ชื่อธนาคาร */}
-      <Typography variant="subtitle1">เลขบัญชี TBA</Typography> {/* TODO: แก้เลขบัญชี */}
+      <Typography variant="subtitle1">ชื่อบัญชี: กรรมการนิสิต คณะวิศวกรรมศาสตร์ จุฬาฯ</Typography> {/* TODO: แก้ชื่อบัญชี */}
+      <Typography variant="subtitle1">ธนาคารไทยพาณิชย์</Typography> {/* TODO: แก้ชื่อธนาคาร */}
+      <Typography variant="subtitle1">เลขบัญชี: 045-286444-0</Typography> {/* TODO: แก้เลขบัญชี */}
       <Typography variant="subtitle1">จำนวน 750 บาท</Typography>
       {errorMessage.current !== "" && (
         <Typography variant="subtitle2" component="div" className={classes.error}>
           {errorMessage.current}
         </Typography>
       )}
-      <Button variant="outlined" component="label" className={classes.button} disabled={isUpload}>
+      <Button variant="outlined" component="label" className={classes.button}>
         {status === "EMPTY" ? "อัปโหลดหลักฐานการชำระเงิน" : "อัปโหลดอีกครั้ง"}
         <input type="file" name="payment" hidden accept="image/jpeg, image/png" onChange={uploadFile} />
       </Button>

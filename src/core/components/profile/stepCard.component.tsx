@@ -344,7 +344,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
               หลักฐานการชำระเงินไม่ถูกต้อง
             </Typography>
-            <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.redText} ${classes.paragraphTop}`}>
+            <Typography variant="subtitle2" className={`${classes.text} ${classes.boldText} ${classes.content} ${classes.paragraphTop}`}>
               จากทีมงาน : {application.payment.comment !== "" ? application.payment.comment : "โปรดอัปโหลดอีกครั้ง"}
             </Typography>
           </>
@@ -371,7 +371,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             </div>
             {step === 5 && application.payment.updatedAt && (
               <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
-                Last uploaded at: {application.payment.updatedAt}
+                Last uploaded at: {(new Date(application.payment.updatedAt)).toLocaleString()}
               </Typography>
             )}
           </>
