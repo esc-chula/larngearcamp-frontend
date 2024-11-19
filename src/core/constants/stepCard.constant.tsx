@@ -305,7 +305,7 @@ const stepCardConstant: StepCardModel = {
             <div style={{ marginTop: "0.75rem" }}>
               หลังจากนี้หากน้อง ๆ มีข้อสงสัยใด ๆ สามารถทักมาสอบถามได้ผ่านทางเฟซบุ๊กเพจ LarnGear Camp ตลอดเลยนะครับ ไว้เจอกันที่ลานเกียร์ฮ๊าฟฟฟฟ :)
             </div>
-            {/* <div style={{ marginTop: "0.75rem" }}>
+            <div style={{ marginTop: "0.75rem" }}>
               สำหรับน้อง ๆ ที่ต้องการขอเอกสารเพื่อขอลาเรียนที่โรงเรียน ให้ดาวน์โหลดเอกสารด้านล่างได้เลย
               <ul>
                 <li>
@@ -314,7 +314,7 @@ const stepCardConstant: StepCardModel = {
                   </Link>
                 </li>
               </ul>
-            </div> */}
+            </div>
           </>
         ),
         // primaryButton: {
