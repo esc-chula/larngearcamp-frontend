@@ -65,7 +65,8 @@ const ProfileModule = () => {
     PASSED_INTERVIEW: ProfileStatus.passedInterview,
     REJECTED_FAILED_THE_INTERVIEW: ProfileStatus.failedInterview,
     PAYMENT_ACCEPTED: ProfileStatus.paymentAccepted,
-    REJECTED_FAIL_TO_PAY: ProfileStatus.paymentFailed
+    REJECTED_FAIL_TO_PAY: ProfileStatus.paymentFailed,
+    PASSED_THE_CAMP: ProfileStatus.passedTheCamp
   }
 
   const profileStatus = applicationState === "SUBMITTED" ? profileStatusMap[applicationState][fileStatus] : profileStatusMap[applicationState]

@@ -14,6 +14,7 @@ export type ApplicationState =
   | "REJECTED_FAILED_THE_INTERVIEW"
   | "PAYMENT_ACCEPTED"
   | "REJECTED_FAIL_TO_PAY"
+  | "PASSED_THE_CAMP"
 
 export type FileStatus = "EMPTY" | "UPLOADED" | "CHANGE_REQUIRED" | "PASSED"
 
