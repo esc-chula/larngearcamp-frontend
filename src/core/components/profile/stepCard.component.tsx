@@ -376,16 +376,22 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             )}
             {step === 6 && application.state === "PASSED_THE_CAMP" && (
               <>
-                <img src={application.certificatePreviewLink} alt="certificate" />
-                <a
-                  href={`${application.certificateDownloadLink}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`no-underline ${classes.linkButton}`}>
-                  <Button variant={"contained"} disableElevation className={`${classes.button} ${classes.solid}`} onClick={() => {}}>
-                    ดาวน์โหลดเกียรติบัตร
-                  </Button>
-                </a>
+                {application.certificateDownloadLink && (
+                  <a
+                    href={`${application.certificateDownloadLink}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`no-underline ${classes.linkButton}`}>
+                    <Button variant={"contained"} disableElevation className={`${classes.button} ${classes.solid}`} onClick={() => {}}>
+                      ดาวน์โหลดเกียรติบัตร
+                    </Button>
+                  </a>
+                )}
+                {!application.certificateDownloadLink && (
+                  <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`} style={{ fontWeight: 500, color: "#941014" }}>
+                    ขอแสดงความเสียใจ น้องไม่ได้รับเกียรติบัตรในการเข้าร่วมค่ายลานเกียร์ครั้งนี้
+                  </Typography>
+                )}
               </>
             )}
           </>
