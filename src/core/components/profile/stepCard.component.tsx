@@ -371,8 +371,22 @@ const StepCard: React.FC<StepCardProps> = ({ step, status, isApproved }) => {
             </div>
             {step === 5 && application.payment.updatedAt && (
               <Typography variant="subtitle2" className={`${classes.text} ${classes.content}`}>
-                Last uploaded at: {(new Date(application.payment.updatedAt)).toLocaleString()}
+                Last uploaded at: {new Date(application.payment.updatedAt).toLocaleString()}
               </Typography>
+            )}
+            {step === 6 && application.state === "PASSED_THE_CAMP" && (
+              <>
+                <img src={application.certificatePreviewLink} alt="certificate" />
+                <a
+                  href={`${application.certificateDownloadLink}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`no-underline ${classes.linkButton}`}>
+                  <Button variant={"contained"} disableElevation className={`${classes.button} ${classes.solid}`} onClick={() => {}}>
+                    ดาวน์โหลดเกียรติบัตร
+                  </Button>
+                </a>
+              </>
             )}
           </>
         )}

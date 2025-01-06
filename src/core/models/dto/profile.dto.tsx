@@ -52,6 +52,8 @@ interface ProfileDTO {
   interviewAvailability: string
   unavailableReason: string | null
   interviewRoom?: string
+  certificatePreviewLink?: string
+  certificateDownloadLink?: string
 }
 
 export default ProfileDTO
