@@ -41,9 +41,7 @@ function mapApplicationToAnswer2(application: ApplicationDTO): Answer2Model {
       answer2: application.answerB2 || "",
       answer3: application.answerB3 || "",
       answer4: application.answerB4 || "",
-      answer5: application.answerB5 || "",
-      answer6: application.answerB6 || "",
-      answer7: application.answerB7 || ""
+      answer5: application.answerB5 || ""
     }
   }
 }
