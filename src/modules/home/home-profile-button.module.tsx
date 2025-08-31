@@ -11,11 +11,11 @@ export const HomeProfileButton: React.FC<ButtonProps> = props => {
 
   const getButtonLabel = () => {
     const nowDate = new Date()
-    const endFakeDate = new Date("September 16, 2024 00:00:00 GMT+07:00")
+    const endFakeDate = new Date("September 14, 2025 00:00:00 GMT+07:00")
     if (isLoggedIn) {
       const isNotSubmit = me.data?.applicationState === "DRAFT" || me.data?.applicationState === "NOT_FILLED"
       if (state === ApplicationStatus.EARLY) {
-        return "เปิดรับสมัคร 2 กันยายน 2567 นี้"
+        return "เปิดรับสมัคร 1 กันยายน 2568 นี้"
       } else if (state !== ApplicationStatus.APPLICABLE && isNotSubmit) {
         return "หมดเขตรับสมัคร"
       } else if (state === ApplicationStatus.DOCUMENT_EDIT && !isNotSubmit) {
@@ -26,8 +26,8 @@ export const HomeProfileButton: React.FC<ButtonProps> = props => {
     }
     if (state === ApplicationStatus.LATE || state === ApplicationStatus.DOCUMENT_EDIT) return "หมดเขตรับสมัคร"
     if (state === ApplicationStatus.EARLY) return "เปิดรับสมัครเร็ว ๆ นี้"
-    if (state === ApplicationStatus.APPLICABLE && nowDate <= endFakeDate) return "สมัครเลย! วันนี้ - 15 กันยายน 2567"
-    return "สมัครเลย! วันนี้ - 20 กันยายน 2567"
+    if (state === ApplicationStatus.APPLICABLE && nowDate <= endFakeDate) return "สมัครเลย! วันนี้ - 14 กันยายน 2568"
+    return "สมัครเลย! วันนี้ - 19 กันยายน 2568"
   }
 
   const notAllow = useMemo(() => {

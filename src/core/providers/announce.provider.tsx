@@ -15,21 +15,21 @@ const SCHEDULE = [
   {
     state: ApplicationStatus.EARLY,
     start: null,
-    end: new Date("September 2, 2024 8:00:00 GMT+07:00")
+    end: new Date("September 1, 2025 8:00:00 GMT+07:00")
   },
   {
     state: ApplicationStatus.APPLICABLE,
-    start: new Date("September 2, 2024 8:00:01 GMT+07:00"),
-    end: new Date("September 20, 2024 23:59:59 GMT+07:00")
+    start: new Date("September 1, 2025 8:00:01 GMT+07:00"),
+    end: new Date("September 19, 2025 23:59:59 GMT+07:00")
   },
   {
     state: ApplicationStatus.DOCUMENT_EDIT,
-    start: new Date("September 21, 2024 00:00:00 GMT+07:00"),
-    end: new Date("October 4, 2024 22:00:00 GMT+07:00")
+    start: new Date("September 20, 2025 00:00:00 GMT+07:00"),
+    end: new Date("October 3, 2025 22:00:00 GMT+07:00")
   },
   {
     state: ApplicationStatus.LATE,
-    start: new Date("October 4, 2024 22:00:01 GMT+07:00"),
+    start: new Date("October 3, 2025 22:00:01 GMT+07:00"),
     end: null
   }
 ]
