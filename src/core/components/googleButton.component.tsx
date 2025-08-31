@@ -39,7 +39,7 @@ const GoogleButtonComponent: React.FC<ButtonProps> = props => {
     const initGoogleButton = async () => {
       const _window = window as typeof window & { google: any }
       _window.google.accounts.id.initialize({
-        client_id: "774746738859-09mup9bt2u45rd37c089em47khe4hcae.apps.googleusercontent.com",
+        client_id: "401297478218-63kfjjgfplefqigtcmb1mdfmgnr7ev2s.apps.googleusercontent.com",
         callback: handleCallback
       })
       _window.google.accounts.id.renderButton(document.getElementById("google_signin"), {
